@@ -4,10 +4,10 @@
 
 SPARQL Endpoint Status project aims at monitoring SPARQL Endpoints based on 4 aspects:
 
-* **Discoverability** analyse how SPARQL endpoints can be located, what meta-data are available for them, etc.
-* **Interoperability** identify which features of SPARQL 1.0 and SPARQL 1.1 standards are supported by an endpoint
-* **Performance** measure generic performance aspects such as result-streaming, atomic lookups and simple-joins over a HTTP connection.
-* **Availability** monitor the uptimes of a SPARQL endpoint.
+* **Discoverability** analyses how SPARQL endpoints can be located, what meta-data are available for them, etc.
+* **Interoperability** identifies which features of SPARQL 1.0 and SPARQL 1.1 standards are supported by an endpoint
+* **Performance** measures generic performance aspects such as result-streaming, atomic lookups and simple-joins over a HTTP connection.
+* **Availability** monitors the uptimes of a SPARQL endpoint.
 
 
 ## Details
