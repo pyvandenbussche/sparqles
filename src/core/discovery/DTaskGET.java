@@ -1,7 +1,7 @@
 package core.discovery;
 
 
-import ie.deri.urq.lidaq.source.CallbackNQuadTripleHandler;
+
 
 import java.io.File;
 import java.util.LinkedList;
@@ -10,9 +10,9 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.deri.any23.http.AcceptHeaderBuilder;
-import org.deri.any23.mime.MIMEType;
-import org.deri.any23.writer.TripleHandler;
+import org.apache.any23.http.AcceptHeaderBuilder;
+import org.apache.any23.mime.MIMEType;
+import org.apache.any23.writer.TripleHandler;
 import org.semanticweb.yars.nx.Node;
 import org.semanticweb.yars.nx.Nodes;
 import org.semanticweb.yars.util.CallbackSet;
@@ -60,7 +60,7 @@ public class DTaskGET extends Task<DResultGET> {
 		CallbackSet cbsetH= new CallbackSet();
 		CallbackSet cbsetC= new CallbackSet();
 		TripleHandler headerTripleHandler = new CallbackNQuadTripleHandler(cbsetH);
-		ContentHandler ch = new com.ontologycentral.ldspider.any23.ContentHandlerAny23(headerTripleHandler, Treatment.DUMP, com.ontologycentral.ldspider.any23.ContentHandlerAny23.getDefaultExtractorNames());
+		ContentHandler ch = new ContentHandlerAny23(headerTripleHandler, Treatment.DUMP, com.ontologycentral.ldspider.any23.ContentHandlerAny23.getDefaultExtractorNames());
 				
 		LinkedList<MIMEType> mimetypes = new LinkedList<MIMEType>();
 		for (String s : ch.getMimeTypes())

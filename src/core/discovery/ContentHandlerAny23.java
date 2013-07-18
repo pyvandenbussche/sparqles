@@ -1,6 +1,6 @@
 package core.discovery;
 
-import ie.deri.urq.lidaq.source.CallbackNQuadTripleHandler;
+
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,21 +18,16 @@ import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.deri.any23.Any23;
-import org.deri.any23.extractor.ExtractorFactory;
-import org.deri.any23.extractor.ExtractorGroup;
-import org.deri.any23.extractor.ExtractorRegistry;
-import org.deri.any23.extractor.html.TurtleHTMLExtractor;
-import org.deri.any23.extractor.rdf.NQuadsExtractor;
-import org.deri.any23.extractor.rdf.NTriplesExtractor;
-import org.deri.any23.extractor.rdf.RDFXMLExtractor;
-import org.deri.any23.extractor.rdf.TurtleExtractor;
-import org.deri.any23.extractor.rdfa.RDFaExtractor;
-import org.deri.any23.filter.IgnoreTitlesOfEmptyDocuments;
-import org.deri.any23.http.AcceptHeaderBuilder;
-import org.deri.any23.mime.MIMEType;
-import org.deri.any23.source.ByteArrayDocumentSource;
-import org.deri.any23.writer.TripleHandler;
+import org.apache.any23.Any23;
+import org.apache.any23.extractor.ExtractorFactory;
+import org.apache.any23.extractor.ExtractorGroup;
+import org.apache.any23.extractor.ExtractorRegistry;
+import org.apache.any23.extractor.rdf.RDFXMLExtractor;
+import org.apache.any23.filter.IgnoreTitlesOfEmptyDocuments;
+import org.apache.any23.http.AcceptHeaderBuilder;
+import org.apache.any23.mime.MIMEType;
+import org.apache.any23.source.ByteArrayDocumentSource;
+import org.apache.any23.writer.TripleHandler;
 import org.semanticweb.yars.nx.parser.Callback;
 
 import com.ontologycentral.ldspider.hooks.content.ContentHandler;
@@ -45,7 +40,7 @@ import com.ontologycentral.ldspider.http.Headers.Treatment;
  * @author Tobias Kaefer
  * 
  */
-public class ContentHandlerAny23{
+public class ContentHandlerAny23 implements ContentHandler{
 
 	private final Logger _log = Logger.getLogger(this.getClass().getName());
 	
