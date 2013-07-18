@@ -1,0 +1,23 @@
+_:node17aeain94x1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/componenteGruppoMisto> <http://dati.camera.it/ocd/data/componenteGruppoMisto> .
+_:node17aeain94x1 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/componenteGruppoMisto> <http://dati.camera.it/ocd/data/componenteGruppoMisto> .
+_:node17aeain94x2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/componenteGruppoMisto> <http://dati.camera.it/ocd/data/componenteGruppoMisto> .
+_:node17aeain94x2 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/componenteGruppoMisto> <http://dati.camera.it/ocd/data/componenteGruppoMisto> .
+_:node17aeain94x3 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/componenteGruppoMisto> <http://dati.camera.it/ocd/data/componenteGruppoMisto> .
+_:node17aeain94x3 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/componenteGruppoMisto> <http://dati.camera.it/ocd/data/componenteGruppoMisto> .
+_:node17aeain94x4 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/componenteGruppoMisto> <http://dati.camera.it/ocd/data/componenteGruppoMisto> .
+_:node17aeain94x4 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/componenteGruppoMisto> <http://dati.camera.it/ocd/data/componenteGruppoMisto> .
+<http://dati.camera.it/ocd/data/componenteGruppoMisto> <http://www.w3.org/2000/01/rdf-schema#label> "RDF description of componente del Gruppo Misto" <http://dati.camera.it/ocd/data/componenteGruppoMisto> .
+<http://dati.camera.it/ocd/data/componenteGruppoMisto> <http://xmlns.com/foaf/0.1/primaryTopic> <http://dati.camera.it/ocd/componenteGruppoMisto> <http://dati.camera.it/ocd/data/componenteGruppoMisto> .
+<http://dati.camera.it/ocd/componenteGruppoMisto> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> <http://dati.camera.it/ocd/data/componenteGruppoMisto> .
+<http://dati.camera.it/ocd/componenteGruppoMisto> <http://www.w3.org/2000/01/rdf-schema#comment> "componenteGruppoMisto \u00E8 la classe che identifica le compononeti di cui si compone il Gruppo Misto"@it <http://dati.camera.it/ocd/data/componenteGruppoMisto> .
+<http://dati.camera.it/ocd/componenteGruppoMisto> <http://www.w3.org/2000/01/rdf-schema#label> "componente del Gruppo Misto"^^<http://www.w3.org/2001/XMLSchema#string> <http://dati.camera.it/ocd/data/componenteGruppoMisto> .
+_:node17aeain94x5 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/componenteGruppoMisto> <http://dati.camera.it/ocd/data/componenteGruppoMisto> .
+_:node17aeain94x5 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/componenteGruppoMisto> <http://dati.camera.it/ocd/data/componenteGruppoMisto> .
+_:node17aeain94x6 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/componenteGruppoMisto> <http://dati.camera.it/ocd/data/componenteGruppoMisto> .
+_:node17aeain94x6 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/componenteGruppoMisto> <http://dati.camera.it/ocd/data/componenteGruppoMisto> .
+_:node17aeain94x7 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/componenteGruppoMisto> <http://dati.camera.it/ocd/data/componenteGruppoMisto> .
+_:node17aeain94x7 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/componenteGruppoMisto> <http://dati.camera.it/ocd/data/componenteGruppoMisto> .
+_:node17aeain94x8 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/componenteGruppoMisto> <http://dati.camera.it/ocd/data/componenteGruppoMisto> .
+_:node17aeain94x8 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/componenteGruppoMisto> <http://dati.camera.it/ocd/data/componenteGruppoMisto> .
+_:node17aeain94x9 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/componenteGruppoMisto> <http://dati.camera.it/ocd/data/componenteGruppoMisto> .
+_:node17aeain94x9 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/componenteGruppoMisto> <http://dati.camera.it/ocd/data/componenteGruppoMisto> .

@@ -1,0 +1,17 @@
+<http://budapest.rkbexplorer.com/data/void> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Ontology> <http://budapest.rkbexplorer.com/data/void> .
+<http://budapest.rkbexplorer.com/data/void> <http://purl.org/dc/elements/1.1/creator> "ReSIST Project" <http://budapest.rkbexplorer.com/data/void> .
+<http://budapest.rkbexplorer.com/data/void> <http://purl.org/dc/terms/created> "2012-10-17T12:07:47"^^<http://www.w3.org/2001/XMLSchema#dateTime> <http://budapest.rkbexplorer.com/data/void> .
+<http://budapest.rkbexplorer.com/data/void> <http://purl.org/dc/elements/1.1/source> <http://budapest.rkbexplorer.com/id/void> <http://budapest.rkbexplorer.com/data/void> .
+<http://budapest.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Computer_science> <http://budapest.rkbexplorer.com/data/void> .
+<http://budapest.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Organization> <http://budapest.rkbexplorer.com/data/void> .
+<http://budapest.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Publication> <http://budapest.rkbexplorer.com/data/void> .
+<http://budapest.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Computer_scientists> <http://budapest.rkbexplorer.com/data/void> .
+<http://budapest.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Person> <http://budapest.rkbexplorer.com/data/void> .
+<http://budapest.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#exampleResource> <http://budapest.rkbexplorer.com/id/person-0eae26b92535edf8537257d195f5e5d3> <http://budapest.rkbexplorer.com/data/void> .
+<http://budapest.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#feature> <http://void.rkbexplorer.com/id/technicalFeature/sparql> <http://budapest.rkbexplorer.com/data/void> .
+<http://budapest.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#sparqlEndpoint> <http://budapest.rkbexplorer.com/sparql/> <http://budapest.rkbexplorer.com/data/void> .
+<http://budapest.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#uriRegexPattern> "^http://budapest\\.rkbexplorer\\.com/id/.+" <http://budapest.rkbexplorer.com/data/void> .
+<http://budapest.rkbexplorer.com/id/void> <http://purl.org/dc/terms/publisher> <http://budapest.rkbexplorer.com> <http://budapest.rkbexplorer.com/data/void> .
+<http://budapest.rkbexplorer.com/id/void> <http://purl.org/dc/terms/description> "This repository contains data supplied from Budapest University of Technology and Economics ." <http://budapest.rkbexplorer.com/data/void> .
+<http://budapest.rkbexplorer.com/id/void> <http://xmlns.com/foaf/0.1/nick> "budapest" <http://budapest.rkbexplorer.com/data/void> .
+<http://budapest.rkbexplorer.com/id/void> <http://purl.org/dc/terms/title> "budapest.rkbexplorer.com Linked Data Repository" <http://budapest.rkbexplorer.com/data/void> .

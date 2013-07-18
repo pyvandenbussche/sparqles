@@ -1,0 +1,18 @@
+{
+"namespace": "ends.core",
+ "type": "record",
+ "name": "DResultGET",
+ "fields": [
+    {"name": "endpointResult", "type": ends.core.EndpointResult },
+    {"name": "SPARQLDESCterms", "type": "int" },
+    {"name": "VOIDterms", "type": "int" },
+      {
+      "name":"SPARQLDESCpreds",
+      "type":{"type":"map","values":["string","long"]}
+      },
+       {
+      "name":"voiDpreds",
+      "type":{"type":"map","values":["string","long"]}
+      }
+ ]
+}

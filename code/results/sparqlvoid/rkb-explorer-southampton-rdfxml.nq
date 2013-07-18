@@ -1,0 +1,736 @@
+<?xml version="1.0"?>
+<sparql xmlns="http://www.w3.org/2005/sparql-results#">
+  <head>
+    <variable name="ds"/>
+    <variable name="p"/>
+    <variable name="o"/>
+  </head>
+  <results>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#uriRegexPattern</uri>
+      </binding>
+      <binding name="o">
+        <literal>^http://southampton.rkbexplorer.com/id/.+</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#sparqlEndpoint</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://southampton.rkbexplorer.com/sparql/</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://rdfs.org/ns/void#Dataset</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://www.w3.org/2002/07/owl#Ontology</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/elements/1.1/creator</uri>
+      </binding>
+      <binding name="o">
+        <literal>ReSIST Project</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/created</uri>
+      </binding>
+      <binding name="o">
+        <literal datatype="http://www.w3.org/2001/XMLSchema#dateTime">2010-01-18T17:46:54</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/elements/1.1/source</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://www.w3.org/2000/01/rdf-schema#Resource</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://xmlns.com/foaf/0.1/homepage</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://southampton.rkbexplorer.com/</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2000/01/rdf-schema#label</uri>
+      </binding>
+      <binding name="o">
+        <literal>southampton.rkbexplorer.com Linked Data Repository</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/title</uri>
+      </binding>
+      <binding name="o">
+        <literal>southampton.rkbexplorer.com Linked Data Repository</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/description</uri>
+      </binding>
+      <binding name="o">
+        <literal>The data presented here is provided by the School of Electronics and Computer Science at the University of Southampton, and details personnel, publications and projects at the institution. Data exports are acquired from the School database on a weekly basis, before being converted into RDF and asserted in this repository.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/publisher</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://southampton.rkbexplorer.com/id/ecs</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/date</uri>
+      </binding>
+      <binding name="o">
+        <literal datatype="http://www.w3.org/2001/XMLSchema#date">2009-10-14T06:07:08</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#uriRegexPattern</uri>
+      </binding>
+      <binding name="o">
+        <literal>^http://southampton\\.rkbexplorer\\.com/id/.+</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#exampleResource</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://southampton.rkbexplorer.com/id/person-00021</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#vocabulary</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://acm.rkbexplorer.com/ontologies/acm#</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#vocabulary</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://courseware.rkbexplorer.com/ontologies/courseware#</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#vocabulary</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://purl.org/NET/scovo#</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#vocabulary</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://rdfs.org/ns/void#</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#vocabulary</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://resex.rkbexplorer.com/ontologies/resex#</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#vocabulary</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://resex.rkbexplorer.com/ontologies/resist#</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#vocabulary</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://www.aktors.org/ontology/portal#</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#vocabulary</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://xmlns.com/foaf/0.1/</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/subject</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://dbpedia.org/resource/Person</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/subject</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://dbpedia.org/resource/Category:Computer_scientists</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/subject</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://dbpedia.org/resource/Publication</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/subject</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://dbpedia.org/resource/Organization</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/subject</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://dbpedia.org/resource/Computer_science</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/elements/1.1/source</uri>
+      </binding>
+      <binding name="o">
+        <uri>file:models/5/4/d/2/54d2aa565d8b5bb4eb56cb810df3f229</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://triplestore.aktors.org/ontology/#last-polled</uri>
+      </binding>
+      <binding name="o">
+        <uri>3store:po:4c8bd41e00b077f6</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://triplestore.aktors.org/ontology/#polled</uri>
+      </binding>
+      <binding name="o">
+        <uri>3store:po:4c8bd41e00b077f6</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#statItem</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b0</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#statItem</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b1</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#feature</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://void.rkbexplorer.com/id/technicalFeature/sparql</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#uriRegexPattern</uri>
+      </binding>
+      <binding name="o">
+        <literal>^http://southampton\.rkbexplorer\.com/id/.+</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/publisher</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://southampton.rkbexplorer.com</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://xmlns.com/foaf/0.1/nick</uri>
+      </binding>
+      <binding name="o">
+        <literal>southampton</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/date</uri>
+      </binding>
+      <binding name="o">
+        <literal datatype="http://www.w3.org/2001/XMLSchema#date">2010-09-13T11:36:12</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#statItem</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b2</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#statItem</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b3</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/date</uri>
+      </binding>
+      <binding name="o">
+        <literal datatype="http://www.w3.org/2001/XMLSchema#date">2010-09-08T08:38:21</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#statItem</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b4</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#statItem</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b5</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#subset</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b6</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#subset</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b7</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#subset</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b8</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#subset</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b9</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#subset</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b10</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#subset</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b11</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#subset</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b12</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#subset</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b13</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#subset</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b14</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#subset</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b15</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#subset</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b16</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#subset</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b17</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#subset</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b18</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#subset</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b19</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#subset</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b20</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#subset</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b21</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#subset</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b22</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#subset</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b23</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#subset</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b24</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b25</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b26</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://southampton.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b27</bnode>
+      </binding>
+    </result>
+  </results>
+</sparql>

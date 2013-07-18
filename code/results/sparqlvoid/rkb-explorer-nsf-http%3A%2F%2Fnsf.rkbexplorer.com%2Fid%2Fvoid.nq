@@ -1,0 +1,17 @@
+<http://nsf.rkbexplorer.com/data/void> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Ontology> <http://nsf.rkbexplorer.com/data/void> .
+<http://nsf.rkbexplorer.com/data/void> <http://purl.org/dc/elements/1.1/creator> "ReSIST Project" <http://nsf.rkbexplorer.com/data/void> .
+<http://nsf.rkbexplorer.com/data/void> <http://purl.org/dc/terms/created> "2012-10-26T12:00:23"^^<http://www.w3.org/2001/XMLSchema#dateTime> <http://nsf.rkbexplorer.com/data/void> .
+<http://nsf.rkbexplorer.com/data/void> <http://purl.org/dc/elements/1.1/source> <http://nsf.rkbexplorer.com/id/void> <http://nsf.rkbexplorer.com/data/void> .
+<http://nsf.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Computer_science> <http://nsf.rkbexplorer.com/data/void> .
+<http://nsf.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Organization> <http://nsf.rkbexplorer.com/data/void> .
+<http://nsf.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Computer_scientists> <http://nsf.rkbexplorer.com/data/void> .
+<http://nsf.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Person> <http://nsf.rkbexplorer.com/data/void> .
+<http://nsf.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Project> <http://nsf.rkbexplorer.com/data/void> .
+<http://nsf.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#exampleResource> <http://nsf.rkbexplorer.com/id/person-6092a2a72319fc9437583fb2d04733ea> <http://nsf.rkbexplorer.com/data/void> .
+<http://nsf.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#feature> <http://void.rkbexplorer.com/id/technicalFeature/sparql> <http://nsf.rkbexplorer.com/data/void> .
+<http://nsf.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#sparqlEndpoint> <http://nsf.rkbexplorer.com/sparql/> <http://nsf.rkbexplorer.com/data/void> .
+<http://nsf.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#uriRegexPattern> "^http://nsf\\.rkbexplorer\\.com/id/.+" <http://nsf.rkbexplorer.com/data/void> .
+<http://nsf.rkbexplorer.com/id/void> <http://purl.org/dc/terms/publisher> <http://nsf.rkbexplorer.com> <http://nsf.rkbexplorer.com/data/void> .
+<http://nsf.rkbexplorer.com/id/void> <http://purl.org/dc/terms/description> "This repository contains data from the National Science Foundation." <http://nsf.rkbexplorer.com/data/void> .
+<http://nsf.rkbexplorer.com/id/void> <http://xmlns.com/foaf/0.1/nick> "nsf" <http://nsf.rkbexplorer.com/data/void> .
+<http://nsf.rkbexplorer.com/id/void> <http://purl.org/dc/terms/title> "nsf.rkbexplorer.com Linked Data Repository" <http://nsf.rkbexplorer.com/data/void> .

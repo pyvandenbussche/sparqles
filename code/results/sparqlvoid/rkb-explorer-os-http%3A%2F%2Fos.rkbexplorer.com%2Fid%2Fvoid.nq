@@ -1,0 +1,14 @@
+<http://os.rkbexplorer.com/data/void> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Ontology> <http://os.rkbexplorer.com/data/void> .
+<http://os.rkbexplorer.com/data/void> <http://purl.org/dc/elements/1.1/creator> "ReSIST Project" <http://os.rkbexplorer.com/data/void> .
+<http://os.rkbexplorer.com/data/void> <http://purl.org/dc/terms/created> "2012-10-26T12:03:13"^^<http://www.w3.org/2001/XMLSchema#dateTime> <http://os.rkbexplorer.com/data/void> .
+<http://os.rkbexplorer.com/data/void> <http://purl.org/dc/elements/1.1/source> <http://os.rkbexplorer.com/id/void> <http://os.rkbexplorer.com/data/void> .
+<http://os.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Location_%28geography%29> <http://os.rkbexplorer.com/data/void> .
+<http://os.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#vocabulary> <http://xmlns.com/foaf/0.1/> <http://os.rkbexplorer.com/data/void> .
+<http://os.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#vocabulary> <http://www.ordnancesurvey.co.uk/ontology/AdministrativeGeography/v2.0/AdministrativeGeography.rdf#> <http://os.rkbexplorer.com/data/void> .
+<http://os.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#vocabulary> <http://rdfs.org/ns/void#> <http://os.rkbexplorer.com/data/void> .
+<http://os.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#vocabulary> <http://purl.org/NET/scovo#> <http://os.rkbexplorer.com/data/void> .
+<http://os.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#vocabulary> <http://purl.org/dc/terms/> <http://os.rkbexplorer.com/data/void> .
+<http://os.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#vocabulary> <http://purl.org/dc/elements/1.1/> <http://os.rkbexplorer.com/data/void> .
+<http://os.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#exampleResource> <http://os.rkbexplorer.com/id/osr7000000000017765> <http://os.rkbexplorer.com/data/void> .
+<http://os.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#sparqlEndpoint> <http://os.rkbexplorer.com/sparql/> <http://os.rkbexplorer.com/data/void> .
+<http://os.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#uriRegexPattern> "^http://os\\.rkbexplorer\\.com/id/.+" <http://os.rkbexplorer.com/data/void> .

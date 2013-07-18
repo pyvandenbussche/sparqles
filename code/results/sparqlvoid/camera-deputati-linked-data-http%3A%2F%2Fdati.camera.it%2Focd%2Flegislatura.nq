@@ -1,0 +1,16 @@
+_:node17aeain94x18 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/legislatura> <http://dati.camera.it/ocd/data/legislatura> .
+_:node17aeain94x18 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/legislatura> <http://dati.camera.it/ocd/data/legislatura> .
+_:node17aeain94x19 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/legislatura> <http://dati.camera.it/ocd/data/legislatura> .
+_:node17aeain94x19 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/legislatura> <http://dati.camera.it/ocd/data/legislatura> .
+_:node17aeain94x20 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/legislatura> <http://dati.camera.it/ocd/data/legislatura> .
+_:node17aeain94x20 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/legislatura> <http://dati.camera.it/ocd/data/legislatura> .
+<http://dati.camera.it/ocd/legislatura> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> <http://dati.camera.it/ocd/data/legislatura> .
+<http://dati.camera.it/ocd/legislatura> <http://www.w3.org/2000/01/rdf-schema#comment> "La classe fa riferimento al  periodo di durata del mandato parlamentare compreso fra le elezioni e lo scioglimento delle Camere. La legislatura si articola in sessioni e sedute"@it <http://dati.camera.it/ocd/data/legislatura> .
+<http://dati.camera.it/ocd/legislatura> <http://www.w3.org/2000/01/rdf-schema#label> "legislatura"^^<http://www.w3.org/2001/XMLSchema#string> <http://dati.camera.it/ocd/data/legislatura> .
+_:node17aeain94x21 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/legislatura> <http://dati.camera.it/ocd/data/legislatura> .
+_:node17aeain94x21 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/legislatura> <http://dati.camera.it/ocd/data/legislatura> .
+<http://dati.camera.it/ocd/rif_leg> <http://www.w3.org/2000/01/rdf-schema#range> <http://dati.camera.it/ocd/legislatura> <http://dati.camera.it/ocd/data/legislatura> .
+<http://dati.camera.it/ocd/fa_parte_della> <http://www.w3.org/2000/01/rdf-schema#range> <http://dati.camera.it/ocd/legislatura> <http://dati.camera.it/ocd/data/legislatura> .
+<http://dati.camera.it/ocd/data/legislatura> <http://www.w3.org/2000/01/rdf-schema#label> "RDF description of legislatura" <http://dati.camera.it/ocd/data/legislatura> .
+<http://dati.camera.it/ocd/data/legislatura> <http://xmlns.com/foaf/0.1/primaryTopic> <http://dati.camera.it/ocd/legislatura> <http://dati.camera.it/ocd/data/legislatura> .
+<http://dati.camera.it/ocd/nomina> <http://www.w3.org/2000/01/rdf-schema#domain> <http://dati.camera.it/ocd/legislatura> <http://dati.camera.it/ocd/data/legislatura> .

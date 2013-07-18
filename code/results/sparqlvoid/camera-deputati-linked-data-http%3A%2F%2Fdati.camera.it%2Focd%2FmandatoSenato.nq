@@ -1,0 +1,12 @@
+<http://dati.camera.it/ocd/rif_mandatoSenato> <http://www.w3.org/2000/01/rdf-schema#range> <http://dati.camera.it/ocd/mandatoSenato> <http://dati.camera.it/ocd/data/mandatoSenato> .
+<http://dati.camera.it/ocd/data/mandatoSenato> <http://www.w3.org/2000/01/rdf-schema#label> "RDF description of mandato" <http://dati.camera.it/ocd/data/mandatoSenato> .
+<http://dati.camera.it/ocd/data/mandatoSenato> <http://xmlns.com/foaf/0.1/primaryTopic> <http://dati.camera.it/ocd/mandatoSenato> <http://dati.camera.it/ocd/data/mandatoSenato> .
+_:node17aeain94x43 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/mandatoSenato> <http://dati.camera.it/ocd/data/mandatoSenato> .
+_:node17aeain94x43 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/mandatoSenato> <http://dati.camera.it/ocd/data/mandatoSenato> .
+_:node17aeain94x44 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/mandatoSenato> <http://dati.camera.it/ocd/data/mandatoSenato> .
+_:node17aeain94x44 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/mandatoSenato> <http://dati.camera.it/ocd/data/mandatoSenato> .
+<http://dati.camera.it/ocd/mandatoSenato> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> <http://dati.camera.it/ocd/data/mandatoSenato> .
+<http://dati.camera.it/ocd/mandatoSenato> <http://www.w3.org/2000/01/rdf-schema#comment> "La classe fa riferimento allo status di senatore assunto da una persona  - candidato in elezioni politiche -  in seguito ad un voto popolare"@it <http://dati.camera.it/ocd/data/mandatoSenato> .
+<http://dati.camera.it/ocd/mandatoSenato> <http://www.w3.org/2000/01/rdf-schema#label> "mandato"^^<http://www.w3.org/2001/XMLSchema#string> <http://dati.camera.it/ocd/data/mandatoSenato> .
+_:node17aeain94x45 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/mandatoSenato> <http://dati.camera.it/ocd/data/mandatoSenato> .
+_:node17aeain94x45 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/mandatoSenato> <http://dati.camera.it/ocd/data/mandatoSenato> .

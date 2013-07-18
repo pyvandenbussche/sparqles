@@ -1,0 +1,15 @@
+_:node17aeain94x58 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/presidenteConsiglioMinistri> <http://dati.camera.it/ocd/data/presidenteConsiglioMinistri> .
+_:node17aeain94x58 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/presidenteConsiglioMinistri> <http://dati.camera.it/ocd/data/presidenteConsiglioMinistri> .
+_:node17aeain94x59 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/presidenteConsiglioMinistri> <http://dati.camera.it/ocd/data/presidenteConsiglioMinistri> .
+_:node17aeain94x59 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/presidenteConsiglioMinistri> <http://dati.camera.it/ocd/data/presidenteConsiglioMinistri> .
+<http://dati.camera.it/ocd/data/presidenteConsiglioMinistri> <http://www.w3.org/2000/01/rdf-schema#label> "RDF description of presidente del Consiglio dei ministri" <http://dati.camera.it/ocd/data/presidenteConsiglioMinistri> .
+<http://dati.camera.it/ocd/data/presidenteConsiglioMinistri> <http://xmlns.com/foaf/0.1/primaryTopic> <http://dati.camera.it/ocd/presidenteConsiglioMinistri> <http://dati.camera.it/ocd/data/presidenteConsiglioMinistri> .
+_:node17aeain94x60 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/presidenteConsiglioMinistri> <http://dati.camera.it/ocd/data/presidenteConsiglioMinistri> .
+_:node17aeain94x60 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/presidenteConsiglioMinistri> <http://dati.camera.it/ocd/data/presidenteConsiglioMinistri> .
+_:node17aeain94x61 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/presidenteConsiglioMinistri> <http://dati.camera.it/ocd/data/presidenteConsiglioMinistri> .
+_:node17aeain94x61 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/presidenteConsiglioMinistri> <http://dati.camera.it/ocd/data/presidenteConsiglioMinistri> .
+<http://dati.camera.it/ocd/presidenteConsiglioMinistri> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> <http://dati.camera.it/ocd/data/presidenteConsiglioMinistri> .
+<http://dati.camera.it/ocd/presidenteConsiglioMinistri> <http://www.w3.org/2000/01/rdf-schema#label> "presidente del Consiglio dei ministri"^^<http://www.w3.org/2001/XMLSchema#string> <http://dati.camera.it/ocd/data/presidenteConsiglioMinistri> .
+_:node17aeain94x62 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/presidenteConsiglioMinistri> <http://dati.camera.it/ocd/data/presidenteConsiglioMinistri> .
+_:node17aeain94x62 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/presidenteConsiglioMinistri> <http://dati.camera.it/ocd/data/presidenteConsiglioMinistri> .
+<http://dati.camera.it/ocd/rif_presidenteConsiglioMinistri> <http://www.w3.org/2000/01/rdf-schema#range> <http://dati.camera.it/ocd/presidenteConsiglioMinistri> <http://dati.camera.it/ocd/data/presidenteConsiglioMinistri> .

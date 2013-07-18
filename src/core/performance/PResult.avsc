@@ -1,0 +1,15 @@
+{"namespace": "ends.core.discovery",
+ "type": "record",
+ "name": "PResult",
+ "fields": [
+     {"name": "endpointResult", "type": ends.core.ER},
+     {"name": "frestout", "type": "int"},
+     {"name": "solutions", "type": "int"},
+     {"name": "inittime", "type": "int"},
+     {"name": "exectime", "type": "int"},
+     {"name": "closetime", "type": "int"},
+     {"name": "exectout", "type": "int"},
+     {"name": "testid", "type": "string"},
+	 {"name": "query", "type": "string"}
+ ]
+}

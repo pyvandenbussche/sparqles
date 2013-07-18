@@ -1,0 +1,197 @@
+<?xml version="1.0"?>
+<sparql xmlns="http://www.w3.org/2005/sparql-results#">
+  <head>
+    <variable name="ds"/>
+    <variable name="p"/>
+    <variable name="o"/>
+  </head>
+  <results>
+    <result>
+      <binding name="ds">
+        <uri>http://purl.org/allie/void.ttl</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://triplestore.aktors.org/ontology/#last-polled</uri>
+      </binding>
+      <binding name="o">
+        <uri>3store:po:4f032d58010b42fb</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://purl.org/allie/void.ttl</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/elements/1.1/source</uri>
+      </binding>
+      <binding name="o">
+        <uri>file:models/b/b/4/1/bb41ba27b21b7852f6faf3b70511b524.ttl</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://purl.org/allie/void.ttl</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#exampleResource</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://purl.org/allie/id/longform/531855</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://purl.org/allie/void.ttl</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#vocabulary</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://www.w3.org/2002/07/owl#</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://purl.org/allie/void.ttl</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#vocabulary</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://purl.org/allie/ontology/201108#</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://purl.org/allie/void.ttl</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#dataDump</uri>
+      </binding>
+      <binding name="o">
+        <uri>ftp://ftp.dbcls.jp/allie/allie_rdf_nt_111212.txt.gz</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://purl.org/allie/void.ttl</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#uriLookupEndpoint</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://data.allie.dbcls.jp/fct/</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://purl.org/allie/void.ttl</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#sparqlEndpoint</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://data.allie.dbcls.jp/sparql</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://purl.org/allie/void.ttl</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/license</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://creativecommons.org/licenses/by/2.1/jp/</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://purl.org/allie/void.ttl</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/publisher</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://dbcls.jp/</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://purl.org/allie/void.ttl</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/description</uri>
+      </binding>
+      <binding name="o">
+        <literal>A database of abbreviations and long forms utilized in Lifesciences.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://purl.org/allie/void.ttl</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/title</uri>
+      </binding>
+      <binding name="o">
+        <literal>Allie Abbreviation And Long Form Database in Life Science</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://purl.org/allie/void.ttl</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://xmlns.com/foaf/0.1/homepage</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://purl.org/allie/</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://purl.org/allie/void.ttl</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://rdfs.org/ns/void#Dataset</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://purl.org/allie/void.ttl</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://triplestore.aktors.org/ontology/#polled</uri>
+      </binding>
+      <binding name="o">
+        <uri>3store:po:4f032d58010b42fb</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://purl.org/allie/void.ttl</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b0</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://purl.org/allie/void.ttl</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b1</bnode>
+      </binding>
+    </result>
+  </results>
+</sparql>

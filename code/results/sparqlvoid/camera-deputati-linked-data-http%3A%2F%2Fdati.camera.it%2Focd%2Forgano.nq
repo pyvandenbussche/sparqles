@@ -1,0 +1,14 @@
+<http://dati.camera.it/ocd/rif_organo> <http://www.w3.org/2000/01/rdf-schema#range> <http://dati.camera.it/ocd/organo> <http://dati.camera.it/ocd/data/organo> .
+_:node17aeain94x81 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/organo> <http://dati.camera.it/ocd/data/organo> .
+_:node17aeain94x81 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/organo> <http://dati.camera.it/ocd/data/organo> .
+<http://dati.camera.it/ocd/haMembro> <http://www.w3.org/2000/01/rdf-schema#domain> <http://dati.camera.it/ocd/organo> <http://dati.camera.it/ocd/data/organo> .
+_:node17aeain94x82 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/organo> <http://dati.camera.it/ocd/data/organo> .
+_:node17aeain94x82 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/organo> <http://dati.camera.it/ocd/data/organo> .
+_:node17aeain94x83 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/organo> <http://dati.camera.it/ocd/data/organo> .
+_:node17aeain94x83 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/organo> <http://dati.camera.it/ocd/data/organo> .
+<http://dati.camera.it/ocd/data/organo> <http://www.w3.org/2000/01/rdf-schema#label> "RDF description of organo" <http://dati.camera.it/ocd/data/organo> .
+<http://dati.camera.it/ocd/data/organo> <http://xmlns.com/foaf/0.1/primaryTopic> <http://dati.camera.it/ocd/organo> <http://dati.camera.it/ocd/data/organo> .
+<http://dati.camera.it/ocd/organo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> <http://dati.camera.it/ocd/data/organo> .
+<http://dati.camera.it/ocd/organo> <http://www.w3.org/2000/01/rdf-schema#label> "organo"^^<http://www.w3.org/2001/XMLSchema#string> <http://dati.camera.it/ocd/data/organo> .
+_:node17aeain94x84 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/organo> <http://dati.camera.it/ocd/data/organo> .
+_:node17aeain94x84 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/organo> <http://dati.camera.it/ocd/data/organo> .

@@ -1,0 +1,14 @@
+<http://dati.camera.it/ocd/presidenteCamera> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> <http://dati.camera.it/ocd/data/presidenteCamera> .
+<http://dati.camera.it/ocd/presidenteCamera> <http://www.w3.org/2000/01/rdf-schema#label> "presidente della Camera dei deputati"^^<http://www.w3.org/2001/XMLSchema#string> <http://dati.camera.it/ocd/data/presidenteCamera> .
+_:node17aeain94x31 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/presidenteCamera> <http://dati.camera.it/ocd/data/presidenteCamera> .
+_:node17aeain94x31 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/presidenteCamera> <http://dati.camera.it/ocd/data/presidenteCamera> .
+_:node17aeain94x32 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/presidenteCamera> <http://dati.camera.it/ocd/data/presidenteCamera> .
+_:node17aeain94x32 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/presidenteCamera> <http://dati.camera.it/ocd/data/presidenteCamera> .
+<http://dati.camera.it/ocd/data/presidenteCamera> <http://www.w3.org/2000/01/rdf-schema#label> "RDF description of presidente della Camera dei deputati" <http://dati.camera.it/ocd/data/presidenteCamera> .
+<http://dati.camera.it/ocd/data/presidenteCamera> <http://xmlns.com/foaf/0.1/primaryTopic> <http://dati.camera.it/ocd/presidenteCamera> <http://dati.camera.it/ocd/data/presidenteCamera> .
+_:node17aeain94x33 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/presidenteCamera> <http://dati.camera.it/ocd/data/presidenteCamera> .
+_:node17aeain94x33 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/presidenteCamera> <http://dati.camera.it/ocd/data/presidenteCamera> .
+_:node17aeain94x34 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/presidenteCamera> <http://dati.camera.it/ocd/data/presidenteCamera> .
+_:node17aeain94x34 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/presidenteCamera> <http://dati.camera.it/ocd/data/presidenteCamera> .
+_:node17aeain94x35 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/presidenteCamera> <http://dati.camera.it/ocd/data/presidenteCamera> .
+_:node17aeain94x35 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/presidenteCamera> <http://dati.camera.it/ocd/data/presidenteCamera> .

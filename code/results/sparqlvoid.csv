@@ -1,0 +1,488 @@
+2000-us-census-rdf,http://www.rdfabout.com/sparql,0,
+biolit,http://biolit.rkbexplorer.com/sparql,0,
+aemet,http://aemet.linkeddata.es/sparql,0,
+agris,http://agrovoc.mimos.my:55824/catalogs/performance/repositories/agris,0,
+agrovoc-skos,http://202.73.13.50:55824/catalogs/performance/repositories/agrovoc,0,
+asn-us,http://sparql.jesandco.org:8890/sparql,0,
+iucr-acta-cryst-e,http://purl.org/openbibliosets/iucrsparql,0,
+grrp,http://sparql.linkedopendata.it/grrp,0,
+grrt,http://sparql.linkedopendata.it/grrt,0,
+bio2rdf-affymetrix,http://affymetrix.bio2rdf.org/sparql,0,
+data-incubator-our-airports,http://api.talis.com/stores/airports/services/sparql,0,
+allie-abbreviation-and-long-form-database-in-life-science,http://data.allie.dbcls.jp/sparql,1,
+austrian_ski_racers,http://vocabulary.semantic-web.at/PoolParty/sparql/AustrianSkiTeam,0,
+amsterdam-museum-as-edm-lod,http://semanticweb.cs.vu.nl/europeana/sparql,0,
+southampton-ac-uk-apps,http://sparql.data.southampton.ac.uk/,0,
+archiveshub-linkeddata,http://data.archiveshub.ac.uk/sparql,0,
+rkb-explorer-acm,http://acm.rkbexplorer.com/sparql/,1,
+b3kat,http://lod.b3kat.de/sparql,0,
+bbc-music,http://api.talis.com/stores/bbc-backstage/services/sparql,0,
+bbc-programmes,http://api.talis.com/stores/bbc-backstage/services/sparql,0,
+bbc-wildlife-finder,http://api.talis.com/stores/bbc-wildlife/services/sparql,0,
+bdgp,http://www.open-biomed.org.uk/sparql/endpoint/bdgp_20081030,0,
+bibbase,http://data.bibbase.org:2020/sparql,0,
+bible-ontology,http://bibleontology.com/sparql/index.jsp,0,
+bio2rdf-biocyc,http://biocyc.bio2rdf.org/sparql,0,
+biographical-directory-of-the-united-states-congress,http://logd.tw.rpi.edu/sparql,0,
+bricklink,http://api.kasabi.com/dataset/bricklink/apis/sparql,0,
+british-museum-collection,http://collection.britishmuseum.org/Sparql,0,
+bluk-bnb,http://bnb.data.bl.uk/sparql,0,
+rkb-explorer-budapest,http://budapest.rkbexplorer.com/sparql/,1,
+bio2rdf-cas,http://cas.bio2rdf.org/sparql,0,
+combined-nomenclature-2012,http://156.35.31.156/sparql,0,
+core,http://core.kmi.open.ac.uk/squery,0,
+corscheck,http://eris.okfn.org/sparql,0,
+cpa-2008,http://156.35.31.156/sparql,0,
+cpc-2008,http://156.35.31.156/sparql,0,
+cpv-2003,http://156.35.31.156/sparql,0,
+cpv-2008,http://156.35.31.156/sparql,0,
+ctic-public-dataset,http://data.fundacionctic.org/sparql,0,
+catalogus-professorum-lipsiensis,http://catalogus-professorum.org/sparql,0,
+bio2rdf-chebi,http://chebi.bio2rdf.org/sparql,0,
+farmbio-chembl,http://rdf.farmbio.uu.se/chembl/sparql,0,
+farmbio-chembl,http://rdf.farmbio.uu.se/chembl/sparql,0,
+chempedia-rdf,http://api.kasabi.com/dataset/chempedia-rdf/apis/sparql,0,
+chebi,http://chebi.bio2rdf.org/sparql,0,
+rkb-explorer-citeseer,http://citeseer.rkbexplorer.com/sparql/,1,
+data-incubator-climb,http://api.talis.com/stores/climb/services/sparql,0,
+rkb-explorer-cordis,http://cordis.rkbexplorer.com/sparql/,1,
+fu-berlin-cordis,http://www4.wiwiss.fu-berlin.de/cordis/sparql,0,
+ckan,http://semantic.ckan.net/sparql/,0,
+copac-library-catalogue,http://data.copac.ac.uk/sparql,0,
+crystal-eye,http://crystaleye.ch.cam.ac.uk/sparql/,0,
+culturalinkeddata,http://cultura.linkeddata.es/sparql,0,
+fu-berlin-dblp,http://www4.wiwiss.fu-berlin.de/dblp/sparql,0,
+rkb-explorer-dblp,http://dblp.rkbexplorer.com/sparql/,1,
+l3s-dblp,http://dblp.l3s.de/d2r/sparql,0,
+jamendo-dbtune,http://dbtune.org/jamendo/sparql/,0,
+dbtune-john-peel-sessions,http://dbtune.org/bbc/peel/sparql/,0,
+dbtune-magnatune,http://dbtune.org/magnatune/sparql/,0,
+dbtune-musicbrainz,http://dbtune.org/musicbrainz/sparql,0,
+dbtune-myspace,http://dbtune.org/myspace/sparql/,0,
+dbtune-classical,http://dbtune.org/classical/sparql/,0,
+dbpedia,http://dbpedia.org/sparql,1,
+dbpedia-de,http://de.dbpedia.org/sparql,0,
+dbpedia-el,http://el.dbpedia.org/sparql,0,
+dbpedia-pt,http://pt.dbpedia.org/sparql,0,
+dbpedia-live,http://live.dbpedia.org/sparql,0,
+rkb-explorer-deploy,http://deploy.rkbexplorer.com/sparql/,1,
+fu-berlin-dailymed,http://www4.wiwiss.fu-berlin.de/dailymed/sparql,0,
+data-incubator-musicbrainz,http://api.talis.com/stores/musicbrainz/services/sparql,0,
+data-gov,http://services.data.gov/sparql,0,
+data-gov-ie,http://data-gov.ie/sparql,0,
+ox-ac-uk-catalogue-metadata,http://data.ox.ac.uk/sparql/,0,
+ox-ac-uk-catalogue,http://data.ox.ac.uk/sparql/,0,
+zaragoza-datosabiertos,http://www.zaragoza.es/datosabiertos/sparql,0,
+datos-bcn-cl,http://datos.bcn.cl/sparql,0,
+rkb-explorer-deepblue,http://deepblue.rkbexplorer.com/sparql/,1,
+deutsche-biographie,http://ndb.publink.lod2.eu/sparql,0,
+dewey_decimal_classification,http://dewey.info/sparql.php,0,
+diavgeia,http://diavgeia.math.auth.gr/sparql,0,
+data-incubator-discogs,http://api.kasabi.com/dataset/discogs/apis/sparql,1,
+fu-berlin-diseasome,http://www4.wiwiss.fu-berlin.de/diseasome/sparql,0,
+rkb-explorer-italy,http://italy.rkbexplorer.com/sparql,0,
+fu-berlin-drugbank,http://www4.wiwiss.fu-berlin.de/drugbank/sparql,0,
+environmental-applications-reference-thesaurus,http://linkeddata.ge.imati.cnr.it:2020/sparql,1,
+ecco-tcp-linked-data,http://api.kasabi.com/dataset/ecco-tcp-eighteenth-century-collections-online-texts/apis/sparql,0,
+eea-rod,http://cr.eionet.europa.eu/sparql,0,
+eea-vocabularies,http://cr.eionet.europa.eu/sparql,0,
+rkb-explorer-era,http://era.rkbexplorer.com/sparql/,1,
+eu-agencies-bodies,http://agencies.publicdata.eu/sparql,0,
+eu-parliament-media,http://api.talis.com/stores/eupmedia/services/sparql,0,
+eu-who-is-who,http://api.talis.com/stores/whoiswho/services/sparql,0,
+beneficiaries-of-the-european-commission,http://fintrans.publicdata.eu/sparql,0,
+eumida-linked-data,http://api.talis.com/stores/eumida/services/sparql,0,
+eur-lex-rdf,http://eur-lex.publicdata.eu/sparql,0,
+fu-berlin-euraxess,http://www4.wiwiss.fu-berlin.de/euraxess/sparql,0,
+eurovoc-in-skos,http://idi.fundacionctic.org/classifications_endpoint/eurovoc,0,
+eutc-productions,http://api.talis.com/stores/eutc-productions/services/sparql,0,
+educationalprograms_sisvu,http://kent.zpr.fer.hr:8080/educationalProgram/sparql,0,
+webnmasunotraveler,http://webenemasuno.linkeddata.es/sparql,0,
+englishheritage_places,http://api.kasabi.com/dataset/english-heritage/apis/sparql,0,
+english-index-of-multiple-deprivation-ranking-2010,http://opendatacommunities.org/sparql,0,
+english-index-of-multiple-deprivation-score-2010,http://opendatacommunities.org/sparql,0,
+english-indices-of-multiple-deprivation,http://opendatacommunities.org/sparql,0,
+printed-book-auction-catalogues,http://api.talis.com/stores/pbac/services/sparql,0,
+enipedia,http://enipedia.tudelft.nl/wiki/Special:SparqlExtension,0,
+environment-agency-bathing-water-quality,http://environment.data.gov.uk/sparql/bwq/query,0,
+odc-population-2005,http://opendatacommunities.org/sparql,0,
+ecb-statistics-linked-data,http://ecb.publicdata.eu/sparql,0,
+european-election-results,http://api.talis.com/stores/elections/services/sparql,0,
+fu-berlin-eures,http://www4.wiwiss.fu-berlin.de/eures/sparql,0,
+eea,http://semantic.eea.europa.eu/sparql,0,
+eunis,http://semantic.eea.europa.eu/sparql,0,
+epo,http://epo.publicdata.eu/sparql,0,
+europeana-lod,http://europeana-triplestore.isti.cnr.it/sparql,0,
+eurostat-linked-data,http://eurostat.linked-statistics.org/sparql,0,
+fu-berlin-eurostat,http://www4.wiwiss.fu-berlin.de/eurostat/sparql,0,
+event-media,http://semantics.eurecom.fr/sparql,0,
+ox-ac-uk-www-ox-ac-uk-events,http://data.ox.ac.uk/sparql/,0,
+eventseer,http://eculture2.cs.vu.nl:8890/sparql,0,
+fact-forge,http://factforge.net/sparql,0,
+fanhubz,http://api.talis.com/stores/fanhubz/services/sparql,0,
+farmers-markets-geographic-data-united-states,http://logd.tw.rpi.edu/sparql,0,
+federal-economic-rdf,http://api.kasabi.com/dataset/federal-reserve-economic-data/apis/sparql,0,
+flybase,http://www.open-biomed.org.uk/sparql/endpoint/flybase,0,
+flyted,http://www.open-biomed.org.uk/sparql/endpoint/flyted,0,
+foodista,http://kasabi.com/api/sparql-endpoint-foodista,0,
+foodista,http://api.kasabi.com/dataset/foodista/apis/sparql,0,
+rkb-explorer-ft,http://ft.rkbexplorer.com/sparql/,1,
+rkb-explorer-lisbon,http://lisbon.rkbexplorer.com/sparql,0,
+gemet,http://cr3.eionet.europa.eu/sparql,0,
+bio2rdf-genbank,http://genbank.bio2rdf.org/sparql,0,
+bio2rdf-go,http://go.bio2rdf.org/sparql,0,
+bio2rdf-geneid,http://geneid.bio2rdf.org/sparql,0,
+geolinkeddata,http://geo.linkeddata.es/sparql,0,
+geospecies,http://lsd.taxonconcept.org/sparql,0,
+geological-survey-of-austria-thesaurus,http://resource.geolba.ac.at/PoolParty/sparql/GeologicUnit,0,
+geological-survey-of-austria-thesaurus,http://resource.geolba.ac.at/PoolParty/sparql/GeologicTimeScale,0,
+geological-survey-of-austria-thesaurus,http://resource.geolba.ac.at/PoolParty/sparql/lithology,0,
+geological-survey-of-austria-thesaurus,http://resource.geolba.ac.at/PoolParty/sparql/tectonicunit,0,
+global-hunger-index-2011,http://kasabi.com/dataset/global-hunger-index/apis/sparql,0,
+govtrack,http://www.rdfabout.com/sparql,0,
+government-web-integration-for-linked-data,http://govwild.org/sparql,0,
+greater-manchester-bus-timetable-linked-data,http://linkedmanchester.org/sparql,0,
+hcls-knowledge-base,http://hcls.deri.org/sparql,0,
+bio2rdf-hgnc,http://hgnc.bio2rdf.org/sparql,0,
+hebis-bibliographic-resources,http://lod.hebis.de/sparql,0,
+hellenic-fire-brigade,http://greek-lod.auth.gr/fire-brigade/sparql,0,
+hellenic-police,http://greek-lod.auth.gr/police/sparql,0,
+bio2rdf-homologene,http://homologene.bio2rdf.org/sparql,0,
+hungarian-national-library-catalog,http://setaria.oszk.hu/sparql,0,
+rkb-explorer-ibm,http://ibm.rkbexplorer.com/sparql/,1,
+rkb-explorer-ieee,http://ieee.rkbexplorer.com/sparql/,1,
+isic-v4,http://156.35.31.156/sparql,0,
+istat-immigration,http://sparql.linkedopendata.it/istat,0,
+odc-imd-rank-2007,http://opendatacommunities.org/sparql,0,
+rkb-explorer-eurecom,http://eurecom.rkbexplorer.com/sparql/,1,
+integrated-human-geography-service-for-lod,http://data.ngii.go.kr/SPARQL/sparql,0,
+bio2rdf-interpro,http://interpro.bio2rdf.org/sparql,0,
+isidore,http://www.rechercheisidore.fr/sparql,0,
+museums-in-italy,http://sparql.linkedopendata.it/musei,0,
+italian-public-schools-linkedopendata-it,http://sparql.linkedopendata.it/scuole,0,
+jisc-cetis-directory,http://api.kasabi.com/dataset/jisc-cetis-project-directory/apis/sparql,0,
+jiscopenbib-bl_bnb-1,http://bnb.data.bl.uk/sparql,0,
+jita,http://202.73.13.50:55824/catalogs/performance/repositories/jita ,0,QueryParseException:Encountered " "<" "< "" at line 13, column 25.
+Was expecting one of:
+    <IRIref> ...
+    <PNAME_NS> ...
+    <PNAME_LN> ...
+    <BLANK_NODE_LABEL> ...
+    <VAR1> ...
+    <VAR2> ...
+    "true" ...
+    "false" ...
+    <INTEGER> ...
+    <DECIMAL> ...
+    <DOUBLE> ...
+    <INTEGER_POSITIVE> ...
+    <DECIMAL_POSITIVE> ...
+    <DOUBLE_POSITIVE> ...
+    <INTEGER_NEGATIVE> ...
+    <DECIMAL_NEGATIVE> ...
+    <DOUBLE_NEGATIVE> ...
+    <STRING_LITERAL1> ...
+    <STRING_LITERAL2> ...
+    <STRING_LITERAL_LONG1> ...
+    <STRING_LITERAL_LONG2> ...
+    "(" ...
+    <NIL> ...
+    "[" ...
+    <ANON> ...
+    "+" ...
+    "*" ...
+    "/" ...
+    "|" ...
+    "?" ...
+    
+john-goodwins-family-tree,http://api.talis.com/stores/jgoodwin-genealogy/services/sparql,0,
+bio2rdf-kegg-compound,http://cpd.bio2rdf.org/sparql,0,
+bio2rdf-kegg-drug,http://dr.bio2rdf.org/sparql,0,
+bio2rdf-kegg-enzyme,http://ec.bio2rdf.org/sparql,0,
+bio2rdf-kegg-glycan,http://gl.bio2rdf.org/sparql,0,
+bio2rdf-kegg-pathway,http://kegg.bio2rdf.org/sparql,0,
+bio2rdf-kegg-reaction,http://rn.bio2rdf.org/sparql,0,
+kallikratis-municipalities,http://greek-lod.math.auth.gr/kalikratis/sparql,0,
+rkb-explorer-kisti,http://kisti.rkbexplorer.com/sparql/,1,
+ktr,http://lod.kaist.ac.kr/sparql,0,
+rkb-explorer-laas,http://laas.rkbexplorer.com/sparql/,1,
+latc-linksets,http://kwijibo.talis.com/latc-linksets/sparql,0,
+libris,http://lab3.libris.kb.se/sparql,0,
+lemonwordnet,http://monnetproject.deri.ie/lemonsource_query/,0,
+lichfield-spending,http://spending.lichfielddc.gov.uk/sparql,0,
+clean-energy-data-reegle,http://sparql.reegle.info/,0,
+ub-mannheim-linked-data,http://data.bib.uni-mannheim.de/sparql,0,
+linked-life-data,http://linkedlifedata.com/sparql,0,
+linkedmdb,http://data.linkedmdb.org/sparql,0,
+linked-open-camera,http://sparql.linkedopendata.it/loc ,0,QueryParseException:Encountered " "<" "< "" at line 13, column 25.
+Was expecting one of:
+    <IRIref> ...
+    <PNAME_NS> ...
+    <PNAME_LN> ...
+    <BLANK_NODE_LABEL> ...
+    <VAR1> ...
+    <VAR2> ...
+    "true" ...
+    "false" ...
+    <INTEGER> ...
+    <DECIMAL> ...
+    <DOUBLE> ...
+    <INTEGER_POSITIVE> ...
+    <DECIMAL_POSITIVE> ...
+    <DOUBLE_POSITIVE> ...
+    <INTEGER_NEGATIVE> ...
+    <DECIMAL_NEGATIVE> ...
+    <DOUBLE_NEGATIVE> ...
+    <STRING_LITERAL1> ...
+    <STRING_LITERAL2> ...
+    <STRING_LITERAL_LONG1> ...
+    <STRING_LITERAL_LONG2> ...
+    "(" ...
+    <NIL> ...
+    "[" ...
+    <ANON> ...
+    "+" ...
+    "*" ...
+    "/" ...
+    "|" ...
+    "?" ...
+    
+linked-open-commerce,http://linkedopencommerce.com/sparql,0,
+camera-deputati-linked-data,http://dati.camera.it/sparql,1,
+linked-open-data-of-ecology,http://ecowlim.tfri.gov.tw/sparql/query,0,
+linked-open-senate,http://sparql.linkedopendata.it/los,0,
+linked-open-vocabularies-lov,http://lov.okfn.org/endpoint/lov,0,
+linked-scotland,http://linkedscotland.org/sparql,0,
+knoesis-linked-sensor-data,http://sonicbanana.cs.wright.edu:8890/sparql,0,
+linked-structured-product-labels,http://dbmi-icode-01.dbmi.pitt.edu/linkedSPLs/sparql,0,
+linked-user-feedback,http://soa4all.isoco.net/luf/sparql,0,
+linkedct,http://data.linkedct.org/sparql,0,
+linkedgeodata,http://linkedgeodata.org/sparql/,0,
+linkedlccn,http://api.talis.com/stores/rsinger-dev4/services/sparql,0,
+loius,http://sw.unime.it:8890/sparql,0,
+lista-encabezamientos-materia,http://id.sgcb.mcu.es/sparql,0,
+lotico,http://www.lotico.com:3030/lotico,0,
+lower-layer-super-output-areas,http://opendatacommunities.org/sparql,0,
+massobservationarchivecatalogue,http://api.talis.com/stores/massobservation/services/sparql,0,
+fu-berlin-medicare,http://www4.wiwiss.fu-berlin.de/medicare/sparql,0,
+dutch-national-regulations-metalex,http://doc.metalex.eu:8000/sparql/,0,
+data-incubator-metoffice,http://api.talis.com/stores/metoffice/services/sparql,0,
+data-incubator-moseley,http://api.talis.com/stores/moseley/services/sparql,0,
+bio2rdf-mgi,http://mgi.bio2rdf.org/sparql,0,
+muninn-world-war-i,http://rdf.muninn-project.org/sparql,0,
+musicnet_codex,http://api.kasabi.com/dataset/musicnet/apis/sparql,0,
+my-family-lineage,http://futurewavehosting.com:3030/my-family-lineage/sparql,0,
+n-lex-as-linked-data,http://n-lex.publicdata.eu/sparql,0,
+naics-2007,http://156.35.31.156/sparql,0,
+naics-2012,http://156.35.31.156/sparql,0,
+data-incubator-nasa,http://api.kasabi.com/dataset/nasa/apis/sparql,0,
+ntnusc,http://api.talis.com/stores/gunnbib-digitalmanuskripter/sparql,0,
+national-diet-library-subject-headings,http://id.ndl.go.jp/auth/ndlsh/,0,
+sztaki-lod,http://lod.sztaki.hu/sparql,0,
+rkb-explorer-nsf,http://nsf.rkbexplorer.com/sparql/,1,
+near,http://api.kasabi.com/api/sparql-endpoint-near,0,
+neurocommons_text_mining_pilot,http://sparql.neurocommons.org:8890/nsparql/,0,
+nomenclator-asturias-2010,http://156.35.31.156/sparql,0,
+nvd,http://api.talis.com/stores/nvd/services/sparql,0,
+normesh,http://api.talis.com/stores/mesh-norwegian/services/sparql,0,
+http-data-noticias-universia-net,http://data.noticias.universia.net/d2r-server/snorql/,0,
+bio2rdf-obo,http://obo.bio2rdf.org/sparql,0,
+bio2rdf-omim,http://omim.bio2rdf.org/sparql,0,
+oceandrilling-codices,http://data.oceandrilling.org/sparql,0,
+oceandrilling-forams,http://data.oceandrilling.org/sparql,0,
+oceandrilling-janusamp,http://data.oceandrilling.org/sparql,0,
+oceandrilling-janus,http://data.oceandrilling.org/sparql,0,
+oceandrilling-ldeo,http://data.oceandrilling.org/sparql,0,
+oceandrilling-dbseabed,http://data.oceandrilling.org/sparql,0,
+rkb-explorer-oai,http://oai.rkbexplorer.com/sparql/,1,
+odc-lsoa,http://opendatacommunities.org/sparql,0,
+open-data-thesaurus,http://vocabulary.semantic-web.at/PoolParty/sparql/OpenData,0,
+data-cnr-it,http://data.cnr.it/sparql-proxy/,0,
+open-knowledge-graph,http://openknowledgegraph.org/sparql,0,
+talis-openlibrary,http://api.talis.com/stores/openlibrary/services/sparql,0,
+open-energy-info-wiki,http://en.openei.org/sparql,0,
+openlink-lod-cache,http://lod.openlinksw.com/sparql,0,
+ox-ac-uk-openmeters,http://data.ox.ac.uk/sparql/,0,
+openmobilenetwork,http://sparql.openmobilenetwork.org,0,
+opentox,http://apps.ideaconsult.net:8080/ontology,0,
+coins-openuplabs,http://gov.tso.co.uk/coins/sparql,0,
+dclg-openuplabs,http://gov.tso.co.uk/dclg/sparql,0,
+education-openuplabs,http://openuplabs.tso.co.uk/sparql/gov-education,0,
+geographic-openuplabs,http://os.services.tso.co.uk/geo/sparql,0,
+legislation-openuplabs,http://gov.tso.co.uk/legislation/sparql,0,
+transport-openuplabs,http://gov.tso.co.uk/transport/sparql,0,
+kasabi-openflights-routes,http://api.kasabi.com/dataset/openflights-routes/apis/sparql,0,
+rkb-explorer-os,http://os.rkbexplorer.com/sparql/,1,
+ordnance-survey-linked-data,http://api.talis.com/stores/ordnance-survey/services/sparql,0,
+ogolod,http://miuras.inf.um.es/sparql,0,
+oxpoints,http://data.ox.ac.uk/sparql/,0,
+bio2rdf-pdb,http://pdb.bio2rdf.org/sparql,0,
+bio2rdf-prosite,http://prosite.bio2rdf.org/sparql,0,
+pali-english-lexicon,http://api.kasabi.com/dataset/pali-english-lexicon/apis/sparql,0,
+bio2rdf-pfam,http://pfam.bio2rdf.org/sparql,0,
+data-incubator-pokedex,http://api.talis.com/stores/pokedex/services/sparql,0,
+cap-italy-rdf,http://sparql.linkedopendata.it/cap,0,
+prelex,http://prelex.publicdata.eu/sparql,0,
+prelinger_archives,http://api.kasabi.com/dataset/prelinger-archives/apis/sparql,0,
+bio2rdf-prodom,http://prodom.bio2rdf.org/sparql,0,
+pscs-catalogue,http://156.35.31.156/sparql,0,
+productdb,http://api.talis.com/stores/productdb/services/sparql,0,
+fu-berlin-project-gutenberg,http://www4.wiwiss.fu-berlin.de/gutendata/sparql,0,
+bio2rdf-pubchem,http://pubchem.bio2rdf.org/sparql,0,
+bio2rdf-pubmed,http://pubmed.bio2rdf.org/sparql,0,
+public-record-office-victoria-semantic-wiki,http://www.sparql.org/sparql.html,0,
+rkb-explorer-risks,http://risks.rkbexplorer.com/sparql/,1,
+raphaelresearchresource,http://rdf.ng-london.org.uk/raphael,0,
+ravensburg-local-shopping-graph,http://linkedopencommerce.com/sparql,0,
+rkb-explorer-curriculum,http://curriculum.rkbexplorer.com/sparql/,1,
+rkb-explorer-wiki,http://wiki.rkbexplorer.com/sparql/,1,
+rkb-explorer-resex,http://resex.rkbexplorer.com/sparql/,1,
+bio2rdf-reactome,http://reactome.bio2rdf.org/sparql,0,
+rechtspraak,http://eculture2.cs.vu.nl:5020/sparql/,0,
+renewable_energy_generators,http://api.kasabi.com/dataset/renewable-energy-generators/apis/sparql,0,
+rkb-explorer-rae2001,http://rae2001.rkbexplorer.com/sparql/,1,
+rkb-explorer-courseware,http://courseware.rkbexplorer.com/sparql/,1,
+revyu,http://revyu.com/sparql,0,
+rxnorm,http://link.informatics.stonybrook.edu/sparql/,0,
+radatana,http://data.bibsys.no/data/query_authority.html,0,
+sadi-semantic-web-services-framework-registry,http://biordf.net/sparql,0,
+fu-berlin-sider,http://www4.wiwiss.fu-berlin.de/sider/sparql,0,
+sitc-v4,http://156.35.31.156/sparql,0,
+sparql-endpoint-status,http://labs.mondeca.com/endpoint/ends,0,
+fu-berlin-stitch,http://www4.wiwiss.fu-berlin.de/stitch/sparql,0,
+stw-thesaurus-for-economics,http://zbw.eu/beta/sparql/stw,0,
+bio2rdf-sgd,http://sgd.bio2rdf.org/sparql,0,
+sanskrit-english-lexicon,http://api.kasabi.com/dataset/sanskrit-english-lexicon/apis/sparql,0,
+santillana_guide_dataset,http://212.81.220.68:2020/elviajero,0,
+schemapedia,http://api.talis.com/stores/schemapedia/services/sparql,0,
+rkb-explorer-ecs,http://ecs.rkbexplorer.com/sparql,0,
+rkb-explorer-southampton,http://southampton.rkbexplorer.com/sparql/,1,
+scotland-pupil-numbers-and-exam-results-2008,http://linkedscotland.org/sparql,0,
+scotland-statistical-geography,http://linkedscotland.org/sparql,0,
+data-incubator-smcjournals,http://api.talis.com/stores/smcjournals/services/sparql,0,
+semsol-crunchbase,http://cb.semsol.org/sparql,0,
+semantic-profiling-network,http://el-devtc01.tugraz.at/~ldv/interlinking/endpoint_handler.php,0,
+semantic-universe,http://data.semanticuniverse.com/sparql,0,
+semantic-web-dog-food,http://data.semanticweb.org/sparql,0,
+smartlink,http://smartlink.open.ac.uk/smartlink/sparql,0,
+social-networks-and-archival-context-fall-2011,http://socialarchive.iath.virginia.edu/sparql/eac,0,
+social-networks-and-archival-context-fall-2011,http://socialarchive.iath.virginia.edu/sparql/snac-viaf,0,
+socialsemweb-thesaurus,http://vocabulary.semantic-web.at/PoolParty/sparql/semweb,0,
+secold,http://aseg.cs.concordia.ca/secold/sparqlendpoint,0,
+eurobarometer-standard,http://api.talis.com/stores/eurobarometer/services/sparql,0,
+rkb-explorer-crime,http://crime.rkbexplorer.com/sparql/,0,
+tcmgenedit_dataset,http://www.open-biomed.org.uk/sparql/endpoint/tcm. ,0,QueryParseException:Encountered " "<" "< "" at line 13, column 25.
+Was expecting one of:
+    <IRIref> ...
+    <PNAME_NS> ...
+    <PNAME_LN> ...
+    <BLANK_NODE_LABEL> ...
+    <VAR1> ...
+    <VAR2> ...
+    "true" ...
+    "false" ...
+    <INTEGER> ...
+    <DECIMAL> ...
+    <DOUBLE> ...
+    <INTEGER_POSITIVE> ...
+    <DECIMAL_POSITIVE> ...
+    <DOUBLE_POSITIVE> ...
+    <INTEGER_NEGATIVE> ...
+    <DECIMAL_NEGATIVE> ...
+    <DOUBLE_NEGATIVE> ...
+    <STRING_LITERAL1> ...
+    <STRING_LITERAL2> ...
+    <STRING_LITERAL_LONG1> ...
+    <STRING_LITERAL_LONG2> ...
+    "(" ...
+    <NIL> ...
+    "[" ...
+    <ANON> ...
+    "+" ...
+    "*" ...
+    "/" ...
+    "|" ...
+    "?" ...
+    
+taxonconcept,http://lsd.taxonconcept.org/sparql,0,
+rkb-explorer-darmstadt,http://darmstadt.rkbexplorer.com/sparql/,1,
+telegraphis,http://telegraphis.net/data/countries/sparql,0,
+tcga,http://hcls.deri.org:8080/openrdf-sesame/repositories/tcga,0,
+the-drug-interaction-knowledge-base,http://dbmi-icode-01.dbmi.pitt.edu:2020/sparql,0,
+london-gazette,http://api.talis.com/stores/datagovuk/services/sparql,0,
+the-view-from,http://api.talis.com/stores/theviewfrom/services/sparql,0,
+gesis-thesoz,http://lod.gesis.org/thesoz/sparql,0,
+thesaurus-w,http://www.archivesdefrance.culture.gouv.fr/thesaurus/sparql,0,
+ox-ac-uk-timeseries,http://data.ox.ac.uk/sparql/,0,
+traditional-korean-medicine,http://tkm.kiom.re.kr/ontology/sparql,0,
+traffic-scotland,http://api.talis.com/stores/trafficscotland/services/sparql,0,
+arrayexpress-e-afmx-1,http://purl.org/twc/arrayexpress/virtuoso/sparql,0,
+arrayexpress_e-afmx-4,http://,0,QueryParseException:Line 13, column 25: org.apache.jena.iri.impl.IRIImplException: <http://> Code: 57/REQUIRED_COMPONENT_MISSING in HOST: A component that is required by the scheme is missing.
+arrayexpress_e-mtab-104,http://purl.org/twc/arrayexpress/virtuoso/sparql,0,
+zaragoza-turismo,http://www.zaragoza.es/turruta/sparql,0,
+twarql,http://twarql.org:8890/sparql,0,
+sec-rdfabout,http://rdfabout.com/sparql,0,
+rkb-explorer-jisc,http://jisc.rkbexplorer.com/sparql/,1,
+un-hazardous-numbers,http://api.kasabi.com/dataset/un-hazardous-material-numbers/apis/sparql,0,
+rkb-explorer-unlocode,http://unlocode.rkbexplorer.com/sparql/,1,
+unodc,http://unodc.publicdata.eu/sparql,0,
+uriburner,http://linkeddata.uriburner.com/sparql,0,
+uberblic,http://platform.uberblic.org/api/v1/sparql,0,
+uniprot-uniparc,http://beta.sparql.uniprot.org,0,
+uniprot-unipathway,http://beta.sparql.uniprot.org/,0,
+uniref,http://beta.sparql.uniprot.org,0,
+uniprotkb,http://beta.sparql.uniprot.org,0,
+uniprot-taxonomy,http://beta.sparql.uniprot.org,0,
+bio2rdf-unists,http://unists.bio2rdf.org/sparql,0,
+rkb-explorer-newcastle,http://newcastle.rkbexplorer.com/sparql/,1,
+rkb-explorer-roma,http://roma.rkbexplorer.com/sparql/,1,
+rkb-explorer-pisa,http://pisa.rkbexplorer.com/sparql/,1,
+rkb-explorer-ulm,http://ulm.rkbexplorer.com/sparql/,1,
+rkb-explorer-irit,http://irit.rkbexplorer.com/sparql/,1,
+ox-ac-uk-vacancies,http://data.ox.ac.uk/sparql/,0,
+rkb-explorer-kaunas,http://kaunas.rkbexplorer.com/sparql,0,
+national-diet-library-authorities,http://id.ndl.go.jp/auth/ndla/,0,
+rkb-explorer-webscience,http://webscience.rkbexplorer.com/sparql,0,
+rkb-explorer-wordnet,http://wordnet.rkbexplorer.com/sparql/,1,
+vu-wordnet,http://api.talis.com/stores/wordnet/services/sparql,0,
+world-bank-linked-data,http://worldbank.270a.info/sparql,1,
+world-factbook-fu-berlin,http://www4.wiwiss.fu-berlin.de/factbook/sparql,0,
+yahoo_geoplanet,http://api.kasabi.com/dataset/yahoo-geoplanet/apis/sparql,0,
+yale_senselab,http://neuroweb.med.yale.edu:8890/sparql,0,
+yovisto,http://sparql.yovisto.com/,0,
+zhishi-me,http://zhishi.me/sparql,0,
+business-data-gov-uk,http://services.data.gov.uk/business/sparql,0,
+cablegate,http://river.styx.org/sparql,0,
+rkb-explorer-crm,http://crm.rkbexplorer.com/sparql,0,
+data-open-ac-uk,http://data.open.ac.uk/query,0,
+datos-bne-es,http://datos.bne.es/sparql,0,
+rkb-explorer-digitaleconomy,http://digitaleconomy.rkbexplorer.com/sparql,0,
+rkb-explorer-dotac,http://dotac.rkbexplorer.com/sparql/,1,
+rkb-explorer-eprints,http://eprints.rkbexplorer.com/sparql/,1,
+education-data-gov-uk,http://services.data.gov.uk/education/sparql,0,
+rkb-explorer-enaktingpsi,http://enaktingpsi.rkbexplorer.com/sparql,0,
+environment-data-gov-uk,http://services.data.gov.uk/environment/sparql,0,
+rkb-explorer-epsrc,http://epsrc.rkbexplorer.com/sparql,0,
+openbiomed-flyatlas,http://www.open-biomed.org.uk/sparql/endpoint/flyatlas,0,
+rkb-explorer-fun,http://fun.rkbexplorer.com/sparql,0,
+rkb-explorer-gdlc,http://gdlc.rkbexplorer.com/sparql,0,
+iserve,http://iserve.kmi.open.ac.uk/data/execute-query,0,
+intervalue,http://greek-lod.math.auth.gr/intervalue/sparql,0,
+lobid-resources,http://lobid.org/sparql/,0,
+lobid-organisations,http://lobid.org/sparql/,0,
+meducator,http://meducator.open.ac.uk/resourcesrestapi/rest/meducator/sparql,0,
+morelab,http://www.morelab.deusto.es/joseki/articles,0,
+my-experiment,http://rdf.myexperiment.org/sparql/,0,
+rkb-explorer-notube,http://notube.rkbexplorer.com/sparql,0,
+patents-data-gov-uk,http://services.data.gov.uk/patents/sparql,0,
+rkb-explorer-photos,http://photos.rkbexplorer.com/sparql,0,
+reference-data-gov-uk,http://services.data.gov.uk/reference/sparql,0,
+research-data-gov-uk,http://services.data.gov.uk/research/sparql,0,
+rkb-explorer-foreign,http://foreign.rkbexplorer.com/sparql,0,
+rkb-explorer-roni,http://roni.rkbexplorer.com/sparql,0,
+statistics-data-gov-uk,http://services.data.gov.uk/statistics/sparql,0,
+transport-data-gov-uk,http://services.data.gov.uk/transport/sparql,0,
+vulnerapedia,http://minsky.gsi.dit.upm.es/semanticwiki/index.php/Special:SPARQLEndpoint,0,
+rkb-explorer-webconf,http://webconf.rkbexplorer.com/sparql,0,
+wiktionary-dbpedia,http://wiktionary.dbpedia.org/sparql,0,
+testee,http://diwis.imis.athena-innovation.gr:8181/sparql,0,

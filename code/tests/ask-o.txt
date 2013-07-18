@@ -1,0 +1,1 @@
+ASK WHERE { ?s ?p <http://nonsensical.com/12> . }

@@ -1,0 +1,29 @@
+<http://dati.camera.it/ocd/deputato> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> <http://dati.camera.it/ocd/data/deputato> .
+<http://dati.camera.it/ocd/deputato> <http://www.w3.org/2000/01/rdf-schema#comment> "La classe deputati comprende tutte le persone che hanno ricevuto un mandato parlamentare alla Camera"@it <http://dati.camera.it/ocd/data/deputato> .
+<http://dati.camera.it/ocd/deputato> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://www.camera.it/423?conoscerelacamera=2> <http://dati.camera.it/ocd/data/deputato> .
+<http://dati.camera.it/ocd/deputato> <http://www.w3.org/2000/01/rdf-schema#label> "deputato"^^<http://www.w3.org/2001/XMLSchema#string> <http://dati.camera.it/ocd/data/deputato> .
+<http://dati.camera.it/ocd/deputato> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://dati.camera.it/ocd/persona> <http://dati.camera.it/ocd/data/deputato> .
+_:node17aeain94x22 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/deputato> <http://dati.camera.it/ocd/data/deputato> .
+_:node17aeain94x22 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/deputato> <http://dati.camera.it/ocd/data/deputato> .
+_:node17aeain94x23 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/deputato> <http://dati.camera.it/ocd/data/deputato> .
+_:node17aeain94x23 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/deputato> <http://dati.camera.it/ocd/data/deputato> .
+<http://dati.camera.it/ocd/rif_deputato> <http://www.w3.org/2000/01/rdf-schema#range> <http://dati.camera.it/ocd/deputato> <http://dati.camera.it/ocd/data/deputato> .
+<http://dati.camera.it/ocd/membro> <http://www.w3.org/2000/01/rdf-schema#domain> <http://dati.camera.it/ocd/deputato> <http://dati.camera.it/ocd/data/deputato> .
+_:node17aeain94x24 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/deputato> <http://dati.camera.it/ocd/data/deputato> .
+_:node17aeain94x24 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/deputato> <http://dati.camera.it/ocd/data/deputato> .
+_:node17aeain94x25 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/deputato> <http://dati.camera.it/ocd/data/deputato> .
+_:node17aeain94x25 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/deputato> <http://dati.camera.it/ocd/data/deputato> .
+_:node17aeain94x26 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/deputato> <http://dati.camera.it/ocd/data/deputato> .
+_:node17aeain94x26 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/deputato> <http://dati.camera.it/ocd/data/deputato> .
+_:node17aeain94x27 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/deputato> <http://dati.camera.it/ocd/data/deputato> .
+_:node17aeain94x27 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/deputato> <http://dati.camera.it/ocd/data/deputato> .
+_:node17aeain94x28 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/deputato> <http://dati.camera.it/ocd/data/deputato> .
+_:node17aeain94x28 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/deputato> <http://dati.camera.it/ocd/data/deputato> .
+<http://dati.camera.it/ocd/data/deputato> <http://www.w3.org/2000/01/rdf-schema#label> "RDF description of deputato" <http://dati.camera.it/ocd/data/deputato> .
+<http://dati.camera.it/ocd/data/deputato> <http://xmlns.com/foaf/0.1/primaryTopic> <http://dati.camera.it/ocd/deputato> <http://dati.camera.it/ocd/data/deputato> .
+<http://dati.camera.it/ocd/aderisce> <http://www.w3.org/2000/01/rdf-schema#domain> <http://dati.camera.it/ocd/deputato> <http://dati.camera.it/ocd/data/deputato> .
+_:node17aeain94x29 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/deputato> <http://dati.camera.it/ocd/data/deputato> .
+_:node17aeain94x29 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/deputato> <http://dati.camera.it/ocd/data/deputato> .
+_:node17aeain94x30 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/deputato> <http://dati.camera.it/ocd/data/deputato> .
+_:node17aeain94x30 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/deputato> <http://dati.camera.it/ocd/data/deputato> .
+<http://dati.camera.it/ocd/fa_parte_della> <http://www.w3.org/2000/01/rdf-schema#domain> <http://dati.camera.it/ocd/deputato> <http://dati.camera.it/ocd/data/deputato> .

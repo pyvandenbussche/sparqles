@@ -1,0 +1,10 @@
+{"namespace": "ends.core",
+ "type": "record",
+ "name": "ER",
+ "fields": [
+     {"name": "endpoint", "type": ends.core.Endpoint},
+     {"name": "date", "type": "string"},
+     {"name": "start", "type": "long"},
+     {"name": "end", "type": "long"}
+ ]
+}

@@ -1,0 +1,17 @@
+<http://laas.rkbexplorer.com/data/void> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Ontology> <http://laas.rkbexplorer.com/data/void> .
+<http://laas.rkbexplorer.com/data/void> <http://purl.org/dc/elements/1.1/creator> "ReSIST Project" <http://laas.rkbexplorer.com/data/void> .
+<http://laas.rkbexplorer.com/data/void> <http://purl.org/dc/terms/created> "2012-10-26T11:56:37"^^<http://www.w3.org/2001/XMLSchema#dateTime> <http://laas.rkbexplorer.com/data/void> .
+<http://laas.rkbexplorer.com/data/void> <http://purl.org/dc/elements/1.1/source> <http://laas.rkbexplorer.com/id/void> <http://laas.rkbexplorer.com/data/void> .
+<http://laas.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Computer_science> <http://laas.rkbexplorer.com/data/void> .
+<http://laas.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Organization> <http://laas.rkbexplorer.com/data/void> .
+<http://laas.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Publication> <http://laas.rkbexplorer.com/data/void> .
+<http://laas.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Computer_scientists> <http://laas.rkbexplorer.com/data/void> .
+<http://laas.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Person> <http://laas.rkbexplorer.com/data/void> .
+<http://laas.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#exampleResource> <http://laas.rkbexplorer.com/id/person-99a6f7d873876fe69e100fa5e1642c85> <http://laas.rkbexplorer.com/data/void> .
+<http://laas.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#feature> <http://void.rkbexplorer.com/id/technicalFeature/sparql> <http://laas.rkbexplorer.com/data/void> .
+<http://laas.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#sparqlEndpoint> <http://laas.rkbexplorer.com/sparql/> <http://laas.rkbexplorer.com/data/void> .
+<http://laas.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#uriRegexPattern> "^http://laas\\.rkbexplorer\\.com/id/.+" <http://laas.rkbexplorer.com/data/void> .
+<http://laas.rkbexplorer.com/id/void> <http://purl.org/dc/terms/publisher> <http://laas.rkbexplorer.com> <http://laas.rkbexplorer.com/data/void> .
+<http://laas.rkbexplorer.com/id/void> <http://purl.org/dc/terms/description> "This repository contains data supplied from LAAS-CNRS." <http://laas.rkbexplorer.com/data/void> .
+<http://laas.rkbexplorer.com/id/void> <http://xmlns.com/foaf/0.1/nick> "laas" <http://laas.rkbexplorer.com/data/void> .
+<http://laas.rkbexplorer.com/id/void> <http://purl.org/dc/terms/title> "laas.rkbexplorer.com Linked Data Repository" <http://laas.rkbexplorer.com/data/void> .

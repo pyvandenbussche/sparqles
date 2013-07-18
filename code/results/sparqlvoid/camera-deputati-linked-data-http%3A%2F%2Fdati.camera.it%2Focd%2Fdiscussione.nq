@@ -1,0 +1,18 @@
+_:node17aeain94x76 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/discussione> <http://dati.camera.it/ocd/data/discussione> .
+_:node17aeain94x76 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/discussione> <http://dati.camera.it/ocd/data/discussione> .
+_:node17aeain94x77 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/discussione> <http://dati.camera.it/ocd/data/discussione> .
+_:node17aeain94x77 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/discussione> <http://dati.camera.it/ocd/data/discussione> .
+_:node17aeain94x78 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/discussione> <http://dati.camera.it/ocd/data/discussione> .
+_:node17aeain94x78 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/discussione> <http://dati.camera.it/ocd/data/discussione> .
+<http://dati.camera.it/ocd/rif_discussione> <http://www.w3.org/2000/01/rdf-schema#range> <http://dati.camera.it/ocd/discussione> <http://dati.camera.it/ocd/data/discussione> .
+_:node17aeain94x79 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/discussione> <http://dati.camera.it/ocd/data/discussione> .
+_:node17aeain94x79 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/discussione> <http://dati.camera.it/ocd/data/discussione> .
+_:node17aeain94x80 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/discussione> <http://dati.camera.it/ocd/data/discussione> .
+_:node17aeain94x80 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/discussione> <http://dati.camera.it/ocd/data/discussione> .
+<http://dati.camera.it/ocd/data/discussione> <http://www.w3.org/2000/01/rdf-schema#label> "RDF description of discussione" <http://dati.camera.it/ocd/data/discussione> .
+<http://dati.camera.it/ocd/data/discussione> <http://xmlns.com/foaf/0.1/primaryTopic> <http://dati.camera.it/ocd/discussione> <http://dati.camera.it/ocd/data/discussione> .
+<http://dati.camera.it/ocd/discussione> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> <http://dati.camera.it/ocd/data/discussione> .
+<http://dati.camera.it/ocd/discussione> <http://www.w3.org/2000/01/rdf-schema#label> "discussione"^^<http://www.w3.org/2001/XMLSchema#string> <http://dati.camera.it/ocd/data/discussione> .
+<http://dati.camera.it/ocd/discussione> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <http://dati.camera.it/ocd/lavori> <http://dati.camera.it/ocd/data/discussione> .
+<http://dati.camera.it/ocd/rif_allegatoDiscussione> <http://www.w3.org/2000/01/rdf-schema#domain> <http://dati.camera.it/ocd/discussione> <http://dati.camera.it/ocd/data/discussione> .
+<http://dati.camera.it/ocd/rif_intervento> <http://www.w3.org/2000/01/rdf-schema#domain> <http://dati.camera.it/ocd/discussione> <http://dati.camera.it/ocd/data/discussione> .

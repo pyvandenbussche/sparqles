@@ -1,0 +1,17 @@
+<http://citeseer.rkbexplorer.com/data/void> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Ontology> <http://citeseer.rkbexplorer.com/data/void> .
+<http://citeseer.rkbexplorer.com/data/void> <http://purl.org/dc/elements/1.1/creator> "ReSIST Project" <http://citeseer.rkbexplorer.com/data/void> .
+<http://citeseer.rkbexplorer.com/data/void> <http://purl.org/dc/terms/created> "2012-10-26T11:45:12"^^<http://www.w3.org/2001/XMLSchema#dateTime> <http://citeseer.rkbexplorer.com/data/void> .
+<http://citeseer.rkbexplorer.com/data/void> <http://purl.org/dc/elements/1.1/source> <http://citeseer.rkbexplorer.com/id/void> <http://citeseer.rkbexplorer.com/data/void> .
+<http://citeseer.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Computer_science> <http://citeseer.rkbexplorer.com/data/void> .
+<http://citeseer.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Organization> <http://citeseer.rkbexplorer.com/data/void> .
+<http://citeseer.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Publication> <http://citeseer.rkbexplorer.com/data/void> .
+<http://citeseer.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Computer_scientists> <http://citeseer.rkbexplorer.com/data/void> .
+<http://citeseer.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Person> <http://citeseer.rkbexplorer.com/data/void> .
+<http://citeseer.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#exampleResource> <http://citeseer.rkbexplorer.com/id/resource-CSP26378> <http://citeseer.rkbexplorer.com/data/void> .
+<http://citeseer.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#feature> <http://void.rkbexplorer.com/id/technicalFeature/sparql> <http://citeseer.rkbexplorer.com/data/void> .
+<http://citeseer.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#sparqlEndpoint> <http://citeseer.rkbexplorer.com/sparql/> <http://citeseer.rkbexplorer.com/data/void> .
+<http://citeseer.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#uriRegexPattern> "^http://citeseer\\.rkbexplorer\\.com/id/.+" <http://citeseer.rkbexplorer.com/data/void> .
+<http://citeseer.rkbexplorer.com/id/void> <http://purl.org/dc/terms/publisher> <http://citeseer.rkbexplorer.com> <http://citeseer.rkbexplorer.com/data/void> .
+<http://citeseer.rkbexplorer.com/id/void> <http://purl.org/dc/terms/description> "This repository contains data from CiteSeer (Research Index). Duncan McRae-Spencer was particularly helpful to us in getting it into the right form." <http://citeseer.rkbexplorer.com/data/void> .
+<http://citeseer.rkbexplorer.com/id/void> <http://xmlns.com/foaf/0.1/nick> "citeseer" <http://citeseer.rkbexplorer.com/data/void> .
+<http://citeseer.rkbexplorer.com/id/void> <http://purl.org/dc/terms/title> "citeseer.rkbexplorer.com Linked Data Repository" <http://citeseer.rkbexplorer.com/data/void> .

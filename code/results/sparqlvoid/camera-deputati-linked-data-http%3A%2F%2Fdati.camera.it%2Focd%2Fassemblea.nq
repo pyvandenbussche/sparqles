@@ -1,0 +1,13 @@
+_:node17aeain94x90 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/assemblea> <http://dati.camera.it/ocd/data/assemblea> .
+_:node17aeain94x90 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/assemblea> <http://dati.camera.it/ocd/data/assemblea> .
+_:node17aeain94x91 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/assemblea> <http://dati.camera.it/ocd/data/assemblea> .
+_:node17aeain94x91 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/assemblea> <http://dati.camera.it/ocd/data/assemblea> .
+<http://dati.camera.it/ocd/assemblea> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> <http://dati.camera.it/ocd/data/assemblea> .
+<http://dati.camera.it/ocd/assemblea> <http://www.w3.org/2000/01/rdf-schema#comment> "la classe fa riferimento al  centro dell'attivit\u00E0 della Camera,  dove si esercita la funzione legislativa, si concede o si revoca la fiducia al Governo, si discutono gli atti di indirizzo,  le interrogazioni e le interpellanze"@it <http://dati.camera.it/ocd/data/assemblea> .
+<http://dati.camera.it/ocd/assemblea> <http://www.w3.org/2000/01/rdf-schema#isDefinedBy> <http://www.camera.it/734> <http://dati.camera.it/ocd/data/assemblea> .
+<http://dati.camera.it/ocd/assemblea> <http://www.w3.org/2000/01/rdf-schema#label> "assemblea"^^<http://www.w3.org/2001/XMLSchema#string> <http://dati.camera.it/ocd/data/assemblea> .
+_:node17aeain94x92 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://dati.camera.it/ocd/assemblea> <http://dati.camera.it/ocd/data/assemblea> .
+_:node17aeain94x92 <http://www.w3.org/2000/01/rdf-schema#seeAlso> <http://dati.camera.it/ocd/pathdata/-rdf:first/assemblea> <http://dati.camera.it/ocd/data/assemblea> .
+<http://dati.camera.it/ocd/data/assemblea> <http://www.w3.org/2000/01/rdf-schema#label> "RDF description of assemblea" <http://dati.camera.it/ocd/data/assemblea> .
+<http://dati.camera.it/ocd/data/assemblea> <http://xmlns.com/foaf/0.1/primaryTopic> <http://dati.camera.it/ocd/assemblea> <http://dati.camera.it/ocd/data/assemblea> .
+<http://dati.camera.it/ocd/nomina> <http://www.w3.org/2000/01/rdf-schema#range> <http://dati.camera.it/ocd/assemblea> <http://dati.camera.it/ocd/data/assemblea> .

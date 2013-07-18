@@ -1,0 +1,373 @@
+<?xml version="1.0"?>
+<sparql xmlns="http://www.w3.org/2005/sparql-results#">
+  <head>
+    <variable name="ds"/>
+    <variable name="p"/>
+    <variable name="o"/>
+  </head>
+  <results>
+    <result>
+      <binding name="ds">
+        <uri>http://curriculum.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#uriRegexPattern</uri>
+      </binding>
+      <binding name="o">
+        <literal>^http://curriculum.rkbexplorer.com/id/.+</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://curriculum.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#sparqlEndpoint</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://curriculum.rkbexplorer.com/sparql/</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://curriculum.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://rdfs.org/ns/void#Dataset</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://curriculum.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#statItem</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b0</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://curriculum.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#statItem</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b1</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://curriculum.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/subject</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://dbpedia.org/resource/Course_%28education%29</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://curriculum.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#exampleResource</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://curriculum.rkbexplorer.com/id/course-4.01</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://curriculum.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#feature</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://void.rkbexplorer.com/id/technicalFeature/sparql</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://curriculum.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#uriRegexPattern</uri>
+      </binding>
+      <binding name="o">
+        <literal>^http://curriculum\.rkbexplorer\.com/id/.+</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://curriculum.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/publisher</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://curriculum.rkbexplorer.com</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://curriculum.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/description</uri>
+      </binding>
+      <binding name="o">
+        <literal>The data presented here is provided by the ReSIST Project and details the courses and associated online materials for the MSc in Resilient Computing.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://curriculum.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://xmlns.com/foaf/0.1/nick</uri>
+      </binding>
+      <binding name="o">
+        <literal>curriculum</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://curriculum.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/title</uri>
+      </binding>
+      <binding name="o">
+        <literal>curriculum.rkbexplorer.com Linked Data Repository</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://curriculum.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/date</uri>
+      </binding>
+      <binding name="o">
+        <literal datatype="http://www.w3.org/2001/XMLSchema#date">2010-09-13T11:30:38</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://curriculum.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2000/01/rdf-schema#label</uri>
+      </binding>
+      <binding name="o">
+        <literal>curriculum.rkbexplorer.com Linked Data Repository</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://curriculum.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://xmlns.com/foaf/0.1/homepage</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://curriculum.rkbexplorer.com/</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://curriculum.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#statItem</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b2</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://curriculum.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#statItem</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b3</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://curriculum.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/date</uri>
+      </binding>
+      <binding name="o">
+        <literal datatype="http://www.w3.org/2001/XMLSchema#date">2010-09-08T08:29:26</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://curriculum.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#vocabulary</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://acm.rkbexplorer.com/ontologies/acm#</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://curriculum.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#vocabulary</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://courseware.rkbexplorer.com/ontologies/courseware#</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://curriculum.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#vocabulary</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://purl.org/NET/scovo#</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://curriculum.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#vocabulary</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://rdfs.org/ns/void#</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://curriculum.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#vocabulary</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://resex.rkbexplorer.com/ontologies/resex#</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://curriculum.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#vocabulary</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://resex.rkbexplorer.com/ontologies/resist#</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://curriculum.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#vocabulary</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://www.aktors.org/ontology/portal#</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://curriculum.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#vocabulary</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://xmlns.com/foaf/0.1/</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://curriculum.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#statItem</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b4</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://curriculum.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#statItem</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b5</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://curriculum.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#subset</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b6</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://curriculum.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#subset</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b7</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://curriculum.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b8</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://curriculum.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b9</bnode>
+      </binding>
+    </result>
+  </results>
+</sparql>

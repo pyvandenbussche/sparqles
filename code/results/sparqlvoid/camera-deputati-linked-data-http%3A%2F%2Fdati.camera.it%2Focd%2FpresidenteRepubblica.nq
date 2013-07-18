@@ -1,0 +1,4 @@
+<http://dati.camera.it/ocd/data/presidenteRepubblica> <http://www.w3.org/2000/01/rdf-schema#label> "RDF description of presidente della Repubblica" <http://dati.camera.it/ocd/data/presidenteRepubblica> .
+<http://dati.camera.it/ocd/data/presidenteRepubblica> <http://xmlns.com/foaf/0.1/primaryTopic> <http://dati.camera.it/ocd/presidenteRepubblica> <http://dati.camera.it/ocd/data/presidenteRepubblica> .
+<http://dati.camera.it/ocd/presidenteRepubblica> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> <http://dati.camera.it/ocd/data/presidenteRepubblica> .
+<http://dati.camera.it/ocd/presidenteRepubblica> <http://www.w3.org/2000/01/rdf-schema#label> "presidente della Repubblica"^^<http://www.w3.org/2001/XMLSchema#string> <http://dati.camera.it/ocd/data/presidenteRepubblica> .

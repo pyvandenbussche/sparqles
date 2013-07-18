@@ -1,0 +1,17 @@
+<http://irit.rkbexplorer.com/data/void> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Ontology> <http://irit.rkbexplorer.com/data/void> .
+<http://irit.rkbexplorer.com/data/void> <http://purl.org/dc/elements/1.1/creator> "ReSIST Project" <http://irit.rkbexplorer.com/data/void> .
+<http://irit.rkbexplorer.com/data/void> <http://purl.org/dc/terms/created> "2012-10-26T12:11:29"^^<http://www.w3.org/2001/XMLSchema#dateTime> <http://irit.rkbexplorer.com/data/void> .
+<http://irit.rkbexplorer.com/data/void> <http://purl.org/dc/elements/1.1/source> <http://irit.rkbexplorer.com/id/void> <http://irit.rkbexplorer.com/data/void> .
+<http://irit.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Computer_science> <http://irit.rkbexplorer.com/data/void> .
+<http://irit.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Organization> <http://irit.rkbexplorer.com/data/void> .
+<http://irit.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Publication> <http://irit.rkbexplorer.com/data/void> .
+<http://irit.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Computer_scientists> <http://irit.rkbexplorer.com/data/void> .
+<http://irit.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Person> <http://irit.rkbexplorer.com/data/void> .
+<http://irit.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#exampleResource> <http://irit.rkbexplorer.com/id/person-585de894e4e4fd038791313df83045a8> <http://irit.rkbexplorer.com/data/void> .
+<http://irit.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#feature> <http://void.rkbexplorer.com/id/technicalFeature/sparql> <http://irit.rkbexplorer.com/data/void> .
+<http://irit.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#sparqlEndpoint> <http://irit.rkbexplorer.com/sparql/> <http://irit.rkbexplorer.com/data/void> .
+<http://irit.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#uriRegexPattern> "^http://irit\\.rkbexplorer\\.com/id/.+" <http://irit.rkbexplorer.com/data/void> .
+<http://irit.rkbexplorer.com/id/void> <http://purl.org/dc/terms/publisher> <http://irit.rkbexplorer.com> <http://irit.rkbexplorer.com/data/void> .
+<http://irit.rkbexplorer.com/id/void> <http://purl.org/dc/terms/description> "This repository contains data supplied from Universit\u00E9 Paul Sabatier - Toulouse 3." <http://irit.rkbexplorer.com/data/void> .
+<http://irit.rkbexplorer.com/id/void> <http://xmlns.com/foaf/0.1/nick> "irit" <http://irit.rkbexplorer.com/data/void> .
+<http://irit.rkbexplorer.com/id/void> <http://purl.org/dc/terms/title> "irit.rkbexplorer.com Linked Data Repository" <http://irit.rkbexplorer.com/data/void> .

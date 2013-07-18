@@ -1,0 +1,16 @@
+<http://resex.rkbexplorer.com/data/void> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Ontology> <http://resex.rkbexplorer.com/data/void> .
+<http://resex.rkbexplorer.com/data/void> <http://purl.org/dc/elements/1.1/creator> "ReSIST Project" <http://resex.rkbexplorer.com/data/void> .
+<http://resex.rkbexplorer.com/data/void> <http://purl.org/dc/terms/created> "2012-10-26T12:05:20"^^<http://www.w3.org/2001/XMLSchema#dateTime> <http://resex.rkbexplorer.com/data/void> .
+<http://resex.rkbexplorer.com/data/void> <http://purl.org/dc/elements/1.1/source> <http://resex.rkbexplorer.com/id/void> <http://resex.rkbexplorer.com/data/void> .
+<http://resex.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Computer_science> <http://resex.rkbexplorer.com/data/void> .
+<http://resex.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Dependability> <http://resex.rkbexplorer.com/data/void> .
+<http://resex.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Resilience_(network)> <http://resex.rkbexplorer.com/data/void> .
+<http://resex.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Person> <http://resex.rkbexplorer.com/data/void> .
+<http://resex.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#exampleResource> <http://resex.rkbexplorer.com/id/resilience-mechanism-65b5cef4> <http://resex.rkbexplorer.com/data/void> .
+<http://resex.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#feature> <http://void.rkbexplorer.com/id/technicalFeature/sparql> <http://resex.rkbexplorer.com/data/void> .
+<http://resex.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#sparqlEndpoint> <http://resex.rkbexplorer.com/sparql/> <http://resex.rkbexplorer.com/data/void> .
+<http://resex.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#uriRegexPattern> "^http://resex\\.rkbexplorer\\.com/id/.+" <http://resex.rkbexplorer.com/data/void> .
+<http://resex.rkbexplorer.com/id/void> <http://purl.org/dc/terms/publisher> <http://resex.rkbexplorer.com> <http://resex.rkbexplorer.com/data/void> .
+<http://resex.rkbexplorer.com/id/void> <http://purl.org/dc/terms/description> "This repository contains data supplied from the ReSIST Project about Resilient Mechanisms." <http://resex.rkbexplorer.com/data/void> .
+<http://resex.rkbexplorer.com/id/void> <http://xmlns.com/foaf/0.1/nick> "resex" <http://resex.rkbexplorer.com/data/void> .
+<http://resex.rkbexplorer.com/id/void> <http://purl.org/dc/terms/title> "resex.rkbexplorer.com Linked Data Repository" <http://resex.rkbexplorer.com/data/void> .

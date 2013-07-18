@@ -1,0 +1,351 @@
+<?xml version="1.0"?>
+<sparql xmlns="http://www.w3.org/2005/sparql-results#">
+  <head>
+    <variable name="ds"/>
+    <variable name="p"/>
+    <variable name="o"/>
+  </head>
+  <results>
+    <result>
+      <binding name="ds">
+        <uri>http://worldbank.270a.info/void.ttl#world-bank</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://rdfs.org/ns/void#Dataset</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://worldbank.270a.info/void.ttl#world-bank</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://xmlns.com/foaf/0.1/homepage</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://worldbank.270a.info/</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://worldbank.270a.info/void.ttl#world-bank</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/title</uri>
+      </binding>
+      <binding name="o">
+        <literal>World Bank Linked Data</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://worldbank.270a.info/void.ttl#world-bank</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/description</uri>
+      </binding>
+      <binding name="o">
+        <literal>World Bank's World Development Indicators, Finances, Projects and Operations data</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://worldbank.270a.info/void.ttl#world-bank</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/source</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b0</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://worldbank.270a.info/void.ttl#world-bank</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/publisher</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b1</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://worldbank.270a.info/void.ttl#world-bank</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/created</uri>
+      </binding>
+      <binding name="o">
+        <literal datatype="http://www.w3.org/2001/XMLSchema#date">2012-03-15</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://worldbank.270a.info/void.ttl#world-bank</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/modified</uri>
+      </binding>
+      <binding name="o">
+        <literal datatype="http://www.w3.org/2001/XMLSchema#date">2012-04-02</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://worldbank.270a.info/void.ttl#world-bank</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#subset</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://worldbank.270a.info/void.ttl#VoID</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://worldbank.270a.info/void.ttl#world-bank</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#subset</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://worldbank.270a.info/void.ttl#meta</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://worldbank.270a.info/void.ttl#world-bank</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#subset</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://worldbank.270a.info/void.ttl#world-development-indicators</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://worldbank.270a.info/void.ttl#world-bank</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#subset</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://worldbank.270a.info/void.ttl#world-bank-finances</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://worldbank.270a.info/void.ttl#world-bank</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#subset</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://worldbank.270a.info/void.ttl#world-bank-projects-and-operations</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://worldbank.270a.info/void.ttl#world-bank</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#subset</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://worldbank.270a.info/void.ttl#world-bank-climates</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://worldbank.270a.info/void.ttl#world-bank</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#triples</uri>
+      </binding>
+      <binding name="o">
+        <literal datatype="http://www.w3.org/2001/XMLSchema#integer">448181880</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://worldbank.270a.info/void.ttl#world-bank</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/subject</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://dbpedia.org/resource/World_Bank</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://worldbank.270a.info/void.ttl#world-bank</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/subject</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://dbpedia.org/resource/International_financial_institution</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://worldbank.270a.info/void.ttl#world-bank</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/subject</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://dbpedia.org/resource/Foreign_investment</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://worldbank.270a.info/void.ttl#world-bank</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/subject</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://dbpedia.org/resource/International_trade</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://worldbank.270a.info/void.ttl#world-bank</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/subject</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://dbpedia.org/resource/International_Bank_for_Reconstruction_and_Development</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://worldbank.270a.info/void.ttl#world-bank</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/subject</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://dbpedia.org/resource/International_Development_Association</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://worldbank.270a.info/void.ttl#world-bank</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/subject</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://dbpedia.org/resource/Statistical_survey</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://worldbank.270a.info/void.ttl#world-bank</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/subject</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://dbpedia.org/resource/Finance</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://worldbank.270a.info/void.ttl#world-bank</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/subject</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://dbpedia.org/resource/Climate_change</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://worldbank.270a.info/void.ttl#world-bank</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/subject</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://dbpedia.org/resource/Environment</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://worldbank.270a.info/void.ttl#world-bank</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#sparqlEndpoint</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://worldbank.270a.info/sparql</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://worldbank.270a.info/void.ttl#world-bank</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#feature</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://www.w3.org/ns/formats/RDF_XML</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://worldbank.270a.info/void.ttl#world-bank</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#feature</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://www.w3.org/ns/formats/Turtle</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://worldbank.270a.info/void.ttl#world-bank</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b2</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://worldbank.270a.info/void.ttl#world-bank</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b3</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://worldbank.270a.info/void.ttl#world-bank</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b4</bnode>
+      </binding>
+    </result>
+  </results>
+</sparql>

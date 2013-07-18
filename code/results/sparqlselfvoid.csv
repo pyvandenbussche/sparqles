@@ -1,0 +1,988 @@
+http://www.rdfabout.com/sparql,0,QueryException:Endpoint returned Content-Type: application/octet-stream which is not currently supported for SELECT queries
+http://aemet.linkeddata.es/sparql,0,
+http://agrovoc.mimos.my:55824/catalogs/performance/repositories/agris,0,
+http://202.73.13.50:55824/catalogs/performance/repositories/agrovoc,0,
+http://data.allie.dbcls.jp/sparql,0,
+http://semanticweb.cs.vu.nl/europeana/sparql,0,QueryExceptionHTTP:java.nio.charset.MalformedInputException: Input length = 1
+http://data.archiveshub.ac.uk/sparql,0,
+http://purl.org/twc/arrayexpress/virtuoso/sparql,0,QueryExceptionHTTP:Service Temporarily Unavailable
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>503 Service Temporarily Unavailable</title>
+</head><body>
+<h1>Service Temporarily Unavailable</h1>
+<p>The server is temporarily unable to service your
+request due to maintenance downtime or capacity
+problems. Please try again later.</p>
+<hr>
+<address>Apache/2.2.14 (Ubuntu) Server at aquarius.tw.rpi.edu Port 80</address>
+</body></html>
+
+http://sparql.jesandco.org:8890/sparql,0,
+http://vocabulary.semantic-web.at/PoolParty/sparql/AustrianSkiTeam,0,QueryException:Endpoint returned Content-Type: text/plain which is not currently supported for SELECT queries
+http://lod.b3kat.de/sparql,0,
+http://api.talis.com/stores/bbc-backstage/services/sparql,0,QueryExceptionHTTP:Forbidden
+<html><body><h1>403 Forbidden</h1>
+Request forbidden by administrative rules.
+</body></html>
+
+http://api.talis.com/stores/bbc-wildlife/services/sparql,0,QueryExceptionHTTP:Forbidden
+<html><body><h1>403 Forbidden</h1>
+Request forbidden by administrative rules.
+</body></html>
+
+http://www.open-biomed.org.uk/sparql/endpoint/bdgp_20081030,0,
+http://fintrans.publicdata.eu/sparql,0,
+http://data.bibbase.org:2020/sparql,0,QueryExceptionHTTP:Failed to connect to remote server
+http://bibleontology.com/sparql/index.jsp,0,QueryException:Endpoint returned Content-Type: text/html which is not currently supported for SELECT queries
+http://affymetrix.bio2rdf.org/sparql,0,
+http://biocyc.bio2rdf.org/sparql,0,
+http://cas.bio2rdf.org/sparql,0,QueryExceptionHTTP:java.net.UnknownHostException: cas.bio2rdf.org
+http://chebi.bio2rdf.org/sparql,0,QueryExceptionHTTP:java.nio.charset.MalformedInputException: Input length = 1
+http://genbank.bio2rdf.org/sparql,0,QueryExceptionHTTP:Service Temporarily Unavailable
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>503 Service Temporarily Unavailable</title>
+</head><body>
+<h1>Service Temporarily Unavailable</h1>
+<p>The server is temporarily unable to service your
+request due to maintenance downtime or capacity
+problems. Please try again later.</p>
+<hr>
+<address>Apache/2.2.15 (Fedora) Server at genbank.bio2rdf.org Port 80</address>
+</body></html>
+
+http://geneid.bio2rdf.org/sparql,0,
+http://go.bio2rdf.org/sparql,0,
+http://hgnc.bio2rdf.org/sparql,0,
+http://homologene.bio2rdf.org/sparql,0,
+http://interpro.bio2rdf.org/sparql,0,QueryExceptionHTTP:Service Temporarily Unavailable
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>503 Service Temporarily Unavailable</title>
+</head><body>
+<h1>Service Temporarily Unavailable</h1>
+<p>The server is temporarily unable to service your
+request due to maintenance downtime or capacity
+problems. Please try again later.</p>
+<hr>
+<address>Apache/2.2.15 (Fedora) Server at interpro.bio2rdf.org Port 80</address>
+</body></html>
+
+http://cpd.bio2rdf.org/sparql,0,QueryExceptionHTTP:java.net.UnknownHostException: cpd.bio2rdf.org
+http://dr.bio2rdf.org/sparql,0,QueryExceptionHTTP:java.net.UnknownHostException: dr.bio2rdf.org
+http://ec.bio2rdf.org/sparql,0,
+http://gl.bio2rdf.org/sparql,0,QueryExceptionHTTP:Service Temporarily Unavailable
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>503 Service Temporarily Unavailable</title>
+</head><body>
+<h1>Service Temporarily Unavailable</h1>
+<p>The server is temporarily unable to service your
+request due to maintenance downtime or capacity
+problems. Please try again later.</p>
+<hr>
+<address>Apache/2.2.15 (Fedora) Server at gl.bio2rdf.org Port 80</address>
+</body></html>
+
+http://kegg.bio2rdf.org/sparql,0,
+http://rn.bio2rdf.org/sparql,0,QueryExceptionHTTP:Service Temporarily Unavailable
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>503 Service Temporarily Unavailable</title>
+</head><body>
+<h1>Service Temporarily Unavailable</h1>
+<p>The server is temporarily unable to service your
+request due to maintenance downtime or capacity
+problems. Please try again later.</p>
+<hr>
+<address>Apache/2.2.15 (Fedora) Server at rn.bio2rdf.org Port 80</address>
+</body></html>
+
+http://mgi.bio2rdf.org/sparql,0,
+http://obo.bio2rdf.org/sparql,0,
+http://omim.bio2rdf.org/sparql,0,
+http://pdb.bio2rdf.org/sparql,0,QueryExceptionHTTP:java.nio.charset.MalformedInputException: Input length = 1
+http://pfam.bio2rdf.org/sparql,0,QueryExceptionHTTP:Service Temporarily Unavailable
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>503 Service Temporarily Unavailable</title>
+</head><body>
+<h1>Service Temporarily Unavailable</h1>
+<p>The server is temporarily unable to service your
+request due to maintenance downtime or capacity
+problems. Please try again later.</p>
+<hr>
+<address>Apache/2.2.15 (Fedora) Server at pfam.bio2rdf.org Port 80</address>
+</body></html>
+
+http://prodom.bio2rdf.org/sparql,0,QueryExceptionHTTP:Service Temporarily Unavailable
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>503 Service Temporarily Unavailable</title>
+</head><body>
+<h1>Service Temporarily Unavailable</h1>
+<p>The server is temporarily unable to service your
+request due to maintenance downtime or capacity
+problems. Please try again later.</p>
+<hr>
+<address>Apache/2.2.15 (Fedora) Server at prodom.bio2rdf.org Port 80</address>
+</body></html>
+
+http://prosite.bio2rdf.org/sparql,0,QueryExceptionHTTP:Service Temporarily Unavailable
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>503 Service Temporarily Unavailable</title>
+</head><body>
+<h1>Service Temporarily Unavailable</h1>
+<p>The server is temporarily unable to service your
+request due to maintenance downtime or capacity
+problems. Please try again later.</p>
+<hr>
+<address>Apache/2.2.15 (Fedora) Server at prosite.bio2rdf.org Port 80</address>
+</body></html>
+
+http://pubchem.bio2rdf.org/sparql,0,
+http://pubmed.bio2rdf.org/sparql,0,
+http://reactome.bio2rdf.org/sparql,0,
+http://sgd.bio2rdf.org/sparql,0,
+http://unists.bio2rdf.org/sparql,0,
+http://logd.tw.rpi.edu/sparql,0,
+http://biolit.rkbexplorer.com/sparql,0,
+http://bnb.data.bl.uk/sparql,0,
+http://api.kasabi.com/dataset/bricklink/apis/sparql,0,QueryExceptionHTTP:java.net.UnknownHostException: api.kasabi.com
+http://collection.britishmuseum.org/Sparql,0,
+http://services.data.gov.uk/business/sparql,0,QueryExceptionHTTP:Not Found
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>404 Not Found</title>
+</head><body>
+<h1>Not Found</h1>
+<p>The requested URL /business/sparql was not found on this server.</p>
+<hr>
+<address>Apache/2.2.3 (CentOS) Server at 54.247.174.77 Port 80</address>
+</body></html>
+
+http://river.styx.org/sparql,0,QueryExceptionHTTP:Bad Gateway
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+      xmlns:foaf="http://xmlns.com/foaf/0.1/"
+>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.7: http://docutils.sourceforge.net/" />
+<title>500 Internal Server Error</title>
+<link rel="stylesheet" href="http://river.styx.org/css/river.css" type="text/css" />
+</head>
+<body>
+<div class="document" id="internal-server-error">
+<h1 class="title">500 Internal Server Error</h1>
+
+<p>Oops. Looks like something is broken.</p>
+<div id="footer">
+  <div>
+    <a href="http://validator.w3.org/check?uri=referer"><img
+       src="http://www.w3.org/Icons/valid-xhtml-rdfa"
+       alt="Valid XHTML + RDFa" height="31" width="88" /></a>
+    <a href="http://jigsaw.w3.org/css-validator/check/referer"><img
+       style="border:0;width:88px;height:31px"
+       src="http://jigsaw.w3.org/css-validator/images/vcss"
+       alt="Valid CSS!" /></a>
+   </div>
+<div class="footer">
+<hr class="footer" />
+<a class="reference external" href="50x.txt">View document source</a>.
+Generated on: 2010-11-23 18:24 UTC.
+
+</div>
+</div><!-- #footer -->
+</div><!-- #document -->
+</body>
+</html>
+
+http://dati.camera.it/sparql,0,
+http://sparql.linkedopendata.it/cap,0,
+http://catalogus-professorum.org/sparql,0,QueryException:Endpoint returned Content-Type: text/html which is not currently supported for SELECT queries
+http://api.kasabi.com/dataset/chempedia-rdf/apis/sparql,0,QueryExceptionHTTP:java.net.UnknownHostException: api.kasabi.com
+http://semantic.ckan.net/sparql/,0,
+http://sparql.reegle.info/,0,
+http://gov.tso.co.uk/coins/sparql,0,
+http://156.35.31.156/sparql,0,QueryExceptionHTTP:Failed to connect to remote server
+http://data.copac.ac.uk/sparql,0,QueryExceptionHTTP:Forbidden
+<html><body><h1>403 Forbidden</h1>
+Request forbidden by administrative rules.
+</body></html>
+
+http://core.kmi.open.ac.uk/squery,0,QueryException:Endpoint returned Content-Type: text/html which is not currently supported for SELECT queries
+http://eris.okfn.org/sparql,0,QueryExceptionHTTP:Bad Gateway
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+      xmlns:foaf="http://xmlns.com/foaf/0.1/"
+>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.7: http://docutils.sourceforge.net/" />
+<title>500 Internal Server Error</title>
+<link rel="stylesheet" href="http://river.styx.org/css/river.css" type="text/css" />
+</head>
+<body>
+<div class="document" id="internal-server-error">
+<h1 class="title">500 Internal Server Error</h1>
+
+<p>Oops. Looks like something is broken.</p>
+<div id="footer">
+  <div>
+    <a href="http://validator.w3.org/check?uri=referer"><img
+       src="http://www.w3.org/Icons/valid-xhtml-rdfa"
+       alt="Valid XHTML + RDFa" height="31" width="88" /></a>
+    <a href="http://jigsaw.w3.org/css-validator/check/referer"><img
+       style="border:0;width:88px;height:31px"
+       src="http://jigsaw.w3.org/css-validator/images/vcss"
+       alt="Valid CSS!" /></a>
+   </div>
+<div class="footer">
+<hr class="footer" />
+<a class="reference external" href="50x.txt">View document source</a>.
+Generated on: 2010-11-23 18:24 UTC.
+
+</div>
+</div><!-- #footer -->
+</div><!-- #document -->
+</body>
+</html>
+
+http://crystaleye.ch.cam.ac.uk/sparql/,0,
+http://data.fundacionctic.org/sparql,0,
+http://cultura.linkeddata.es/sparql,0,
+http://data.cnr.it/sparql-proxy/,0,
+http://data-gov.ie/sparql,0,
+http://services.data.gov/sparql,0,
+http://api.talis.com/stores/climb/services/sparql,0,QueryExceptionHTTP:Forbidden
+<html><body><h1>403 Forbidden</h1>
+Request forbidden by administrative rules.
+</body></html>
+
+http://api.kasabi.com/dataset/discogs/apis/sparql,0,QueryExceptionHTTP:java.net.UnknownHostException: api.kasabi.com
+http://api.talis.com/stores/metoffice/services/sparql,0,QueryExceptionHTTP:Forbidden
+<html><body><h1>403 Forbidden</h1>
+Request forbidden by administrative rules.
+</body></html>
+
+http://api.talis.com/stores/moseley/services/sparql,0,QueryExceptionHTTP:Forbidden
+<html><body><h1>403 Forbidden</h1>
+Request forbidden by administrative rules.
+</body></html>
+
+http://api.talis.com/stores/musicbrainz/services/sparql,0,QueryExceptionHTTP:Forbidden
+<html><body><h1>403 Forbidden</h1>
+Request forbidden by administrative rules.
+</body></html>
+
+http://api.kasabi.com/dataset/nasa/apis/sparql,0,QueryExceptionHTTP:java.net.UnknownHostException: api.kasabi.com
+http://api.talis.com/stores/airports/services/sparql,0,QueryExceptionHTTP:Forbidden
+<html><body><h1>403 Forbidden</h1>
+Request forbidden by administrative rules.
+</body></html>
+
+http://api.talis.com/stores/pokedex/services/sparql,0,QueryExceptionHTTP:Forbidden
+<html><body><h1>403 Forbidden</h1>
+Request forbidden by administrative rules.
+</body></html>
+
+http://api.talis.com/stores/smcjournals/services/sparql,0,QueryExceptionHTTP:Forbidden
+<html><body><h1>403 Forbidden</h1>
+Request forbidden by administrative rules.
+</body></html>
+
+http://data.open.ac.uk/query,0,
+http://datos.bcn.cl/sparql,0,
+http://datos.bne.es/sparql,0,
+http://de.dbpedia.org/sparql,0,
+http://el.dbpedia.org/sparql,0,
+http://live.dbpedia.org/sparql,0,
+http://pt.dbpedia.org/sparql,0,
+http://dbpedia.org/sparql,0,QueryExceptionHTTP:Bandwidth Limit Exceeded
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+  <head>
+    <title>Error HTTP/1.1 509 Bandwidth Limit Exceeded</title>
+  </head>
+  <body>
+    <h3>Error HTTP/1.1 509 Bandwidth Limit Exceeded</h3><pre>
+Bandwidth Limit Exceeded    URI  = '/!sparql/'
+  </pre></body></html>
+
+http://dbtune.org/classical/sparql/,0,
+http://dbtune.org/bbc/peel/sparql/,0,QueryException:Endpoint returned Content-Type: application/sparql-result+xml which is not currently supported for SELECT queries
+http://dbtune.org/magnatune/sparql/,0,QueryException:Endpoint returned Content-Type: application/sparql-result+xml which is not currently supported for SELECT queries
+http://dbtune.org/musicbrainz/sparql,0,
+http://dbtune.org/myspace/sparql/,0,QueryExceptionHTTP:Service Temporarily Unavailable
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>503 Service Temporarily Unavailable</title>
+</head><body>
+<h1>Service Temporarily Unavailable</h1>
+<p>The server is temporarily unable to service your
+request due to maintenance downtime or capacity
+problems. Please try again later.</p>
+<hr>
+<address>Apache/2.2.3 (CentOS) Server at dbtune.org Port 80</address>
+</body></html>
+
+http://gov.tso.co.uk/dclg/sparql,0,
+http://ndb.publink.lod2.eu/sparql,0,
+http://dewey.info/sparql.php,0,
+http://diavgeia.math.auth.gr/sparql,0,
+http://doc.metalex.eu:8000/sparql/,0,
+http://ecb.publicdata.eu/sparql,0,QueryException:Endpoint returned Content-Type: application/json which is not currently supported for SELECT queries
+http://api.kasabi.com/dataset/ecco-tcp-eighteenth-century-collections-online-texts/apis/sparql,0,QueryExceptionHTTP:java.net.UnknownHostException: api.kasabi.com
+http://services.data.gov.uk/education/sparql,0,
+http://openuplabs.tso.co.uk/sparql/gov-education,0,QueryException:Endpoint returned Content-Type: text/html which is not currently supported for SELECT queries
+http://kent.zpr.fer.hr:8080/educationalProgram/sparql,0,
+http://cr.eionet.europa.eu/sparql,0,
+http://semantic.eea.europa.eu/sparql,0,
+http://opendatacommunities.org/sparql,0,
+http://api.kasabi.com/dataset/english-heritage/apis/sparql,0,QueryExceptionHTTP:java.net.UnknownHostException: api.kasabi.com
+http://enipedia.tudelft.nl/wiki/Special:SparqlExtension,0,QueryException:Endpoint returned Content-Type: application/xml which is not currently supported for SELECT queries
+http://environment.data.gov.uk/sparql/bwq/query,0,
+http://services.data.gov.uk/environment/sparql,0,QueryExceptionHTTP:Not Found
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>404 Not Found</title>
+</head><body>
+<h1>Not Found</h1>
+<p>The requested URL /environment/sparql was not found on this server.</p>
+<hr>
+<address>Apache/2.2.3 (CentOS) Server at 54.247.174.77 Port 80</address>
+</body></html>
+
+http://linkeddata.ge.imati.cnr.it:2020/sparql,0,
+http://epo.publicdata.eu/sparql,0,
+http://agencies.publicdata.eu/sparql,0,
+http://api.talis.com/stores/eupmedia/services/sparql,0,
+http://api.talis.com/stores/whoiswho/services/sparql,0,
+http://api.talis.com/stores/eumida/services/sparql,0,
+http://eur-lex.publicdata.eu/sparql,0,
+http://api.talis.com/stores/eurobarometer/services/sparql,0,
+http://api.talis.com/stores/elections/services/sparql,0,
+http://europeana-triplestore.isti.cnr.it/sparql,0,
+http://eurostat.linked-statistics.org/sparql,0,
+http://idi.fundacionctic.org/classifications_endpoint/eurovoc,0,QueryExceptionHTTP:Service Temporarily Unavailable
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>503 Service Temporarily Unavailable</title>
+</head><body>
+<h1>Service Temporarily Unavailable</h1>
+<p>The server is temporarily unable to service your
+request due to maintenance downtime or capacity
+problems. Please try again later.</p>
+<hr>
+<address>Apache Server at idi.fundacionctic.org Port 80</address>
+</body></html>
+
+http://api.talis.com/stores/eutc-productions/services/sparql,0,QueryExceptionHTTP:Forbidden
+<html><body><h1>403 Forbidden</h1>
+Request forbidden by administrative rules.
+</body></html>
+
+http://semantics.eurecom.fr/sparql,0,QueryExceptionHTTP:Not Found
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>404 Not Found</title>
+</head><body>
+<h1>Not Found</h1>
+<p>The requested URL /sparql was not found on this server.</p>
+</body></html>
+
+http://eculture2.cs.vu.nl:8890/sparql,0,
+http://factforge.net/sparql,0,
+http://api.talis.com/stores/fanhubz/services/sparql,0,QueryExceptionHTTP:Forbidden
+<html><body><h1>403 Forbidden</h1>
+Request forbidden by administrative rules.
+</body></html>
+
+http://rdf.farmbio.uu.se/chembl/sparql,0,
+http://api.kasabi.com/dataset/federal-reserve-economic-data/apis/sparql,0,QueryExceptionHTTP:java.net.UnknownHostException: api.kasabi.com
+http://www.open-biomed.org.uk/sparql/endpoint/flybase,0,
+http://www.open-biomed.org.uk/sparql/endpoint/flyted,0,
+http://kasabi.com/api/sparql-endpoint-foodista,0,QueryExceptionHTTP:java.nio.charset.MalformedInputException: Input length = 1
+http://api.kasabi.com/dataset/foodista/apis/sparql,0,QueryExceptionHTTP:java.net.UnknownHostException: api.kasabi.com
+http://www4.wiwiss.fu-berlin.de/cordis/sparql,0,QueryExceptionHTTP:Service Temporarily Unavailable
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>503 Service Temporarily Unavailable</title>
+</head><body>
+<h1>Service Temporarily Unavailable</h1>
+<p>The server is temporarily unable to service your
+request due to maintenance downtime or capacity
+problems. Please try again later.</p>
+<p>Additionally, a 406 Not Acceptable
+error was encountered while trying to use an ErrorDocument to handle the request.</p>
+<hr>
+<address>Apache/2.2.14 (Win32) DAV/2 mod_ssl/2.2.14 OpenSSL/0.9.8l mod_autoindex_color PHP/5.3.1 Server at www4.wiwiss.fu-berlin.de Port 80</address>
+</body></html>
+
+http://www4.wiwiss.fu-berlin.de/dailymed/sparql,0,
+http://www4.wiwiss.fu-berlin.de/dblp/sparql,0,QueryExceptionHTTP:Service Temporarily Unavailable
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>503 Service Temporarily Unavailable</title>
+</head><body>
+<h1>Service Temporarily Unavailable</h1>
+<p>The server is temporarily unable to service your
+request due to maintenance downtime or capacity
+problems. Please try again later.</p>
+<p>Additionally, a 406 Not Acceptable
+error was encountered while trying to use an ErrorDocument to handle the request.</p>
+<hr>
+<address>Apache/2.2.14 (Win32) DAV/2 mod_ssl/2.2.14 OpenSSL/0.9.8l mod_autoindex_color PHP/5.3.1 Server at www4.wiwiss.fu-berlin.de Port 80</address>
+</body></html>
+
+http://www4.wiwiss.fu-berlin.de/diseasome/sparql,0,
+http://www4.wiwiss.fu-berlin.de/drugbank/sparql,0,
+http://www4.wiwiss.fu-berlin.de/euraxess/sparql,0,QueryExceptionHTTP:Service Temporarily Unavailable
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>503 Service Temporarily Unavailable</title>
+</head><body>
+<h1>Service Temporarily Unavailable</h1>
+<p>The server is temporarily unable to service your
+request due to maintenance downtime or capacity
+problems. Please try again later.</p>
+<p>Additionally, a 406 Not Acceptable
+error was encountered while trying to use an ErrorDocument to handle the request.</p>
+<hr>
+<address>Apache/2.2.14 (Win32) DAV/2 mod_ssl/2.2.14 OpenSSL/0.9.8l mod_autoindex_color PHP/5.3.1 Server at www4.wiwiss.fu-berlin.de Port 80</address>
+</body></html>
+
+http://www4.wiwiss.fu-berlin.de/eures/sparql,0,QueryExceptionHTTP:Service Temporarily Unavailable
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>503 Service Temporarily Unavailable</title>
+</head><body>
+<h1>Service Temporarily Unavailable</h1>
+<p>The server is temporarily unable to service your
+request due to maintenance downtime or capacity
+problems. Please try again later.</p>
+<p>Additionally, a 406 Not Acceptable
+error was encountered while trying to use an ErrorDocument to handle the request.</p>
+<hr>
+<address>Apache/2.2.14 (Win32) DAV/2 mod_ssl/2.2.14 OpenSSL/0.9.8l mod_autoindex_color PHP/5.3.1 Server at www4.wiwiss.fu-berlin.de Port 80</address>
+</body></html>
+
+http://www4.wiwiss.fu-berlin.de/eurostat/sparql,0,
+http://www4.wiwiss.fu-berlin.de/medicare/sparql,0,
+http://www4.wiwiss.fu-berlin.de/gutendata/sparql,0,QueryExceptionHTTP:Bad Gateway
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>502 Bad Gateway</title>
+</head><body>
+<h1>Bad Gateway</h1>
+<p>The proxy server received an invalid
+response from an upstream server.<br />
+</p>
+<p>Additionally, a 406 Not Acceptable
+error was encountered while trying to use an ErrorDocument to handle the request.</p>
+<hr>
+<address>Apache/2.2.14 (Win32) DAV/2 mod_ssl/2.2.14 OpenSSL/0.9.8l mod_autoindex_color PHP/5.3.1 Server at www4.wiwiss.fu-berlin.de Port 80</address>
+</body></html>
+
+http://www4.wiwiss.fu-berlin.de/sider/sparql,0,
+http://www4.wiwiss.fu-berlin.de/stitch/sparql,0,
+http://cr3.eionet.europa.eu/sparql,0,QueryExceptionHTTP:java.net.UnknownHostException: cr3.eionet.europa.eu
+http://os.services.tso.co.uk/geo/sparql,0,
+http://geo.linkeddata.es/sparql,0,
+http://resource.geolba.ac.at/PoolParty/sparql/GeologicUnit,0,QueryException:Endpoint returned Content-Type: text/plain which is not currently supported for SELECT queries
+http://resource.geolba.ac.at/PoolParty/sparql/GeologicTimeScale,0,QueryException:Endpoint returned Content-Type: text/plain which is not currently supported for SELECT queries
+http://resource.geolba.ac.at/PoolParty/sparql/lithology,0,QueryException:Endpoint returned Content-Type: text/plain which is not currently supported for SELECT queries
+http://resource.geolba.ac.at/PoolParty/sparql/tectonicunit,0,QueryException:Endpoint returned Content-Type: text/plain which is not currently supported for SELECT queries
+http://lsd.taxonconcept.org/sparql,0,
+http://lod.gesis.org/thesoz/sparql,0,
+http://kasabi.com/dataset/global-hunger-index/apis/sparql,0,QueryExceptionHTTP:java.nio.charset.MalformedInputException: Input length = 1
+http://govwild.org/sparql,0,
+http://linkedmanchester.org/sparql,0,
+http://sparql.linkedopendata.it/grrp,0,
+http://sparql.linkedopendata.it/grrt,0,
+http://hcls.deri.org/sparql,0,QueryExceptionHTTP:java.nio.charset.MalformedInputException: Input length = 1
+http://lod.hebis.de/sparql,0,
+http://greek-lod.auth.gr/fire-brigade/sparql,0,
+http://greek-lod.auth.gr/police/sparql,0,
+http://data.noticias.universia.net/d2r-server/snorql/,0,QueryException:Endpoint returned Content-Type: text/html which is not currently supported for SELECT queries
+http://setaria.oszk.hu/sparql,0,
+http://data.ngii.go.kr/SPARQL/sparql,0,QueryException:Endpoint returned Content-Type: text/xml which is not currently supported for SELECT queries
+http://greek-lod.math.auth.gr/intervalue/sparql,0,
+http://iserve.kmi.open.ac.uk/data/execute-query,0,QueryExceptionHTTP:Service Temporarily Unavailable
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>503 Service Temporarily Unavailable</title>
+</head><body>
+<h1>Service Temporarily Unavailable</h1>
+<p>The server is temporarily unable to service your
+request due to maintenance downtime or capacity
+problems. Please try again later.</p>
+</body></html>
+
+http://www.rechercheisidore.fr/sparql,0,QueryException:Endpoint returned Content-Type: text/html which is not currently supported for SELECT queries
+http://sparql.linkedopendata.it/istat,0,
+http://sparql.linkedopendata.it/scuole,0,
+http://purl.org/openbibliosets/iucrsparql,0,QueryException:Endpoint returned Content-Type: text/html which is not currently supported for SELECT queries
+http://dbtune.org/jamendo/sparql/,0,
+http://api.kasabi.com/dataset/jisc-cetis-project-directory/apis/sparql,0,QueryExceptionHTTP:java.net.UnknownHostException: api.kasabi.com
+http://202.73.13.50:55824/catalogs/performance/repositories/jita,0,
+http://api.talis.com/stores/jgoodwin-genealogy/services/sparql,0,QueryExceptionHTTP:Forbidden
+<html><body><h1>403 Forbidden</h1>
+Request forbidden by administrative rules.
+</body></html>
+
+http://greek-lod.math.auth.gr/kalikratis/sparql,0,
+http://api.kasabi.com/dataset/openflights-routes/apis/sparql,0,QueryExceptionHTTP:java.net.UnknownHostException: api.kasabi.com
+http://sonicbanana.cs.wright.edu:8890/sparql,0,QueryExceptionHTTP:Failed to connect to remote server
+http://lod.kaist.ac.kr/sparql,0,QueryExceptionHTTP:Service Temporarily Unavailable
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>503 Service Temporarily Unavailable</title>
+</head><body>
+<h1>Service Temporarily Unavailable</h1>
+<p>The server is temporarily unable to service your
+request due to maintenance downtime or capacity
+problems. Please try again later.</p>
+</body></html>
+
+http://dblp.l3s.de/d2r/sparql,0,
+http://kwijibo.talis.com/latc-linksets/sparql,0,QueryExceptionHTTP:Service Unavailable: Back-end server is at capacity
+http://gov.tso.co.uk/legislation/sparql,0,
+http://monnetproject.deri.ie/lemonsource_query/,0,QueryExceptionHTTP:Failed to connect to remote server
+http://lab3.libris.kb.se/sparql,0,QueryExceptionHTTP:Not Found
+<html><head><title>Apache Tomcat/7.0.20 - Error report</title><style><!--H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A {color : black;}A.name {color : black;}HR {color : #525D76;}--></style> </head><body><h1>HTTP Status 404 - Not Found</h1><HR size="1" noshade="noshade"><p><b>type</b> Status report</p><p><b>message</b> <u>Not Found</u></p><p><b>description</b> <u>The requested resource (Not Found) is not available.</u></p><HR size="1" noshade="noshade"><h3>Apache Tomcat/7.0.20</h3></body></html>
+http://spending.lichfielddc.gov.uk/sparql,0,QueryExceptionHTTP:Not Acceptable
+406 Not Acceptable<br />Unable to provide desired content-type. Does the view "spending/sparql" exist?
+http://linkedlifedata.com/sparql,0,
+http://sparql.linkedopendata.it/loc,0,
+http://linkedopencommerce.com/sparql,0,QueryExceptionHTTP:java.nio.charset.MalformedInputException: Input length = 1
+http://ecowlim.tfri.gov.tw/sparql/query,0,
+http://sparql.linkedopendata.it/los,0,
+http://lov.okfn.org/endpoint/lov,0,
+http://linkedscotland.org/sparql,0,
+http://dbmi-icode-01.dbmi.pitt.edu/linkedSPLs/sparql,0,
+http://soa4all.isoco.net/luf/sparql,0,
+http://data.linkedct.org/sparql,0,QueryException:Endpoint returned Content-Type: text/rdf+n3 which is not currently supported for SELECT queries
+http://linkedgeodata.org/sparql/,0,
+http://api.talis.com/stores/rsinger-dev4/services/sparql,0,QueryExceptionHTTP:Forbidden
+<html><body><h1>403 Forbidden</h1>
+Request forbidden by administrative rules.
+</body></html>
+
+http://data.linkedmdb.org/sparql,0,
+http://id.sgcb.mcu.es/sparql,0,
+http://lobid.org/sparql/,0,
+http://sw.unime.it:8890/sparql,0,
+http://api.talis.com/stores/datagovuk/services/sparql,0,QueryExceptionHTTP:Forbidden
+<html><body><h1>403 Forbidden</h1>
+Request forbidden by administrative rules.
+</body></html>
+
+http://www.lotico.com:3030/lotico,0,QueryExceptionHTTP:Neither ?default nor ?graph in the query string of the request
+Error 400: Neither ?default nor ?graph in the query string of the request
+
+
+Fuseki - version 0.2.2-incubating-SNAPSHOT (Build date: 2012-03-22T05:04:16+0000)
+
+http://api.talis.com/stores/massobservation/services/sparql,0,QueryExceptionHTTP:Forbidden
+<html><body><h1>403 Forbidden</h1>
+Request forbidden by administrative rules.
+</body></html>
+
+http://meducator.open.ac.uk/resourcesrestapi/rest/meducator/sparql,0,QueryExceptionHTTP:Not Acceptable
+<html><head><title>Apache Tomcat/6.0.30 - Error report</title><style><!--H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A {color : black;}A.name {color : black;}HR {color : #525D76;}--></style> </head><body><h1>HTTP Status 406 - Not Acceptable</h1><HR size="1" noshade="noshade"><p><b>type</b> Status report</p><p><b>message</b> <u>Not Acceptable</u></p><p><b>description</b> <u>The resource identified by this request is only capable of generating responses with characteristics not acceptable according to the request "accept" headers (Not Acceptable).</u></p><HR size="1" noshade="noshade"><h3>Apache Tomcat/6.0.30</h3></body></html>
+http://www.morelab.deusto.es/joseki/articles,0,
+http://rdf.muninn-project.org/sparql,0,
+http://sparql.linkedopendata.it/musei,0,QueryExceptionHTTP:java.nio.charset.MalformedInputException: Input length = 1
+http://api.kasabi.com/dataset/musicnet/apis/sparql,0,QueryExceptionHTTP:java.net.UnknownHostException: api.kasabi.com
+http://rdf.myexperiment.org/sparql/,0,QueryException:Endpoint returned Content-Type: application/xml which is not currently supported for SELECT queries
+http://futurewavehosting.com:3030/my-family-lineage/sparql,0,
+http://n-lex.publicdata.eu/sparql,0,
+http://id.ndl.go.jp/auth/ndla/,0,QueryException:Endpoint returned Content-Type: text/plain which is not currently supported for SELECT queries
+http://id.ndl.go.jp/auth/ndlsh/,0,QueryException:Endpoint returned Content-Type: text/plain which is not currently supported for SELECT queries
+http://api.kasabi.com/api/sparql-endpoint-near,0,QueryExceptionHTTP:java.net.UnknownHostException: api.kasabi.com
+http://sparql.neurocommons.org:8890/nsparql/,0,QueryExceptionHTTP:Service Temporarily Unavailable
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>503 Service Temporarily Unavailable</title>
+</head><body>
+<h1>Service Temporarily Unavailable</h1>
+<p>The server is temporarily unable to service your
+request due to maintenance downtime or capacity
+problems. Please try again later.</p>
+<p>Additionally, a 503 Service Temporarily Unavailable
+error was encountered while trying to use an ErrorDocument to handle the request.</p>
+<hr>
+<address>Apache/2.2 Server at <a href="mailto:WebMaster@NeuroCommons.Org">sparql.neurocommons.org</a> Port 8890</address>
+</body></html>
+
+http://api.talis.com/stores/mesh-norwegian/services/sparql,0,QueryExceptionHTTP:Forbidden
+<html><body><h1>403 Forbidden</h1>
+Request forbidden by administrative rules.
+</body></html>
+
+http://api.talis.com/stores/gunnbib-digitalmanuskripter/sparql,0,QueryExceptionHTTP:Forbidden
+<html><body><h1>403 Forbidden</h1>
+Request forbidden by administrative rules.
+</body></html>
+
+http://api.talis.com/stores/nvd/services/sparql,0,QueryExceptionHTTP:Forbidden
+<html><body><h1>403 Forbidden</h1>
+Request forbidden by administrative rules.
+</body></html>
+
+http://data.oceandrilling.org/sparql,0,
+http://miuras.inf.um.es/sparql,0,
+http://vocabulary.semantic-web.at/PoolParty/sparql/OpenData,0,QueryException:Endpoint returned Content-Type: text/plain which is not currently supported for SELECT queries
+http://en.openei.org/sparql,0,
+http://openknowledgegraph.org/sparql,0,QueryExceptionHTTP:Not Acceptable
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>406 Not Acceptable</title>
+</head><body>
+<h1>Not Acceptable</h1>
+<p>An appropriate representation of the requested resource /sparql could not be found on this server.</p>
+Available variants:
+<ul>
+<li><a href="sparql.php">sparql.php</a> , type x-mapp-php4</li>
+</ul>
+</body></html>
+
+http://www.open-biomed.org.uk/sparql/endpoint/flyatlas,0,
+http://lod.openlinksw.com/sparql,0,QueryExceptionHTTP:java.nio.charset.MalformedInputException: Input length = 1
+http://sparql.openmobilenetwork.org,0,
+http://apps.ideaconsult.net:8080/ontology,0,
+http://api.talis.com/stores/ordnance-survey/services/sparql,0,
+http://data.ox.ac.uk/sparql/,0,QueryExceptionHTTP:Moved Permanently
+http://api.kasabi.com/dataset/pali-english-lexicon/apis/sparql,0,QueryExceptionHTTP:java.net.UnknownHostException: api.kasabi.com
+http://services.data.gov.uk/patents/sparql,0,QueryExceptionHTTP:Not Found
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>404 Not Found</title>
+</head><body>
+<h1>Not Found</h1>
+<p>The requested URL /patents/sparql was not found on this server.</p>
+<hr>
+<address>Apache/2.2.3 (CentOS) Server at 54.247.174.77 Port 80</address>
+</body></html>
+
+http://prelex.publicdata.eu/sparql,0,
+http://api.kasabi.com/dataset/prelinger-archives/apis/sparql,0,QueryExceptionHTTP:java.net.UnknownHostException: api.kasabi.com
+http://api.talis.com/stores/pbac/services/sparql,0,QueryExceptionHTTP:Forbidden
+<html><body><h1>403 Forbidden</h1>
+Request forbidden by administrative rules.
+</body></html>
+
+http://api.talis.com/stores/productdb/services/sparql,0,QueryExceptionHTTP:Forbidden
+<html><body><h1>403 Forbidden</h1>
+Request forbidden by administrative rules.
+</body></html>
+
+http://www.sparql.org/sparql.html,0,QueryException:Endpoint returned Content-Type: text/html which is not currently supported for SELECT queries
+http://data.bibsys.no/data/query_authority.html,0,QueryException:Endpoint returned Content-Type: text/html which is not currently supported for SELECT queries
+http://rdf.ng-london.org.uk/raphael,0,QueryException:Endpoint returned Content-Type: text/html which is not currently supported for SELECT queries
+http://eculture2.cs.vu.nl:5020/sparql/,0,
+http://services.data.gov.uk/reference/sparql,0,
+http://api.kasabi.com/dataset/renewable-energy-generators/apis/sparql,0,QueryExceptionHTTP:java.net.UnknownHostException: api.kasabi.com
+http://services.data.gov.uk/research/sparql,0,QueryExceptionHTTP:Not Found
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>404 Not Found</title>
+</head><body>
+<h1>Not Found</h1>
+<p>The requested URL /research/sparql was not found on this server.</p>
+<hr>
+<address>Apache/2.2.3 (CentOS) Server at 54.247.174.77 Port 80</address>
+</body></html>
+
+http://revyu.com/sparql,0,ResultSetException:Failed when initializing the StAX parsing engine
+http://acm.rkbexplorer.com/sparql/,0,
+http://budapest.rkbexplorer.com/sparql/,0,
+http://citeseer.rkbexplorer.com/sparql/,0,
+http://cordis.rkbexplorer.com/sparql/,0,
+http://courseware.rkbexplorer.com/sparql/,0,
+http://crime.rkbexplorer.com/sparql/,0,
+http://crm.rkbexplorer.com/sparql,0,
+http://curriculum.rkbexplorer.com/sparql/,0,
+http://darmstadt.rkbexplorer.com/sparql/,0,
+http://dblp.rkbexplorer.com/sparql/,0,
+http://deepblue.rkbexplorer.com/sparql/,0,
+http://deploy.rkbexplorer.com/sparql/,0,
+http://digitaleconomy.rkbexplorer.com/sparql,0,
+http://dotac.rkbexplorer.com/sparql/,0,
+http://ecs.rkbexplorer.com/sparql,0,QueryExceptionHTTP:Not Found
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head id="head">
+    <title>http://ecs.rkbexplorer.com/sparql/</title>
+    <link rel="stylesheet" type="text/css" href="/style/basic.css" />      </head>
+
+  <body>
+    <div id="header">
+      <h1><a href="http://ecs.rkbexplorer.com/">ecs</a>.<a href="http://www.rkbexplorer.com/">rkbexplorer.com</a></h1>
+            <ul class="right"><li><a href="/contact/">contact</a></li></ul>      <div style="clear: both;"></div>
+    </div>
+<h2>Error 404 &mdash; Not Found</h2>    <p>The requested resource could not be found, there is no RDF repository available for <a href="http://ecs.rkbexplorer.com/">ecs.rkbexplorer.com</a></p>
+    <p>Please contact the <a href="mailto:admin@rkbexplorer.com">administrator</a> for further assistance.</p>
+  </body>
+</html>
+
+http://enaktingpsi.rkbexplorer.com/sparql,0,QueryExceptionHTTP:Not Found
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head id="head">
+    <title>http://enaktingpsi.rkbexplorer.com/sparql/</title>
+    <link rel="stylesheet" type="text/css" href="/style/basic.css" />      </head>
+
+  <body>
+    <div id="header">
+      <h1><a href="http://enaktingpsi.rkbexplorer.com/">enaktingpsi</a>.<a href="http://www.rkbexplorer.com/">rkbexplorer.com</a></h1>
+            <ul class="right"><li><a href="/contact/">contact</a></li></ul>      <div style="clear: both;"></div>
+    </div>
+<h2>Error 404 &mdash; Not Found</h2>    <p>The requested resource could not be found, there is no RDF repository available for <a href="http://enaktingpsi.rkbexplorer.com/">enaktingpsi.rkbexplorer.com</a></p>
+    <p>Please contact the <a href="mailto:admin@rkbexplorer.com">administrator</a> for further assistance.</p>
+  </body>
+</html>
+
+http://eprints.rkbexplorer.com/sparql/,0,
+http://epsrc.rkbexplorer.com/sparql,0,
+http://era.rkbexplorer.com/sparql/,0,
+http://eurecom.rkbexplorer.com/sparql/,0,
+http://foreign.rkbexplorer.com/sparql,0,
+http://ft.rkbexplorer.com/sparql/,0,
+http://fun.rkbexplorer.com/sparql,0,QueryExceptionHTTP:Not Found
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head id="head">
+    <title>http://fun.rkbexplorer.com/sparql/</title>
+    <link rel="stylesheet" type="text/css" href="/style/basic.css" />      </head>
+
+  <body>
+    <div id="header">
+      <h1><a href="http://fun.rkbexplorer.com/">fun</a>.<a href="http://www.rkbexplorer.com/">rkbexplorer.com</a></h1>
+            <ul class="right"><li><a href="/contact/">contact</a></li></ul>      <div style="clear: both;"></div>
+    </div>
+<h2>Error 404 &mdash; Not Found</h2>    <p>The requested resource could not be found, there is no RDF repository available for <a href="http://fun.rkbexplorer.com/">fun.rkbexplorer.com</a></p>
+    <p>Please contact the <a href="mailto:admin@rkbexplorer.com">administrator</a> for further assistance.</p>
+  </body>
+</html>
+
+http://gdlc.rkbexplorer.com/sparql,0,QueryExceptionHTTP:Not Found
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head id="head">
+    <title>http://gdlc.rkbexplorer.com/sparql/</title>
+    <link rel="stylesheet" type="text/css" href="/style/basic.css" />      </head>
+
+  <body>
+    <div id="header">
+      <h1><a href="http://gdlc.rkbexplorer.com/">gdlc</a>.<a href="http://www.rkbexplorer.com/">rkbexplorer.com</a></h1>
+            <ul class="right"><li><a href="/contact/">contact</a></li></ul>      <div style="clear: both;"></div>
+    </div>
+<h2>Error 404 &mdash; Not Found</h2>    <p>The requested resource could not be found, there is no RDF repository available for <a href="http://gdlc.rkbexplorer.com/">gdlc.rkbexplorer.com</a></p>
+    <p>Please contact the <a href="mailto:admin@rkbexplorer.com">administrator</a> for further assistance.</p>
+  </body>
+</html>
+
+http://ibm.rkbexplorer.com/sparql/,0,
+http://ieee.rkbexplorer.com/sparql/,0,
+http://irit.rkbexplorer.com/sparql/,0,
+http://italy.rkbexplorer.com/sparql,0,
+http://jisc.rkbexplorer.com/sparql/,0,
+http://kaunas.rkbexplorer.com/sparql,0,
+http://kisti.rkbexplorer.com/sparql/,0,
+http://laas.rkbexplorer.com/sparql/,0,
+http://lisbon.rkbexplorer.com/sparql,0,
+http://newcastle.rkbexplorer.com/sparql/,0,
+http://notube.rkbexplorer.com/sparql,0,QueryExceptionHTTP:Not Found
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head id="head">
+    <title>http://notube.rkbexplorer.com/sparql/</title>
+    <link rel="stylesheet" type="text/css" href="/style/basic.css" />      </head>
+
+  <body>
+    <div id="header">
+      <h1><a href="http://notube.rkbexplorer.com/">notube</a>.<a href="http://www.rkbexplorer.com/">rkbexplorer.com</a></h1>
+            <ul class="right"><li><a href="/contact/">contact</a></li></ul>      <div style="clear: both;"></div>
+    </div>
+<h2>Error 404 &mdash; Not Found</h2>    <p>The requested resource could not be found, there is no RDF repository available for <a href="http://notube.rkbexplorer.com/">notube.rkbexplorer.com</a></p>
+    <p>Please contact the <a href="mailto:admin@rkbexplorer.com">administrator</a> for further assistance.</p>
+  </body>
+</html>
+
+http://nsf.rkbexplorer.com/sparql/,0,
+http://oai.rkbexplorer.com/sparql/,0,QueryExceptionHTTP:Not Acceptable
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head id="head">
+    <title>http://www.rkbexplorer.com/explorer/</title>
+    <link rel="stylesheet" type="text/css" href="/style/basic.css" />      </head>
+
+  <body>
+    <div id="header">
+      <h1><a href="http://www.rkbexplorer.com/">www</a>.<a href="http://www.rkbexplorer.com/">rkbexplorer.com</a></h1>
+            <ul class="right"><li><a href="/contact/">contact</a></li></ul>      <div style="clear: both;"></div>
+    </div>
+<h2>HTTP/1.1 406 Not Acceptable</h2>    <p>We do not have anything to serve at this URL which matches your requested acceptable content type(s).</p>
+<p>You requested data in the format(s):</p>
+<pre>application/sparql-results+xml</pre>
+<p>I can give you:</p>
+<pre>text/html</pre>
+<p></p>
+    <p>Please contact the <a href="mailto:admin@rkbexplorer.com">administrator</a> for further assistance.</p>
+  </body>
+</html>
+
+http://os.rkbexplorer.com/sparql/,0,
+http://photos.rkbexplorer.com/sparql,0,QueryExceptionHTTP:Not Found
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head id="head">
+    <title>http://photos.rkbexplorer.com/sparql/</title>
+    <link rel="stylesheet" type="text/css" href="/style/basic.css" />      </head>
+
+  <body>
+    <div id="header">
+      <h1><a href="http://photos.rkbexplorer.com/">photos</a>.<a href="http://www.rkbexplorer.com/">rkbexplorer.com</a></h1>
+            <ul class="right"><li><a href="/contact/">contact</a></li></ul>      <div style="clear: both;"></div>
+    </div>
+<h2>Error 404 &mdash; Not Found</h2>    <p>The requested resource could not be found, there is no RDF repository available for <a href="http://photos.rkbexplorer.com/">photos.rkbexplorer.com</a></p>
+    <p>Please contact the <a href="mailto:admin@rkbexplorer.com">administrator</a> for further assistance.</p>
+  </body>
+</html>
+
+http://pisa.rkbexplorer.com/sparql/,0,
+http://rae2001.rkbexplorer.com/sparql/,0,
+http://resex.rkbexplorer.com/sparql/,0,
+http://risks.rkbexplorer.com/sparql/,0,
+http://roma.rkbexplorer.com/sparql/,0,
+http://roni.rkbexplorer.com/sparql,0,QueryExceptionHTTP:Authorization Required
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>401 Authorization Required</title>
+</head><body>
+<h1>Authorization Required</h1>
+<p>This server could not verify that you
+are authorized to access the document
+requested.  Either you supplied the wrong
+credentials (e.g., bad password), or your
+browser doesn't understand how to supply
+the credentials required.</p>
+<p>Additionally, a 401 Authorization Required
+error was encountered while trying to use an ErrorDocument to handle the request.</p>
+<hr>
+<address>Apache/2.0.52 (Red Hat) Server at roni.rkbexplorer.com Port 80</address>
+</body></html>
+
+http://southampton.rkbexplorer.com/sparql/,0,
+http://ulm.rkbexplorer.com/sparql/,0,
+http://unlocode.rkbexplorer.com/sparql/,0,
+http://webconf.rkbexplorer.com/sparql,0,
+http://webscience.rkbexplorer.com/sparql,0,
+http://wiki.rkbexplorer.com/sparql/,0,
+http://wordnet.rkbexplorer.com/sparql/,0,
+http://link.informatics.stonybrook.edu/sparql/,0,
+http://biordf.net/sparql,0,
+http://api.kasabi.com/dataset/sanskrit-english-lexicon/apis/sparql,0,QueryExceptionHTTP:java.net.UnknownHostException: api.kasabi.com
+http://212.81.220.68:2020/elviajero,0,QueryExceptionHTTP:Failed to connect to remote server
+http://api.talis.com/stores/schemapedia/services/sparql,0,QueryExceptionHTTP:Forbidden
+<html><body><h1>403 Forbidden</h1>
+Request forbidden by administrative rules.
+</body></html>
+
+http://rdfabout.com/sparql,0,QueryException:Endpoint returned Content-Type: application/octet-stream which is not currently supported for SELECT queries
+http://aseg.cs.concordia.ca/secold/sparqlendpoint,0,QueryExceptionHTTP:Gateway Time-out
+<html>
+<head><title>504 Gateway Time-out</title></head>
+<body bgcolor="white">
+<center><h1>504 Gateway Time-out</h1></center>
+<hr><center>nginx/0.7.65</center>
+</body>
+</html>
+
+http://el-devtc01.tugraz.at/~ldv/interlinking/endpoint_handler.php,0,QueryExceptionHTTP:java.nio.charset.MalformedInputException: Input length = 1
+http://data.semanticuniverse.com/sparql,0,
+http://data.semanticweb.org/sparql,0,
+http://cb.semsol.org/sparql,0,QueryExceptionHTTP:java.net.UnknownHostException: cb.semsol.org
+http://smartlink.open.ac.uk/smartlink/sparql,0,
+http://socialarchive.iath.virginia.edu/sparql/eac,0,
+http://socialarchive.iath.virginia.edu/sparql/snac-viaf,0,
+http://vocabulary.semantic-web.at/PoolParty/sparql/semweb,0,QueryException:Endpoint returned Content-Type: text/plain which is not currently supported for SELECT queries
+http://sparql.data.southampton.ac.uk/,0,
+http://labs.mondeca.com/endpoint/ends,0,
+http://services.data.gov.uk/statistics/sparql,0,
+http://zbw.eu/beta/sparql/stw,0,
+http://lod.sztaki.hu/sparql,0,
+http://api.talis.com/stores/openlibrary/services/sparql,0,
+http://hcls.deri.org:8080/openrdf-sesame/repositories/tcga,0,
+http://www.open-biomed.org.uk/sparql/endpoint/tcm.,0,QueryExceptionHTTP:java.nio.charset.MalformedInputException: Input length = 1
+http://telegraphis.net/data/countries/sparql,0,QueryException:Endpoint returned Content-Type: text/plain which is not currently supported for SELECT queries
+http://diwis.imis.athena-innovation.gr:8181/sparql,0,QueryExceptionHTTP:Failed to connect to remote server
+http://dbmi-icode-01.dbmi.pitt.edu:2020/sparql,0,
+http://api.talis.com/stores/theviewfrom/services/sparql,0,QueryExceptionHTTP:Forbidden
+<html><body><h1>403 Forbidden</h1>
+Request forbidden by administrative rules.
+</body></html>
+
+http://www.archivesdefrance.culture.gouv.fr/thesaurus/sparql,0,QueryException:Endpoint returned Content-Type: application/xml which is not currently supported for SELECT queries
+http://tkm.kiom.re.kr/ontology/sparql,0,
+http://api.talis.com/stores/trafficscotland/services/sparql,0,QueryExceptionHTTP:Forbidden
+<html><body><h1>403 Forbidden</h1>
+Request forbidden by administrative rules.
+</body></html>
+
+http://services.data.gov.uk/transport/sparql,0,
+http://gov.tso.co.uk/transport/sparql,0,
+http://twarql.org:8890/sparql,0,QueryExceptionHTTP:java.net.UnknownHostException: twarql.org
+http://data.bib.uni-mannheim.de/sparql,0,QueryExceptionHTTP:java.nio.charset.MalformedInputException: Input length = 1
+http://platform.uberblic.org/api/v1/sparql,0,QueryExceptionHTTP:Moved Permanently
+http://api.kasabi.com/dataset/un-hazardous-material-numbers/apis/sparql,0,QueryExceptionHTTP:java.net.UnknownHostException: api.kasabi.com
+http://beta.sparql.uniprot.org,0,
+http://beta.sparql.uniprot.org/,0,
+http://unodc.publicdata.eu/sparql,0,
+http://linkeddata.uriburner.com/sparql,0,
+http://api.talis.com/stores/wordnet/services/sparql,0,QueryExceptionHTTP:Forbidden
+<html><body><h1>403 Forbidden</h1>
+Request forbidden by administrative rules.
+</body></html>
+
+http://minsky.gsi.dit.upm.es/semanticwiki/index.php/Special:SPARQLEndpoint,0,QueryException:Endpoint returned Content-Type: text/html which is not currently supported for SELECT queries
+http://webenemasuno.linkeddata.es/sparql,0,
+http://wiktionary.dbpedia.org/sparql,0,QueryExceptionHTTP:Failed to connect to remote server
+http://worldbank.270a.info/sparql,0,
+http://www4.wiwiss.fu-berlin.de/factbook/sparql,0,QueryExceptionHTTP:Bad Gateway
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>502 Bad Gateway</title>
+</head><body>
+<h1>Bad Gateway</h1>
+<p>The proxy server received an invalid
+response from an upstream server.<br />
+</p>
+<p>Additionally, a 406 Not Acceptable
+error was encountered while trying to use an ErrorDocument to handle the request.</p>
+<hr>
+<address>Apache/2.2.14 (Win32) DAV/2 mod_ssl/2.2.14 OpenSSL/0.9.8l mod_autoindex_color PHP/5.3.1 Server at www4.wiwiss.fu-berlin.de Port 80</address>
+</body></html>
+
+http://api.kasabi.com/dataset/yahoo-geoplanet/apis/sparql,0,QueryExceptionHTTP:java.net.UnknownHostException: api.kasabi.com
+http://neuroweb.med.yale.edu:8890/sparql,0,QueryExceptionHTTP:Failed to connect to remote server
+http://sparql.yovisto.com/,0,
+http://www.zaragoza.es/datosabiertos/sparql,0,
+http://www.zaragoza.es/turruta/sparql,0,
+http://zhishi.me/sparql,0,QueryExceptionHTTP:java.net.SocketException: Software caused connection abort: recv failed

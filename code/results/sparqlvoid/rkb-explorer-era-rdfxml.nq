@@ -1,0 +1,274 @@
+<?xml version="1.0"?>
+<sparql xmlns="http://www.w3.org/2005/sparql-results#">
+  <head>
+    <variable name="ds"/>
+    <variable name="p"/>
+    <variable name="o"/>
+  </head>
+  <results>
+    <result>
+      <binding name="ds">
+        <uri>http://era.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#uriRegexPattern</uri>
+      </binding>
+      <binding name="o">
+        <literal>^http://era.rkbexplorer.com/id/.+</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://era.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#sparqlEndpoint</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://era.rkbexplorer.com/sparql/</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://era.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://rdfs.org/ns/void#Dataset</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://era.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#statItem</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b0</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://era.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#statItem</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b1</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://era.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/subject</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://dbpedia.org/resource/Publication</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://era.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/subject</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://dbpedia.org/resource/Person</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://era.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#exampleResource</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://era.rkbexplorer.com/id/ERAID-15590</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://era.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#feature</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://void.rkbexplorer.com/id/technicalFeature/sparql</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://era.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#uriRegexPattern</uri>
+      </binding>
+      <binding name="o">
+        <literal>^http://era\.rkbexplorer\.com/id/.+</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://era.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/publisher</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://era.rkbexplorer.com</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://era.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/description</uri>
+      </binding>
+      <binding name="o">
+        <literal>The data presented here is from the Australian Government's Australian Research Council (ARC) lists of ranked journals used by Australians which can be found here. You might like to look at John Lamp's page which also publishes the data in a more human accessible form. It is provided on an as is basis, with no warranty, in case anyone finds a Linked Data version useful.</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://era.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://xmlns.com/foaf/0.1/nick</uri>
+      </binding>
+      <binding name="o">
+        <literal>era</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://era.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/title</uri>
+      </binding>
+      <binding name="o">
+        <literal>era.rkbexplorer.com Linked Data Repository</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://era.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/date</uri>
+      </binding>
+      <binding name="o">
+        <literal datatype="http://www.w3.org/2001/XMLSchema#date">2010-09-13T11:32:14</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://era.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/2000/01/rdf-schema#label</uri>
+      </binding>
+      <binding name="o">
+        <literal>era.rkbexplorer.com Linked Data Repository</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://era.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://xmlns.com/foaf/0.1/homepage</uri>
+      </binding>
+      <binding name="o">
+        <uri>http://era.rkbexplorer.com/</uri>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://era.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#statItem</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b2</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://era.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#statItem</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b3</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://era.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://purl.org/dc/terms/date</uri>
+      </binding>
+      <binding name="o">
+        <literal datatype="http://www.w3.org/2001/XMLSchema#date">2010-09-08T08:37:03</literal>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://era.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#statItem</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b4</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://era.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://rdfs.org/ns/void#statItem</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b5</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://era.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b6</bnode>
+      </binding>
+    </result>
+    <result>
+      <binding name="ds">
+        <uri>http://era.rkbexplorer.com/id/void</uri>
+      </binding>
+      <binding name="p">
+        <uri>http://www.w3.org/1999/02/22-rdf-syntax-ns#type</uri>
+      </binding>
+      <binding name="o">
+        <bnode>b7</bnode>
+      </binding>
+    </result>
+  </results>
+</sparql>

@@ -1,0 +1,17 @@
+<http://rae2001.rkbexplorer.com/data/void> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Ontology> <http://rae2001.rkbexplorer.com/data/void> .
+<http://rae2001.rkbexplorer.com/data/void> <http://purl.org/dc/elements/1.1/creator> "ReSIST Project" <http://rae2001.rkbexplorer.com/data/void> .
+<http://rae2001.rkbexplorer.com/data/void> <http://purl.org/dc/terms/created> "2012-10-26T12:05:42"^^<http://www.w3.org/2001/XMLSchema#dateTime> <http://rae2001.rkbexplorer.com/data/void> .
+<http://rae2001.rkbexplorer.com/data/void> <http://purl.org/dc/elements/1.1/source> <http://rae2001.rkbexplorer.com/id/void> <http://rae2001.rkbexplorer.com/data/void> .
+<http://rae2001.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Computer_science> <http://rae2001.rkbexplorer.com/data/void> .
+<http://rae2001.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Organization> <http://rae2001.rkbexplorer.com/data/void> .
+<http://rae2001.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Publication> <http://rae2001.rkbexplorer.com/data/void> .
+<http://rae2001.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Computer_scientists> <http://rae2001.rkbexplorer.com/data/void> .
+<http://rae2001.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Person> <http://rae2001.rkbexplorer.com/data/void> .
+<http://rae2001.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#exampleResource> <http://rae2001.rkbexplorer.com/id/resource-Id-227384> <http://rae2001.rkbexplorer.com/data/void> .
+<http://rae2001.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#feature> <http://void.rkbexplorer.com/id/technicalFeature/sparql> <http://rae2001.rkbexplorer.com/data/void> .
+<http://rae2001.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#sparqlEndpoint> <http://rae2001.rkbexplorer.com/sparql/> <http://rae2001.rkbexplorer.com/data/void> .
+<http://rae2001.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#uriRegexPattern> "^http://rae2001\\.rkbexplorer\\.com/id/.+" <http://rae2001.rkbexplorer.com/data/void> .
+<http://rae2001.rkbexplorer.com/id/void> <http://purl.org/dc/terms/publisher> <http://rae2001.rkbexplorer.com> <http://rae2001.rkbexplorer.com/data/void> .
+<http://rae2001.rkbexplorer.com/id/void> <http://purl.org/dc/terms/description> "This repository contains data from RAE 2001, the 2001 edition of the UK's Research Assessment Exercise. The RAE data aimed to report on every academic in every institution in every discpline, and list the four publications that were chosen to represent their work. Please note, this is historical data from the HERO Web Site that was captured for 2001. It will not change. Also, please do not email to say it is wrong/out of date. It is simply a reflection of the RAE 2001 data of that time, and we will not change it." <http://rae2001.rkbexplorer.com/data/void> .
+<http://rae2001.rkbexplorer.com/id/void> <http://xmlns.com/foaf/0.1/nick> "rae2001" <http://rae2001.rkbexplorer.com/data/void> .
+<http://rae2001.rkbexplorer.com/id/void> <http://purl.org/dc/terms/title> "rae2001.rkbexplorer.com Linked Data Repository" <http://rae2001.rkbexplorer.com/data/void> .

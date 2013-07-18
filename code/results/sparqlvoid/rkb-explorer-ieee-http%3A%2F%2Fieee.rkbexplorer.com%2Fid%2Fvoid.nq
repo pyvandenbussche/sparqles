@@ -1,0 +1,17 @@
+<http://ieee.rkbexplorer.com/data/void> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Ontology> <http://ieee.rkbexplorer.com/data/void> .
+<http://ieee.rkbexplorer.com/data/void> <http://purl.org/dc/elements/1.1/creator> "ReSIST Project" <http://ieee.rkbexplorer.com/data/void> .
+<http://ieee.rkbexplorer.com/data/void> <http://purl.org/dc/terms/created> "2012-10-26T11:54:36"^^<http://www.w3.org/2001/XMLSchema#dateTime> <http://ieee.rkbexplorer.com/data/void> .
+<http://ieee.rkbexplorer.com/data/void> <http://purl.org/dc/elements/1.1/source> <http://ieee.rkbexplorer.com/id/void> <http://ieee.rkbexplorer.com/data/void> .
+<http://ieee.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Computer_science> <http://ieee.rkbexplorer.com/data/void> .
+<http://ieee.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Organization> <http://ieee.rkbexplorer.com/data/void> .
+<http://ieee.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Publication> <http://ieee.rkbexplorer.com/data/void> .
+<http://ieee.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Category:Computer_scientists> <http://ieee.rkbexplorer.com/data/void> .
+<http://ieee.rkbexplorer.com/id/void> <http://purl.org/dc/terms/subject> <http://dbpedia.org/resource/Person> <http://ieee.rkbexplorer.com/data/void> .
+<http://ieee.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#exampleResource> <http://ieee.rkbexplorer.com/id/person-21757c2767705194600b55ff6b0ef692-1e427d6bbb6d2bb2aa5434059d6c58f4> <http://ieee.rkbexplorer.com/data/void> .
+<http://ieee.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#feature> <http://void.rkbexplorer.com/id/technicalFeature/sparql> <http://ieee.rkbexplorer.com/data/void> .
+<http://ieee.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#sparqlEndpoint> <http://ieee.rkbexplorer.com/sparql/> <http://ieee.rkbexplorer.com/data/void> .
+<http://ieee.rkbexplorer.com/id/void> <http://rdfs.org/ns/void#uriRegexPattern> "^http://ieee\\.rkbexplorer\\.com/id/.+" <http://ieee.rkbexplorer.com/data/void> .
+<http://ieee.rkbexplorer.com/id/void> <http://purl.org/dc/terms/publisher> <http://ieee.rkbexplorer.com> <http://ieee.rkbexplorer.com/data/void> .
+<http://ieee.rkbexplorer.com/id/void> <http://purl.org/dc/terms/description> "This repository contains data from IEEE papers." <http://ieee.rkbexplorer.com/data/void> .
+<http://ieee.rkbexplorer.com/id/void> <http://xmlns.com/foaf/0.1/nick> "ieee" <http://ieee.rkbexplorer.com/data/void> .
+<http://ieee.rkbexplorer.com/id/void> <http://purl.org/dc/terms/title> "ieee.rkbexplorer.com Linked Data Repository" <http://ieee.rkbexplorer.com/data/void> .
