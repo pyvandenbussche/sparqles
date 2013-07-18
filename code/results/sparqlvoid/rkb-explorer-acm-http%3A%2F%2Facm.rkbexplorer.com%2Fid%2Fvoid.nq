@@ -1,7 +1,0 @@
-<http://acm.rkbexplorer.com/data/void> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Ontology> <http://acm.rkbexplorer.com/data/void> .
-<http://acm.rkbexplorer.com/data/void> <http://purl.org/dc/elements/1.1/creator> "ReSIST Project" <http://acm.rkbexplorer.com/data/void> .
-<http://acm.rkbexplorer.com/data/void> <http://purl.org/dc/terms/created> "2012-10-17T01:25:01"^^<http://www.w3.org/2001/XMLSchema#dateTime> <http://acm.rkbexplorer.com/data/void> .
-<http://acm.rkbexplorer.com/data/void> <http://purl.org/dc/elements/1.1/source> <http://acm.rkbexplorer.com/id/void> <http://acm.rkbexplorer.com/data/void> .
-<http://acm.rkbexplorer.com/id/void> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/ns/void#Dataset> <http://acm.rkbexplorer.com/data/void> .
-<http://acm.rkbexplorer.com/id/void> <http://xmlns.com/foaf/0.1/homepage> <http://acm.rkbexplorer.com/> <http://acm.rkbexplorer.com/data/void> .
-<http://acm.rkbexplorer.com/id/void> <http://www.w3.org/2000/01/rdf-schema#label> "acm.rkbexplorer.com Linked Data Repository" <http://acm.rkbexplorer.com/data/void> .

@@ -1,6 +1,0 @@
-<http://eprints.rkbexplorer.com/data/void> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Ontology> <http://eprints.rkbexplorer.com/data/void> .
-<http://eprints.rkbexplorer.com/data/void> <http://purl.org/dc/elements/1.1/creator> "ReSIST Project" <http://eprints.rkbexplorer.com/data/void> .
-<http://eprints.rkbexplorer.com/data/void> <http://purl.org/dc/terms/created> "2012-10-26T12:13:16"^^<http://www.w3.org/2001/XMLSchema#dateTime> <http://eprints.rkbexplorer.com/data/void> .
-<http://eprints.rkbexplorer.com/data/void> <http://purl.org/dc/elements/1.1/source> <http://eprints.rkbexplorer.com/id/void> <http://eprints.rkbexplorer.com/data/void> .
-<http://eprints.rkbexplorer.com/id/void> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/ns/void#Dataset> <http://eprints.rkbexplorer.com/data/void> .
-<http://eprints.rkbexplorer.com/data/void> <http://xmlns.com/foaf/0.1/primaryTopic> <http://eprints.rkbexplorer.com/id/void> <http://eprints.rkbexplorer.com/data/void> .
