@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	   
+   <bean id="messageFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory"/>
+
+	<bean id="webServiceTemplate" class="org.springframework.ws.client.core.WebServiceTemplate">
+	    <constructor-arg ref="messageFactory"/>
+	    <property name="messageSender">
+	        <bean class="org.springframework.ws.transport.http.CommonsHttpMessageSender">
+	            <property name="credentials">
+	                <bean class="org.apache.commons.httpclient.UsernamePasswordCredentials">
+	                    <constructor-arg value="john"/>
+	                    <constructor-arg value="secret"/>
+	                </bean>
+	            </property>
+	        </bean>
+	    </property>
+	    <property name="defaultUri" value="http://example.com/WebService"/>
+	</bean>
+</beans>
