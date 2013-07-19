@@ -6,6 +6,7 @@ import java.net.URISyntaxException;
 
 import org.junit.Test;
 
+import core.DBManager;
 import core.Endpoint;
 
 public class DTaskGETTEST {
@@ -17,8 +18,14 @@ public class DTaskGETTEST {
 			DTaskGET dget= new DTaskGET(ep, new File("."));
 			DResultGET res = dget.call();
 			
-			System.out.println(res);
 			System.out.println(res.serialize());
+			
+			
+			DBManager db = new DBManager();
+			
+			System.out.println("Store result: "+db.insertResult(res));
+			db.debug();
+			
 			
 		} catch (URISyntaxException e) {
 			e.printStackTrace();

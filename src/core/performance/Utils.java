@@ -1,4 +1,4 @@
-package org.deri.sparql.perf;
+package core.performance;
 
 public class Utils {
 	public static String removeNewlines(String in){

@@ -16,6 +16,7 @@ public class PResult extends EndpointResult {
 	private long _closeTime;
 	private String _testid;
 	private String _query;
+	private boolean _warmRun;
 
 	public void setFirstResTOut(long firstResTimeout) {
 		_frestout = firstResTimeout;
@@ -64,5 +65,10 @@ public class PResult extends EndpointResult {
 		record.put("query", _query);
 		return record;
 		 
+	}
+
+	public void isWarmRun(boolean warmRun) {
+		_warmRun = warmRun;
+		
 	}
 }

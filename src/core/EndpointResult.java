@@ -31,12 +31,13 @@ public abstract class EndpointResult implements AvroSerialize {
 	private long _start;
 	private long _end;
 	private Date _date;
+	private Task _task;
 	
 
 	public EndpointResult() {
 		try {
 			System.out.println("Here" );
-			SCHEMA = AvroUtils.parseSchema(DResultGET.class.getResourceAsStream(this.getClass().getSimpleName()+".avsc"));
+			SCHEMA = AvroUtils.parseSchema(this.getClass().getResourceAsStream(this.getClass().getSimpleName()+".avsc"));
 			System.out.println(SCHEMA);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -47,6 +48,17 @@ public abstract class EndpointResult implements AvroSerialize {
 	
 	public void setEndpoint(Endpoint ep){
 		_ep =ep;
+	}
+	public Endpoint getEndpoint() {
+		return _ep;
+	}
+	
+	
+	public void setTask(Task t){
+		_task = t;
+	}
+	public Task getTask(){
+		return _task;
 	}
 	
 	
@@ -61,6 +73,10 @@ public abstract class EndpointResult implements AvroSerialize {
 	
 	public void end() {
 		_end= System.currentTimeMillis();
+	}
+	
+	public Date getDate(){
+		return _date;
 	}
 	
 	
@@ -85,6 +101,8 @@ public abstract class EndpointResult implements AvroSerialize {
 		
 		return record;
 	}
+
+	
 
 
 	

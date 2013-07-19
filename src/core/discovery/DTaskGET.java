@@ -10,6 +10,12 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.any23.extractor.html.TurtleHTMLExtractor;
+import org.apache.any23.extractor.rdf.NQuadsExtractor;
+import org.apache.any23.extractor.rdf.NTriplesExtractor;
+import org.apache.any23.extractor.rdf.RDFXMLExtractor;
+import org.apache.any23.extractor.rdf.TurtleExtractor;
+import org.apache.any23.extractor.rdfa.RDFaExtractor;
 import org.apache.any23.http.AcceptHeaderBuilder;
 import org.apache.any23.mime.MIMEType;
 import org.apache.any23.writer.TripleHandler;
@@ -49,6 +55,16 @@ public class DTaskGET extends Task<DResultGET> {
 		_logDir = logDir;
 	}
 
+	public static String[] getDefaultExtractorNames() {
+		String[] extractorNames = { 
+//				RDFaExtractor.factory.getExtractorName(),
+				RDFXMLExtractor.factory.getExtractorName(),
+				TurtleExtractor.factory.getExtractorName(),
+				NTriplesExtractor.factory.getExtractorName(),
+				NQuadsExtractor.factory.getExtractorName(),
+				TurtleHTMLExtractor.NAME };
+		return extractorNames;
+	}
 	/**
 	 * 
 	 */
@@ -60,7 +76,7 @@ public class DTaskGET extends Task<DResultGET> {
 		CallbackSet cbsetH= new CallbackSet();
 		CallbackSet cbsetC= new CallbackSet();
 		TripleHandler headerTripleHandler = new CallbackNQuadTripleHandler(cbsetH);
-		ContentHandler ch = new ContentHandlerAny23(headerTripleHandler, Treatment.DUMP, com.ontologycentral.ldspider.any23.ContentHandlerAny23.getDefaultExtractorNames());
+		ContentHandler ch = new ContentHandlerAny23(headerTripleHandler, Treatment.DUMP, getDefaultExtractorNames());
 				
 		LinkedList<MIMEType> mimetypes = new LinkedList<MIMEType>();
 		for (String s : ch.getMimeTypes())

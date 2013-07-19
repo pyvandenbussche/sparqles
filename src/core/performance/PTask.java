@@ -31,22 +31,33 @@ public class PTask extends Task<PResult>
     PrintStream out;
 
     Exception query_exc;
+	
 
-    public PTask(Endpoint ep, File logDir,String query, String testId) {
+    public PTask(Endpoint ep, File logDir,String queryID) {
 		super(ep,PResult.class);
-//		_logDir = logDir;
-	    this.testId = testId;
-        this.query = query;
+		
+        this.query = getQuery(queryID);
     }
 
     @Override
 	protected PResult process(PResult res) {
-    	
-    	res.setTestID(testId);
     	res.setQuery(query);
     	res.setFirstResTOut(FIRST_RESULT_TIMEOUT);
         res.setExecTOut(EXECUTION_TIMEOUT);
+        
+        // we need to run a test alwasy two times
+        
+        run(res, false);
+        
+        
+        run(res, true);
+        
        
+        return res;
+    }
+
+    private boolean run(PResult res, boolean isWarm) {
+
         
 	    long b4 = 0;
         long cnxion = 0;
@@ -129,11 +140,14 @@ public class PTask extends Task<PResult>
                     + "\t" + (cnxion - b4) + "\t"
                     + (System.currentTimeMillis() - b4) + "\tException\t"
                     + Utils.removeNewlines(e.getMessage()));
+            
+            return false;
         }
-        return res;
-    }
+        
+        return true;
+	}
 
-    private static String toString(QuerySolution qs, boolean first)
+	private static String toString(QuerySolution qs, boolean first)
     {
         StringBuffer vars = new StringBuffer();
         StringBuffer sb = new StringBuffer();

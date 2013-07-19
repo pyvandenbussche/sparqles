@@ -23,6 +23,7 @@ import org.apache.any23.extractor.ExtractorFactory;
 import org.apache.any23.extractor.ExtractorGroup;
 import org.apache.any23.extractor.ExtractorRegistry;
 import org.apache.any23.extractor.rdf.RDFXMLExtractor;
+import org.apache.any23.extractor.rdfa.RDFaExtractor;
 import org.apache.any23.filter.IgnoreTitlesOfEmptyDocuments;
 import org.apache.any23.http.AcceptHeaderBuilder;
 import org.apache.any23.mime.MIMEType;
@@ -52,17 +53,7 @@ public class ContentHandlerAny23 implements ContentHandler{
 	private final ExtractorGroup extractorGroup;
 	private final Collection<MIMEType> mimeTypes;
 
-	public static String[] getDefaultExtractorNames() {
-		String[] extractorNames = { 
-//				RDFaExtractor.NAME,
-				RDFXMLExtractor.factory.getExtractorName(),
-//				TurtleExtractor.factory.getExtractorName(),
-//				NTriplesExtractor.factory.getExtractorName(),
-//				NQuadsExtractor.factory.getExtractorName(),
-//				TurtleHTMLExtractor.NAME 
-				};
-		return extractorNames;
-	}
+	
 
 	public ContentHandlerAny23() {
 		// causes any23 to use all extractors

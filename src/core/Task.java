@@ -19,6 +19,7 @@ public abstract class Task<V extends EndpointResult> implements Callable<V>{
 	public V call() throws Exception {
 		V v = _cls.newInstance();
 		v.setEndpoint(_ep);
+		v.setTask(this);
 		v.start();
 		
 		process(v);		
