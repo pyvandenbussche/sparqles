@@ -2,13 +2,14 @@
 * tags
 ************************************************************/
 *{margin: 0px; padding: 0px;}
-body{ font: 12px Arial, Helvetica, sans-serif; color: #4A4A4A;}
+body{ font: 14px 'Helvetica Neue',Helvetica,Arial, sans-serif; color: #4A4A4A;}
 a{text-decoration: none;}
 ul{list-style: none;}
 a:active, a:focus{outline: 0;}
 img{border: 0px;}
 ul.round li{ background: url(../img/bullit-round.png) no-repeat left 4px; padding-left: 14px; margin-top: 5px; margin-bottom: 10px; margin-left:10px;}
 h1, h2, h3, h4, h5, h6{font-weight: normal;}
+h1{font-weight:bold}
 h1, h2{font-size: 24px;}
 h3, h4, h5, h6{ font-size: 24px;color: #3F3F3F;}
 h1.name, h2.name{display:block;float:left;font-size:19px;font-weight:bold;letter-spacing:-1px;line-height:33px;text-transform:uppercase;}
@@ -18,18 +19,18 @@ h1.name, h2.name{display:block;float:left;font-size:19px;font-weight:bold;letter
 #container{width: 910px; margin: auto;}
 #header{height: 100px; border-bottom: 1px solid #B5B5B5; margin-bottom: 10px; position: relative;}
 #share{border-bottom: 1px solid #B5B5B5; margin-bottom: 10px; padding-bottom:10px; position: relative;}
-#share a{ font-size: 12px;}
+#share a{ font-size: 14px;}
 #share_details{height: 100px; border-bottom: 1px solid #B5B5B5; margin-bottom: 10px; position: relative;}
-#share_details a{ font-size: 12px;}
+#share_details a{ font-size: 14px;}
 #share_stats{height: 62px; border-bottom: 1px solid #B5B5B5; margin-bottom: 10px; position: relative;}
-#share_stats a{ font-size: 12px;}
+#share_stats a{ font-size: 14px;}
 #legend{border: 1px solid #B5B5B5; background: #EEEEEE;	margin-bottom: 30px; padding-top:5px; padding-bottom:5px; text-align: center;}
 #footer{background: #FF7C07; padding: 8px; color: #FFFFFF;}
 #footer a{color: #FFF; text-decoration: underline; font-weight: normal;}
 #header-404{border-top: 15px solid #FF7C07; height: 39px; border-bottom: 1px solid #CCC; margin-bottom: 13px; position: relative;}
 #main-content-404 {margin-bottom:30px; font-size: 13px;}
 #main-content-404 a, #main-content-404 a:visited{text-decoration: underline;color: #333333;}
-#footer-404{border-bottom: 3px solid #FF7C07; font-size:12px; height:15px;}
+#footer-404{border-bottom: 3px solid #FF7C07; font-size:14px; height:15px;}
 #footer-404 a{color: #FF7C07; text-decoration: underline; font-weight: bold;}
 #footer a:hover, #footer-404 a:hover{text-decoration: none;}
 #page_loader{top:0px; text-align: center; position:absolute; width:100%; z-index:100; color: #333; font-weight: bold; font-size: 13px;}
@@ -58,6 +59,22 @@ h1.name, h2.name{display:block;float:left;font-size:19px;font-weight:bold;letter
 /************************************************************
 * classes
 ************************************************************/
+.dimensionBoxHeader{width:400px; background-image: -moz-linear-gradient(top, #fe9131, #fd5209);
+background-image: -webkit-gradient(linear, 0 0, 0 100%, from #fe9131, to #fd5209);
+background-image: -webkit-linear-gradient(top, #fe9131, #fd5209);
+background-image: -o-linear-gradient(top, #fe9131, #fd5209);
+background-image: linear-gradient(to bottom, #fe9131, #fd5209);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@warning', endColorstr='softlight(@warning, #000)', GradientType=0);
+border-color: #fd5209;
+border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+-webkit-border-radius: 6px 6px 0px 0px; -moz-border-radius: 6px 6px 0px 0px; border-radius: 6px 6px 0px 0px; padding:10px; font-size: 16px; font-weight: bold; color: #ffffff; text-shadow: 0 -1px 0 rgba(0,0,0,0.25); border: 1px solid #fd5209; box-shadow: inset 0 1px 0 rgba(255,255,255,.2),0 1px 2px rgba(0,0,0,.05);cursor:pointer;}
+
+.dimensionBoxFooter{height:200px;border: 1px solid #fd5209;border-top:0px; padding:10px;cursor:pointer;
+	-webkit-box-shadow: 0 3px 6px -2px grey;
+	   -moz-box-shadow: 0 3px 6px -2px grey;
+	        box-shadow: 0 3px 6px -2px grey;
+}
 .floatright{float: right;}
 .floatleft{float: left;}
 .margin-bottom{margin-bottom: 20px;}
@@ -73,12 +90,12 @@ h1.name, h2.name{display:block;float:left;font-size:19px;font-weight:bold;letter
 .psp-table{padding: 1px; border: 1px solid #B5B5B5; margin-top: 6px; margin-bottom: 35px; line-height: 14px;}
 .psp-table td{padding: 5px 2px 5px 4px;}
 .tablehead{font-weight: bold; border-bottom: 1px solid #B5B5B5;}
-#table_current tr td{font-size:12px;} 
+#table_current tr td{font-size:14px;} 
 .endpointIMG{margin-right:10px;}
 .rssIMG{margin-right:15px;}
 .row_odd{background: #EEEEEE;}
 .vertline{border-right: 1px solid #B5B5B5;}
-.date{background: url(../img/bg-date-180.png) no-repeat; margin-top: 5px; height: 18px; width: 180px; line-height: 18px; text-align: center; font-size: 12px; color: #FFFFFF; font-weight:normal;}
+.date{background: url(../img/bg-date-180.png) no-repeat; margin-top: 5px; height: 18px; width: 180px; line-height: 18px; text-align: center; font-size: 14px; color: #FFFFFF; font-weight:normal;}
 .hover_notes{top:-20px; padding:5px; position:absolute; right:20px; border: 1px solid #949DAD; width:250px; z-index: 100; opacity:0.95;}
 .hover-note-inner{padding:5px;}
 .psp-table a.more{color: #333333; background: url(../img/more-arrow.gif) no-repeat right 5px; padding-right: 8px; margin-left: 5px; border-bottom: 1px dotted #4A4A4A; text-decoration: none;}

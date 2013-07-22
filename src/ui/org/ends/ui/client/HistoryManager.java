@@ -108,8 +108,12 @@ public abstract class HistoryManager{
 	}
 	
 	public void requestPage(String page){
+		requestPage(page, null, null);
+	}
+	
+	public void requestPage(String page, String endpoint, String dimension){
 		if(isAValidPage(page)){
-			createHistoryToken(page, null, null);
+			createHistoryToken(page, endpoint, dimension);
 		}
 	}
 	
@@ -137,9 +141,11 @@ public abstract class HistoryManager{
 	}
 	
 	private void displayPage(String page,String endpoint, String dimension){
-//		if(page!=null){
-//			if(page.equals(PAGE_LOGIN))displayLogin();
-//			else if(page.equals(PAGE_HOME))displayHome();
+		if(page!=null){
+			if(page.equals(PAGE_LOGIN)){
+				
+			}
+			else displayHomePage();
 //			else if(page.equals(PAGE_VOCABS)){
 //				if(action==null)displayVocabs();
 //				else{
@@ -161,8 +167,8 @@ public abstract class HistoryManager{
 //				}
 //			}
 //			else if(page.equals(PAGE_SETTINGS))displaySettings();
-//		
-//		}
+		
+		}
 	}
 	
 	/**
@@ -173,6 +179,7 @@ public abstract class HistoryManager{
 		displayPage(currentPage,currentEndpoint, currentDimension);
 	}
 	
+	abstract void displayHomePage();
 //	abstract void displayLogin();
 //	abstract void displayHome();
 //	abstract void displayVocabs();
