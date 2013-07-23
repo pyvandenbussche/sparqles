@@ -21,7 +21,8 @@ public abstract class HistoryManager{
 	public static String PAGE_HOME="home";
 	public static String PAGE_LOGIN="login";
 	public static String PAGE_ABOUT="about";
-	public static String PAGE_DETAIL="detail";
+	public static String PAGE_DIMENSION="dimension";
+	public static String PAGE_ENDPOINT="endpoint";
 	public static String PAGE_ADMIN="admin";
 	
 	public static String DIMENSION_DISCOVERABILITY="discov";
@@ -123,7 +124,8 @@ public abstract class HistoryManager{
 				pageVar!=null
 				&&!pageVar.equals(PAGE_LOGIN)
 				&&!pageVar.equals(PAGE_HOME)
-				&&!pageVar.equals(PAGE_DETAIL)
+				&&!pageVar.equals(PAGE_DIMENSION)
+				&&!pageVar.equals(PAGE_ENDPOINT)
 				&&!pageVar.equals(PAGE_ADMIN)
 				&&!pageVar.equals(PAGE_ABOUT)
 				)return false;
@@ -144,6 +146,10 @@ public abstract class HistoryManager{
 		if(page!=null){
 			if(page.equals(PAGE_LOGIN)){
 				
+			}
+			else if(page.equals(PAGE_DIMENSION) && dimension!=null){
+				if(isAValidDimension(dimension))displayDimensionPage(dimension);
+				else createHistoryToken(PAGE_HOME,null,null);
 			}
 			else displayHomePage();
 //			else if(page.equals(PAGE_VOCABS)){
@@ -180,6 +186,7 @@ public abstract class HistoryManager{
 	}
 	
 	abstract void displayHomePage();
+	abstract void displayDimensionPage(String dimension);
 //	abstract void displayLogin();
 //	abstract void displayHome();
 //	abstract void displayVocabs();

@@ -3,6 +3,7 @@ package org.ends.ui.client;
 import org.ends.ui.client.exception.EndsExceptionHandler;
 import org.ends.ui.client.objects.GeneralInfo;
 import org.ends.ui.client.page.MainPage;
+import org.ends.ui.client.page.dimension.AvailabilityPage;
 import org.ends.ui.client.service.EndsService;
 
 import com.google.gwt.core.client.EntryPoint;
@@ -34,7 +35,6 @@ public class Ends extends HistoryManager implements EntryPoint,ICom{
 		RootPanel.get("content").add(main);
 		main.add(content, DockPanel.CENTER);
 		main.setCellWidth(content, "100%");
-		content.setWidget(new HTML("yo!"));
 		
 		//load general information and load the screen
 		EndsService.Util.getInstance().loadGeneralInfo(
@@ -48,8 +48,7 @@ public class Ends extends HistoryManager implements EntryPoint,ICom{
 						Ends.this.generalInfo=generalInfo;
 						HTML htmlTitle = new HTML(generalInfo.getTitle());
 						RootPanel.get("EndsTitle").add(htmlTitle);
-						HTML htmlDescription = new HTML(generalInfo.getDescription());
-						RootPanel.get("EndsDescription").add(htmlDescription);
+						getDescriptionPanel().add(new HTML(generalInfo.getDescription()));
 						
 						//initialize the History Manager and set a default page
 						initializeHistoryManager(PAGE_HOME);
@@ -57,10 +56,32 @@ public class Ends extends HistoryManager implements EntryPoint,ICom{
 				});
 	}
 	
+	
+	/* Page Loading */
+	
 	protected void displayHomePage(){
+		getDescriptionPanel().add(new HTML(generalInfo.getDescription()));
 		content.setWidget(new MainPage(this));
 	}
 	
+	protected void displayDimensionPage(String dimension){
+		if(dimension.equals(HistoryManager.DIMENSION_AVAILABILITY)){
+			content.setWidget(new AvailabilityPage(this));
+		}
+	}
+	
+	
+	
+	
+	/* Icom */
+	
+	public RootPanel getDescriptionPanel(){
+		RootPanel.get("EndsDescription").clear();
+		return RootPanel.get("EndsDescription");
+	}
+	
+	
+	/* Utility methods */
 	
 	public static Widget createLoadingWidget(){
 		HorizontalPanel container = new HorizontalPanel();
