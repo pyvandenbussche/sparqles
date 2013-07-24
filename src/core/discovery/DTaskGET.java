@@ -90,7 +90,7 @@ public class DTaskGET extends Task<DResultGET> {
 	
 		//perform an HTTP Get and parse the response
 		HttpClient client = new DefaultHttpClient();
-		HttpGet request = new HttpGet(_ep.getEndpointURI());
+		HttpGet request = new HttpGet(_ep.getUri());
 		request.addHeader("accept", header);
 
 		String date = DateFormater.getDataAsString(DateFormater.YYYYMMDDHHMM);

@@ -1,0 +1,10 @@
+{"namespace": "core",
+ "type": "record",
+ "name": "EndpointResult",
+ "imports": ["Endpoint.avsc"],
+ "fields": [
+     {"name": "endpoint", "type": "core.Endpoint"},
+     {"name": "start", "type": "long"},
+     {"name": "end", "type": "long"}
+ ]
+}

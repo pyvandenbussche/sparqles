@@ -1,0 +1,14 @@
+{"namespace": "core.availability",
+ "type": "record",
+ "name": "AResult",
+ "fields": [
+     {"name": "endpointResult", "type": "core.EndpointResult"},
+     {"name": "responseTime", "type": "long"},
+     {"name": "isAvailable", "type": "boolean"},
+     {"name": "isPrivate", "type": "boolean"},
+     {"name": "explaination", "type": "string"}
+ ]
+}
+
+
+

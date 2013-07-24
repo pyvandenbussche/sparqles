@@ -1,5 +1,5 @@
 {
-"namespace": "ends.core",
+"namespace": "core",
  "type": "record",
  "name": "Endpoint",
  "fields": [

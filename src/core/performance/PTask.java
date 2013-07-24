@@ -4,7 +4,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 
@@ -17,12 +23,17 @@ import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.sparql.util.FmtUtils;
 
+import core.DBManager;
 import core.Endpoint;
+import core.EndpointResult;
 import core.Task;
+import core.availability.AResult;
 import core.discovery.DResultGET;
 
-public class PTask extends Task<PResult>
-{
+public class PTask extends Task<PResult>{
+	
+	private static final Logger log = LoggerFactory.getLogger(PTask.class);
+	
     private static final long FIRST_RESULT_TIMEOUT = 60 * 1000;
     private static final long EXECUTION_TIMEOUT = 15 * 60 * 1000;
 
@@ -31,156 +42,41 @@ public class PTask extends Task<PResult>
     PrintStream out;
 
     Exception query_exc;
+	private SpecificPTask[] _runs;
 	
 
-    public PTask(Endpoint ep, File logDir,String queryID) {
-		super(ep,PResult.class);
-		
-        this.query = getQuery(queryID);
+    public PTask(Endpoint ep, File logDir,SpecificPTask ... runs) {
+		super(ep);
+		_runs = runs;
     }
 
     @Override
-	protected PResult process(PResult res) {
-    	res.setQuery(query);
-    	res.setFirstResTOut(FIRST_RESULT_TIMEOUT);
-        res.setExecTOut(EXECUTION_TIMEOUT);
-        
-        // we need to run a test alwasy two times
-        
-        run(res, false);
-        
-        
-        run(res, true);
-        
-       
-        return res;
+	public PResult process(EndpointResult epr) {
+    	PResult res = new PResult();
+		res.setEndpointResult(epr);
+    	
+		
+		Map<CharSequence, PSingleResult> results = new HashMap<CharSequence, PSingleResult>(_runs.length);
+		for(SpecificPTask sp: _runs){
+			log.debug("Running {} for {}",sp.name(), epr.getEndpoint());
+			PRun run = sp.get(epr.getEndpoint());
+			
+			PSingleResult pres = run.execute();
+//			run.close();
+			results.put(sp.name(), pres);
+			
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		res.setResults(results);
+    return res;
     }
 
-    private boolean run(PResult res, boolean isWarm) {
-
-        
-	    long b4 = 0;
-        long cnxion = 0;
-        int sols = 0;
-        try
-        {
-            Query query = QueryFactory.create(this.query);
-
-            
-            
-            b4 = System.currentTimeMillis();
-            
-            Query q = QueryFactory.create(query.toString());
-            QueryExecution qexec = QueryExecutionFactory.sparqlService(_ep.getEndpointURI().toString(), q);
-            qexec.setTimeout(FIRST_RESULT_TIMEOUT, EXECUTION_TIMEOUT);
-            cnxion = System.currentTimeMillis();
-
-            if (q.isSelectType())
-            {
-                ResultSet results = qexec.execSelect();
-                while (results.hasNext())
-                {
-                    QuerySolution qs = results.nextSolution();
-                    out.println(toString(qs, sols == 0));
-                    sols++;
-                }
-            }
-            else if (q.isAskType())
-            {
-                boolean result = qexec.execAsk();
-                out.println(result);
-                if (result)
-                    sols = 1;
-                else
-                    sols = -1;
-            }
-            else if (q.isDescribeType())
-            {
-                Iterator<Triple> triples = qexec.execDescribeTriples();
-                while (triples.hasNext())
-                {
-                    out.println(triples.next());
-                    sols++;
-                }
-            }
-            else if (q.isConstructType())
-            {
-                Iterator<Triple> triples = qexec.execConstructTriples();
-                while (triples.hasNext())
-                {
-                    out.println(triples.next());
-                    sols++;
-                }
-            }
-            else
-            {
-                throw new UnsupportedOperationException(
-                        "What query is this? (Not SELECT|ASK|DESCRIBE|CONSTRUCT). "
-                                + query);
-            }
-
-            long iter = System.currentTimeMillis();
-            qexec.close();
-            long close = System.currentTimeMillis();
-
-            res.setSolutions(sols);
-            res.setInitTime((cnxion - b4));
-            res.setExecTime((iter - b4));
-            res.setCloseTime((close - b4));
-            
-            System.out.println(this.testId + "\t" + _ep.getEndpointURI() + "\t" + sols
-                    + "\t" + (cnxion - b4) + "\t" + (iter - b4) + "\t"
-                    + (close - b4));
-        }
-        catch (Exception e)
-        {
-        	res.recordError(e);
-            query_exc = e;
-            System.out.println(this.testId + "\t" + _ep.getEndpointURI() + "\t" + sols
-                    + "\t" + (cnxion - b4) + "\t"
-                    + (System.currentTimeMillis() - b4) + "\tException\t"
-                    + Utils.removeNewlines(e.getMessage()));
-            
-            return false;
-        }
-        
-        return true;
-	}
-
-	private static String toString(QuerySolution qs, boolean first)
-    {
-        StringBuffer vars = new StringBuffer();
-        StringBuffer sb = new StringBuffer();
-        Iterator<String> varns = qs.varNames();
-        while (varns.hasNext())
-        {
-            String varName = varns.next();
-            if (first)
-            {
-                vars.append(varName + "\t");
-            }
-            sb.append(FmtUtils.stringForObject(qs.get(varName)) + "\t");
-        }
-
-        if (first)
-            return vars.toString() + "\n" + sb.toString();
-        return sb.toString();
-    }
-
-    /**
-     * Close the output file
-     * 
-     * @throws IOException
-     */
-    public void close() throws IOException
-    {
-        out.close();
-    }
-
-    public Exception getQueryException()
-    {
-        return query_exc;
-    }
+    
+	
 
 	
 }

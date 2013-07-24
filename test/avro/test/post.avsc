@@ -1,0 +1,11 @@
+{
+  "type": "record", 
+  "name": "Post",
+  "imports": ["Privacy.avsc"],
+  "fields": [{
+              "name": "privacy", 
+              "type": [ "null", "Privacy"], 
+              "default": "Private"
+            }
+  ]
+}

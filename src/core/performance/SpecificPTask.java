@@ -60,14 +60,15 @@ public enum  SpecificPTask {
    
     public String toString(){
         return query;
+        
     }
    
-    public PTask get(Endpoint ep){
-        return new PTask(ep, null, query);
+    public PRun get(Endpoint ep){
+        return new PRun(ep, null, query);
     }
    
-    public static List<PTask> allTasks(Endpoint ep){
-    	List<PTask> res = new ArrayList<PTask>();
+    public static List<PRun> allTasks(Endpoint ep){
+    	List<PRun> res = new ArrayList<PRun>();
     	
     	for (SpecificPTask action : values()){
     		res.add(action.get(ep));
