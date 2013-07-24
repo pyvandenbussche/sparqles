@@ -59,6 +59,8 @@ h1.name, h2.name{display:block;float:left;font-size:19px;font-weight:bold;letter
 /************************************************************
 * classes
 ************************************************************/
+.dimensionName{font-size:16px; font-weight: bold; }
+.dimensionDescriptionCode{font-family:"Courier New",Courier, Monospace;}
 .dimensionBoxHeader{width:400px; background-image: -moz-linear-gradient(top, #fe9131, #fd5209);
 background-image: -webkit-gradient(linear, 0 0, 0 100%, from #fe9131, to #fd5209);
 background-image: -webkit-linear-gradient(top, #fe9131, #fd5209);
@@ -68,7 +70,7 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@warning', end
 border-color: #fd5209;
 border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
--webkit-border-radius: 6px 6px 0px 0px; -moz-border-radius: 6px 6px 0px 0px; border-radius: 6px 6px 0px 0px; padding:10px; font-size: 16px; font-weight: bold; color: #ffffff; text-shadow: 0 -1px 0 rgba(0,0,0,0.25); border: 1px solid #fd5209; box-shadow: inset 0 1px 0 rgba(255,255,255,.2),0 1px 2px rgba(0,0,0,.05);cursor:pointer;}
+-webkit-border-radius: 6px 6px 0px 0px; -moz-border-radius: 6px 6px 0px 0px; border-radius: 6px 6px 0px 0px; padding:6px; font-size: 16px; font-weight: bold; color: #ffffff; text-shadow: 0 -1px 0 rgba(0,0,0,0.25); border: 1px solid #fd5209; box-shadow: inset 0 1px 0 rgba(255,255,255,.2),0 1px 2px rgba(0,0,0,.05);cursor:pointer;}
 
 .dimensionBoxFooter{height:200px;border: 1px solid #fd5209;border-top:0px; padding:10px;cursor:pointer;
 	-webkit-box-shadow: 0 3px 6px -2px grey;

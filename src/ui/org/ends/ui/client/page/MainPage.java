@@ -26,127 +26,56 @@ public class MainPage  extends Grid{
 	}
 	
 	private void buildDiscoverability(){
-		//build the header
-		SimplePanel spHeader = new SimplePanel();
-		HTML header = new HTML("Discoverability");
-		spHeader.setStyleName("dimensionBoxHeader");
-		spHeader.setWidget(header);
-		this.setWidget(0, 1, spHeader);
-		
-		
-		//build the footer (display a loading logo while fetching the data)
-		SimplePanel spFooter = new SimplePanel();
-		spFooter.setStyleName("dimensionBoxFooter");
-		spFooter.setWidget(Ends.createLoadingWidget());
-		this.setWidget(1, 1, spFooter);
-		
-		
-		//add the click action
-		ClickHandler clickHandler = new ClickHandler() {
-	        @Override
-	        public void onClick(ClickEvent event) {
-	        		com.requestPage(HistoryManager.PAGE_DETAIL,null,HistoryManager.DIMENSION_DISCOVERABILITY);
-	        }
-	    };
-		spHeader.sinkEvents(Event.ONCLICK);
-		spHeader.setTitle("Discoverability Details");
-		spHeader.addHandler(clickHandler, ClickEvent.getType());
-		spFooter.sinkEvents(Event.ONCLICK);
-		spFooter.setTitle("Discoverability Details");
-		spFooter.addHandler(clickHandler, ClickEvent.getType());
+		//build the box
+		SimplePanel content = buildBox("Discoverability", "Discoverability Details", HistoryManager.DIMENSION_DISCOVERABILITY, 0, 1);
 	}
 	
 	private void buildInteroperability(){
-		//build the header
-		SimplePanel spHeader = new SimplePanel();
-		HTML header = new HTML("Interoperability");
-		spHeader.setStyleName("dimensionBoxHeader");
-		spHeader.setWidget(header);
-		this.setWidget(0, 3, spHeader);
-		
-		
-		//build the footer (display a loading logo while fetching the data)
-		SimplePanel spFooter = new SimplePanel();
-		spFooter.setStyleName("dimensionBoxFooter");
-		spFooter.setWidget(Ends.createLoadingWidget());
-		this.setWidget(1, 3, spFooter);
-		
-		//add the click action
-		ClickHandler clickHandler = new ClickHandler() {
-	        @Override
-	        public void onClick(ClickEvent event) {
-	        		com.requestPage(HistoryManager.PAGE_DETAIL,null,HistoryManager.DIMENSION_INTEROPERABILITY);
-	        }
-	    };
-		spHeader.sinkEvents(Event.ONCLICK);
-		spHeader.setTitle("Interoperability Details");
-		spHeader.addHandler(clickHandler, ClickEvent.getType());
-		spFooter.sinkEvents(Event.ONCLICK);
-		spFooter.setTitle("Interoperability Details");
-		spFooter.addHandler(clickHandler, ClickEvent.getType());
+		//build the box
+		SimplePanel content = buildBox("Interoperability", "Interoperability Details", HistoryManager.DIMENSION_INTEROPERABILITY, 0, 3);
 	}
 	
 	private void buildPerformance(){
-		//build the header
-		SimplePanel spHeader = new SimplePanel();
-		HTML header = new HTML("Performance");
-		spHeader.setStyleName("dimensionBoxHeader");
-		spHeader.setWidget(header);
-		this.setWidget(3, 1, spHeader);
-		
-		
-		//build the footer (display a loading logo while fetching the data)
-		SimplePanel spFooter = new SimplePanel();
-		spFooter.setStyleName("dimensionBoxFooter");
-		spFooter.setWidget(Ends.createLoadingWidget());
-		this.setWidget(4, 1, spFooter);
-		
-		
-		//add the click action
-		ClickHandler clickHandler = new ClickHandler() {
-	        @Override
-	        public void onClick(ClickEvent event) {
-	        		com.requestPage(HistoryManager.PAGE_DETAIL,null,HistoryManager.DIMENSION_PERFORMANCE);
-	        }
-	    };
-		spHeader.sinkEvents(Event.ONCLICK);
-		spHeader.setTitle("Performance Details");
-		spHeader.addHandler(clickHandler, ClickEvent.getType());
-		spFooter.sinkEvents(Event.ONCLICK);
-		spFooter.setTitle("Performance Details");
-		spFooter.addHandler(clickHandler, ClickEvent.getType());
+		//build the box
+		SimplePanel content = buildBox("Performance", "Performance Details", HistoryManager.DIMENSION_PERFORMANCE, 3, 1);
 	}
 	
 	private void buildAvailability(){
+		//build the box
+		SimplePanel content = buildBox("Availability", "Availability Details", HistoryManager.DIMENSION_AVAILABILITY, 3, 3);
+	}
+	
+	private SimplePanel buildBox(String dimensionName, String dimensionInfoBox, final String historyDimension, int row, int column){
 		//build the header
 		SimplePanel spHeader = new SimplePanel();
-		HTML header = new HTML("Availability");
+		HTML header = new HTML("<table width=100%><tr><td style='width:50%; text-align:left; font-size: 16px;'>"+dimensionName+
+				"</td><td style='width:50%; text-align:right; font-size: 16px;'>&rarr;</td></tr></table>");
 		spHeader.setStyleName("dimensionBoxHeader");
 		spHeader.setWidget(header);
-		this.setWidget(3, 3, spHeader);
+		this.setWidget(row, column, spHeader);
 		
 		
 		//build the footer (display a loading logo while fetching the data)
 		SimplePanel spFooter = new SimplePanel();
 		spFooter.setStyleName("dimensionBoxFooter");
 		spFooter.setWidget(Ends.createLoadingWidget());
-		this.setWidget(4, 3, spFooter);
+		this.setWidget(row+1, column, spFooter);
 		
 		
 		//add the click action
 		ClickHandler clickHandler = new ClickHandler() {
 	        @Override
 	        public void onClick(ClickEvent event) {
-	        		com.requestPage(HistoryManager.PAGE_DETAIL,null,HistoryManager.DIMENSION_AVAILABILITY);
+	        		com.requestPage(HistoryManager.PAGE_DIMENSION,null,historyDimension);
 	        }
 	    };
 		spHeader.sinkEvents(Event.ONCLICK);
-		spHeader.setTitle("Availability Details");
+		spHeader.setTitle(dimensionInfoBox);
 		spHeader.addHandler(clickHandler, ClickEvent.getType());
 		spFooter.sinkEvents(Event.ONCLICK);
-		spFooter.setTitle("Availability Details");
+		spFooter.setTitle(dimensionInfoBox);
 		spFooter.addHandler(clickHandler, ClickEvent.getType());
+		
+		return spFooter;
 	}
-	
-	
 }
