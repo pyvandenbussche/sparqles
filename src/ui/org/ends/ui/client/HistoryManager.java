@@ -20,7 +20,6 @@ public abstract class HistoryManager{
 	
 	public static String PAGE_HOME="home";
 	public static String PAGE_LOGIN="login";
-	public static String PAGE_ABOUT="about";
 	public static String PAGE_DIMENSION="dimension";
 	public static String PAGE_ENDPOINT="endpoint";
 	public static String PAGE_ADMIN="admin";
@@ -127,7 +126,6 @@ public abstract class HistoryManager{
 				&&!pageVar.equals(PAGE_DIMENSION)
 				&&!pageVar.equals(PAGE_ENDPOINT)
 				&&!pageVar.equals(PAGE_ADMIN)
-				&&!pageVar.equals(PAGE_ABOUT)
 				)return false;
 		else return true;
 	}

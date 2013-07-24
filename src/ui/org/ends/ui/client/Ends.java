@@ -4,6 +4,9 @@ import org.ends.ui.client.exception.EndsExceptionHandler;
 import org.ends.ui.client.objects.GeneralInfo;
 import org.ends.ui.client.page.MainPage;
 import org.ends.ui.client.page.dimension.AvailabilityPage;
+import org.ends.ui.client.page.dimension.DiscoverabilityPage;
+import org.ends.ui.client.page.dimension.InteroperabilityPage;
+import org.ends.ui.client.page.dimension.PerformancePage;
 import org.ends.ui.client.service.EndsService;
 
 import com.google.gwt.core.client.EntryPoint;
@@ -58,7 +61,6 @@ public class Ends extends HistoryManager implements EntryPoint,ICom{
 	
 	
 	/* Page Loading */
-	
 	protected void displayHomePage(){
 		getDescriptionPanel().add(new HTML(generalInfo.getDescription()));
 		content.setWidget(new MainPage(this));
@@ -67,6 +69,12 @@ public class Ends extends HistoryManager implements EntryPoint,ICom{
 	protected void displayDimensionPage(String dimension){
 		if(dimension.equals(HistoryManager.DIMENSION_AVAILABILITY)){
 			content.setWidget(new AvailabilityPage(this));
+		}else if(dimension.equals(HistoryManager.DIMENSION_INTEROPERABILITY)){
+			content.setWidget(new InteroperabilityPage(this));
+		}else if(dimension.equals(HistoryManager.DIMENSION_DISCOVERABILITY)){
+			content.setWidget(new DiscoverabilityPage(this));
+		}else if(dimension.equals(HistoryManager.DIMENSION_PERFORMANCE)){
+			content.setWidget(new PerformancePage(this));
 		}
 	}
 	
