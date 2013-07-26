@@ -7,13 +7,14 @@ package core.performance;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class Run extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Run\",\"namespace\":\"core.performance\",\"fields\":[{\"name\":\"frestout\",\"type\":\"long\"},{\"name\":\"solutions\",\"type\":\"int\"},{\"name\":\"inittime\",\"type\":\"long\"},{\"name\":\"exectime\",\"type\":\"long\"},{\"name\":\"closetime\",\"type\":\"long\"},{\"name\":\"exectout\",\"type\":\"long\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Run\",\"namespace\":\"core.performance\",\"fields\":[{\"name\":\"frestout\",\"type\":\"long\"},{\"name\":\"solutions\",\"type\":\"int\"},{\"name\":\"inittime\",\"type\":\"long\"},{\"name\":\"exectime\",\"type\":\"long\"},{\"name\":\"closetime\",\"type\":\"long\"},{\"name\":\"Exception\",\"type\":[\"string\",\"null\"]},{\"name\":\"exectout\",\"type\":\"long\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public long frestout;
   @Deprecated public int solutions;
   @Deprecated public long inittime;
   @Deprecated public long exectime;
   @Deprecated public long closetime;
+  @Deprecated public java.lang.CharSequence Exception;
   @Deprecated public long exectout;
 
   /**
@@ -24,12 +25,13 @@ public class Run extends org.apache.avro.specific.SpecificRecordBase implements 
   /**
    * All-args constructor.
    */
-  public Run(java.lang.Long frestout, java.lang.Integer solutions, java.lang.Long inittime, java.lang.Long exectime, java.lang.Long closetime, java.lang.Long exectout) {
+  public Run(java.lang.Long frestout, java.lang.Integer solutions, java.lang.Long inittime, java.lang.Long exectime, java.lang.Long closetime, java.lang.CharSequence Exception, java.lang.Long exectout) {
     this.frestout = frestout;
     this.solutions = solutions;
     this.inittime = inittime;
     this.exectime = exectime;
     this.closetime = closetime;
+    this.Exception = Exception;
     this.exectout = exectout;
   }
 
@@ -42,7 +44,8 @@ public class Run extends org.apache.avro.specific.SpecificRecordBase implements 
     case 2: return inittime;
     case 3: return exectime;
     case 4: return closetime;
-    case 5: return exectout;
+    case 5: return Exception;
+    case 6: return exectout;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -55,7 +58,8 @@ public class Run extends org.apache.avro.specific.SpecificRecordBase implements 
     case 2: inittime = (java.lang.Long)value$; break;
     case 3: exectime = (java.lang.Long)value$; break;
     case 4: closetime = (java.lang.Long)value$; break;
-    case 5: exectout = (java.lang.Long)value$; break;
+    case 5: Exception = (java.lang.CharSequence)value$; break;
+    case 6: exectout = (java.lang.Long)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -136,6 +140,21 @@ public class Run extends org.apache.avro.specific.SpecificRecordBase implements 
   }
 
   /**
+   * Gets the value of the 'Exception' field.
+   */
+  public java.lang.CharSequence getException() {
+    return Exception;
+  }
+
+  /**
+   * Sets the value of the 'Exception' field.
+   * @param value the value to set.
+   */
+  public void setException(java.lang.CharSequence value) {
+    this.Exception = value;
+  }
+
+  /**
    * Gets the value of the 'exectout' field.
    */
   public java.lang.Long getExectout() {
@@ -176,6 +195,7 @@ public class Run extends org.apache.avro.specific.SpecificRecordBase implements 
     private long inittime;
     private long exectime;
     private long closetime;
+    private java.lang.CharSequence Exception;
     private long exectout;
 
     /** Creates a new Builder */
@@ -211,9 +231,13 @@ public class Run extends org.apache.avro.specific.SpecificRecordBase implements 
         this.closetime = data().deepCopy(fields()[4].schema(), other.closetime);
         fieldSetFlags()[4] = true;
       }
-      if (isValidValue(fields()[5], other.exectout)) {
-        this.exectout = data().deepCopy(fields()[5].schema(), other.exectout);
+      if (isValidValue(fields()[5], other.Exception)) {
+        this.Exception = data().deepCopy(fields()[5].schema(), other.Exception);
         fieldSetFlags()[5] = true;
+      }
+      if (isValidValue(fields()[6], other.exectout)) {
+        this.exectout = data().deepCopy(fields()[6].schema(), other.exectout);
+        fieldSetFlags()[6] = true;
       }
     }
 
@@ -337,6 +361,31 @@ public class Run extends org.apache.avro.specific.SpecificRecordBase implements 
       return this;
     }
 
+    /** Gets the value of the 'Exception' field */
+    public java.lang.CharSequence getException() {
+      return Exception;
+    }
+    
+    /** Sets the value of the 'Exception' field */
+    public core.performance.Run.Builder setException(java.lang.CharSequence value) {
+      validate(fields()[5], value);
+      this.Exception = value;
+      fieldSetFlags()[5] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'Exception' field has been set */
+    public boolean hasException() {
+      return fieldSetFlags()[5];
+    }
+    
+    /** Clears the value of the 'Exception' field */
+    public core.performance.Run.Builder clearException() {
+      Exception = null;
+      fieldSetFlags()[5] = false;
+      return this;
+    }
+
     /** Gets the value of the 'exectout' field */
     public java.lang.Long getExectout() {
       return exectout;
@@ -344,20 +393,20 @@ public class Run extends org.apache.avro.specific.SpecificRecordBase implements 
     
     /** Sets the value of the 'exectout' field */
     public core.performance.Run.Builder setExectout(long value) {
-      validate(fields()[5], value);
+      validate(fields()[6], value);
       this.exectout = value;
-      fieldSetFlags()[5] = true;
+      fieldSetFlags()[6] = true;
       return this; 
     }
     
     /** Checks whether the 'exectout' field has been set */
     public boolean hasExectout() {
-      return fieldSetFlags()[5];
+      return fieldSetFlags()[6];
     }
     
     /** Clears the value of the 'exectout' field */
     public core.performance.Run.Builder clearExectout() {
-      fieldSetFlags()[5] = false;
+      fieldSetFlags()[6] = false;
       return this;
     }
 
@@ -370,7 +419,8 @@ public class Run extends org.apache.avro.specific.SpecificRecordBase implements 
         record.inittime = fieldSetFlags()[2] ? this.inittime : (java.lang.Long) defaultValue(fields()[2]);
         record.exectime = fieldSetFlags()[3] ? this.exectime : (java.lang.Long) defaultValue(fields()[3]);
         record.closetime = fieldSetFlags()[4] ? this.closetime : (java.lang.Long) defaultValue(fields()[4]);
-        record.exectout = fieldSetFlags()[5] ? this.exectout : (java.lang.Long) defaultValue(fields()[5]);
+        record.Exception = fieldSetFlags()[5] ? this.Exception : (java.lang.CharSequence) defaultValue(fields()[5]);
+        record.exectout = fieldSetFlags()[6] ? this.exectout : (java.lang.Long) defaultValue(fields()[6]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

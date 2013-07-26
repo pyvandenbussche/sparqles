@@ -49,7 +49,6 @@ public class PRun {
 			log.debug("Parsed from {} query {}", qFile, content);
 			return content;
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "";

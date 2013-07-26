@@ -7,12 +7,13 @@ package core.availability;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class AResult extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"AResult\",\"namespace\":\"core.availability\",\"fields\":[{\"name\":\"endpointResult\",\"type\":{\"type\":\"record\",\"name\":\"EndpointResult\",\"namespace\":\"core\",\"fields\":[{\"name\":\"endpoint\",\"type\":{\"type\":\"record\",\"name\":\"Endpoint\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"}]}},{\"name\":\"start\",\"type\":\"long\"},{\"name\":\"end\",\"type\":\"long\"}],\"imports\":[\"Endpoint.avsc\"]}},{\"name\":\"responseTime\",\"type\":\"long\"},{\"name\":\"isAvailable\",\"type\":\"boolean\"},{\"name\":\"isPrivate\",\"type\":\"boolean\"},{\"name\":\"explaination\",\"type\":\"string\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"AResult\",\"namespace\":\"core.availability\",\"fields\":[{\"name\":\"endpointResult\",\"type\":{\"type\":\"record\",\"name\":\"EndpointResult\",\"namespace\":\"core\",\"fields\":[{\"name\":\"endpoint\",\"type\":{\"type\":\"record\",\"name\":\"Endpoint\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"}]}},{\"name\":\"start\",\"type\":\"long\"},{\"name\":\"end\",\"type\":\"long\"}],\"imports\":[\"Endpoint.avsc\"]}},{\"name\":\"responseTime\",\"type\":\"long\"},{\"name\":\"isAvailable\",\"type\":\"boolean\"},{\"name\":\"isPrivate\",\"type\":\"boolean\"},{\"name\":\"Exception\",\"type\":\"string\"},{\"name\":\"explaination\",\"type\":\"string\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public core.EndpointResult endpointResult;
   @Deprecated public long responseTime;
   @Deprecated public boolean isAvailable;
   @Deprecated public boolean isPrivate;
+  @Deprecated public java.lang.CharSequence Exception;
   @Deprecated public java.lang.CharSequence explaination;
 
   /**
@@ -23,11 +24,12 @@ public class AResult extends org.apache.avro.specific.SpecificRecordBase impleme
   /**
    * All-args constructor.
    */
-  public AResult(core.EndpointResult endpointResult, java.lang.Long responseTime, java.lang.Boolean isAvailable, java.lang.Boolean isPrivate, java.lang.CharSequence explaination) {
+  public AResult(core.EndpointResult endpointResult, java.lang.Long responseTime, java.lang.Boolean isAvailable, java.lang.Boolean isPrivate, java.lang.CharSequence Exception, java.lang.CharSequence explaination) {
     this.endpointResult = endpointResult;
     this.responseTime = responseTime;
     this.isAvailable = isAvailable;
     this.isPrivate = isPrivate;
+    this.Exception = Exception;
     this.explaination = explaination;
   }
 
@@ -39,7 +41,8 @@ public class AResult extends org.apache.avro.specific.SpecificRecordBase impleme
     case 1: return responseTime;
     case 2: return isAvailable;
     case 3: return isPrivate;
-    case 4: return explaination;
+    case 4: return Exception;
+    case 5: return explaination;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -51,7 +54,8 @@ public class AResult extends org.apache.avro.specific.SpecificRecordBase impleme
     case 1: responseTime = (java.lang.Long)value$; break;
     case 2: isAvailable = (java.lang.Boolean)value$; break;
     case 3: isPrivate = (java.lang.Boolean)value$; break;
-    case 4: explaination = (java.lang.CharSequence)value$; break;
+    case 4: Exception = (java.lang.CharSequence)value$; break;
+    case 5: explaination = (java.lang.CharSequence)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -117,6 +121,21 @@ public class AResult extends org.apache.avro.specific.SpecificRecordBase impleme
   }
 
   /**
+   * Gets the value of the 'Exception' field.
+   */
+  public java.lang.CharSequence getException() {
+    return Exception;
+  }
+
+  /**
+   * Sets the value of the 'Exception' field.
+   * @param value the value to set.
+   */
+  public void setException(java.lang.CharSequence value) {
+    this.Exception = value;
+  }
+
+  /**
    * Gets the value of the 'explaination' field.
    */
   public java.lang.CharSequence getExplaination() {
@@ -156,6 +175,7 @@ public class AResult extends org.apache.avro.specific.SpecificRecordBase impleme
     private long responseTime;
     private boolean isAvailable;
     private boolean isPrivate;
+    private java.lang.CharSequence Exception;
     private java.lang.CharSequence explaination;
 
     /** Creates a new Builder */
@@ -187,9 +207,13 @@ public class AResult extends org.apache.avro.specific.SpecificRecordBase impleme
         this.isPrivate = data().deepCopy(fields()[3].schema(), other.isPrivate);
         fieldSetFlags()[3] = true;
       }
-      if (isValidValue(fields()[4], other.explaination)) {
-        this.explaination = data().deepCopy(fields()[4].schema(), other.explaination);
+      if (isValidValue(fields()[4], other.Exception)) {
+        this.Exception = data().deepCopy(fields()[4].schema(), other.Exception);
         fieldSetFlags()[4] = true;
+      }
+      if (isValidValue(fields()[5], other.explaination)) {
+        this.explaination = data().deepCopy(fields()[5].schema(), other.explaination);
+        fieldSetFlags()[5] = true;
       }
     }
 
@@ -290,6 +314,31 @@ public class AResult extends org.apache.avro.specific.SpecificRecordBase impleme
       return this;
     }
 
+    /** Gets the value of the 'Exception' field */
+    public java.lang.CharSequence getException() {
+      return Exception;
+    }
+    
+    /** Sets the value of the 'Exception' field */
+    public core.availability.AResult.Builder setException(java.lang.CharSequence value) {
+      validate(fields()[4], value);
+      this.Exception = value;
+      fieldSetFlags()[4] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'Exception' field has been set */
+    public boolean hasException() {
+      return fieldSetFlags()[4];
+    }
+    
+    /** Clears the value of the 'Exception' field */
+    public core.availability.AResult.Builder clearException() {
+      Exception = null;
+      fieldSetFlags()[4] = false;
+      return this;
+    }
+
     /** Gets the value of the 'explaination' field */
     public java.lang.CharSequence getExplaination() {
       return explaination;
@@ -297,21 +346,21 @@ public class AResult extends org.apache.avro.specific.SpecificRecordBase impleme
     
     /** Sets the value of the 'explaination' field */
     public core.availability.AResult.Builder setExplaination(java.lang.CharSequence value) {
-      validate(fields()[4], value);
+      validate(fields()[5], value);
       this.explaination = value;
-      fieldSetFlags()[4] = true;
+      fieldSetFlags()[5] = true;
       return this; 
     }
     
     /** Checks whether the 'explaination' field has been set */
     public boolean hasExplaination() {
-      return fieldSetFlags()[4];
+      return fieldSetFlags()[5];
     }
     
     /** Clears the value of the 'explaination' field */
     public core.availability.AResult.Builder clearExplaination() {
       explaination = null;
-      fieldSetFlags()[4] = false;
+      fieldSetFlags()[5] = false;
       return this;
     }
 
@@ -323,7 +372,8 @@ public class AResult extends org.apache.avro.specific.SpecificRecordBase impleme
         record.responseTime = fieldSetFlags()[1] ? this.responseTime : (java.lang.Long) defaultValue(fields()[1]);
         record.isAvailable = fieldSetFlags()[2] ? this.isAvailable : (java.lang.Boolean) defaultValue(fields()[2]);
         record.isPrivate = fieldSetFlags()[3] ? this.isPrivate : (java.lang.Boolean) defaultValue(fields()[3]);
-        record.explaination = fieldSetFlags()[4] ? this.explaination : (java.lang.CharSequence) defaultValue(fields()[4]);
+        record.Exception = fieldSetFlags()[4] ? this.Exception : (java.lang.CharSequence) defaultValue(fields()[4]);
+        record.explaination = fieldSetFlags()[5] ? this.explaination : (java.lang.CharSequence) defaultValue(fields()[5]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

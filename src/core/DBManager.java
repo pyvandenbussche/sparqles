@@ -20,11 +20,13 @@ import org.apache.avro.io.Encoder;
 import org.apache.avro.io.EncoderFactory;
 import org.apache.avro.specific.SpecificDatumReader;
 import org.apache.avro.specific.SpecificDatumWriter;
+import org.apache.avro.specific.SpecificRecordBase;
 import org.mortbay.log.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import core.availability.AResult;
+import core.discovery.DResult;
 import core.performance.PResult;
 
 
@@ -56,11 +58,24 @@ public class DBManager {
 		} 
 	}
 	
-	public void insertResult(AResult res) {
-		insertResult(res.getEndpointResult().getEndpoint().getUri().toString(), res.getClass().getSimpleName(), res, res.getEndpointResult().getStart() );
+	public <V extends SpecificRecordBase> boolean insertResult(V res) {
+		if(res instanceof DResult) return insertResult((DResult)res);
+		if(res instanceof AResult) return insertResult((AResult)res);
+		if(res instanceof PResult) return insertResult((PResult)res);
+		return true;
 	}
-	public void insertResult(PResult res) {
-		insertResult(res.getEndpointResult().getEndpoint().getUri().toString(), res.getClass().getSimpleName(), res, res.getEndpointResult().getStart() );
+	
+	public boolean insertResult(DResult res) {
+		return insertResult(res.getEndpointResult().getEndpoint().getUri().toString(), res.getClass().getSimpleName(), res, res.getEndpointResult().getStart() );
+	}
+	
+	public boolean insertResult(AResult res) {
+		return insertResult(res.getEndpointResult().getEndpoint().getUri().toString(), res.getClass().getSimpleName(), res, res.getEndpointResult().getStart() );
+	}
+	
+	
+	public boolean insertResult(PResult res) {
+		return insertResult(res.getEndpointResult().getEndpoint().getUri().toString(), res.getClass().getSimpleName(), res, res.getEndpointResult().getStart() );
 	}
 	
 	public boolean insertResult(String epURI, String task, Object  result, Long timestamp){

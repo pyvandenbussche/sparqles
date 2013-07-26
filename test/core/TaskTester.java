@@ -1,22 +1,20 @@
-package core.performance;
+package core;
 
+import static org.junit.Assert.*;
+
+import java.sql.SQLException;
 import java.util.List;
 
 import org.junit.Test;
 
+import core.performance.PResult;
+import core.performance.PTask;
+import core.performance.SpecificPTask;
 
-
-import core.DBManager;
-import core.Endpoint;
-import core.Endpoints;
-import core.FileManager;
-
-
-public class PTaskTEST {
+public class TaskTester {
 
 	@Test
-	public void testATask() throws Exception {
-		
+	public void test() throws SQLException {
 		Endpoint ep = Endpoints.DBPEDIA;
 		
 		DBManager db = new DBManager();
@@ -24,6 +22,8 @@ public class PTaskTEST {
 		
 		
 		PTask task = new PTask(ep, null,SpecificPTask.ASKO,SpecificPTask.ASKPO);
+		
+		
 		task.setDBManager(db);
 		task.setFileManager(fm);
 		
@@ -34,4 +34,5 @@ public class PTaskTEST {
 			System.out.println(rr);
 		}
 	}
+
 }
