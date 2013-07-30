@@ -19,8 +19,8 @@ public class FTaskTEST {
 		
 		Endpoint ep = Endpoints.DBPEDIA;
 		
-		DBManager db = new DBManager();
-		FileManager fm = new FileManager();
+		DBManager db = DBManager.getInstance();
+		FileManager fm = FileManager.getInstance();
 		
 		
 		FTask task = new FTask(ep, SpecificFTask.SPARQL11_CON,SpecificFTask.SPARQL1_ASK);
@@ -31,7 +31,7 @@ public class FTaskTEST {
 			
 		List<FResult> r = db.getResults(ep, FResult.class);
 		for(FResult rr: r){
-			System.out.println(rr);
+			System.out.println("Result is: "+rr);
 		}
 	}
 }

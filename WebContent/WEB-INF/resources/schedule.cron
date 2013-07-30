@@ -1,0 +1,22 @@
+###
+# Cron schedule for the ends framework 
+#
+# The syntax to schedule a job for an endpoint is as follows: 
+# * * * * * * endpointURI task
+# The first six fields specify the cron format for the scheduling. We use the quartz cron parser for this task. 
+# Note: we can use a online tool to get the right format  
+# http://www.cronmaker.com/
+# 
+# The endpoint URI 
+# PTask - performance test
+# DTask - discoverability test
+# ATask - availabilty test
+# FTask - Supported SPARQL1.0 and SPARQL 1.1 feature test
+###
+
+# Examples 
+# 
+# Perform the ATask every day at 12 on the dbpedia endpoint
+# 0 0 12 1/1 * ? * http://dbpedia.org/sparql ATask 
+
+0 0 12 1/1 * ? * http://dbpedia.org/sparql ATask 

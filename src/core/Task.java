@@ -10,8 +10,7 @@ import org.slf4j.LoggerFactory;
 public abstract class Task<V extends SpecificRecordBase> implements Callable<V> {
 	private static final Logger log = LoggerFactory.getLogger(Task.class);
 	
-	//wait time in milliseconds between to consequitive ep access
-	protected final Integer WAITTIME= 5000;
+	
 	private EndpointResult _epr;
 	private String _id;
 	private DBManager _dbm;

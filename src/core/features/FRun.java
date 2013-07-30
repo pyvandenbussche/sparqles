@@ -106,7 +106,7 @@ public class FRun {
             	log.debug("Executing {} against {}", _queryFile, _ep.getUri());
                 ResultSet results = qexec.execSelect();
                 
-                sols = FileManager.writeSPARQLResults(results, _queryFile, _ep, _start);
+                sols = FileManager.getInstance().writeSPARQLResults(results, _queryFile, _ep, _start);
                 
             }
             else if (q.isAskType())
@@ -124,7 +124,7 @@ public class FRun {
             	log.debug("Executing {} against {}", _queryFile, _ep.getUri());
                 Iterator<Triple> triples = qexec.execDescribeTriples();
                 
-                sols = FileManager.writeSPARQLResults(triples, _queryFile, _ep, _start);
+                sols = FileManager.getInstance().writeSPARQLResults(triples, _queryFile, _ep, _start);
 //                while (triples.hasNext())
 //                {
 ////                    out.println(triples.next());
@@ -135,7 +135,7 @@ public class FRun {
             {
             	log.debug("Executing {} against {}", _queryFile, _ep.getUri());
                 Iterator<Triple> triples = qexec.execConstructTriples();
-                sols = FileManager.writeSPARQLResults(triples, _queryFile, _ep, _start);
+                sols = FileManager.getInstance().writeSPARQLResults(triples, _queryFile, _ep, _start);
                 
 //                while (triples.hasNext())
 //                {

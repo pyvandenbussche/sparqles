@@ -7,6 +7,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import core.ENDSProperties;
 import core.Endpoint;
 import core.EndpointResult;
 import core.Task;
@@ -26,7 +27,7 @@ public class PTask extends Task<PResult>{
     public PTask(Endpoint ep, SpecificPTask ... tasks) {
 		super(ep);
 		_tasks = tasks;
-		Object [] s = {ep.getUri().toString(), tasks.length, WAITTIME};
+		Object [] s = {ep.getUri().toString(), tasks.length, ENDSProperties.PTASK_WAITTIME};
 		log.debug("Init for {} with {} tasks and a waittime of {} ms", s);
     }
 
@@ -51,7 +52,7 @@ public class PTask extends Task<PResult>{
 				failures++;
 			}
 			try {
-				Thread.sleep(WAITTIME);
+				Thread.sleep(ENDSProperties.PTASK_WAITTIME);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

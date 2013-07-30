@@ -36,20 +36,14 @@ public class DTask extends Task<DResult> {
 		GetResult res = SpecificDTask.newGetRun(epr.getEndpoint()).execute();
 		result.setGetResult(res);
 		
-		try {
-			Thread.sleep(WAITTIME);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		VoidResult vres= SpecificDTask.newSelfVoidRun(epr.getEndpoint()).execute();
-		result.setVoidResult(vres);
-		try {
-			Thread.sleep(WAITTIME);
-		} catch (InterruptedException e) {e.printStackTrace();}
+	
 		
 		VoidResult vsres= SpecificDTask.newVoidStoreRun(epr.getEndpoint()).execute();
 		result.setVoidStoreResult(vsres);
-		
+	
+		VoidResult vres= SpecificDTask.newSelfVoidRun(epr.getEndpoint()).execute();
+		result.setVoidResult(vres);
+	
 		
 		if(res.getException()!=null)failures++;
 		if(vres.getException()!=null)failures++;

@@ -67,7 +67,7 @@ SPARQL11_SELVALUES   	("sparql11/SEL[VALUES].rq");
     }
    
     public FRun get(Endpoint ep){
-        return new FRun(ep, null, query);
+        return new FRun(ep, query);
     }
    
     public static List<FRun> allTasks(Endpoint ep){

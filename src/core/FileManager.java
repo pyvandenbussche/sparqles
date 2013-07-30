@@ -1,6 +1,8 @@
 package core;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -13,6 +15,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.GZIPOutputStream;
 
 import org.apache.avro.file.DataFileReader;
 import org.apache.avro.file.DataFileWriter;
@@ -31,6 +34,7 @@ import com.hp.hpl.jena.sparql.util.FmtUtils;
 
 import core.availability.AResult;
 import core.discovery.DResult;
+import core.features.FResult;
 import core.performance.PResult;
 
 
@@ -43,9 +47,17 @@ public class FileManager {
 	private static final Logger log = LoggerFactory.getLogger(FileManager.class);
 	private HashMap<String, Map<String, File>> eptask;
 
-	File rootFolder = new File("./ondisk");
+	private final File rootFolder = new File(ENDSProperties.DATA_DIR);
+	private final File avroFolder = new File(rootFolder, "avro");
+	private final File resultsFolder = new File(rootFolder, "results");
 
-	public FileManager() {
+	private final static FileManager fm = new FileManager();
+	
+	public static FileManager getInstance(){
+		return fm;
+	}
+	
+	private FileManager() {
 		init();
 	}
 
@@ -54,10 +66,12 @@ public class FileManager {
 		eptask = new HashMap<String, Map<String,File>>();
 
 		if(!rootFolder.exists()) rootFolder.mkdirs();
+		if(!avroFolder.exists()) avroFolder.mkdirs();
+		if(!resultsFolder.exists()) resultsFolder.mkdirs();
 		if(rootFolder.isFile()){ log.warn("The specified folder {} is not a directory", rootFolder);
 			return;
 		}
-		for( File f: rootFolder.listFiles()){
+		for( File f: avroFolder.listFiles()){
 			String name = f.getName().replace(".avro", "");
 			try {
 				String ep = URLDecoder.decode(name.substring(0, name.lastIndexOf(".")),  "UTF-8");
@@ -85,9 +99,9 @@ public class FileManager {
 	}
 
 
-	public <V> List<V> readResults(String endpointURI,Class<V> cls){
+	public <V> List<V> getResults(String endpointURI, Class<V> cls){
 		try {
-			return readResults(EndpointFactory.newEndpoint(new URI(endpointURI)),cls);
+			return getResults(EndpointFactory.newEndpoint(new URI(endpointURI)),cls);
 		} catch (URISyntaxException e) {
 			Object[] t = {e.getClass().getSimpleName(), e.getMessage(), cls.getSimpleName(), endpointURI};
 			log.error("{}:{} during deserialisation of {} results for {}", t);
@@ -95,7 +109,7 @@ public class FileManager {
 		}
 	}
 	
-	public <V> List<V> readResults(Endpoint ep,Class<V> cls){
+	public <V> List<V> getResults(Endpoint ep,Class<V> cls){
 		List<V> l = new ArrayList<V>();
 		File f = getFile(ep, cls.getSimpleName());
 		DatumReader<V> reader = new SpecificDatumReader<V>(cls);
@@ -117,9 +131,13 @@ public class FileManager {
 		if(res instanceof DResult) return writeResult((DResult)res);
 		if(res instanceof AResult) return writeResult((AResult)res);
 		if(res instanceof PResult) return writeResult((PResult)res);
+		if(res instanceof FResult) return writeResult((FResult)res);
 		return true;
 	}
 
+	public boolean writeResult(FResult res) {
+		return writeResult(res.getEndpointResult().getEndpoint(), res.getClass().getSimpleName(), (SpecificRecordBase)res);
+	}
 	public boolean writeResult(DResult res) {
 		return writeResult(res.getEndpointResult().getEndpoint(), res.getClass().getSimpleName(), (SpecificRecordBase)res);
 	}
@@ -140,7 +158,7 @@ public class FileManager {
 			File f = getFile(ep,task);
 			
 			if(f==null){
-				f = createFile(ep,task);
+				f = createAVROFile(ep,task);
 				put(ep.getUri().toString(),task,f);
 				dfw.create(result.getSchema(), f);
 			}else{
@@ -159,9 +177,18 @@ public class FileManager {
 	}
 
 
-	private File createFile(Endpoint ep, String task) {
+	private File createAVROFile(Endpoint ep, String task) {
 		try {
-			return new File(rootFolder, URLEncoder.encode(ep.getUri().toString(), "UTF-8")+"."+task+".avro");
+			return new File(avroFolder, URLEncoder.encode(ep.getUri().toString(), "UTF-8")+"."+task+".avro");
+		} catch (UnsupportedEncodingException e) {
+			log.warn("UnsupportedEncodingException: {} for {}", e.getMessage(), ep.getUri().toString() );
+		}
+		return null;
+	}
+	
+	private File createResultFile(Endpoint ep, String query, Long date) {
+		try {
+			return new File(resultsFolder, URLEncoder.encode(ep.getUri().toString(), "UTF-8")+"_"+query.replaceAll("/", "-")+"_"+date+".results");
 		} catch (UnsupportedEncodingException e) {
 			log.warn("UnsupportedEncodingException: {} for {}", e.getMessage(), ep.getUri().toString() );
 		}
@@ -178,45 +205,71 @@ public class FileManager {
 	}
 
 
-	public static int writeSPARQLResults(ResultSet results, String queryFile,
+	public int writeSPARQLResults(ResultSet results, String queryFile,
 			Endpoint ep, Long start) {
 		
-		PrintWriter out = getPARQLResultPrintStream(ep, queryFile, start);
-		int sols=0;
-		while (results.hasNext())
-        {
-            QuerySolution qs = results.nextSolution();
-            out.println(toString(qs, sols == 0));
-            sols++;
-        }
-		out.close();
-		return sols;
+		PrintWriter out=null;
+		try {
+			out = getPARQLResultPrintStream(ep, queryFile, start);
+			int sols=0;
+			while (results.hasNext())
+	        {
+	            QuerySolution qs = results.nextSolution();
+	            out.println(toString(qs, sols == 0));
+	            sols++;
+	        }
+			out.close();
+			return sols;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		finally{
+			if(out!=null) out.close();
+		}
+		return -10;
+		
 	}
 	
-	public static int writeSPARQLResults(Iterator<Triple> triples,
-			String _queryFile, Endpoint _ep, Long start) {
-		PrintWriter out = getPARQLResultPrintStream(ep, queryFile, start);
-		int sols=0;
-		while (triples.hasNext())
-        {
-            out.println(triples.next());
-            sols++;
-        }
-		out.close();
-		return sols;
+	public int writeSPARQLResults(Iterator<Triple> triples,
+			String queryFile, Endpoint ep, Long start) {
+		PrintWriter out=null;
+		try {
+			out = getPARQLResultPrintStream(ep, queryFile, start);
+			int sols=0;
+			while (triples.hasNext())
+	        {
+	            out.println(triples.next());
+	            sols++;
+	        }
+			out.close();
+			return sols;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally{
+			if(out!=null) out.close();
+		}
+		return -10;
+		
 	}
 	
-	private static PrintWriter getPARQLResultPrintStream(Endpoint ep,
-			String queryFile, Long start) {
-		// TODO Auto-generated method stub
-		return null;
+	private PrintWriter getPARQLResultPrintStream(Endpoint ep,
+			String queryFile, Long start) throws FileNotFoundException, IOException {
+		
+		File f = createResultFile(ep, queryFile, start);
+		PrintWriter pw = null;
+		pw = new PrintWriter(new GZIPOutputStream(new FileOutputStream(f)));
+		return pw;
 	}
 
 
 
 	
 	
-	private static String toString(QuerySolution qs, boolean first)
+	private String toString(QuerySolution qs, boolean first)
     {
         StringBuffer vars = new StringBuffer();
         StringBuffer sb = new StringBuffer();

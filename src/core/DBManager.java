@@ -27,6 +27,7 @@ import org.slf4j.LoggerFactory;
 
 import core.availability.AResult;
 import core.discovery.DResult;
+import core.features.FResult;
 import core.performance.PResult;
 
 
@@ -37,24 +38,24 @@ public class DBManager {
 	public static final String CREATE_RESULT="CREATE TABLE IF NOT EXISTS results (Endpoint VARCHAR(256), Task VARCHAR(256), Result BLOB, Date TIMESTAMP,  UNIQUE(Endpoint, Date));";
 	
 	private Connection con;
+	private static DBManager inst = new DBManager();
 	
-	public DBManager() throws SQLException {
+	public static DBManager getInstance(){
+		return inst;
+	}
+	private DBManager()  {
 		setup();
 	}
 	 
-	
-	
-
-	private void setup() throws SQLException {
+	private void setup()  {
 		try {
-			Class.forName("org.h2.Driver");
-			con = DriverManager.getConnection("jdbc:h2:./testdbh2");
-				
+			Class.forName(ENDSProperties.DB_DRIVER);
+			con = DriverManager.getConnection(ENDSProperties.DB_URL);
 			con.createStatement().execute(CREATE_RESULT);
-	
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("[INIT] Cannot load the database driver {}",ENDSProperties.DB_DRIVER,e);
+		} catch (SQLException e) {
+			log.error("[INIT] Cannot load the database driver {}",ENDSProperties.DB_DRIVER,e);
 		} 
 	}
 	
@@ -62,9 +63,13 @@ public class DBManager {
 		if(res instanceof DResult) return insertResult((DResult)res);
 		if(res instanceof AResult) return insertResult((AResult)res);
 		if(res instanceof PResult) return insertResult((PResult)res);
+		if(res instanceof FResult) return insertResult((FResult)res);
 		return true;
 	}
 	
+	public boolean insertResult(FResult res) {
+		return insertResult(res.getEndpointResult().getEndpoint().getUri().toString(), res.getClass().getSimpleName(), res, res.getEndpointResult().getStart() );
+	}
 	public boolean insertResult(DResult res) {
 		return insertResult(res.getEndpointResult().getEndpoint().getUri().toString(), res.getClass().getSimpleName(), res, res.getEndpointResult().getStart() );
 	}
@@ -114,7 +119,7 @@ public class DBManager {
 		return true;
 	}
 	
-	public void stop() throws SQLException{
+	public void close() throws SQLException{
 		con.close();
 	}
 	
@@ -127,7 +132,6 @@ public class DBManager {
 				
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -142,7 +146,6 @@ public class DBManager {
 			
 			ResultSet res = st.executeQuery(query);
 			while(res.next()){
-				System.out.println("res3: "+res.getString(3));
 				Decoder decoder = DecoderFactory.get().binaryDecoder(res.getBinaryStream(3), null);
 				DatumReader<T> dr = new SpecificDatumReader<T>(cls);
 				
@@ -150,10 +153,9 @@ public class DBManager {
 				reslist.add(t);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return reslist;
