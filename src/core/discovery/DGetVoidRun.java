@@ -1,6 +1,7 @@
 package core.discovery;
 
-import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -16,16 +17,27 @@ import com.hp.hpl.jena.query.ResultSetRewindable;
 import com.hp.hpl.jena.rdf.model.RDFNode;
 
 import core.Endpoint;
+import core.EndpointFactory;
 
-public class DGetSelfVoidRun  extends DRun<VoidResult>{
-	private static final Logger log = LoggerFactory.getLogger(DGetSelfVoidRun.class);
-
-	public DGetSelfVoidRun(Endpoint ep) {
-		super(ep);
-
-	}
-
+public class DGetVoidRun  extends DRun<VoidResult>{
+	private static final Logger log = LoggerFactory.getLogger(DGetVoidRun.class);
+	private boolean _self;
 	private final static String voidStore="http://void.rkbexplorer.com/sparql/";
+	private static Endpoint VOIDSTORE=null;
+
+	
+	public DGetVoidRun(Endpoint ep, boolean self) {
+		super(ep);
+		_self = self;
+		if(VOIDSTORE==null)
+			try {
+				VOIDSTORE = EndpointFactory.newEndpoint(new URI(voidStore));
+			} catch (URISyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+	
 	private final static String query = "" +
 			"PREFIX rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"+
 //			"PREFIX rdfs:     <http://www.w3.org/2000/01/rdf-schema#>\n"+
@@ -52,7 +64,10 @@ public class DGetSelfVoidRun  extends DRun<VoidResult>{
 		// **this actually was the main problem I couldn't figure out.**
 		QueryExecution qexec = null;
 		try {
-			qexec = QueryManager.getExecution(_ep, queryString);
+			if(_self)
+				qexec = QueryManager.getExecution(_ep, queryString);
+			else
+				qexec = QueryManager.getExecution(VOIDSTORE, queryString);
 
 
 			boolean results = false;

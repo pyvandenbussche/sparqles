@@ -21,7 +21,7 @@ import org.apache.avro.io.EncoderFactory;
 import org.apache.avro.specific.SpecificDatumReader;
 import org.apache.avro.specific.SpecificDatumWriter;
 import org.apache.avro.specific.SpecificRecordBase;
-import org.mortbay.log.Log;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,7 +32,7 @@ import core.performance.PResult;
 
 
 public class DBManager {
-	private static final Logger logger = LoggerFactory.getLogger(DBManager.class);
+	private static final Logger log = LoggerFactory.getLogger(DBManager.class);
 	
 	public static final String CREATE_RESULT="CREATE TABLE IF NOT EXISTS results (Endpoint VARCHAR(256), Task VARCHAR(256), Result BLOB, Date TIMESTAMP,  UNIQUE(Endpoint, Date));";
 	
@@ -79,10 +79,10 @@ public class DBManager {
 	}
 	
 	public boolean insertResult(String epURI, String task, Object  result, Long timestamp){
-		Log.info("Inserting {}", result);
+		log.info("[INSERT] {}", result);
 		
 		try {
-			PreparedStatement prep = con.prepareStatement("INSERT INTO results (Endpoint, Task, Result, Date) VALUES (?,?,?,?)");
+			PreparedStatement prep = con.prepareStatement("INSERT INTO results (Endpoint, Task, Result, Date) VALUES (?,?,?,?)");	
 			
 			prep.setString(1, epURI);
 			prep.setString(2, task);
@@ -96,13 +96,16 @@ public class DBManager {
 			prep.setBlob(3, new SerialBlob(outputStream.toByteArray()));
 			prep.setTimestamp(4, new java.sql.Timestamp(timestamp));
 			
-			Log.info("Execute {}", prep);
+			log.debug("[EXEC] {}", prep);
 			int insertedRecordsCount = prep.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			log.warn("[EXEC] {}", e);
 			return false;
 		} catch (IOException e) {
 			e.printStackTrace();
+			log.warn("[EXEC] {}", e);
+			return false;
 		}
 		return true;
 	}
@@ -135,7 +138,7 @@ public class DBManager {
 			
 			Statement st = con.createStatement();
 			String query ="SELECT * FROM results WHERE Endpoint='"+ep.getUri().toString()+"' AND Task='"+cls.getSimpleName()+"';";
-			Log.info("Querying {}", query);
+			log.info("[QUERY] {}", query);
 			
 			ResultSet res = st.executeQuery(query);
 			while(res.next()){

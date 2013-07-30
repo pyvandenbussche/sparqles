@@ -3,13 +3,15 @@ package core;
 import java.util.concurrent.Callable;
 
 import org.apache.avro.specific.SpecificRecordBase;
-import org.mortbay.log.Log;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public abstract class Task<V extends SpecificRecordBase> implements Callable<V> {
-	private static final Logger logger = LoggerFactory.getLogger(Task.class);
+	private static final Logger log = LoggerFactory.getLogger(Task.class);
 	
+	//wait time in milliseconds between to consequitive ep access
+	protected final Integer WAITTIME= 5000;
 	private EndpointResult _epr;
 	private String _id;
 	private DBManager _dbm;
@@ -41,13 +43,13 @@ public abstract class Task<V extends SpecificRecordBase> implements Callable<V> 
 		
 		if(_dbm != null){
 			if( !_dbm.insertResult(v)){
-				Log.warn("Could not store record to DB");
+				log.warn("Could not store record to DB");
 			}
 			
 		}
 		if(_fm != null){
 			if( !_fm.writeResult(v)){
-				Log.warn("Could not store record to file");
+				log.warn("Could not store record to file");
 			}
 			
 		}

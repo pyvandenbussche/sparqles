@@ -3,7 +3,6 @@ package schedule.iter;
 import java.util.Calendar;
 import java.util.Date;
 
-import schedule.ScheduleIterator;
 
 public class HourlyIterator implements ScheduleIterator {
     private final int minute, second;

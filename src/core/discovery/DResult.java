@@ -7,11 +7,12 @@ package core.discovery;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class DResult extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"DResult\",\"namespace\":\"core.discovery\",\"fields\":[{\"name\":\"endpointResult\",\"type\":{\"type\":\"record\",\"name\":\"EndpointResult\",\"namespace\":\"core\",\"fields\":[{\"name\":\"endpoint\",\"type\":{\"type\":\"record\",\"name\":\"Endpoint\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"}]}},{\"name\":\"start\",\"type\":\"long\"},{\"name\":\"end\",\"type\":\"long\"}],\"imports\":[\"Endpoint.avsc\"]}},{\"name\":\"GetResult\",\"type\":{\"type\":\"record\",\"name\":\"GetResult\",\"fields\":[{\"name\":\"ResponseType\",\"type\":\"string\"},{\"name\":\"ResponseCode\",\"type\":\"string\"},{\"name\":\"ResponseServer\",\"type\":\"string\"},{\"name\":\"ResponseLink\",\"type\":\"string\"},{\"name\":\"SPARQLDESCterms\",\"type\":\"long\"},{\"name\":\"Exception\",\"type\":[\"string\",\"null\"]},{\"name\":\"VOIDterms\",\"type\":\"long\"},{\"name\":\"SPARQLDESCpreds\",\"type\":{\"type\":\"map\",\"values\":[\"string\",\"long\"]}},{\"name\":\"voiDpreds\",\"type\":{\"type\":\"map\",\"values\":[\"string\",\"long\"]}}]}},{\"name\":\"VoidResult\",\"type\":{\"type\":\"record\",\"name\":\"VoidResult\",\"fields\":[{\"name\":\"voidFile\",\"type\":{\"type\":\"array\",\"items\":\"string\"}},{\"name\":\"Exception\",\"type\":[\"string\",\"null\"]}]}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"DResult\",\"namespace\":\"core.discovery\",\"fields\":[{\"name\":\"endpointResult\",\"type\":{\"type\":\"record\",\"name\":\"EndpointResult\",\"namespace\":\"core\",\"fields\":[{\"name\":\"endpoint\",\"type\":{\"type\":\"record\",\"name\":\"Endpoint\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"}]}},{\"name\":\"start\",\"type\":\"long\"},{\"name\":\"end\",\"type\":\"long\"}],\"imports\":[\"Endpoint.avsc\"]}},{\"name\":\"GetResult\",\"type\":{\"type\":\"record\",\"name\":\"GetResult\",\"fields\":[{\"name\":\"ResponseType\",\"type\":\"string\"},{\"name\":\"ResponseCode\",\"type\":\"string\"},{\"name\":\"ResponseServer\",\"type\":\"string\"},{\"name\":\"ResponseLink\",\"type\":\"string\"},{\"name\":\"SPARQLDESCterms\",\"type\":\"long\"},{\"name\":\"Exception\",\"type\":[\"string\",\"null\"]},{\"name\":\"VOIDterms\",\"type\":\"long\"},{\"name\":\"SPARQLDESCpreds\",\"type\":{\"type\":\"map\",\"values\":[\"string\",\"long\"]}},{\"name\":\"voiDpreds\",\"type\":{\"type\":\"map\",\"values\":[\"string\",\"long\"]}}]}},{\"name\":\"VoidResult\",\"type\":{\"type\":\"record\",\"name\":\"VoidResult\",\"fields\":[{\"name\":\"voidFile\",\"type\":{\"type\":\"array\",\"items\":\"string\"}},{\"name\":\"Exception\",\"type\":[\"string\",\"null\"]}]}},{\"name\":\"VoidStoreResult\",\"type\":\"VoidResult\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public core.EndpointResult endpointResult;
   @Deprecated public core.discovery.GetResult GetResult;
   @Deprecated public core.discovery.VoidResult VoidResult;
+  @Deprecated public core.discovery.VoidResult VoidStoreResult;
 
   /**
    * Default constructor.
@@ -21,10 +22,11 @@ public class DResult extends org.apache.avro.specific.SpecificRecordBase impleme
   /**
    * All-args constructor.
    */
-  public DResult(core.EndpointResult endpointResult, core.discovery.GetResult GetResult, core.discovery.VoidResult VoidResult) {
+  public DResult(core.EndpointResult endpointResult, core.discovery.GetResult GetResult, core.discovery.VoidResult VoidResult, core.discovery.VoidResult VoidStoreResult) {
     this.endpointResult = endpointResult;
     this.GetResult = GetResult;
     this.VoidResult = VoidResult;
+    this.VoidStoreResult = VoidStoreResult;
   }
 
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
@@ -34,6 +36,7 @@ public class DResult extends org.apache.avro.specific.SpecificRecordBase impleme
     case 0: return endpointResult;
     case 1: return GetResult;
     case 2: return VoidResult;
+    case 3: return VoidStoreResult;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -44,6 +47,7 @@ public class DResult extends org.apache.avro.specific.SpecificRecordBase impleme
     case 0: endpointResult = (core.EndpointResult)value$; break;
     case 1: GetResult = (core.discovery.GetResult)value$; break;
     case 2: VoidResult = (core.discovery.VoidResult)value$; break;
+    case 3: VoidStoreResult = (core.discovery.VoidResult)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -93,6 +97,21 @@ public class DResult extends org.apache.avro.specific.SpecificRecordBase impleme
     this.VoidResult = value;
   }
 
+  /**
+   * Gets the value of the 'VoidStoreResult' field.
+   */
+  public core.discovery.VoidResult getVoidStoreResult() {
+    return VoidStoreResult;
+  }
+
+  /**
+   * Sets the value of the 'VoidStoreResult' field.
+   * @param value the value to set.
+   */
+  public void setVoidStoreResult(core.discovery.VoidResult value) {
+    this.VoidStoreResult = value;
+  }
+
   /** Creates a new DResult RecordBuilder */
   public static core.discovery.DResult.Builder newBuilder() {
     return new core.discovery.DResult.Builder();
@@ -117,6 +136,7 @@ public class DResult extends org.apache.avro.specific.SpecificRecordBase impleme
     private core.EndpointResult endpointResult;
     private core.discovery.GetResult GetResult;
     private core.discovery.VoidResult VoidResult;
+    private core.discovery.VoidResult VoidStoreResult;
 
     /** Creates a new Builder */
     private Builder() {
@@ -142,6 +162,10 @@ public class DResult extends org.apache.avro.specific.SpecificRecordBase impleme
       if (isValidValue(fields()[2], other.VoidResult)) {
         this.VoidResult = data().deepCopy(fields()[2].schema(), other.VoidResult);
         fieldSetFlags()[2] = true;
+      }
+      if (isValidValue(fields()[3], other.VoidStoreResult)) {
+        this.VoidStoreResult = data().deepCopy(fields()[3].schema(), other.VoidStoreResult);
+        fieldSetFlags()[3] = true;
       }
     }
 
@@ -220,6 +244,31 @@ public class DResult extends org.apache.avro.specific.SpecificRecordBase impleme
       return this;
     }
 
+    /** Gets the value of the 'VoidStoreResult' field */
+    public core.discovery.VoidResult getVoidStoreResult() {
+      return VoidStoreResult;
+    }
+    
+    /** Sets the value of the 'VoidStoreResult' field */
+    public core.discovery.DResult.Builder setVoidStoreResult(core.discovery.VoidResult value) {
+      validate(fields()[3], value);
+      this.VoidStoreResult = value;
+      fieldSetFlags()[3] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'VoidStoreResult' field has been set */
+    public boolean hasVoidStoreResult() {
+      return fieldSetFlags()[3];
+    }
+    
+    /** Clears the value of the 'VoidStoreResult' field */
+    public core.discovery.DResult.Builder clearVoidStoreResult() {
+      VoidStoreResult = null;
+      fieldSetFlags()[3] = false;
+      return this;
+    }
+
     @Override
     public DResult build() {
       try {
@@ -227,6 +276,7 @@ public class DResult extends org.apache.avro.specific.SpecificRecordBase impleme
         record.endpointResult = fieldSetFlags()[0] ? this.endpointResult : (core.EndpointResult) defaultValue(fields()[0]);
         record.GetResult = fieldSetFlags()[1] ? this.GetResult : (core.discovery.GetResult) defaultValue(fields()[1]);
         record.VoidResult = fieldSetFlags()[2] ? this.VoidResult : (core.discovery.VoidResult) defaultValue(fields()[2]);
+        record.VoidStoreResult = fieldSetFlags()[3] ? this.VoidStoreResult : (core.discovery.VoidResult) defaultValue(fields()[3]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

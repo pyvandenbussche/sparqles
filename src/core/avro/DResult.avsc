@@ -27,10 +27,13 @@
     	{"name": "VoidResult", "type": {
     		"type": "record",
     		"name": "VoidResult",
+    		"namespace":"core.discovery",
       		"fields" : [
         		{"name": "voidFile", "type": {"type": "array", "items": "string"} },
         		{"name": "Exception", "type": ["string", "null"] }
         	]}
-    	}
+    	},
+    	{"name": "VoidStoreResult", "type": "core.discovery.VoidResult"}
+    	
  	]
 }

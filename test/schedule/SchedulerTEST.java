@@ -11,6 +11,7 @@ import org.junit.Test;
 import schedule.iter.CronBasedIterator;
 import schedule.iter.DailyIterator;
 import schedule.iter.HourlyIterator;
+import schedule.iter.ScheduleIterator;
 import schedule.iter.SecondlyIterator;
 
 import core.Endpoint;
@@ -32,7 +33,7 @@ public class SchedulerTEST {
 		iter(h,10);
 		
 		
-		String c = "10 * * * * ?";
+		String c = "0 0/1 * 1/1 * ? *";
 		CronBasedIterator i;
 		try {
 			i = new CronBasedIterator(c);

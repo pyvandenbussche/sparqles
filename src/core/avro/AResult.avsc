@@ -6,7 +6,7 @@
      {"name": "responseTime", "type": "long"},
      {"name": "isAvailable", "type": "boolean"},
      {"name": "isPrivate", "type": "boolean"},
-     {"name": "Exception", "type": "string" },
+     {"name": "Exception", "type": ["string", "null"] },
      {"name": "explaination", "type": "string"}
      
  ]

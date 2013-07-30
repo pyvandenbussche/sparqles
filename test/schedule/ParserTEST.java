@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.junit.Test;
 
+
 public class ParserTEST {
 
 	
@@ -11,16 +12,13 @@ public class ParserTEST {
 	public void testParseLine() throws Exception {
 		
 		
-		Parser p = new Parser();
+		Scheduler s = new Scheduler(10);
+		s.init();
+		SchedulerParser p = new SchedulerParser(s);
 		
 		
-		String l = "* * * * http://example.org/ PTask";
+		String l = "0 0/1 * 1/1 * ? http://example.org/ PTask";
 		p.parseLine(l);
-		CronExpression c = new CronExpression("0 0 12 * * ?");
-		System.out.println(c.getExpressionSummary());
 		
-		Date d = new Date();
-		System.out.println("Now: "+d);
-		System.out.println(c.getNextValidTimeAfter(new Date()));
 	}
 }

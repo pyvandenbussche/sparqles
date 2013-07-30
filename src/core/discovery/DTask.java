@@ -30,15 +30,37 @@ public class DTask extends Task<DResult> {
 		DResult result = new DResult();
 		result.setEndpointResult(epr);
 		
-		result.setGetResult(SpecificDTask.newGetRun(epr.getEndpoint()).execute());
+		log.debug("[RUN] {}", epr.getEndpoint().getUri().toString());
+		
+		int failures=0;
+		GetResult res = SpecificDTask.newGetRun(epr.getEndpoint()).execute();
+		result.setGetResult(res);
 		
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(WAITTIME);
 		} catch (InterruptedException e) {
-		e.printStackTrace();
+			e.printStackTrace();
 		}
-		result.setVoidResult(SpecificDTask.newSelfVoidRun(epr.getEndpoint()).execute());
+		VoidResult vres= SpecificDTask.newSelfVoidRun(epr.getEndpoint()).execute();
+		result.setVoidResult(vres);
+		try {
+			Thread.sleep(WAITTIME);
+		} catch (InterruptedException e) {e.printStackTrace();}
 		
+		VoidResult vsres= SpecificDTask.newVoidStoreRun(epr.getEndpoint()).execute();
+		result.setVoidStoreResult(vsres);
+		
+		
+		if(res.getException()!=null)failures++;
+		if(vres.getException()!=null)failures++;
+		if(vsres.getException()!=null)failures++;
+		
+		if(failures==0)
+			log.info("[SUCCESS] [SELECT] {}", epr.getEndpoint());
+		else{
+			Object [] s = { epr.getEndpoint().getUri().toString(), failures, 3}; 
+			log.error("[RUN] {}: {}/{} failures",s);
+		}
 		return result;
 	}
 }

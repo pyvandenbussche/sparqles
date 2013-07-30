@@ -1,9 +1,10 @@
-package core.performance;
+package core.features;
 
 import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.log4j.net.SyslogAppender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,18 +13,18 @@ import core.EndpointResult;
 import core.Task;
 
 
-public class PTask extends Task<PResult>{
+public class FTask extends Task<FResult>{
 	
-	private static final Logger log = LoggerFactory.getLogger(PTask.class);
+	private static final Logger log = LoggerFactory.getLogger(FTask.class);
 	
     String query;
     PrintStream out;
 
     Exception query_exc;
-	private SpecificPTask[] _tasks;
+	private SpecificFTask[] _tasks;
 	
 
-    public PTask(Endpoint ep, SpecificPTask ... tasks) {
+    public FTask(Endpoint ep, SpecificFTask ... tasks) {
 		super(ep);
 		_tasks = tasks;
 		Object [] s = {ep.getUri().toString(), tasks.length, WAITTIME};
@@ -31,23 +32,24 @@ public class PTask extends Task<PResult>{
     }
 
     @Override
-	public PResult process(EndpointResult epr) {
-    	PResult res = new PResult();
+	public FResult process(EndpointResult epr) {
+    	FResult res = new FResult();
 		res.setEndpointResult(epr);
     	
 		log.debug("[RUN] {}", epr.getEndpoint().getUri().toString());
-		Map<CharSequence, PSingleResult> results = new HashMap<CharSequence, PSingleResult>(_tasks.length);
+		Map<CharSequence, FSingleResult> results = new HashMap<CharSequence, FSingleResult>(_tasks.length);
 		
 		int failures=0;
-		for(SpecificPTask sp: _tasks){
+		for(SpecificFTask sp: _tasks){
+			System.out.println(sp.name());
 			log.debug("[RUN] {} [{}]", epr.getEndpoint(), sp.name());
-			PRun run = sp.get(epr.getEndpoint());
+			FRun run = sp.get(epr);
 			
-			PSingleResult pres = run.execute();
+			FSingleResult pres = run.execute();
 
 			results.put(sp.name(), pres);
 			
-			if(pres.getCold().getException()!=null ||pres.getWarm().getException()!=null){
+			if(pres.getRun().getException()!=null){
 				failures++;
 			}
 			try {

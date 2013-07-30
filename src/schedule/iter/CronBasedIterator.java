@@ -4,7 +4,6 @@ import java.text.ParseException;
 import java.util.Date;
 
 import schedule.CronExpression;
-import schedule.ScheduleIterator;
 
 public class CronBasedIterator implements ScheduleIterator {
 	private final CronExpression _cron;
@@ -19,5 +18,10 @@ public class CronBasedIterator implements ScheduleIterator {
     	Date res = next; 
     	next = _cron.getNextValidTimeAfter(res);
     	return res;
+    }
+    
+    @Override
+    public String toString() {
+    	return ""+this.getClass().getSimpleName()+"("+_cron.getCronExpression()+")";
     }
 }

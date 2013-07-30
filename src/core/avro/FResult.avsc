@@ -1,0 +1,18 @@
+{
+	"namespace": "core.features",
+ 	"type": "record",
+ 	"name": "FResult",
+ 	"fields": [
+ 		{"name": "endpointResult", "type": "core.EndpointResult"},
+ 		{"name": "results", "type": { "type":"map","values": 
+ 		  	{
+     		"name": "FSingleResult",
+      		"type": "record",
+        	"fields" : [
+	        	{ "name": "query", "type": "string"},
+    	    	{ "name": "run", "type": "core.performance.Run"}
+      		]}
+    		} 
+ 		}
+ 	]
+}

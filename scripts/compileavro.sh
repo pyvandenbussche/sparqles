@@ -10,7 +10,9 @@ EPR=$AVRO_DIR/EndpointResult.avsc
 PR=$AVRO_DIR/PResult.avsc
 AR=$AVRO_DIR/AResult.avsc
 DR=$AVRO_DIR/DResult.avsc
+FR=$AVRO_DIR/FResult.avsc
+
 
 SRC=src
 
-java -jar $LIB/$AVRO_JAR compile schema $EP $EPR $PR $AR $DR $SRC  
+java -jar $LIB/$AVRO_JAR compile schema $EP $EPR $PR $AR $DR $FR $SRC  
