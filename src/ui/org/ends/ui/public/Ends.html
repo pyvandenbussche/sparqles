@@ -1,66 +1,133 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> 
-<head> 
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
-  <title>SPARQL Endpoints availability</title> 
-  <meta http-equiv="imagetoolbar" content="no" /> 
-  <link rel="shortcut icon" href="./images/favicon.ico">
-  <meta name="Description" content="SPARQL Endpoints real-time availability." /> 
-  <meta name="keywords" content="endpoint,up,down,available, sparqlendpoint, endpointsparql, rdf, dataset, availability,SPARQL, endpoint" /> 
-  <link rel="stylesheet" type="text/css" href="./styles/style.css" />
-  <script type="text/javascript" language="javascript" src="org.ends.ui.Ends.nocache.js"></script>
-</head> 
-<body> 
-<iframe src="javascript:''" id="__gwt_historyFrame" style="width:0;height:0;border:0"></iframe>
-  <div id="container">
-	<div id="header">
-		<noscript><div class="error-message">Please enable javascript</div></noscript> 
-		<div id="head_left">
-			<table style="width:100%;">
-				<tr style="width:100%;">
-					<td style="width:125px;">
-						<a href="#"><img id="logo" height="100px" title="SPARQL Endpoints status" src="./images/SES.png"></a>
-					</td>
-					<td style="width:625px;">
-						<table style="width:100%;">
-							<tr><td><h1 style="text-align: center;"><a href="#">SPARQL Endpoints Status</a></h1></td></tr>
-							<tr><td><h2 style="text-align: center;" id="EndsTitle"></h2></td></tr>
-						</table>
-					</td>
-					<td style="width:135px;">
-						<table style="height:100%; width:100%">
-							<tr><td colspan=2 style="text-align: right; padding-bottom:20px; color: #8e8e8e;"><a href="#p=login">login</a></td></tr>
-							<tr><td style="text-align: right;">Supported by </td><td style="text-align: right;"><a href="http://okfn.org/" target="_blank"><img id="OKFN" height="30px" title="OKFN" src="./images/okfn.png"></a></td></tr>
-						</table>
-					</td>
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="description" content="">
+	<meta name="keywords" content="endpoint,up,down,available, sparqlendpoint, endpointsparql, rdf, dataset, availability,SPARQL, discoverability, interoperability, performance">
+	<meta name="viewport" content="width=device-width, user-scalable=no, maximum-scale=1">
+	
+	<title>SPARQL Endpoints Status</title>
+	
+	<link rel="icon" href="./images/favicon.ico">
+	
+	<link href="./styles/css" rel="stylesheet" type="text/css">
+	<link href="./styles/style.css" rel="stylesheet" type="text/css" media="all">
+	<link href="./styles/style_ext.css" rel="stylesheet" type="text/css" media="screen">
+	<link href="./styles/nv.d3.css" rel="stylesheet" type="text/css">
+	
+	<script src="./lib/d3.v3.min.js"></script>
+	<script src="./lib/nv.d3.js"></script>
+		
+	<meta http-equiv="Content-Language" content="en-US">
+	<script type="text/javascript" language="javascript" src="org.ends.ui.Ends.nocache.js"></script>
+	</head>
+	<body>
+		<iframe src="javascript:''" id="__gwt_historyFrame" style="width:0;height:0;border:0"></iframe>
+		<div class="container">
+			<header>
+				<noscript><div class="error-message">Please enable javascript</div></noscript> 
+				<a id="logo" title="SPARQL Endpoints Status" href="#"><img alt="" src="./images/SES_small.png"></a>
+				<nav>
+					<ul>
+						<li class="wrpl"><a title="" href="#p=home">Highlights<span>At a glance</span></a></li>
+						<li class="wrpl"><a title="" href="#p=dimension&dim=avail">Availability<span>Up / Down</span></a></li>
+						<li class="wrpl"><a title="" href="#p=dimension&dim=perf">Performance<span>Cold / Warm</span></a></li>
+						<li class="wrpl"><a title="" href="#p=dimension&dim=interop">Interoperability<span>SPARQL 1.0 / 1.1</span></a></li>
+						<li class="wrpl"><a title="" href="#p=dimension&dim=discov">Discoverability<span>VoID, Server</span></a></li>
+					</ul>
+				</nav>
+			</header>
+			
+			<div class="line"></div>
+
+			<section id="post">
+				<article>
+					<header class="wrpl w-3-4">
+						<h1 id="instanceTitle"></h1>
+						<span id="instanceDate"></span>
+						<details>
+							<summary>Description:</summary>
+								<span id="instanceDescription"></span>
+						</details>
+					</header>
+						
+							
+				</article>
+			</section>
+
+			<div class="line"></div>
+
+			
+			<section id="posts" class="default-area">
+				<div class="col-2 clear">
 					
-				</tr>
-			</table>
-		</div> 
-	</div>
-	<div id="share">
-		<table>
-		<tr>
-			<td style=" width:660px; border-right:1px solid #B5B5B5; padding-right:20px;"><div id="EndsDescription"/></td>
-			<td>Actions</td>
-		</tr>
-		</table>
-	</div>
-	
-	<div id="content"></div>
-	
-    <div style="margin-top:20px;" id="legend">
-		<table style="width:100%">
-			<tr>
-				<td><div style="text-align: left; margin-left:30px;"><a href="#p=about">About SPARQL Endpoint Status</a></div></td>
-				<td><div style="text-align: right; margin-right:30px;">A service supported by <a href="http://okfn.org/" target="_blank">Open Knowledge Foundation (OKFN)</a><div></td>
-			</tr>
-			<tr>
-				<td><div style="text-align: left; margin-left:30px;"><a href="https://github.com/pyvandenbussche/ends/wiki" target="_blank">Download SPARQL Endpoint Status</a></div></td>
-				<td></td>
-			</tr>
-		</table>
-	</div>
-  </div>
-</body> 
+					<article class="wrpl" style="min-width:400px;">
+						<div class="wrplInnerBox">
+						<a title="" href="#p=dimension&dim=avail"><h2>Availability</h2></a>
+						<svg id="avail"/>
+						</div>
+					</article>
+					
+					<article class=" wrpl" style="min-width:400px;">
+						<div class="wrplInnerBox">
+						<a title="" href="#p=dimension&dim=perf"><h2>Performance</h2></a>
+						<svg id="perf"/>
+						</div>
+					</article>
+					
+					<article class=" wrpl" style="min-width:400px;">
+						<div class="wrplInnerBox">
+						<a title="" href="#p=dimension&dim=interop"><h2>Interoperability</h2></a>
+						<svg id="interop"/>
+						</div>
+					</article>
+					<article class=" wrpl" style="min-width:400px;">
+						<div class="wrplInnerBox">
+						<a title="" href="#p=dimension&dim=discov"><h2>Discoverability</h2></a>
+						<div class="col-2">
+							<article class=" wrpl"  style="width:20%; height:100%;padding-bottom:0;"><svg id="discoDesc"/></article>
+							<article class=" wrpl"  style="width:80%; height:100%; padding-bottom:0;"><svg id="disco"/></article>
+						</div>
+						</div>
+					</article>
+					
+				</div>
+			</section>
+
+
+
+			<footer id="footer">
+				<div class="wrpl">
+					<dl>
+						<dt><img src="./images/SES_white_small.png"></dt>
+						<dd><strong>SPARQL Endpoints Status</strong></dd>
+						<!--dd><br><br><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" /></a></dd-->
+					</dl>
+				</div>
+				<div class="wrpl">
+					<br>
+					<div id="linkcat-6" class="bookmarks"><b>Documentation</b>
+						<ul class="xoxo blogroll">
+					<li><a href="https://github.com/pyvandenbussche/ends/wiki" title="About SPARQL Endpoints Status" target="_blank">About</a></li>
+					<li><a href="https://github.com/pyvandenbussche/ends/wiki" title="Download a standalone instance of the tool" target="_blank">Download</a></li>
+					<li><a href="https://github.com/pyvandenbussche/ends" title="Source in GitHub" target="_blank">Source code</a></li>
+
+						</ul>
+					</div>
+					<div id="linkcat-6" class="bookmarks"><b>Publication</b>
+						<ul class="xoxo blogroll">
+					<li><a href="#" title="Article in ISWC 2013 In Use track" target="_blank">ISWC 2013</a></li>
+
+						</ul>
+					</div>
+					
+				</div>
+				<div class="wrpl">
+						<a id="mt" href="http://okfn.org/" target="_blank"><div></div><span><p>Hosted by </p><p>the Open Knowledge Foundation</p></span></a>
+						
+				</div>
+			</footer>
+		</div>
+	</body> 
 </html> 

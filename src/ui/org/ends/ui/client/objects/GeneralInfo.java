@@ -5,6 +5,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 public class GeneralInfo implements IsSerializable {
 	private String title=null;
 	private String description=null;
+	private String lastUpdateDate=null;
 	private boolean isAuthenticated=false;
 	
 	public String getTitle() {
@@ -24,5 +25,11 @@ public class GeneralInfo implements IsSerializable {
 	}
 	public void setAuthenticated(boolean isAuthenticated) {
 		this.isAuthenticated = isAuthenticated;
+	}
+	public String getLastUpdateDate() {
+		return lastUpdateDate;
+	}
+	public void setLastUpdateDate(String lastUpdateDate) {
+		this.lastUpdateDate = lastUpdateDate;
 	}
 }

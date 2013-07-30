@@ -11,7 +11,6 @@ import org.ends.ui.client.service.EndsService;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.DockPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
@@ -24,20 +23,12 @@ import com.google.gwt.user.client.ui.Widget;
 public class Ends extends HistoryManager implements EntryPoint,ICom{
 	
 	private GeneralInfo generalInfo = null;
-	private DockPanel main;
 	SimplePanel content=new SimplePanel();
 	
 	public void onModuleLoad() {
 //		StyleInjector.inject(ResourceBundle.INSTANCE.stylesheet().getText());
 		System.out.println("onModuleLoad()");
-		main = new DockPanel();
-		main.setStyleName("cw-DockPanel");
-		main.setSpacing(4);
-		main.setHorizontalAlignment(DockPanel.ALIGN_CENTER);
-		main.setWidth("100%");
-		RootPanel.get("content").add(main);
-		main.add(content, DockPanel.CENTER);
-		main.setCellWidth(content, "100%");
+		RootPanel.get("posts").add(content);
 		
 		//load general information and load the screen
 		EndsService.Util.getInstance().loadGeneralInfo(
@@ -49,9 +40,9 @@ public class Ends extends HistoryManager implements EntryPoint,ICom{
 
 					public void onSuccess(GeneralInfo generalInfo) {
 						Ends.this.generalInfo=generalInfo;
-						HTML htmlTitle = new HTML(generalInfo.getTitle());
-						RootPanel.get("EndsTitle").add(htmlTitle);
-						getDescriptionPanel().add(new HTML(generalInfo.getDescription()));
+						changeInstanceLastUpdateDate(generalInfo.getLastUpdateDate());
+//						ChangeInstanceTitle(generalInfo.getTitle());
+//						ChangeInstanceDescription(generalInfo.getDescription());
 						
 						//initialize the History Manager and set a default page
 						initializeHistoryManager(PAGE_HOME);
@@ -62,7 +53,8 @@ public class Ends extends HistoryManager implements EntryPoint,ICom{
 	
 	/* Page Loading */
 	protected void displayHomePage(){
-		getDescriptionPanel().add(new HTML(generalInfo.getDescription()));
+		ChangeInstanceTitle(generalInfo.getTitle());
+		ChangeInstanceDescription(generalInfo.getDescription());
 		content.setWidget(new MainPage(this));
 	}
 	
@@ -83,9 +75,19 @@ public class Ends extends HistoryManager implements EntryPoint,ICom{
 	
 	/* Icom */
 	
-	public RootPanel getDescriptionPanel(){
-		RootPanel.get("EndsDescription").clear();
-		return RootPanel.get("EndsDescription");
+	public void ChangeInstanceTitle(String html){
+		RootPanel.get("instanceTitle").clear();
+		RootPanel.get("instanceTitle").add(new HTML(html));
+	}
+	public void ChangeInstanceDescription(String html){
+		RootPanel.get("instanceDescription").clear();
+		RootPanel.get("instanceDescription").add(new HTML(html));
+	}
+	public void changeInstanceLastUpdateDate(String date){
+		//TODO
+		RootPanel.get("instanceDate").clear();
+		RootPanel.get("instanceDate").add(new HTML("<time datetime='2010-09-06 22:22:38'>Last update: Monday 06 September 2010, 22:22</time>"));
+		
 	}
 	
 	
