@@ -19,10 +19,10 @@ public class MainPage  extends Grid{
 		this.setCellSpacing(0);
 		this.com=com;
 		
-		buildDiscoverability();
-		buildInteroperability();
-		buildPerformance();
-		buildAvailability();
+//		buildDiscoverability();
+//		buildInteroperability();
+//		buildPerformance();
+//		buildAvailability();
 	}
 	
 	private void buildDiscoverability(){

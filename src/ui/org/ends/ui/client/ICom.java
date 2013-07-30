@@ -12,5 +12,6 @@ public interface ICom {
 		
 		
 	//RootPanel
-		public RootPanel getDescriptionPanel();
+		public void ChangeInstanceDescription(String html);
+		public void ChangeInstanceTitle(String html);
 }
