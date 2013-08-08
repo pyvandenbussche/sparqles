@@ -23,12 +23,10 @@ import com.google.gwt.user.client.ui.Widget;
 public class Ends extends HistoryManager implements EntryPoint,ICom{
 	
 	private GeneralInfo generalInfo = null;
-	SimplePanel content=new SimplePanel();
 	
 	public void onModuleLoad() {
 //		StyleInjector.inject(ResourceBundle.INSTANCE.stylesheet().getText());
 		System.out.println("onModuleLoad()");
-		RootPanel.get("posts").add(content);
 		
 		//load general information and load the screen
 		EndsService.Util.getInstance().loadGeneralInfo(
@@ -53,20 +51,20 @@ public class Ends extends HistoryManager implements EntryPoint,ICom{
 	
 	/* Page Loading */
 	protected void displayHomePage(){
-		ChangeInstanceTitle(generalInfo.getTitle());
-		ChangeInstanceDescription(generalInfo.getDescription());
-		content.setWidget(new MainPage(this));
+		changeInstanceTitle(generalInfo.getTitle());
+		changeInstanceDescription(generalInfo.getDescription());
+		changePostsElement(new MainPage(this));
 	}
 	
 	protected void displayDimensionPage(String dimension){
 		if(dimension.equals(HistoryManager.DIMENSION_AVAILABILITY)){
-			content.setWidget(new AvailabilityPage(this));
+			new AvailabilityPage(this);
 		}else if(dimension.equals(HistoryManager.DIMENSION_INTEROPERABILITY)){
-			content.setWidget(new InteroperabilityPage(this));
+			new InteroperabilityPage(this);
 		}else if(dimension.equals(HistoryManager.DIMENSION_DISCOVERABILITY)){
-			content.setWidget(new DiscoverabilityPage(this));
+			new DiscoverabilityPage(this);
 		}else if(dimension.equals(HistoryManager.DIMENSION_PERFORMANCE)){
-			content.setWidget(new PerformancePage(this));
+			new PerformancePage(this);
 		}
 	}
 	
@@ -75,11 +73,18 @@ public class Ends extends HistoryManager implements EntryPoint,ICom{
 	
 	/* Icom */
 	
-	public void ChangeInstanceTitle(String html){
+	public RootPanel getPostsElement(){
+		return RootPanel.get("posts");
+	}
+	public void changePostsElement(Widget w){
+		RootPanel.get("posts").clear();
+		RootPanel.get("posts").add(w);
+	}
+	public void changeInstanceTitle(String html){
 		RootPanel.get("instanceTitle").clear();
 		RootPanel.get("instanceTitle").add(new HTML(html));
 	}
-	public void ChangeInstanceDescription(String html){
+	public void changeInstanceDescription(String html){
 		RootPanel.get("instanceDescription").clear();
 		RootPanel.get("instanceDescription").add(new HTML(html));
 	}

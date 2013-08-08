@@ -1,11 +1,12 @@
 // Module dependencies.
-
-
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
   , http = require('http')
   , path = require('path');
+ 
+var ConfigProvider = require('./configprovider').ConfigProvider;
+var ConfigProvider = new ConfigProvider();
 
 var app = express();
 
@@ -26,6 +27,7 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', function(req, res){
+		console.log(ConfigProvider.get('instanceTitle'));
         res.render('content/index.jade');
 });
 

@@ -12,7 +12,7 @@ public abstract class PageBuilder extends SimplePanel {
 		this.com=com;
 		
 		//update the description
-		this.com.ChangeInstanceTitle(mainTitle);
-		this.com.ChangeInstanceDescription(descriptionHTML);
+		this.com.changeInstanceTitle(mainTitle);
+		this.com.changeInstanceDescription(descriptionHTML);
 	}
 }

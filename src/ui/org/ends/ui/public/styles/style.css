@@ -219,6 +219,21 @@ figure figcaption a img {
 	height:300px;
 }
 
+.wrplInnerBox2{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	box-sizing: border-box;
+	box-shadow: inset  0px 0px 2px 0px rgb(255, 255, 255);
+	-o-box-shadow: inset  0px 0px 2px 0px rgb(255, 255, 255);
+	-moz-box-shadow: inset  0px 0px 2px 0px rgb(255, 255, 255);
+	-webkit-box-shadow: inset  0px 0px 2px 0px rgb(255, 255, 255);
+	background-color: #f3f3f3;
+	border: 1px solid #d0d7da;
+	padding:0.75em;
+	height:300px;
+}
+
 /* Selection colours (easy to forget) */
 
 ::selection 	 	{ background:rgb(216,216,216); }
@@ -247,6 +262,7 @@ body {
 	padding:3em 4em;
 }
 
+/*
 .home section article {
 	float: left;
 	margin-bottom:2em;
@@ -254,6 +270,7 @@ body {
 .home section h2 {
 	padding-top:1em;
 }
+*/
 
 
 .elements {
@@ -299,7 +316,7 @@ article > .navigation {
 }
 
 #posts article img {
-	width:100%;
+	/* width:100%; */
 	height:auto;
 }
 #posts > .wrpl {

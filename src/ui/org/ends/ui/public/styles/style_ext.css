@@ -66,6 +66,8 @@ all the rest of the style can be managed with http://lesscss.org
 * {
   font-family: 'Terminal Dosis', helvetica, arial, sans-serif;
 }
+.minWidth400 {min-width:400px;}
+
 /* DEFAULTS */
 a {
   text-decoration: none;

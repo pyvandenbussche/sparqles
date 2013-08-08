@@ -12,6 +12,7 @@ public interface ICom {
 		
 		
 	//RootPanel
-		public void ChangeInstanceDescription(String html);
-		public void ChangeInstanceTitle(String html);
+		public void changeInstanceDescription(String html);
+		public void changeInstanceTitle(String html);
+		public RootPanel getPostsElement();
 }
