@@ -47,8 +47,9 @@ public class LogHandler {
 	public static void run(Logger log, String task, String ep) {
 		log.info("[EXEC] [{}] {}", task,ep);
 	}
-	public static void success(Logger log, String task, String ep) {
-		log.info("[SUCC] [{}] {}", task,ep);
+	public static void success(Logger log, String task, String ep, Long time) {
+		Object []t = {task,ep, time};
+		log.info("[SUCC] [{}] {} in {} ms", t);
 	}
 	public static void error(Logger log, String task, String ep, Exception e) {
 		log.info("[ERROR] [{}] {}", task,ep);

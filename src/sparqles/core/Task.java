@@ -39,7 +39,8 @@ public abstract class Task<V extends SpecificRecordBase> implements Callable<V> 
 	
 	@Override
 	public V call(){
-		_epr.setStart(System.currentTimeMillis());
+		long start = System.currentTimeMillis()
+		_epr.setStart(start);
 		try{
 			sparqles.utils.LogHandler.run(log,this.getClass().getSimpleName(), _epr.getEndpoint().getUri().toString());
 			V v= process(_epr);
@@ -50,10 +51,13 @@ public abstract class Task<V extends SpecificRecordBase> implements Callable<V> 
 				log.warn("Could not store record to file");
 			}
 			sparqles.utils.LogHandler.success(log,this.getClass().getSimpleName(), _epr.getEndpoint().getUri().toString());
+			long end = System.currentTimeMillis();
+			_epr.setEnd(System.currentTimeMillis());
 			return v;
 		}catch(Exception e){
 			sparqles.utils.LogHandler.error(log,this.getClass().getSimpleName(), _epr.getEndpoint().getUri().toString(),e);
 		}
+		end = System.currentTimeMillis();
 		_epr.setEnd(System.currentTimeMillis());
 		return null;
 	}
