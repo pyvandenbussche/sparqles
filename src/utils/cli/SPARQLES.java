@@ -3,21 +3,14 @@ package utils.cli;
 import java.io.File;
 import java.sql.Date;
 
-import javax.swing.DefaultButtonModel;
-
-
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Options;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.hp.hpl.jena.util.FileManager;
-
 import schedule.Scheduler;
 import utils.DatahubAccess;
 import utils.DateFormater;
-
-import core.DBManager;
 import core.ENDSProperties;
 import core.EndpointManager;
 
@@ -92,7 +85,7 @@ public class SPARQLES extends CLIObject{
 				long start = System.currentTimeMillis();
 				while (true) {
 					log.info("Running since {}", DateFormater.getDataAsString(DateFormater.ISO8601, new Date(start)));
-					Thread.sleep (1800000);
+					Thread.sleep (3600000);
 				}
 			}catch (Throwable t) {
 				t.printStackTrace();

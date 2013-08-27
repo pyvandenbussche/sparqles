@@ -1,7 +1,5 @@
 package schedule;
 
-import java.net.URISyntaxException;
-import java.text.ParseException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +15,6 @@ import org.slf4j.LoggerFactory;
 import schedule.iter.CronBasedIterator;
 import schedule.iter.ScheduleIterator;
 import utils.LogHandler;
-
 import core.DBManager;
 import core.ENDSProperties;
 import core.Endpoint;
@@ -30,18 +27,24 @@ public class Scheduler {
 	
 	private static final Logger log = LoggerFactory.getLogger(Scheduler.class);
 	
-	private final static String CRON_EVERY_HOUR_AT_ONE="0 0 0/1 1/1 * ? *";
+	private final static String CRON_EVERY_HOUR="0 0 0/1 1/1 * ? *";
+	private final static String CRON_EVERY_ONETEN="0 30 1/12 1/1 * ? *";
+	private final static String CRON_EVERY_DAY_AT_715="0 15 7 1/1 * ? *";
+	private final static String CRON_EVERY_WED_THU_AT_410="0 10 4 ? * WED,THU *";
+	
 	private final static String CRON_EVERY_SUN_AT_310="0 10 3 ? * SUN *";
 	private final static String CRON_FIRST_SAT_AT_MONTH_AT_TWO="0 0 2 ? 1/1 SAT#1 *";
 	private final static String CRON_EVERY_FIVE_MINUTES="0 0/5 * 1/1 * ? *";
 	
 	private final static Map<String,String> taskSchedule = new HashMap<String,String>();
 	static{
-//		taskSchedule.put("ATask", CRON_EVERY_HOUR_AT_ONE);
-		taskSchedule.put("ATask", CRON_EVERY_FIVE_MINUTES);
+		taskSchedule.put("ATask", CRON_EVERY_HOUR);
+//		taskSchedule.put("PTask", CRON_EVERY_SUN_AT_310);
+//		taskSchedule.put("FTask", CRON_FIRST_SAT_AT_MONTH_AT_TWO);
 		
-		taskSchedule.put("PTask", CRON_EVERY_SUN_AT_310);
-		taskSchedule.put("FTask", CRON_FIRST_SAT_AT_MONTH_AT_TWO);
+		taskSchedule.put("PTask", CRON_EVERY_ONETEN);
+		taskSchedule.put("FTask", CRON_EVERY_DAY_AT_715);
+		taskSchedule.put("DTask", CRON_EVERY_WED_THU_AT_410);
 	}
 	
 	private final ScheduledExecutorService SERVICE;

@@ -14,12 +14,10 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import utils.cli.CLIObject;
-import utils.cli.SPARQLES;
 
 /**
  * This Main class parses all available classes in the JVM for command line objects having the specific PACKAGE_PREFIX.
