@@ -34,6 +34,5 @@
         	]}
     	},
     	{"name": "VoidStoreResult", "type": "core.discovery.VoidResult"}
-    	
  	]
 }

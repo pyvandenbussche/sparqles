@@ -47,18 +47,23 @@ public class FileManager {
 	private static final Logger log = LoggerFactory.getLogger(FileManager.class);
 	private HashMap<String, Map<String, File>> eptask;
 
-	private final File rootFolder = new File(ENDSProperties.DATA_DIR);
-	private final File avroFolder = new File(rootFolder, "avro");
-	private final File resultsFolder = new File(rootFolder, "results");
+	
+	private final File rootFolder;
+	private final File avroFolder;
+	private final File resultsFolder;
 
-	private final static FileManager fm = new FileManager();
 	
-	public static FileManager getInstance(){
-		return fm;
-	}
-	
-	private FileManager() {
+	public FileManager() {
+		String folder = ENDSProperties.getDATA_DIR();
+		if(folder.startsWith("file:")){
+			folder = folder.replace("file:","");
+		}
+		rootFolder = new File(folder);
+		avroFolder = new File(rootFolder, "avro");
+		resultsFolder = new File(rootFolder, "results");
+		
 		init();
+		
 	}
 
 
@@ -68,6 +73,8 @@ public class FileManager {
 		if(!rootFolder.exists()) rootFolder.mkdirs();
 		if(!avroFolder.exists()) avroFolder.mkdirs();
 		if(!resultsFolder.exists()) resultsFolder.mkdirs();
+		
+		
 		if(rootFolder.isFile()){ log.warn("The specified folder {} is not a directory", rootFolder);
 			return;
 		}

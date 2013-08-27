@@ -3,10 +3,11 @@ package core.discovery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import utils.LogHandler;
+
 import core.Endpoint;
 import core.EndpointResult;
 import core.Task;
-import core.performance.PTask;
 
 /**
  * DTaskGET: This task inspects the header and content after a HTTP GET on the endpoint URI. 
@@ -30,13 +31,11 @@ public class DTask extends Task<DResult> {
 		DResult result = new DResult();
 		result.setEndpointResult(epr);
 		
-		log.debug("[RUN] {}", epr.getEndpoint().getUri().toString());
+		LogHandler.run(log, "{}",epr.getEndpoint().getUri().toString());
 		
 		int failures=0;
 		GetResult res = SpecificDTask.newGetRun(epr.getEndpoint()).execute();
 		result.setGetResult(res);
-		
-	
 		
 		VoidResult vsres= SpecificDTask.newVoidStoreRun(epr.getEndpoint()).execute();
 		result.setVoidStoreResult(vsres);
@@ -50,10 +49,10 @@ public class DTask extends Task<DResult> {
 		if(vsres.getException()!=null)failures++;
 		
 		if(failures==0)
-			log.info("[SUCCESS] [SELECT] {}", epr.getEndpoint());
+			LogHandler.debugSuccess(log, "{}", epr.getEndpoint());
 		else{
-			Object [] s = { epr.getEndpoint().getUri().toString(), failures, 3}; 
-			log.error("[RUN] {}: {}/{} failures",s);
+			Object [] s = { epr.getEndpoint().getUri().toString(), failures, 3};
+			LogHandler.debugERROR(log, "{}: {}/{}", epr.getEndpoint().getUri().toString(), failures, 3);
 		}
 		return result;
 	}

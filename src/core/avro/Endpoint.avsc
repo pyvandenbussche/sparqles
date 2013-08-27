@@ -3,6 +3,10 @@
  "type": "record",
  "name": "Endpoint",
  "fields": [
-    {"name": "uri", "type": "string" }
+    {"name": "uri", "type": "string" },
+    {"name": "name", "type": "string" },
+    {"name": "dataset", "type": "string" },
+    {"name": "username", "type": "string" },
+    {"name": "password", "type": "string" }
  ]
 }

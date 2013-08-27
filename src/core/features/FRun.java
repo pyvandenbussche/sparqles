@@ -1,16 +1,15 @@
 package core.features;
 
-import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.util.Date;
 import java.util.Iterator;
-import java.util.Scanner;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
+import utils.LogHandler;
 import utils.QueryManager;
 
 import com.hp.hpl.jena.graph.Triple;
@@ -21,7 +20,7 @@ import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.sparql.util.FmtUtils;
 
-
+import core.ENDSProperties;
 import core.Endpoint;
 import core.FileManager;
 import core.performance.Run;
@@ -39,6 +38,8 @@ public class FRun {
 	private Endpoint _ep;
 
 	private Long _start;
+
+	private FileManager _fm;
 		
 	public FRun(Endpoint ep, String queryFile ) {
 		this(ep, queryFile, System.currentTimeMillis());
@@ -48,25 +49,10 @@ public class FRun {
 	public FRun(Endpoint ep, String queryFile, Long start) {
 		_queryFile = queryFile;
 		
-		_query = getQuery(_queryFile);
+		_query = QueryManager.getQuery(ENDSProperties.getFTASK_QUERIES(),queryFile);
 		_ep = ep;
 		_start =start;
 	}
-
-
-	private String getQuery(String qFile) {
-		String content;
-		try {
-			content = new Scanner(new File("WebContent/WEB-INF/resources/ftask/"+qFile)).useDelimiter("\\Z").next();
-			log.debug("Parsed from {} query {}", qFile, content);
-			return content;
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		return "";
-		
-	}
-
 
 	public FSingleResult execute() {
 		FSingleResult result = new FSingleResult();
@@ -74,8 +60,8 @@ public class FRun {
 		result.setQuery(_query);
     	
 		 // we need to run a test alwasy two times
-		log.info("Execute {} over {}",_queryFile, _ep.getUri());
-        result.setRun(run());
+		LogHandler.run(log, "{} over {}",_queryFile, _ep.getUri());
+		result.setRun(run());
         
         return result;
 	}
@@ -100,20 +86,21 @@ public class FRun {
             
             qexec.setTimeout(FIRST_RESULT_TIMEOUT, FIRST_RESULT_TIMEOUT);
             cnxion = System.currentTimeMillis();
-
+            LogHandler.run(log, " {} over {}", _ep.getUri(),_queryFile);
             if (q.isSelectType())
             {
-            	log.debug("Executing {} against {}", _queryFile, _ep.getUri());
-                ResultSet results = qexec.execSelect();
-                
-                sols = FileManager.getInstance().writeSPARQLResults(results, _queryFile, _ep, _start);
+            	
+            	ResultSet results = qexec.execSelect();
+                if(_fm!=null)
+                	sols = _fm.writeSPARQLResults(results, _queryFile, _ep, _start);
+                else{
+                	sols = skipSPARQLResults(results, _queryFile, _ep, _start);
+                }
                 
             }
             else if (q.isAskType())
             {
-            	log.debug("Executing {} against {}", _queryFile, _ep.getUri());
-                boolean result = qexec.execAsk();
-//                out.println(result);
+            	boolean result = qexec.execAsk();
                 if (result)
                     sols = 1;
                 else
@@ -121,28 +108,23 @@ public class FRun {
             }
             else if (q.isDescribeType())
             {
-            	log.debug("Executing {} against {}", _queryFile, _ep.getUri());
                 Iterator<Triple> triples = qexec.execDescribeTriples();
                 
-                sols = FileManager.getInstance().writeSPARQLResults(triples, _queryFile, _ep, _start);
-//                while (triples.hasNext())
-//                {
-////                    out.println(triples.next());
-//                    sols++;
-//                }
+                if(_fm!=null)
+                	sols = _fm.writeSPARQLResults(triples, _queryFile, _ep, _start);
+                else{
+                	sols = skipSPARQLResults(triples, _queryFile, _ep, _start);
+                }
+
             }
             else if (q.isConstructType())
             {
-            	log.debug("Executing {} against {}", _queryFile, _ep.getUri());
-                Iterator<Triple> triples = qexec.execConstructTriples();
-                sols = FileManager.getInstance().writeSPARQLResults(triples, _queryFile, _ep, _start);
-                
-//                while (triples.hasNext())
-//                {
-//                	log.debug(arg0)
-//                    out.println(triples.next());
-//                    sols++;
-//                }
+            	Iterator<Triple> triples = qexec.execConstructTriples();
+                if(_fm!=null)
+                	sols = _fm.writeSPARQLResults(triples, _queryFile, _ep, _start);
+                else{
+                	sols = skipSPARQLResults(triples, _queryFile, _ep, _start);
+                }
             }
             else
             {
@@ -174,12 +156,9 @@ public class FRun {
                     + Utils.removeNewlines(e.getMessage()));
             
 //            return false;
-            
-            StringWriter sw = new StringWriter();
-            PrintWriter pw = new PrintWriter(sw);
-            e.printStackTrace(pw);
-            
-            r.setException(sw.toString());
+            LogHandler.warn(log, "", e);
+      
+            r.setException(LogHandler.toString(e));
         }
         
         return r;
@@ -205,19 +184,34 @@ public class FRun {
         return sb.toString();
     }
 
-//    /**
-//     * Close the output file
-//     * 
-//     * @throws IOException
-//     */
-//    public void close() throws IOException
-//    {
-//        out.close();
-//    }
-//
-//    public Exception getQueryException()
-//    {
-//        return query_exc;
-//    }
 
+	public void setFileManager(FileManager fm) {
+		_fm = fm;
+		
+	}
+	
+	public int skipSPARQLResults(Iterator<Triple> triples,
+			String queryFile, Endpoint ep, Long start) {
+		
+			int sols=0;
+			while (triples.hasNext())
+	        {
+				triples.next();
+	            sols++;
+	        }
+			return sols;
+	}
+	public int skipSPARQLResults(ResultSet results, String queryFile,
+			Endpoint ep, Long start) {
+		
+			int sols=0;
+			while (results.hasNext())
+	        {
+	            QuerySolution qs = results.nextSolution();
+	            toString(qs, sols == 0);
+	            sols++;
+	        }
+			
+			return sols;
+	}
 }

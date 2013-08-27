@@ -2,6 +2,7 @@ package utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class DateFormater {
@@ -12,6 +13,10 @@ public class DateFormater {
 	static final Calendar CAL = GregorianCalendar.getInstance();
 	
 	public static String getDataAsString(String pattern){
-		return new SimpleDateFormat(pattern).format(CAL.getTime());
+		return getDataAsString(pattern, CAL.getTime());
+	}
+	
+	public static String getDataAsString(String pattern, Date date){
+		return new SimpleDateFormat(pattern).format(date);
 	}
 }

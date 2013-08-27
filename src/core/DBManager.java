@@ -38,24 +38,22 @@ public class DBManager {
 	public static final String CREATE_RESULT="CREATE TABLE IF NOT EXISTS results (Endpoint VARCHAR(256), Task VARCHAR(256), Result BLOB, Date TIMESTAMP,  UNIQUE(Endpoint, Date));";
 	
 	private Connection con;
-	private static DBManager inst = new DBManager();
+	private DBManager inst;
 	
-	public static DBManager getInstance(){
-		return inst;
-	}
-	private DBManager()  {
+	
+	public DBManager()  {
 		setup();
 	}
 	 
 	private void setup()  {
 		try {
-			Class.forName(ENDSProperties.DB_DRIVER);
-			con = DriverManager.getConnection(ENDSProperties.DB_URL);
+			Class.forName(ENDSProperties.getDB_DRIVER());
+			con = DriverManager.getConnection(ENDSProperties.getDB_URL());
 			con.createStatement().execute(CREATE_RESULT);
 		} catch (ClassNotFoundException e) {
-			log.error("[INIT] Cannot load the database driver {}",ENDSProperties.DB_DRIVER,e);
+			log.error("[INIT] Cannot load the database driver {}",ENDSProperties.getDB_DRIVER(),e);
 		} catch (SQLException e) {
-			log.error("[INIT] Cannot load the database driver {}",ENDSProperties.DB_DRIVER,e);
+			log.error("[INIT] Cannot load the database driver {}",ENDSProperties.getDB_DRIVER(),e);
 		} 
 	}
 	
@@ -119,8 +117,16 @@ public class DBManager {
 		return true;
 	}
 	
-	public void close() throws SQLException{
-		con.close();
+	public boolean close(){
+		
+		try {
+			con.close();
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 	
 	public void debug(){

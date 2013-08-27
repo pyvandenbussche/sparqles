@@ -9,6 +9,8 @@ import java.util.Scanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
+import utils.LogHandler;
 import utils.QueryManager;
 
 import com.hp.hpl.jena.graph.Triple;
@@ -20,6 +22,7 @@ import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.sparql.util.FmtUtils;
 
+import core.ENDSProperties;
 import core.Endpoint;
 
 public class PRun {
@@ -37,23 +40,23 @@ public class PRun {
 	public PRun(Endpoint ep, Object object, String queryFile) {
 		_queryFile = queryFile;
 		
-		_query = getQuery(_queryFile);
+		_query = QueryManager.getQuery(ENDSProperties.getPTASK_QUERIES(),queryFile);
 		_ep = ep;
 	}
 
 
-	private String getQuery(String qFile) {
-		String content;
-		try {
-			content = new Scanner(new File("WebContent/WEB-INF/resources/ptask/"+qFile)).useDelimiter("\\Z").next();
-			log.debug("Parsed from {} query {}", qFile, content);
-			return content;
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		return "";
-		
-	}
+//	private String getQuery(String qFile) {
+//		String content;
+//		try {
+//			content = new Scanner(new File("WebContent/WEB-INF/resources/ptask/"+qFile)).useDelimiter("\\Z").next();
+//			log.debug("Parsed from {} query {}", qFile, content);
+//			return content;
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		}
+//		return "";
+//		
+//	}
 
 
 	public PSingleResult execute() {
@@ -62,18 +65,17 @@ public class PRun {
 		result.setQuery(_query);
     	
 		 // we need to run a test alwasy two times
-		log.info("Execute(cold) {} over {}",_queryFile, _ep.getUri());
+		LogHandler.run(log, " [COLD] {} over {}", _ep.getUri(),_queryFile);
         result.setCold(run());
         
         try {
-			Thread.sleep(5000);
+			Thread.sleep(ENDSProperties.getPTASK_WAITTIME());
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-        log.info("Execute(warm) {} over {}",_queryFile, _ep.getUri());
+        LogHandler.run(log, " [WARM] {} over {}", _ep.getUri(),_queryFile);
         result.setWarm(run());
 		
-        
         return result;
 	}
 
@@ -156,6 +158,9 @@ public class PRun {
         }
         catch (Exception e)
         {
+        	LogHandler.warn(log, "", e);
+//        	log.error("[RUN] {}: {}", _ep.getUri().toString(), e.getClass().getSimpleName()+" "+e.getMessage());
+        	r.setException(LogHandler.toString(e));
 //        	res.recordError(e);
 //            query_exc = e;
             System.out.println(_ep.getUri() + "\t" + sols

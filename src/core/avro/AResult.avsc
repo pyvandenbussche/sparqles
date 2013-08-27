@@ -8,9 +8,5 @@
      {"name": "isPrivate", "type": "boolean"},
      {"name": "Exception", "type": ["string", "null"] },
      {"name": "explaination", "type": "string"}
-     
- ]
+  ]
 }
-
-
-

@@ -7,6 +7,8 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import utils.LogHandler;
+
 import core.ENDSProperties;
 import core.Endpoint;
 import core.EndpointResult;
@@ -27,21 +29,22 @@ public class PTask extends Task<PResult>{
     public PTask(Endpoint ep, SpecificPTask ... tasks) {
 		super(ep);
 		_tasks = tasks;
-		Object [] s = {ep.getUri().toString(), tasks.length, ENDSProperties.PTASK_WAITTIME};
-		log.debug("Init for {} with {} tasks and a waittime of {} ms", s);
+		Object [] s = {ep.getUri().toString(), tasks.length, ENDSProperties.getPTASK_WAITTIME()};
+		LogHandler.init(log,"{} with {} tasks and a waittime of {} ms", s);
     }
 
     @Override
 	public PResult process(EndpointResult epr) {
     	PResult res = new PResult();
 		res.setEndpointResult(epr);
+    	LogHandler.run(log, "{}",epr.getEndpoint().getUri().toString());
+		
     	
-		log.debug("[RUN] {}", epr.getEndpoint().getUri().toString());
-		Map<CharSequence, PSingleResult> results = new HashMap<CharSequence, PSingleResult>(_tasks.length);
+    	Map<CharSequence, PSingleResult> results = new HashMap<CharSequence, PSingleResult>(_tasks.length);
 		
 		int failures=0;
 		for(SpecificPTask sp: _tasks){
-			log.debug("[RUN] {} [{}]", epr.getEndpoint(), sp.name());
+			LogHandler.run(log, "{} {}",epr.getEndpoint().getUri().toString(),sp.name());
 			PRun run = sp.get(epr.getEndpoint());
 			
 			PSingleResult pres = run.execute();
@@ -52,17 +55,16 @@ public class PTask extends Task<PResult>{
 				failures++;
 			}
 			try {
-				Thread.sleep(ENDSProperties.PTASK_WAITTIME);
+				Thread.sleep(ENDSProperties.getPTASK_WAITTIME());
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
 		res.setResults(results);
 		if(failures==0)
-			log.info("[SUCCESS] [SELECT] {}", epr.getEndpoint());
+			LogHandler.debugSuccess(log, "{}", epr.getEndpoint());
 		else{
-			Object [] s = { epr.getEndpoint().getUri().toString(), failures, _tasks.length}; 
-			log.error("[RUN] {}: {}/{} failures",s);
+			LogHandler.debugERROR(log, "{}: {}/{}",  epr.getEndpoint().getUri().toString(), failures, _tasks.length);
 		}
 		return res;
     }
