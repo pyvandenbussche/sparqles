@@ -8,6 +8,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import core.availability.AResult;
+import core.availability.ATask;
+import core.discovery.DResult;
+import core.discovery.DTask;
 import core.features.FResult;
 import core.features.FTask;
 import core.features.SpecificFTask;
@@ -44,12 +48,18 @@ public class TaskTester {
 
 
 
-		PTask task = new PTask(ep, SpecificPTask.ASKO,SpecificPTask.ASKPO);
-
-		runTask(ep,task, true, true, PResult.class );
+//		PTask task = new PTask(ep, SpecificPTask.ASKO,SpecificPTask.ASKPO);
+//		runTask(ep,task, true, true, PResult.class );
+//		
+//		FTask ftask = new FTask(ep, SpecificFTask.SPARQL11_CON,SpecificFTask.SPARQL1_ASK);
+//		runTask(ep,ftask, true, true, FResult.class );
+//		
+//		ATask atask = new ATask(ep);
+//		runTask(ep,atask, true, true, AResult.class );
+//		
+		DTask dtask = new DTask(ep);
+		runTask(ep, dtask, true, true, DResult.class );
 		
-		FTask ftask = new FTask(ep, SpecificFTask.SPARQL11_CON,SpecificFTask.SPARQL1_ASK);
-		runTask(ep,ftask, true, true, FResult.class );
 		
 	}
 
