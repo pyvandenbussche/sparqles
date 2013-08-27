@@ -19,4 +19,4 @@
 # Perform the ATask every day at 12 on the dbpedia endpoint
 # 0 0 12 1/1 * ? * http://dbpedia.org/sparql ATask 
 
-0 0 12 1/1 * ? * http://dbpedia.org/sparql ATask 
+0 0 12 1/1 * ? * http://dbpedia.org/sparql ATask (SPARQL1ASK, ... )
