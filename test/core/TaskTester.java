@@ -8,16 +8,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import core.availability.AResult;
-import core.availability.ATask;
-import core.discovery.DResult;
-import core.discovery.DTask;
-import core.features.FResult;
-import core.features.FTask;
-import core.features.SpecificFTask;
-import core.performance.PResult;
-import core.performance.PTask;
-import core.performance.SpecificPTask;
+import sparqles.core.*;
 
 public class TaskTester {
 

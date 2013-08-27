@@ -2,7 +2,7 @@ package core;
 
 import org.junit.Test;
 
-import utils.DatahubAccess;
+import sparqles.utils.DatahubAccess;
 
 public class DatahubAccessTEST {
 

@@ -6,9 +6,11 @@ import org.junit.Test;
 
 import com.hp.hpl.jena.util.FileManager;
 
-import core.DBManager;
-import core.Endpoint;
 import core.Endpoints;
+
+import sparqles.core.*;
+import sparqles.core.availability.AResult;
+import sparqles.core.availability.ATask;
 
 public class ATaskTEST {
 
@@ -19,7 +21,7 @@ public class ATaskTEST {
 		
 		
 		DBManager db = new DBManager();
-		core.FileManager fm = new core.FileManager();
+		sparqles.core.FileManager fm = new sparqles.core.FileManager();
 		
 		ATask task = new ATask(ep);
 		task.setDBManager(db);

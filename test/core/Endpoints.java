@@ -2,6 +2,9 @@ package core;
 
 import java.net.URI;
 
+import sparqles.core.Endpoint;
+import sparqles.core.EndpointFactory;
+
 public class Endpoints {
 
 

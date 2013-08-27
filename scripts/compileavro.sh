@@ -3,7 +3,7 @@
 
 LIB=WebContent/WEB-INF/lib
 AVRO_JAR=avro-tools-1.7.4.jar
-AVRO_DIR=src/core/avro
+AVRO_DIR=src/sparqles/core/avro
 
 EP=$AVRO_DIR/Endpoint.avsc
 EPR=$AVRO_DIR/EndpointResult.avsc

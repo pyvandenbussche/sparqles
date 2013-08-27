@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="iso-8859-1"?> 
-<project name="ENDS">
+<project name="ENDS" default="compile">
 	<description>The SPARQL endpoint status project</description> 
 	
 	<!-- properties -->
@@ -8,11 +8,12 @@
 	<property name="build.dir" value="build"/>
 	<property name="dist.dir" value="dist"/>
 	<property name="WEBINF.dir" value="WebContent/WEB-INF"/>
+	<property name="resource.dir" value="${WEBINF.dir}/resources"/>
 	<property name="lib.dir" value="${WEBINF.dir}/lib"/>
 	
 	<property name="version" value="0.1"/>
 	
-	<property name="project.name" value="ends"/>
+	<property name="project.name" value="sparqles"/>
 	<property name="project.core.name" value="${project.name}-core"/>
 	
 	 <!-- project classpath -->
@@ -29,9 +30,17 @@
 		<delete dir="${dist.dir}"/> 
 	</target> 
 
-	<target name="compile" depends="clean" description="Compile the core package">
+	<target name="prepare" description="Copy all necessary resource files" depends="clean"> 
 		<tstamp />
 		<mkdir dir="${build.dir}"/>
+		<copy todir="${build.dir}">
+			<fileset dir="${resource.dir}" includes="**"/> 
+		</copy>
+		</target> 
+	
+	<target name="compile" depends="prepare" description="Compile the core package">
+		<tstamp />
+		
 	    <javac 
 			srcdir="${src.dir}" 
 			destdir="${build.dir}"
@@ -45,7 +54,11 @@
 	<target name="jar" description="JARs the Task" depends="compile">
 		<tstamp />
 		<delete file="${project.core.name}-${version}.jar"></delete>
-		<jar destfile="${project.core.name}-${version}.jar" basedir="${build.dir}"/>
+		<jar destfile="${project.core.name}-${version}.jar" basedir="${build.dir}">
+			<manifest>
+				<attribute name="Main-Class" value="sparqles.core.Main"/>
+			</manifest>
+		</jar>
 	</target>
 
 </project>

@@ -23,10 +23,10 @@ import org.apache.avro.util.Utf8;
 import org.junit.Before;
 import org.junit.Test;
 
-import utils.AvroUtils;
-import utils.DateFormater;
+import sparqles.utils.AvroUtils;
+import sparqles.utils.DateFormater;
 
-import core.Endpoint;
+import sparqles.core.Endpoint;
 
 public class AvroTESTS {
 
