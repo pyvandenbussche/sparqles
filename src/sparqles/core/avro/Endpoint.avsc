@@ -1,0 +1,8 @@
+{
+"namespace": "sparqles.core",
+ "type": "record",
+ "name": "Endpoint",
+ "fields": [
+    {"name": "uri", "type": "string" }
+ ]
+}

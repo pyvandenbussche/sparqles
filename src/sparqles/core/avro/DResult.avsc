@@ -1,0 +1,38 @@
+{
+	"namespace": "sparqles.core.discovery",
+ 	"type": "record",
+ 	"name": "DResult",
+ 	"fields": [
+    	{"name": "endpointResult", "type": "sparqles.core.EndpointResult"},
+    	{"name": "GetResult", "type": {
+    		"type": "record",
+    		"name": "GetResult",
+      		
+        	"fields" : [
+        		{"name": "ResponseType", "type": "string" },
+        		{"name": "ResponseCode", "type": "string" },
+        		{"name": "ResponseServer", "type": "string" },
+        		{"name": "ResponseLink", "type": "string" },
+        		{"name": "SPARQLDESCterms", "type": "long" },
+        		{"name": "Exception", "type": ["string", "null"] },
+    			{"name": "VOIDterms", "type": "long" },
+      			{"name":"SPARQLDESCpreds",
+      			"type":{"type":"map","values":["string","long"]}
+		      	},
+       			{"name":"voiDpreds",
+      			"type":{"type":"map","values":["string","long"]}
+      			}
+        	]}
+    	},
+    	{"name": "VoidResult", "type": {
+    		"type": "record",
+    		"name": "VoidResult",
+    		"namespace":"sparqles.core.discovery",
+      		"fields" : [
+        		{"name": "voidFile", "type": {"type": "array", "items": "string"} },
+        		{"name": "Exception", "type": ["string", "null"] }
+        	]}
+    	},
+    	{"name": "VoidStoreResult", "type": "sparqles.core.discovery.VoidResult"}
+ 	]
+}
