@@ -84,8 +84,8 @@ public class SPARQLES extends CLIObject{
 			try {
 				long start = System.currentTimeMillis();
 				while (true) {
-					log.info("Running since {}", DateFormater.getDataAsString(DateFormater.ISO8601, new Date(start)));
-					Thread.sleep (3600000);
+					log.info("Running since {}", DateFormater.formatInterval(System.currentTimeMillis()-start));
+					Thread.sleep (1800000);
 				}
 			}catch (Throwable t) {
 				t.printStackTrace();
