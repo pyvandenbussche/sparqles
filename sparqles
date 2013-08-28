@@ -20,10 +20,13 @@ OTHER=$OTHER:$LIB/json-lib-2.4-jdk15.jar
 OTHER=$OTHER:$LIB/commons-cli-1.2.jar
 OTHER=$OTHER:$LIB/slf4j-log4j12-1.6.4.jar
 OTHER=$OTHER:$LIB/log4j-1.2.16.jar
+OTHER=$OTHER:$LIB/commons-logging-1.1.1.jar 
+
 
 SESAME=$(JARS=("$LIB"/sesame*.jar); IFS=:; echo "${JARS[*]}")
 JACKSON=$(JARS=("$LIB"/jackson*.jar); IFS=:; echo "${JARS[*]}")
 JENA=$(JARS=("$LIB"/jena*.jar); IFS=:; echo "${JARS[*]}")
 
-
-java -Xmx2G -cp $OTHER:$SESAME:$JACKSON:$JENA:JAR sparqles.core.Main $*
+CP=$OTHER:$SESAME:$JACKSON:$JENA:$JAR
+echo $CP
+java -Xmx2G -cp $CP sparqles.core.Main SPARQLES $*
