@@ -5,7 +5,7 @@ block content
           header.wrpl.w-3-4
             h1
               | SPARQL Endpoints Status !{configInstanceTitle}
-            time(datetime='2010-09-06 22:22:38') Last update: #{lastUpdate}
+            time Last update: #{lastUpdate}
             details
               summary Description:
               p Public SPARQL endpoints list is fetch dynamically using CKAN SPARQL Endpoint.
@@ -18,7 +18,7 @@ block content
         .col-2.clear
           article.wrpl(style='min-width: 400px;')
             .wrplInnerBox(style='height: 380px;')
-              a(title='', href='availability.htm')
+              a(title='', href='./availability')
                 h2 Availability
               .bx-viewport(style='width: 100%; overflow: hidden; position: relative;')
                 ul.bxslider(style='width: auto; position: relative; height: 310px;')
@@ -28,17 +28,17 @@ block content
                     svg#discoDesc
           article.wrpl(style='min-width: 400px;')
             .wrplInnerBox(style='height: 300px;')
-              a(title='', href='#')
+              a(title='', href='./performance')
                 h2 Performance
               svg#perf
           article.wrpl(style='min-width: 400px;')
             .wrplInnerBox(style='height: 300px;')
-              a(title='', href='#')
+              a(title='', href='./interoperability')
                 h2 Interoperability
               svg#interop
           article.wrpl(style='min-width: 400px;')
             .wrplInnerBox(style='height: 300px;')
-              a(title='', href='#')
+              a(title='', href='./discoverability')
                 h2 Discoverability
               .col-2
                 article.wrpl(style='width: 20%; height: 100%; padding-bottom: 0;')

@@ -1,0 +1,36 @@
+{
+	"nbEndpointsUp": 201,
+	"nbEndpointsTotal": 413,
+	"endpoints": [
+		{
+			"uri": "http://www.rdfabout.com/sparql",
+			"datasets":[
+				{
+					"uri": "http://thedatahub.org/dataset/2000-us-census-rdf",
+					"label": "2000 U.S Census in RDF (rdfabout.com)"
+				},
+				{
+					"uri": "http://thedatahub.org/dataset/2000-us-census-rdf2",
+					"label": "2000 U.S Census in RDF (rdfabout.com) 2"
+				}
+			],
+			"upNow":false,
+			"uptimeLast24h":0,
+			"uptimeLast7d":0
+			
+			
+		},
+		{
+			"uri": "http://biolit.rkbexplorer.com/sparql",
+			"datasets":[
+				{
+					"uri": "http://biolit.rkbexplorer.com/sparql",
+					"label": "A Short Biographical Dictionary of English Literature (RKBExplorer)"
+				}
+			]
+			"upNow":true,
+			"uptimeLast24h":1,
+			"uptimeLast7d":0.958645
+		}
+	]
+}
