@@ -61,7 +61,7 @@ public abstract class CLIObject {
 
 	abstract protected void execute(CommandLine cmd);
 
-	protected CommandLine verifyArgs(String[] args) {
+	public CommandLine verifyArgs(String[] args) {
 		init();
 
 		CommandLineParser parser = new GnuParser();

@@ -7,6 +7,9 @@ import org.apache.avro.specific.SpecificRecordBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import sparqles.utils.DBManager;
+import sparqles.utils.FileManager;
+
 /**
  * 
  * Abstract Task class

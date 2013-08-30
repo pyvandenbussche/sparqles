@@ -11,6 +11,8 @@ import sparqles.core.features.FTask;
 import sparqles.core.features.SpecificFTask;
 import sparqles.core.performance.PTask;
 import sparqles.core.performance.SpecificPTask;
+import sparqles.utils.DBManager;
+import sparqles.utils.FileManager;
 
 public class TaskFactory {
 	private static final Logger log = LoggerFactory.getLogger(TaskFactory.class);

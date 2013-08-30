@@ -14,12 +14,12 @@ import org.slf4j.LoggerFactory;
 
 import sparqles.schedule.iter.CronBasedIterator;
 import sparqles.schedule.iter.ScheduleIterator;
+import sparqles.utils.DBManager;
+import sparqles.utils.FileManager;
 import sparqles.utils.LogHandler;
-import sparqles.core.DBManager;
 import sparqles.core.ENDSProperties;
 import sparqles.core.Endpoint;
 import sparqles.core.EndpointManager;
-import sparqles.core.FileManager;
 import sparqles.core.Task;
 import sparqles.core.TaskFactory;
 

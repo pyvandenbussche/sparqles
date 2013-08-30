@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
+import sparqles.utils.FileManager;
 import sparqles.utils.LogHandler;
 import sparqles.utils.QueryManager;
 
@@ -22,7 +23,6 @@ import com.hp.hpl.jena.sparql.util.FmtUtils;
 
 import sparqles.core.ENDSProperties;
 import sparqles.core.Endpoint;
-import sparqles.core.FileManager;
 import sparqles.core.performance.Run;
 
 public class FRun {

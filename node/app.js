@@ -28,7 +28,10 @@ if ('development' == app.get('env')) {
 
 app.get('/', function(req, res){
 		console.log(ConfigProvider.get('instanceTitle'));
-        res.render('content/index.jade');
+        res.render('content/index.jade',{
+            configInstanceTitle: '- for <a href="http://datahub.io/" target="_blank">Datahub.io</a>',
+            lastUpdate: 'Monday 06 September 2010, 22:22'
+            });
 });
 
 http.createServer(app).listen(app.get('port'), function(){

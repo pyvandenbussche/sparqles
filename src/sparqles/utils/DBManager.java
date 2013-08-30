@@ -1,4 +1,4 @@
-package sparqles.core;
+package sparqles.utils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -25,6 +25,8 @@ import org.apache.avro.specific.SpecificRecordBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import sparqles.core.ENDSProperties;
+import sparqles.core.Endpoint;
 import sparqles.core.availability.AResult;
 import sparqles.core.discovery.DResult;
 import sparqles.core.features.FResult;
