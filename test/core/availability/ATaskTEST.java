@@ -11,6 +11,7 @@ import core.Endpoints;
 import sparqles.core.*;
 import sparqles.core.availability.AResult;
 import sparqles.core.availability.ATask;
+import sparqles.utils.DBManager;
 
 public class ATaskTEST {
 
@@ -21,7 +22,7 @@ public class ATaskTEST {
 		
 		
 		DBManager db = new DBManager();
-		sparqles.core.FileManager fm = new sparqles.core.FileManager();
+		sparqles.utils.FileManager fm = new sparqles.utils.FileManager();
 		
 		ATask task = new ATask(ep);
 		task.setDBManager(db);
