@@ -118,6 +118,13 @@ table {
   border-spacing: 0;
 }
 
+.tdcenter{
+	text-align:center;
+}
+.tdright{
+	text-align:right;
+}
+
 /*
 *
 *  Simple fluid media

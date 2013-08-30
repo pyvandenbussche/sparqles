@@ -42,6 +42,22 @@ app.get('/availability', function(req, res){
             });
 });
 
+app.get('/discoverability', function(req, res){
+		var epsDisco = JSON.parse(fs.readFileSync('./examples/discoverability.json'));
+        res.render('content/discoverability.jade',{
+			lastUpdate: 'Monday 02 September 2013, 22:22',
+			epsDisco: epsDisco
+            });
+});
+
+app.get('/performance', function(req, res){
+		var epsPerf = JSON.parse(fs.readFileSync('./examples/performance.json'));
+        res.render('content/performance.jade',{
+			lastUpdate: 'Monday 02 September 2013, 22:22',
+			epsPerf: epsPerf
+            });
+});
+
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });

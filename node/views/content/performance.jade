@@ -1,0 +1,49 @@
+extends ../layout
+block content
+      section#post
+        article
+          header.wrpl
+            h1 Performance
+            time Last update: #{lastUpdate}
+            details
+              summary Description:
+              p
+                | To assess the reliability of SPARQL Endpoints, we test hourly (by default) the endpoints uptime. In order to accommodate patchy SPARQL compliance, we try two queries to test availability for each endpoint:
+              p
+                span.dimensionDescriptionCode ASK WHERE{ ?s ?p ?o . }
+              p
+                span.dimensionDescriptionCode SELECT ?s WHERE{ ?s ?p ?o . } LIMIT 1
+              p If the ASK query fails (e.g., is not supported) we try the SELECT query.
+      .line
+      section#posts.default-area
+        article.wrp(style='padding-bottom: 1em;')
+          .wrplInnerBox(style='height: 100%;')
+            - function numberWithCommas(x) {if (x) return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");}
+            h3 #{epsPerf.nbEndpointsWithThreshold}/#{epsPerf.nbEndpointsTotal} endpoints suspected to enforce a result-size thresholds
+            h3 #{numberWithCommas(epsPerf.mostCommonThreshold)} is the most common result-size threshold  
+        article.wrp
+          .wrplInnerBox(style='height: 100%;')
+            table#table_current.psp-table(cellspacing='0', cellpadding='0', border='0', width='100%')
+              thead
+                tr
+                  th.tablehead(scope='col', width='40%') SPARQL Endpoint
+                  th.tablehead(width='20%') Result-size thresholds
+                  th.tablehead(width='20%') ASK queries mean runtime (Cold-Warm)
+                  th.tablehead(width='20%') Join queries mean runtime (Cold-Warm)
+              tbody
+                - each ep, i in epsPerf.endpoints
+                  tr(class=(i % 2 == 0) ? 'odd' : 'even')
+                    //-Display Endpoint Label
+                    //-TODO: if more than one endpoint then display how many and their names 
+                    if ep.datasets.length>1
+                      td
+                        a(href="/dataset?uri=#{ep.uri}") #{ep.uri}
+                    else
+                      td 
+                        a(href="/dataset?uri=#{ep.uri}") #{ep.datasets[0].label}
+                    //-Display Threshold 
+                    td.tdright #{numberWithCommas(ep.threshold)}
+                    //-Display ASK
+                    td.tdright #{parseFloat(ep.askMeanCold.toFixed(2))}-#{parseFloat(ep.askMeanWarm.toFixed(2))} s
+                    //-Display Join
+                    td.tdright #{parseFloat(ep.joinMeanCold.toFixed(2))}-#{parseFloat(ep.joinMeanWarm.toFixed(2))} s

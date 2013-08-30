@@ -1,0 +1,70 @@
+{
+	"nbEndpointsWithThreshold": 68,
+	"mostCommonThreshold": 10000,
+	"nbEndpointsTotal": 413,
+	"endpoints": [
+		{
+			"uri": "http://www.rdfabout.com/sparql/Gray",
+			"datasets":[
+				{
+					"uri": "http://thedatahub.org/dataset/2000-us-census-rdf",
+					"label": "2000 U.S Census in RDF (rdfabout.com)"
+				},
+				{
+					"uri": "http://thedatahub.org/dataset/2000-us-census-rdf2",
+					"label": "2000 U.S Census in RDF (rdfabout.com) 2"
+				}
+			],
+			"threshold":1000,
+			"askMeanCold":0.2756,
+			"askMeanWarm":0.2659,
+			"joinMeanCold":3.86,
+			"joinMeanWarm":3.85486
+		},
+		{
+			"uri": "http://www.rdfabout.com/sparql/Red",
+			"datasets":[
+				{
+					"uri": "http://thedatahub.org/dataset/2000-us-census-rdf4",
+					"label": "2000 U.S Census in RDF (rdfabout.com) 4"
+				},
+				{
+					"uri": "http://thedatahub.org/dataset/2000-us-census-rdf5",
+					"label": "2000 U.S Census in RDF (rdfabout.com) 5"
+				}
+			],
+			"threshold":20000,
+			"askMeanCold":0.2256,
+			"askMeanWarm":0.2359,
+			"joinMeanCold":3.10,
+			"joinMeanWarm":3.0456
+		},
+		{
+			"uri": "http://biolit.rkbexplorer.com/sparql/Green",
+			"datasets":[
+				{
+					"uri": "http://biolit.rkbexplorer.com/sparql",
+					"label": "A Short Biographical Dictionary of English Literature (RKBExplorer) Green"
+				}
+			],
+			"threshold":10000,
+			"askMeanCold":0.4531,
+			"askMeanWarm":0.4635,
+			"joinMeanCold":4.65,
+			"joinMeanWarm":4.63254
+		},
+		{
+			"uri": "http://biolit.rkbexplorer.com/sparql/Orange",
+			"datasets":[
+				{
+					"uri": "http://biolit.rkbexplorer.com/sparql",
+					"label": "A Short Biographical Dictionary of English Literature (RKBExplorer) Orange"
+				}
+			],
+			"askMeanCold":0.2649,
+			"askMeanWarm":0.26023,
+			"joinMeanCold":3.52,
+			"joinMeanWarm":3.4356
+		}
+	]
+}
