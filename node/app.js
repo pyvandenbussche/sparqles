@@ -58,6 +58,14 @@ app.get('/performance', function(req, res){
             });
 });
 
+app.get('/interoperability', function(req, res){
+		var epsInter = JSON.parse(fs.readFileSync('./examples/interoperability.json'));
+        res.render('content/interoperability.jade',{
+			lastUpdate: 'Monday 02 September 2013, 22:22',
+			epsInter: epsInter
+            });
+});
+
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });

@@ -8,12 +8,7 @@ block content
             details
               summary Description:
               p
-                | To assess the reliability of SPARQL Endpoints, we test hourly (by default) the endpoints uptime. In order to accommodate patchy SPARQL compliance, we try two queries to test availability for each endpoint:
-              p
-                span.dimensionDescriptionCode ASK WHERE{ ?s ?p ?o . }
-              p
-                span.dimensionDescriptionCode SELECT ?s WHERE{ ?s ?p ?o . } LIMIT 1
-              p If the ASK query fails (e.g., is not supported) we try the SELECT query.
+                | The performance of a SPARQL Endpoint is crucial for any application using this service. The performance first looks at the presence of an hypothetical result size threshold enforced by the endpoint. Then, it measures ask and join queries performance. Each query is runned twice to compare cold-cache (first run) and warm-cache (second run) timings.
       .line
       section#posts.default-area
         article.wrp(style='padding-bottom: 1em;')

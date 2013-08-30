@@ -8,12 +8,7 @@ block content
             details
               summary Description:
               p
-                | To assess the reliability of SPARQL Endpoints, we test hourly (by default) the endpoints uptime. In order to accommodate patchy SPARQL compliance, we try two queries to test availability for each endpoint:
-              p
-                span.dimensionDescriptionCode ASK WHERE{ ?s ?p ?o . }
-              p
-                span.dimensionDescriptionCode SELECT ?s WHERE{ ?s ?p ?o . } LIMIT 1
-              p If the ASK query fails (e.g., is not supported) we try the SELECT query.
+                | For any data consumer to find relevant information about an endpoint (What type of data it contains? Where can I access a data dump? etc.) the data publisher needs to publish some fundamental metadata about the policies, features and content of its endpoint. The Discoverability is searching for VoID and SPARQL 1.1 Service Description metadata in the SPARQL Endpoint itself as well as in a seperate file. The information of server name from the HTTP GET answer is given.
       .line
       section#posts.default-area
         article.wrp(style='padding-bottom: 1em;')
