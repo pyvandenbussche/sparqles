@@ -3,7 +3,7 @@
 	"nbEndpointsTotal": 413,
 	"endpoints": [
 		{
-			"uri": "http://www.rdfabout.com/sparql",
+			"uri": "http://www.rdfabout.com/sparql/Gray",
 			"datasets":[
 				{
 					"uri": "http://thedatahub.org/dataset/2000-us-census-rdf",
@@ -21,15 +21,45 @@
 			
 		},
 		{
-			"uri": "http://biolit.rkbexplorer.com/sparql",
+			"uri": "http://www.rdfabout.com/sparql/Red",
+			"datasets":[
+				{
+					"uri": "http://thedatahub.org/dataset/2000-us-census-rdf4",
+					"label": "2000 U.S Census in RDF (rdfabout.com) 4"
+				},
+				{
+					"uri": "http://thedatahub.org/dataset/2000-us-census-rdf5",
+					"label": "2000 U.S Census in RDF (rdfabout.com) 5"
+				}
+			],
+			"upNow":false,
+			"uptimeLast24h":0.65,
+			"uptimeLast7d":0.352678
+			
+			
+		},
+		{
+			"uri": "http://biolit.rkbexplorer.com/sparql/Green",
 			"datasets":[
 				{
 					"uri": "http://biolit.rkbexplorer.com/sparql",
-					"label": "A Short Biographical Dictionary of English Literature (RKBExplorer)"
+					"label": "A Short Biographical Dictionary of English Literature (RKBExplorer) Green"
 				}
 			],
 			"upNow":true,
 			"uptimeLast24h":1,
+			"uptimeLast7d":0.958645
+		},
+		{
+			"uri": "http://biolit.rkbexplorer.com/sparql/Orange",
+			"datasets":[
+				{
+					"uri": "http://biolit.rkbexplorer.com/sparql",
+					"label": "A Short Biographical Dictionary of English Literature (RKBExplorer) Orange"
+				}
+			],
+			"upNow":true,
+			"uptimeLast24h":0.989,
 			"uptimeLast7d":0.958645
 		}
 	]

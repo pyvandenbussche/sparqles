@@ -44,4 +44,27 @@ block content
               tbody
                 - each ep, i in epsAvail.endpoints
                   tr(class=(i % 2 == 0) ? 'odd' : 'even')
-                    td #{ep.uri}
+                    //-Display Availability color image
+                    td
+                      if ep.upNow == true
+                        if ep.uptimeLast24h <1
+                          img(src='./images/orange.png')
+                        else
+                          img(src='./images/green.png')
+                      else
+                        if ep.uptimeLast7d >0
+                          img(src='./images/red.png')
+                        else
+                          img(src='./images/gray.png')
+                    //-Display Endpoint Label
+                    //-TODO: if more than one endpoint then display how many and their names 
+                    if ep.datasets.length>1
+                      td
+                        a(href="/dataset?uri=#{ep.uri}") #{ep.uri}
+                    else
+                      td 
+                        a(href="/dataset?uri=#{ep.uri}") #{ep.datasets[0].label}
+                    //-Display uptime last 24h
+                    td #{parseFloat((ep.uptimeLast24h*100).toFixed(2))+ '%'}
+                    //-Display uptime last 7d
+                    td #{parseFloat((ep.uptimeLast7d*100).toFixed(2))+ '%'}
