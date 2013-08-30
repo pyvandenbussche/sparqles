@@ -1,7 +1,34 @@
-#!/bin/bash
+#! /bin/sh
+# /etc/init.d/mydaemon
 
+### BEGIN INIT INFO
+# Provides:          sparqles
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Short-Description: Starts the SPARQLES service
+# Description:       This file is used to start the daemon
+#                    and should be placed in /etc/init.d
+### END INIT INFO
+
+# Author:   Sheldon Neilson <sheldon[AT]neilson.co.za>
+# Url:      www.neilson.co.za
+# Date:     25/04/2013
+
+NAME="sparqles"
+DESC="SPARQLES service"
+
+# The path to Jsvc
+EXEC="/usr/bin/jsvc"
+
+# The path to the folder containing MyDaemon.jar
+FILE_PATH="/usr/local/$NAME"
+
+# The path to the folder containing the java runtime
+JAVA_HOME="/usr/lib/jvm/default-java"
+
+# Our classpath including our jar file and the Apache Commons Daemon library
 JAR=sparqles-core-0.1.jar
-LIB=WebContent/WEB-INF/lib
+LIB=$FILE_PATH/ends/WebContent/WEB-INF/lib
 
 OTHER=$LIB/apache-any23-core-0.7.0-incubating.jar
 OTHER=$OTHER:$LIB/avro-1.7.4.jar:
@@ -20,10 +47,74 @@ OTHER=$OTHER:$LIB/json-lib-2.4-jdk15.jar
 OTHER=$OTHER:$LIB/commons-cli-1.2.jar
 OTHER=$OTHER:$LIB/slf4j-log4j12-1.6.4.jar
 OTHER=$OTHER:$LIB/log4j-1.2.16.jar
+OTHER=$OTHER:$LIB/commons-daemon-1.0.15.jar
 
 SESAME=$(JARS=("$LIB"/sesame*.jar); IFS=:; echo "${JARS[*]}")
 JACKSON=$(JARS=("$LIB"/jackson*.jar); IFS=:; echo "${JARS[*]}")
 JENA=$(JARS=("$LIB"/jena*.jar); IFS=:; echo "${JARS[*]}")
 
+CLASS_PATH="$OTHER:$SESAME:$JACKSON:$JENA:JAR"
 
-java -Xmx2G -cp $OTHER:$SESAME:$JACKSON:$JENA:JAR sparqles.core.Main $*
+# The fully qualified name of the class to execute
+CLASS="sparqles.utils.SPARQLESDaemon"
+
+# Any command line arguments to be passed to the our Java Daemon implementations init() method
+ARGS="-p /etc/sparqles/sparqles.prop"
+
+#The user to run the daemon as
+USER="root"
+
+# The file that will contain our process identification number (pid) for other scripts/programs that need to access it.
+PID="/var/run/$NAME.pid"
+
+# System.out writes to this file...
+LOG_OUT="/var/log/$NAME.out"
+
+# System.err writes to this file...
+LOG_ERR="/var/log/$NAME.err"
+
+jsvc_exec()
+{  
+    cd $FILE_PATH
+    $EXEC -home $JAVA_HOME -cp $CLASS_PATH -user $USER -outfile $LOG_OUT -errfile $LOG_ERR -pidfile $PID $1 $CLASS $ARGS
+}
+
+case "$1" in
+    start) 
+        echo "Starting the $DESC..."       
+       
+        # Start the service
+        jsvc_exec
+       
+        echo "The $DESC has started."
+    ;;
+    stop)
+        echo "Stopping the $DESC..."
+       
+        # Stop the service
+        jsvc_exec "-stop"      
+       
+        echo "The $DESC has stopped."
+    ;;
+    restart)
+        if [ -f "$PID" ]; then
+           
+            echo "Restarting the $DESC..."
+           
+            # Stop the service
+            jsvc_exec "-stop"
+           
+            # Start the service
+            jsvc_exec
+           
+            echo "The $DESC has restarted."
+        else
+            echo "Daemon not running, no action taken"
+            exit 1
+        fi
+            ;;
+    *)
+    echo "Usage: /etc/init.d/$NAME {start|stop|restart}" >&2
+    exit 3
+    ;;
+esac
