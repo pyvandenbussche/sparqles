@@ -1,4 +1,4 @@
-package sparqles.core;
+package sparqles.utils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -32,6 +32,9 @@ import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.sparql.util.FmtUtils;
 
+import sparqles.core.ENDSProperties;
+import sparqles.core.Endpoint;
+import sparqles.core.EndpointFactory;
 import sparqles.core.availability.AResult;
 import sparqles.core.discovery.DResult;
 import sparqles.core.features.FResult;
@@ -195,7 +198,7 @@ public class FileManager {
 	
 	private File createResultFile(Endpoint ep, String query, Long date) {
 		try {
-			return new File(resultsFolder, URLEncoder.encode(ep.getUri().toString(), "UTF-8")+"_"+query.replaceAll("/", "-")+"_"+date+".results");
+			return new File(resultsFolder, URLEncoder.encode(ep.getUri().toString(), "UTF-8")+"_"+query.replaceAll("/", "-")+"_"+date+".results.gz");
 		} catch (UnsupportedEncodingException e) {
 			log.warn("UnsupportedEncodingException: {} for {}", e.getMessage(), ep.getUri().toString() );
 		}

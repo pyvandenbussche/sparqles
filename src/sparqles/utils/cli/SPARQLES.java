@@ -26,6 +26,8 @@ import sparqles.core.EndpointManager;
  */
 public class SPARQLES extends CLIObject{
 	private static final Logger log = LoggerFactory.getLogger(SPARQLES.class);
+	private EndpointManager epm;
+	private Scheduler scheduler;
 
 
 	@Override
@@ -43,6 +45,37 @@ public class SPARQLES extends CLIObject{
 	@Override
 	protected void execute(CommandLine cmd) {
 
+		
+		parseCMD(cmd);
+				
+		//reinitialise datahub 
+		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_INIT)){
+			//check the endpoint list
+			DatahubAccess.checkEndpointList(epm);
+			//create schedule
+			scheduler.createDefaultSchedule(epm);
+		}
+		
+		Runtime.getRuntime().addShutdownHook (new ShutdownThread(this));
+		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_START)){
+			start();
+		}
+	}
+
+	public void start() {
+		scheduler.init(epm);
+		try {
+			long start = System.currentTimeMillis();
+			while (true) {
+				log.info("Running since {}", DateFormater.formatInterval(System.currentTimeMillis()-start));
+				Thread.sleep (1800000);
+			}
+		}catch (Throwable t) {
+			t.printStackTrace();
+		}
+	}
+
+	private void parseCMD(CommandLine cmd) {
 		//load the Properties
 		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_PROP_FILE)){
 			File propFile = new File(CLIObject.getOptionValue(cmd, ARGUMENTS.PARAM_PROP_FILE));
@@ -53,43 +86,41 @@ public class SPARQLES extends CLIObject{
 			}
 		}
 
+		setup(true,true);
+	}
+
+	public void init(String[] arguments) {
+		CommandLine cmd =  verifyArgs(arguments);
+		parseCMD(cmd);
+	}
+	
+	private void setup(boolean useDB, boolean useFM) {
 		// Init the endpoint manager
-		final EndpointManager epm = new EndpointManager();
+		epm = new EndpointManager();
 		epm.init();
 
 		//Init the scheduler
-		final Scheduler s = new Scheduler();
-		s.useDB(true);
-		s.useFileManager(true);
+		scheduler = new Scheduler();
+		scheduler.useDB(useDB);
+		scheduler.useFileManager(useFM);
+	}
 
-		//reinitialise datahub 
-		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_INIT)){
-			//check the endpoint list
-			DatahubAccess.checkEndpointList(epm);
-			//create schedule
-			s.createDefaultSchedule(epm);
-		}
-		s.init(epm);
-
-		Thread runtimeHookThread = new Thread() {
-			public void run() {
-				log.info("[START] [SHUTDOWN] Shutting down the system");
-				s.close();
-				epm.close();
-				log.info("[SUCCESS] [SHUTDOWN] Everything closed normally");
-			}};
-		Runtime.getRuntime().addShutdownHook (runtimeHookThread);
+	public void stop() {
+		log.info("[START] [SHUTDOWN] Shutting down the system");
+		scheduler.close();
+		epm.close();
+		log.info("[SUCCESS] [SHUTDOWN] Everything closed normally");
 		
-		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_START)){
-			try {
-				long start = System.currentTimeMillis();
-				while (true) {
-					log.info("Running since {}", DateFormater.formatInterval(System.currentTimeMillis()-start));
-					Thread.sleep (1800000);
-				}
-			}catch (Throwable t) {
-				t.printStackTrace();
-			}
+	}
+	
+	class ShutdownThread extends Thread{
+		private SPARQLES _s;
+		public ShutdownThread(SPARQLES s) {
+			_s=s;
+		}
+		@Override
+		public void run() {
+			_s.stop();
 		}
 	}
 }
