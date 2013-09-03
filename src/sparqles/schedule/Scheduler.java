@@ -33,6 +33,7 @@ public class Scheduler {
 	private final static String CRON_EVERY_WED_THU_AT_410="0 10 4 ? * WED,THU *";
 	
 	private final static String CRON_EVERY_SUN_AT_310="0 10 3 ? * SUN *";
+	private final static String CRON_EVERY_SAT_AT_310="0 10 3 ? * SAT *";
 	private final static String CRON_FIRST_SAT_AT_MONTH_AT_TWO="0 0 2 ? 1/1 SAT#1 *";
 	private final static String CRON_EVERY_FIVE_MINUTES="0 0/5 * 1/1 * ? *";
 	
@@ -43,8 +44,8 @@ public class Scheduler {
 //		taskSchedule.put("FTask", CRON_FIRST_SAT_AT_MONTH_AT_TWO);
 		
 		taskSchedule.put("PTask", CRON_EVERY_ONETEN);
-		taskSchedule.put("FTask", CRON_EVERY_DAY_AT_715);
-		taskSchedule.put("DTask", CRON_EVERY_WED_THU_AT_410);
+		taskSchedule.put("FTask", CRON_EVERY_SUN_AT_310);
+		taskSchedule.put("DTask", CRON_EVERY_SAT_AT_310);
 	}
 	
 	private final ScheduledExecutorService SERVICE;

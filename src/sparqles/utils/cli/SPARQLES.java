@@ -30,6 +30,8 @@ public class SPARQLES extends CLIObject{
 	private Scheduler scheduler;
 
 
+	
+	
 	@Override
 	public String getDescription() {
 		return "Start and control SPARQLES";
