@@ -1,0 +1,57 @@
+extends ../layout
+block content
+      section#post
+        article
+          header.wrpl
+            h1 Interoperability
+            time Last update: #{lastUpdate}
+            details
+              summary Description:
+              p
+                | The interoperability empirically analyses the SPARQL 1.0 and SPARQL 1.1 features supported by an endpoint.
+      .line
+      section#posts.default-area
+        article.wrp(style='padding-bottom: 1em;')
+          .wrplInnerBox(style='height: 100%;')
+            - function numberWithCommas(x) {if (x) return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");}
+            h3 #{epsInter.nbEndpointsSPARQL1}/#{epsInter.nbEndpointsTotal} endpoints are compliant with some SPARQL 1.0 features
+            h3 #{epsInter.nbEndpointsFullSPARQL1}/#{epsInter.nbEndpointsTotal} endpoints are Fully compliant with SPARQL 1.0
+            h3 #{epsInter.nbEndpointsSPARQL11}/#{epsInter.nbEndpointsTotal} endpoints are compliant with some SPARQL 1.1 features
+            h3 #{epsInter.nbEndpointsFullSPARQL11}/#{epsInter.nbEndpointsTotal} endpoints are Fully compliant with SPARQL 1.1
+        article.wrp
+          .wrplInnerBox(style='height: 100%;')
+            table#table_current.psp-table(cellspacing='0', cellpadding='0', border='0', width='100%')
+              thead
+                tr
+                  th.tablehead(scope='col', width='50%') SPARQL Endpoint
+                  th.tablehead(width='25%') SPARQL 1.0 features
+                  th.tablehead(width='25%') SPARQL 1.1 features
+              tbody
+                - each ep, i in epsInter.endpoints
+                  tr(class=(i % 2 == 0) ? 'odd' : 'even')
+                    //-Display Endpoint Label
+                    //-TODO: if more than one endpoint then display how many and their names 
+                    if ep.datasets.length>1
+                      td
+                        a(href="/dataset?uri=#{ep.uri}") #{ep.uri}
+                    else
+                      td 
+                        a(href="/dataset?uri=#{ep.uri}") #{ep.datasets[0].label}
+                    //-Display SPARQL 1.0 
+                    td.tdcenter
+                      if ep.nbCompliantSPARQL1Features==epsInter.nbSPARQL1Features
+                        img(src='./images/green.png')
+                      else
+                        if ep.nbCompliantSPARQL1Features>0
+                          img(src='./images/orange.png')
+                        else
+                          img(src='./images/gray.png')
+                    //-Display SPARQL 1.0 
+                    td.tdcenter
+                      if ep.nbCompliantSPARQL11Features==epsInter.nbSPARQL11Features
+                        img(src='./images/green.png')
+                      else
+                        if ep.nbCompliantSPARQL11Features>0
+                          img(src='./images/orange.png')
+                        else
+                          img(src='./images/gray.png')

@@ -1,0 +1,52 @@
+extends ../layout
+block content
+      section#post
+        article
+          header.wrpl
+            h1 Discoverability
+            time Last update: #{lastUpdate}
+            details
+              summary Description:
+              p
+                | For any data consumer to find relevant information about an endpoint (What type of data it contains? Where can I access a data dump? etc.) the data publisher needs to publish some fundamental metadata about the policies, features and content of its endpoint. The Discoverability is searching for VoID and SPARQL 1.1 Service Description metadata in the SPARQL Endpoint itself as well as in a seperate file. The information of server name from the HTTP GET answer is given.
+      .line
+      section#posts.default-area
+        article.wrp(style='padding-bottom: 1em;')
+          .wrplInnerBox(style='height: 100%;')
+            h3 #{epsDisco.nbEndpointsVoID}/#{epsDisco.nbEndpointsTotal} endpoints present a VoID description
+            h3 #{epsDisco.nbEndpointsSD}/#{epsDisco.nbEndpointsTotal} endpoints present a Service description
+            h3 #{epsDisco.nbEndpointsServerName}/#{epsDisco.nbEndpointsTotal} endpoints have a meaningful server name in the HTTP Get answer 
+        article.wrp
+          .wrplInnerBox(style='height: 100%;')
+            table#table_current.psp-table(cellspacing='0', cellpadding='0', border='0', width='100%')
+              thead
+                tr
+                  th.tablehead(scope='col', width='40%') SPARQL Endpoint
+                  th.tablehead(width='20%') VoID Description
+                  th.tablehead(width='20%') Service Description
+                  th.tablehead(width='20%') Server name (HTTP GET)
+              tbody
+                - each ep, i in epsDisco.endpoints
+                  tr(class=(i % 2 == 0) ? 'odd' : 'even')
+                    //-Display Endpoint Label
+                    //-TODO: if more than one endpoint then display how many and their names 
+                    if ep.datasets.length>1
+                      td
+                        a(href="/dataset?uri=#{ep.uri}") #{ep.uri}
+                    else
+                      td 
+                        a(href="/dataset?uri=#{ep.uri}") #{ep.datasets[0].label}
+                    //-Display VoID Description
+                    td.tdcenter
+                      if ep.VoID
+                        img(src='./images/green.png')
+                      else
+                        img(src='./images/gray.png')
+                    //-Display SD Description
+                    td.tdcenter
+                      if ep.SD
+                        img(src='./images/green.png')
+                      else
+                        img(src='./images/gray.png')
+                    //-Display VoID Description
+                    td.tdcenter #{ep.serverName}

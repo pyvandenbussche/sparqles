@@ -3,7 +3,8 @@ var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , fs = require('fs');
  
 var ConfigProvider = require('./configprovider').ConfigProvider;
 var ConfigProvider = new ConfigProvider();
@@ -27,10 +28,41 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', function(req, res){
-		console.log(ConfigProvider.get('instanceTitle'));
         res.render('content/index.jade',{
-            configInstanceTitle: '- for <a href="http://datahub.io/" target="_blank">Datahub.io</a>',
-            lastUpdate: 'Monday 06 September 2010, 22:22'
+            configInstanceTitle: ConfigProvider.get('configInstanceTitle'),
+            lastUpdate: 'Monday 02 September 2013, 22:22'
+            });
+});
+
+app.get('/availability', function(req, res){
+		var epsAvail = JSON.parse(fs.readFileSync('./examples/availability.json'));
+        res.render('content/availability.jade',{
+			lastUpdate: 'Monday 02 September 2013, 22:22',
+			epsAvail: epsAvail
+            });
+});
+
+app.get('/discoverability', function(req, res){
+		var epsDisco = JSON.parse(fs.readFileSync('./examples/discoverability.json'));
+        res.render('content/discoverability.jade',{
+			lastUpdate: 'Monday 02 September 2013, 22:22',
+			epsDisco: epsDisco
+            });
+});
+
+app.get('/performance', function(req, res){
+		var epsPerf = JSON.parse(fs.readFileSync('./examples/performance.json'));
+        res.render('content/performance.jade',{
+			lastUpdate: 'Monday 02 September 2013, 22:22',
+			epsPerf: epsPerf
+            });
+});
+
+app.get('/interoperability', function(req, res){
+		var epsInter = JSON.parse(fs.readFileSync('./examples/interoperability.json'));
+        res.render('content/interoperability.jade',{
+			lastUpdate: 'Monday 02 September 2013, 22:22',
+			epsInter: epsInter
             });
 });
 
