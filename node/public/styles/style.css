@@ -226,6 +226,51 @@ figure figcaption a img {
 	height:300px;
 }
 
+.wrplInnerBoxGreen{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	box-sizing: border-box;
+	box-shadow: 0px 1px 3px -1px rgba(0, 0, 0, 0.5);
+	-o-box-shadow: 0px 1px 3px -1px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 0px 1px 3px -1px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow: 0px 1px 3px -1px rgba(0, 0, 0, 0.5);
+	background-color: #CDFFB4;
+	border: 1px solid #33D633;
+	padding:0.75em;
+	height:300px;
+}
+
+.wrplInnerBoxRed{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	box-sizing: border-box;
+	box-shadow: 0px 1px 3px -1px rgba(0, 0, 0, 0.5);
+	-o-box-shadow: 0px 1px 3px -1px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 0px 1px 3px -1px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow: 0px 1px 3px -1px rgba(0, 0, 0, 0.5);
+	background-color: #FFCCCC;
+	border: 1px solid #FF3333;
+	padding:0.75em;
+	height:300px;
+}
+
+.wrplInnerBoxOrange{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	box-sizing: border-box;
+	box-shadow: 0px 1px 3px -1px rgba(0, 0, 0, 0.5);
+	-o-box-shadow: 0px 1px 3px -1px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 0px 1px 3px -1px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow: 0px 1px 3px -1px rgba(0, 0, 0, 0.5);
+	background-color: #FFE2A9;
+	border: 1px solid #FF9933;
+	padding:0.75em;
+	height:300px;
+}
+
 .wrplInnerBox2{
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;

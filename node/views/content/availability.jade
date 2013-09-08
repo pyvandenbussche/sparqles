@@ -60,10 +60,10 @@ block content
                     //-TODO: if more than one endpoint then display how many and their names 
                     if ep.datasets.length>1
                       td
-                        a(href="/dataset?uri=#{ep.uri}") #{ep.uri}
+                        a(href="/endpoint?uri=#{ep.uri}") #{ep.uri}
                     else
                       td 
-                        a(href="/dataset?uri=#{ep.uri}") #{ep.datasets[0].label}
+                        a(href="/endpoint?uri=#{ep.uri}") #{ep.datasets[0].label}
                     //-Display uptime last 24h
                     td #{parseFloat((ep.uptimeLast24h*100).toFixed(2))+ '%'}
                     //-Display uptime last 7d

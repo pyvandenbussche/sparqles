@@ -1,0 +1,21 @@
+{
+	"uri": "http://www.rdfabout.com/sparql/Gray",
+	"datasets":[
+		{
+			"uri": "http://thedatahub.org/dataset/2000-us-census-rdf",
+			"label": "2000 U.S Census in RDF (rdfabout.com)"
+		},
+		{
+			"uri": "http://thedatahub.org/dataset/2000-us-census-rdf2",
+			"label": "2000 U.S Census in RDF (rdfabout.com) 2"
+		}
+	],
+	"availability":{
+		"upNow":true,
+		"uptimeLast24h":1,
+		"uptimeLast7d":0.958645,
+		"uptimeLast31d":0.965,
+		"uptimeLast365d":0.96143,
+		"data":[{"key":"Stream0","values":[{"x":0,"y":0.1763659900975835},{"x":1,"y":0.1456531480470824}]}]
+	}
+}

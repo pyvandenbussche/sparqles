@@ -34,6 +34,15 @@ app.get('/', function(req, res){
             });
 });
 
+app.get('/endpoint', function(req, res){
+		var ep = JSON.parse(fs.readFileSync('./examples/endpoint.json'));
+	//TODO deal with no URI
+        res.render('content/endpoint.jade',{
+            ep: ep,
+            lastUpdate: 'Monday 02 September 2013, 22:22'
+            });
+});
+
 app.get('/availability', function(req, res){
 		var epsAvail = JSON.parse(fs.readFileSync('./examples/availability.json'));
         res.render('content/availability.jade',{
