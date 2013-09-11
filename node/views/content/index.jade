@@ -5,7 +5,7 @@ block content
           header.wrpl.w-3-4
             h1
               | SPARQL Endpoints Status !{configInstanceTitle}
-            time Last update: #{lastUpdate}
+            time Last update: #{new Date(eps.lastUpdate)}
             details
               summary Description:
               p Public SPARQL endpoints list is fetch dynamically using CKAN SPARQL Endpoint.
@@ -20,27 +20,112 @@ block content
             .wrplInnerBox(style='height: 380px;')
               a(title='', href='./availability')
                 h2 Availability
-              .bx-viewport(style='width: 100%; overflow: hidden; position: relative;')
-                ul.bxslider(style='width: auto; position: relative; height: 310px;')
-                  li(style='float: none; list-style: none; position: absolute; width: 1000px; z-index: 0; display: none; height: 305px;')
-                    svg#avail
-                  li(style='float: none; list-style: none; position: absolute; width: 1000px; z-index: 50; display: list-item; height: 305px;')
-                    svg#discoDesc
+              svg#avail(style='height: 350px; padding-right:10px;')
           article.wrpl(style='min-width: 400px;')
-            .wrplInnerBox(style='height: 300px;')
+            .wrplInnerBox(style='height: 380px;')
+              - function numberWithCommas(x) {if (x) return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");}
               a(title='', href='./performance')
                 h2 Performance
+              span
+                b #{numberWithCommas(eps.performance.threshold)} 
+                | is the most common result-size threshold
               svg#perf
           article.wrpl(style='min-width: 400px;')
-            .wrplInnerBox(style='height: 300px;')
+            .wrplInnerBox(style='height: 380px;')
               a(title='', href='./interoperability')
                 h2 Interoperability
               svg#interop
           article.wrpl(style='min-width: 400px;')
-            .wrplInnerBox(style='height: 300px;')
+            .wrplInnerBox(style='height: 380px;')
               a(title='', href='./discoverability')
                 h2 Discoverability
-              .col-2
-                article.wrpl(style='width: 20%; height: 100%; padding-bottom: 0;')
-                article.wrpl(style='width: 80%; height: 100%; padding-bottom: 0;')
-                  svg#disco
+              div
+                b #{parseFloat((eps.discoverability.VoIDDescription*100).toFixed(2))+ '%'} 
+                | of the endpoints provide a VoID description
+              div
+                b #{parseFloat((eps.discoverability.SDDescription*100).toFixed(2))+ '%'} 
+                | of the endpoints provide a SD description
+              svg#disco(style='height: 350px;')
+      script.
+        var colors = d3.scale.category20();
+        keyColor = function(d, i) {return colors(d.key)};
+        
+        nv.addGraph(function() {
+          var chart = nv.models.stackedAreaChart()
+            .x(function(d) { return d[0] })
+            .y(function(d) { return d[1] })
+            .yDomain([0,1])
+            .color(keyColor)
+            .showControls(false);
+            //.clipEdge(true);
+          
+          chart.xAxis.tickFormat(function(d) { return d3.time.format('%Y-%m-%d')(new Date(d)) });
+          chart.yAxis.tickFormat(d3.format('.2%'));
+          
+          d3.select('#avail')
+            .datum(!{JSON.stringify(eps.availability)})
+            .call(chart);
+          
+          nv.utils.windowResize(chart.update);
+          chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
+          return chart;
+        });
+        nv.addGraph(function() {
+          var chart = nv.models.multiBarHorizontalChart()
+              .x(function(d) { return d.label })
+              .y(function(d) { return d.value })
+              .margin({top: 0, right: 20, bottom: 50, left: 30})
+              .showValues(true)
+              .showControls(false)
+              .barColor(d3.scale.category20().range());
+          chart.yAxis
+              .tickFormat(d3.format(',.2f'));
+          d3.select('#perf')
+              .datum(!{JSON.stringify(eps.performance.data)})
+              .transition().duration(500)
+              .call(chart);
+          nv.utils.windowResize(chart.update);
+          chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
+          return chart;
+        });
+        nv.addGraph(function() {  
+          var chart = nv.models.discreteBarChart()
+            .x(function(d) { return d.label })
+            .y(function(d) { return d.value })
+            .staggerLabels(true)
+            .tooltips(true)
+            .forceY([0,1])
+            .valueFormat(d3.format('.2%'))
+            .showValues(true);
+          
+          chart.yAxis.tickFormat(d3.format('.2%'));
+          
+          d3.select('#interop')
+            .datum(!{JSON.stringify(eps.interoperability)})
+            .transition().duration(500)
+            .call(chart);
+          
+          nv.utils.windowResize(chart.update);
+          
+          return chart;
+        });
+        nv.addGraph(function() {
+          var chart = nv.models.pieChart()
+            .x(function(d) { return d.key })
+            .values(function(d) { return d })
+            .showLegend(false)
+            .height(550)
+            .color(d3.scale.category10().range())
+            .margin({top: 0, right: 5, bottom: 40, left: 0})
+            .donut(true);
+          chart.pie
+            .startAngle(function(d) { return d.startAngle/2 -Math.PI/2 })
+            .endAngle(function(d) { return d.endAngle/2 -Math.PI/2 });
+          
+          d3.select("#disco")
+            .datum([!{JSON.stringify(eps.discoverability.serverName[0].values)}])
+            .transition().duration(500)
+            .call(chart);
+          nv.utils.windowResize(chart.update);
+          return chart;
+        });

@@ -28,9 +28,10 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', function(req, res){
+		var eps = JSON.parse(fs.readFileSync('./examples/index.json'));
         res.render('content/index.jade',{
             configInstanceTitle: ConfigProvider.get('configInstanceTitle'),
-            lastUpdate: 'Monday 02 September 2013, 22:22'
+            eps: eps
             });
 });
 
