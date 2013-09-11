@@ -15,7 +15,345 @@
 		"uptimeLast24h":1,
 		"uptimeLast7d":0.958645,
 		"uptimeLast31d":0.965,
-		"uptimeLast365d":0.96143,
-		"data":[{"key":"Stream0","values":[{"x":0,"y":0.1763659900975835},{"x":1,"y":0.1456531480470824}]}]
+		"uptimeOverall":0.96143,
+		"data":[{"key":"Availability","values":[{"x":1138683600000,"y":0.921032254},{"x":1159588800000,"y":0.6524789},{"x":1225425600000,"y":0.8524789},{"x":1317355200000,"y":0.92524789},{"x":1338436800000,"y":0.903256}]}]
+	},
+	"performance":{
+		"threshold":1000,
+		"ask":[{
+				"key": "Cold ASK Tests",
+				"color": "#1f77b4",
+				"values": [
+				  { 
+					"label" : "s" ,
+					"value" : 0.307646510375
+				  } , 
+				  { 
+					"label" : "p" ,
+					"value" : 2.756779544553
+				  } , 
+				  { 
+					"label" : "o" ,
+					"value" : 18.451534877007
+				  } , 
+				  { 
+					"label" : "sp" ,
+					"value" : 8.6142352811805
+				  } , 
+				  { 
+					"label" : "so" ,
+					"value" : 5.6142352811805
+				  } , 
+				  {
+					"label" : "po" ,
+					"value" : 7.8082472075876
+				  } , 
+				  { 
+					"label" : "spo" ,
+					"value" : 5.259101026956
+				  }
+				]
+			  },
+			  {
+				"key": "Warm ASK Tests",
+				"color": "#2ca02c",
+				"values": [
+				  { 
+					"label" : "s" ,
+					"value" : 0.207646510375
+				  } , 
+				  { 
+					"label" : "p" ,
+					"value" : 1.756779544553
+				  } , 
+				  { 
+					"label" : "o" ,
+					"value" : 12.451534877007
+				  } , 
+				  { 
+					"label" : "sp" ,
+					"value" : 2.6142352811805
+				  } , 
+				  { 
+					"label" : "so" ,
+					"value" : 4.6142352811805
+				  } , 
+				  {
+					"label" : "po" ,
+					"value" : 6.8082472075876
+				  } , 
+				  { 
+					"label" : "spo" ,
+					"value" : 5.159101026956
+				  }
+				]
+			  }
+			],
+		"join":[{
+				"key": "Cold JOIN Tests",
+				"color": "#1f77b4",
+				"values": [
+				  { 
+					"label" : "ss" ,
+					"value" : 30.307646510375
+				  } , 
+				  { 
+					"label" : "so" ,
+					"value" : 12.756779544553
+				  } , 
+				  { 
+					"label" : "oo" ,
+					"value" : 13.451534877007
+				  }
+				]
+			  },
+			  {
+				"key": "Warm JOIN Tests",
+				"color": "#2ca02c",
+				"values": [
+				  { 
+					"label" : "ss" ,
+					"value" : 22.307646510375
+				  } , 
+				  { 
+					"label" : "so" ,
+					"value" : 13.756779544553
+				  } , 
+				  { 
+					"label" : "oo" ,
+					"value" : 10.451534877007
+				  }
+				]
+			  }
+			]
+	},
+	"interoperability":{
+		"SPARQL1Features":[
+		  { 
+			"label" : "sel[.]" ,
+			"value" : true
+		  } , 
+		  { 
+			"label" : "sel[join]" ,
+			"value" : true
+		  } , 
+		  { 
+			"label" : "sel[opt]" ,
+			"value" : true
+		  } , 
+		  { 
+			"label" : "sel[union]" ,
+			"value" : true
+		  } , 
+		  { 
+			"label" : "sel[empty]" ,
+			"value" : true
+		  } , 
+		  {
+			"label" : "sel[fil(regex)]]" ,
+			"value" : true
+		  } , 
+		  { 
+			"label" : "sel[fil(regex-i)]]" ,
+			"value" : true
+		  },
+		  { 
+			"label" : "sel[fil(blank)]" ,
+			"value" : true
+		  } , 
+		  { 
+			"label" : "sel[fil(iri)]" ,
+			"value" : true
+		  } , 
+		  { 
+			"label" : "sel[fil(num)]" ,
+			"value" : true
+		  } , 
+		  { 
+			"label" : "sel[fil(str)]" ,
+			"value" : true
+		  } , 
+		  {
+			"label" : "sel[fil(bool)]" ,
+			"value" : true
+		  } , 
+		  { 
+			"label" : "sel[fil(!bound)]" ,
+			"value" : true
+		  },
+		  { 
+			"label" : "sel[bnode]" ,
+			"value" : true
+		  } , 
+		  { 
+			"label" : "sel[from]" ,
+			"value" : true
+		  } , 
+		  { 
+			"label" : "sel[graph]" ,
+			"value" : true
+		  } , 
+		  { 
+			"label" : "sel[graph;join]" ,
+			"value" : true
+		  } , 
+		  { 
+			"label" : "sel[graph;union]" ,
+			"value" : true
+		  } , 
+		  {
+			"label" : "sel[.]*orderby" ,
+			"value" : true
+		  } , 
+		  { 
+			"label" : "sel[.]*orderby*offset" ,
+			"value" : true
+		  },
+		  { 
+			"label" : "sel[.]*orderby-asc" ,
+			"value" : true
+		  } , 
+		  { 
+			"label" : "sel[.]*orderby-desc" ,
+			"value" : true
+		  } , 
+		  { 
+			"label" : "sel-distinct[.]" ,
+			"value" : true
+		  } , 
+		  { 
+			"label" : "sel-reduced[.]" ,
+			"value" : true
+		  } , 
+		  {
+			"label" : "con[.]" ,
+			"value" : true
+		  } , 
+		  { 
+			"label" : "con[join]" ,
+			"value" : true
+		  },
+		  {
+			"label" : "con[opt]" ,
+			"value" : true
+		  } , 
+		  { 
+			"label" : "ask[.]" ,
+			"value" : true
+		  }
+		],
+		"SPARQL11Features":[
+		  { 
+			"label" : "sel[avg]" ,
+			"value" : true
+		  } , 
+		  { 
+			"label" : "sel[avg]*groupby" ,
+			"value" : false
+		  } , 
+		  { 
+			"label" : "sel[max]" ,
+			"value" : true
+		  } , 
+		  { 
+			"label" : "sel[min]" ,
+			"value" : true
+		  } , 
+		  { 
+			"label" : "sel[sum]" ,
+			"value" : true
+		  } , 
+		  {
+			"label" : "sel[count]*groupby" ,
+			"value" : true
+		  } , 
+		  { 
+			"label" : "sel[subq]" ,
+			"value" : true
+		  },
+		  { 
+			"label" : "sel[subq;graph]" ,
+			"value" : true
+		  } , 
+		  { 
+			"label" : "sel[paths]" ,
+			"value" : false
+		  } , 
+		  { 
+			"label" : "sel[bind]" ,
+			"value" : false
+		  } , 
+		  { 
+			"label" : "sel[values]" ,
+			"value" : true
+		  } , 
+		  {
+			"label" : "sel[minus]" ,
+			"value" : true
+		  } , 
+		  { 
+			"label" : "sel[fil(exists)]" ,
+			"value" : false
+		  },
+		  { 
+			"label" : "sel[fil(!exists)]" ,
+			"value" : false
+		  } , 
+		  { 
+			"label" : "sel[fil(start)]" ,
+			"value" : false
+		  } , 
+		  { 
+			"label" : "sel[fil(contains)]" ,
+			"value" : true
+		  } , 
+		  { 
+			"label" : "sel[fil(abs)]" ,
+			"value" : false
+		  } , 
+		  { 
+			"label" : "ask[fil(!in)]" ,
+			"value" : true
+		  } , 
+		  {
+			"label" : "con-[.]" ,
+			"value" : false
+		  } , 
+		  { 
+			"label" : "sel[service]" ,
+			"value" : true
+		  }
+		]
+	},
+	"discoverability":{
+		"serverName":"Apache",
+		"VoIDDescription":[
+			{
+				"label":"HTTP GET header",
+				"value":false
+			},
+			{
+				"label":"Well Known Location",
+				"value":false
+			},
+			{
+				"label":"SPARQL Endpoint content",
+				"value":true
+			}
+		],
+		"SDDescription":[
+			{
+				"label":"HTTP GET header",
+				"value":true
+			},
+			{
+				"label":"Well Known Location",
+				"value":false
+			},
+			{
+				"label":"SPARQL Endpoint content",
+				"value":false
+			}
+		]
 	}
 }

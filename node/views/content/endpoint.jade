@@ -23,65 +23,164 @@ block content
             div(style="height:400px;")(class=(ep.availability.upNow==true) ? ((ep.availability.uptimeLast24h <1) ?'wrplInnerBoxOrange':'wrplInnerBoxGreen'):((ep.availability.uptimeLast7d >0) ?'wrplInnerBoxRed':'wrplInnerBox'))
               a(title='', href='./availability')
                 h2(style="float:left;") Availability
-                span(style="float:right;") Last day (96%); last 30 days (94%); last 365 days (92%)
-              svg#chart(style='height: 350px;')
+                span(style="float:right;") Last day (
+                  b #{parseFloat((ep.availability.uptimeLast24h*100).toFixed(2))+ '%'}
+                  ); last 30 days (
+                  b #{parseFloat((ep.availability.uptimeLast31d*100).toFixed(2))+ '%'}
+                  ); overall (
+                  b #{parseFloat((ep.availability.uptimeOverall*100).toFixed(2))+ '%'}
+                  )
+              svg#chartAvail(style='height: 370px; padding-right:10px;')
+          article.wrpl(style='min-width: 400px; width:100%;')
+            - function numberWithCommas(x) {if (x) return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");}
+            div(style="height:400px;")(class="wrplInnerBox")
+              a(title='', href='./performance')
+                h2(style="float:left;") Performance
+                span(style="float:right;") Suspected Result size threshold: 
+                  //- TODO handle case where no value
+                  b #{numberWithCommas(ep.performance.threshold)}
+              table(style='width:100%')
+                tr
+                  td
+                    svg#chartPerformanceAsk(style='float:left; height: 370px;')
+                  td
+                    svg#chartPerformanceJoin(style='float:left; height: 370px;')
+          article.wrpl(style='min-width: 400px; width:100%;')
+            div(class="wrplInnerBoxNoHeight")
+              a(title='', href='./interoperability')
+                h2(style="float:left;") Interoperability
+              table#table_current.psp-table(cellspacing='0', cellpadding='0', border='0', width='100%')
+                tr
+                  td(valign='top')(style='width:50%; padding: 0em 2em;')
+                    table#table_current(cellspacing='0', cellpadding='0', border='0', width='100%')
+                      thead
+                        tr
+                          th.tablehead(colspan=2) SPARQL 1.0 features
+                      tbody
+                        - each feature, i in ep.interoperability.SPARQL1Features
+                          tr(class=(i % 2 == 0) ? 'odd' : 'even')
+                            td #{feature.label}
+                            td.tdcenter
+                              if feature.value
+                                img(src='./images/green.png')
+                              else
+                                img(src='./images/red.png')
+                  td(valign='top')(style='width:50%; padding: 0em 2em')
+                    table#table_current.psp-table(cellspacing='0', cellpadding='0', border='0', width='100%')
+                      thead
+                        tr
+                          th.tablehead(colspan=2) SPARQL 1.1 features
+                      tbody
+                        - each feature, i in ep.interoperability.SPARQL11Features
+                          tr(class=(i % 2 == 0) ? 'odd' : 'even')
+                            td #{feature.label}
+                            td.tdcenter
+                              if feature.value
+                                img(src='./images/green.png')
+                              else
+                                img(src='./images/red.png')
+          article.wrpl(style='min-width: 400px; width:100%;')
+            div.wrplInnerBoxNoHeight
+              a(title='', href='./discoverability')
+                h2 Discoverability
+              div 
+               table#table_current.psp-table(cellspacing='0', cellpadding='0', border='0', width='100%')
+                tr
+                  td(valign='top')(style='width:33%;; padding: 0em 2em;')
+                    table#table_current(cellspacing='0', cellpadding='0', border='0')(style='margin-left:1em;')
+                      thead
+                        tr
+                          th.tablehead Server Name
+                      tbody
+                        tr
+                          td
+                            span "
+                              b #{ep.discoverability.serverName}
+                              " server name has been detected in the HTTP GET response
+                  td(valign='top')(style='width:33%;; padding: 0em 2em;')
+                    table#table_current(cellspacing='0', cellpadding='0', border='0')(style='margin-left:1em;')
+                      thead
+                        tr
+                          th.tablehead VoID Description
+                          th.tablehead 
+                      tbody
+                        - each feature, i in ep.discoverability.VoIDDescription
+                          tr(class=(i % 2 == 0) ? 'odd' : 'even')
+                            td #{feature.label}
+                            td.tdcenter
+                              if feature.value
+                                img(src='./images/green.png')
+                              else
+                                img(src='./images/red.png')
+                  td(valign='top')(style='width:33%; padding: 0em 2em;')
+                    table#table_current(cellspacing='0', cellpadding='0', border='0')(style='margin-left:1em;')
+                      thead
+                        tr
+                          th.tablehead SD Description
+                          th.tablehead 
+                      tbody
+                        - each feature, i in ep.discoverability.SDDescription
+                          tr(class=(i % 2 == 0) ? 'odd' : 'even')
+                            td #{feature.label}
+                            td.tdcenter
+                              if feature.value
+                                img(src='./images/green.png')
+                              else
+                                img(src='./images/red.png')
       script.
-        function data() {
-          return stream_layers(1,10+Math.random()*200,.1).map(function(data, i) {
-            return {
-              key: 'Stream' + i,
-              values: data
-            };
-          });
-        }
-        
-        /* Inspired by Lee Byron's test data generator. */
-        function stream_layers(n, m, o) {
-          if (arguments.length < 3) o = 0;
-          function bump(a) {
-            var x = 1 / (.1 + Math.random()),
-                y = 2 * Math.random() - .5,
-                z = 10 / (.1 + Math.random());
-            for (var i = 0; i < m; i++) {
-              var w = (i / m - y) * z;
-              a[i] += x * Math.exp(-w * w);
-            }
-          }
-          return d3.range(n).map(function() {
-              var a = [], i;
-              for (i = 0; i < m; i++) a[i] = o + o * Math.random();
-              for (i = 0; i < 5; i++) bump(a);
-              return a.map(stream_index);
-            });
-        }
-        
-        /* Another layer generator using gamma distributions. */
-        function stream_waves(n, m) {
-          return d3.range(n).map(function(i) {
-            return d3.range(m).map(function(j) {
-                var x = 20 * j / m - i / 3;
-                return 2 * x * Math.exp(-.5 * x);
-              }).map(stream_index);
-            });
-        }
-        
-        function stream_index(d, i) {
-          return {x: i, y: Math.max(0, d)};
-        }
-      
+        var colors = d3.scale.category20();
+        keyColor = function(d, i) {return colors(d.key)};
         nv.addGraph(function() {
-          var chart = nv.models.lineWithFocusChart();
-          chart.xAxis.tickFormat(function(d) { return d3.time.format('%x')(new Date(d)) });
-          chart.x2Axis.tickFormat(function(d) { return d3.time.format('%x')(new Date(d)) });
-          chart.yAxis.tickFormat(d3.format(',.2f'));
-          chart.y2Axis.tickFormat(d3.format(',.2f'));
-          chart.showLegend(false);
-          /* document.write(dataAvail); */
-          d3.select('#chart')
-          .datum(!{JSON.stringify(ep.availability.data)})
-          .transition().duration(500)
-          .call(chart);
-
+          var chart = nv.models.stackedAreaChart()
+            .x(function(d) { return d.x })
+            .y(function(d) { return d.y })
+            .color(keyColor)
+            .showControls(false)
+            .showLegend(false)
+            .yDomain([0,1]);
+          chart.xAxis.tickFormat(function(d) { return d3.time.format('%Y-%m-%d')(new Date(d)) });
+          chart.yAxis.tickFormat(d3.format('.2%'));
+          d3.select('#chartAvail')
+            .datum(!{JSON.stringify(ep.availability.data)})
+            .call(chart);
           nv.utils.windowResize(chart.update);
+          chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
+          return chart;
+        });
+        nv.addGraph(function() {
+          var chart = nv.models.multiBarHorizontalChart()
+              .x(function(d) { return d.label })
+              .y(function(d) { return d.value })
+              .margin({top: 30, right: 20, bottom: 50, left: 30})
+              .showValues(true)
+              .showControls(false)
+              .barColor(d3.scale.category20().range());
+          chart.yAxis
+              .tickFormat(d3.format(',.2f'));
+          d3.select('#chartPerformanceAsk')
+              .datum(!{JSON.stringify(ep.performance.ask)})
+              .transition().duration(500)
+              .call(chart);
+          nv.utils.windowResize(chart.update);
+          chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
+          return chart;
+        });
+        nv.addGraph(function() {
+          var chart = nv.models.multiBarHorizontalChart()
+              .x(function(d) { return d.label })
+              .y(function(d) { return d.value })
+              .margin({top: 30, right: 20, bottom: 50, left: 30})
+              .showValues(true)
+              .barColor(d3.scale.category20().range())
+              .showControls(false);
+          chart.xAxis.axisLabel('s');
+          chart.yAxis
+              .tickFormat(d3.format(',.2f'));
+          d3.select('#chartPerformanceJoin')
+              .datum(!{JSON.stringify(ep.performance.join)})
+              .transition().duration(500)
+              .call(chart);
+          nv.utils.windowResize(chart.update);
+          chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
           return chart;
         });

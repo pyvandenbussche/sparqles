@@ -211,6 +211,32 @@ figure figcaption a img {
 	float: left;
 }
 
+.wrplInnerBoxNoHeight{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	box-sizing: border-box;
+	box-shadow: 0px 1px 3px -1px rgba(0, 0, 0, 0.5);
+	-o-box-shadow: 0px 1px 3px -1px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 0px 1px 3px -1px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow: 0px 1px 3px -1px rgba(0, 0, 0, 0.5);
+	background-color: #f3f3f3;
+	border: 1px solid #d0d7da;
+	padding:0.75em;
+}
+
+.interoptable{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	box-sizing: border-box;
+	box-shadow: 0px 0px 3px 1px rgba(255,255,255, 1);
+	-o-box-shadow: 0px 0px 3px 1px rgba(255,255,255, 1);
+	-moz-box-shadow: 0px 0px 3px 1px rgba(255,255,255, 1);
+	-webkit-box-shadow: 0px 0px 3px 1px rgba(255,255,255, 1);
+	border: 1px solid #d0d7da;
+}
+
 .wrplInnerBox{
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
