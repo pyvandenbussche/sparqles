@@ -7,7 +7,7 @@ var express = require('express')
   , fs = require('fs');
  
 var ConfigProvider = require('./configprovider').ConfigProvider;
-var ConfigProvider = new ConfigProvider();
+var configApp = new ConfigProvider('../config.json');
 
 var app = express();
 
@@ -30,7 +30,7 @@ if ('development' == app.get('env')) {
 app.get('/', function(req, res){
 		var eps = JSON.parse(fs.readFileSync('./examples/index.json'));
         res.render('content/index.jade',{
-            configInstanceTitle: ConfigProvider.get('configInstanceTitle'),
+            configInstanceTitle: configApp.get('configInstanceTitle'),
             eps: eps
             });
 });
@@ -40,7 +40,8 @@ app.get('/endpoint', function(req, res){
 	//TODO deal with no URI
         res.render('content/endpoint.jade',{
             ep: ep,
-            lastUpdate: 'Monday 02 September 2013, 22:22'
+            lastUpdate: 'Monday 02 September 2013, 22:22',
+			configInterop: JSON.parse(fs.readFileSync('./texts/interoperability.json'))
             });
 });
 

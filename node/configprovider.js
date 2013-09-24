@@ -1,7 +1,7 @@
 var nconf = require('nconf');
 
-var ConfigProvider = function(){
-	nconf.use('file', { file: '../config.json' });
+var ConfigProvider = function(path){
+	nconf.use('file', { file: path });
 	nconf.load();
 };
 	  

@@ -150,11 +150,11 @@
 			"value" : true
 		  } , 
 		  {
-			"label" : "sel[fil(regex)]]" ,
+			"label" : "sel[fil(regex)]" ,
 			"value" : true
 		  } , 
 		  { 
-			"label" : "sel[fil(regex-i)]]" ,
+			"label" : "sel[fil(regex-i)]" ,
 			"value" : true
 		  },
 		  { 
@@ -339,6 +339,10 @@
 			{
 				"label":"SPARQL Endpoint content",
 				"value":true
+			},
+			{
+				"label":"Datahub.io",
+				"value":true
 			}
 		],
 		"SDDescription":[
@@ -352,6 +356,10 @@
 			},
 			{
 				"label":"SPARQL Endpoint content",
+				"value":false
+			},
+			{
+				"label":"Datahub.io",
 				"value":false
 			}
 		]

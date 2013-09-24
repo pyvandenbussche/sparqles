@@ -45,6 +45,11 @@ block content
               div
                 b #{parseFloat((eps.discoverability.SDDescription*100).toFixed(2))+ '%'} 
                 | of the endpoints provide a SD description
+              div
+                b #{parseFloat((eps.discoverability.NoDescription*100).toFixed(2))+ '%'} 
+                | of the endpoints have 
+                b no 
+                | description
               svg#disco(style='height: 350px;')
       script.
         var colors = d3.scale.category20();
@@ -113,6 +118,7 @@ block content
           var chart = nv.models.pieChart()
             .x(function(d) { return d.key })
             .values(function(d) { return d })
+            .valueFormat(d3.format('.2%'))
             .showLegend(false)
             .height(550)
             .color(d3.scale.category10().range())

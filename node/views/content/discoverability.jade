@@ -13,9 +13,18 @@ block content
       section#posts.default-area
         article.wrp(style='padding-bottom: 1em;')
           .wrplInnerBox(style='height: 100%;')
-            h3 #{epsDisco.nbEndpointsVoID}/#{epsDisco.nbEndpointsTotal} endpoints present a VoID description
-            h3 #{epsDisco.nbEndpointsSD}/#{epsDisco.nbEndpointsTotal} endpoints present a Service description
-            h3 #{epsDisco.nbEndpointsServerName}/#{epsDisco.nbEndpointsTotal} endpoints have a meaningful server name in the HTTP Get answer 
+            div
+              b #{parseFloat((epsDisco.nbEndpointsVoID/epsDisco.nbEndpointsTotal*100).toFixed(2))+ '%'} 
+              | (#{epsDisco.nbEndpointsVoID}/#{epsDisco.nbEndpointsTotal}) 
+              b of the endpoints present a VoID description
+            div
+              b #{parseFloat((epsDisco.nbEndpointsSD/epsDisco.nbEndpointsTotal*100).toFixed(2))+ '%'} 
+              | (#{epsDisco.nbEndpointsSD}/#{epsDisco.nbEndpointsTotal}) 
+              b of the endpoints present a Service description
+            div
+              b #{parseFloat((epsDisco.nbEndpointsServerName/epsDisco.nbEndpointsTotal*100).toFixed(2))+ '%'} 
+              | (#{epsDisco.nbEndpointsServerName}/#{epsDisco.nbEndpointsTotal}) 
+              b of the endpoints have a meaningful server name in the HTTP Get answer
         article.wrp
           .wrplInnerBox(style='height: 100%;')
             table#table_current.psp-table(cellspacing='0', cellpadding='0', border='0', width='100%')

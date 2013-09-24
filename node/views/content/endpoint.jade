@@ -59,7 +59,8 @@ block content
                       tbody
                         - each feature, i in ep.interoperability.SPARQL1Features
                           tr(class=(i % 2 == 0) ? 'odd' : 'even')
-                            td #{feature.label}
+                            td
+                              span(onmouseover='tooltip.show(\'#{configInterop[feature.label]}\')')(onmouseout='tooltip.hide();') #{feature.label}
                             td.tdcenter
                               if feature.value
                                 img(src='./images/green.png')
@@ -73,7 +74,8 @@ block content
                       tbody
                         - each feature, i in ep.interoperability.SPARQL11Features
                           tr(class=(i % 2 == 0) ? 'odd' : 'even')
-                            td #{feature.label}
+                            td
+                              span(onmouseover='tooltip.show(\'#{configInterop[feature.label]}\')')(onmouseout='tooltip.hide();') #{feature.label}
                             td.tdcenter
                               if feature.value
                                 img(src='./images/green.png')
