@@ -93,6 +93,25 @@ block content
           chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
           return chart;
         });
+        nv.addGraph(function() {
+          var chart = nv.models.multiBarHorizontalChart()
+              .x(function(d) { return d.label })
+              .y(function(d) { return d.value })
+              .margin({top: 0, right: 20, bottom: 50, left: 185})
+              .showValues(true)
+              .valueFormat(d3.format('.2%'))
+              .forceY([0,1])
+              .showControls(false);
+          chart.yAxis
+              .tickFormat(d3.format('.0%'));
+          d3.select('#interop')
+              .datum(!{JSON.stringify(eps.interoperability.data)})
+              .transition().duration(500)
+              .call(chart);
+          nv.utils.windowResize(chart.update);
+          chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
+          return chart;
+        });
         nv.addGraph(function() {  
           var chart = nv.models.discreteBarChart()
             .x(function(d) { return d.label })
@@ -105,8 +124,8 @@ block content
           
           chart.yAxis.tickFormat(d3.format('.2%'));
           
-          d3.select('#interop')
-            .datum(!{JSON.stringify(eps.interoperability)})
+          d3.select('#interopBAK')
+            .datum(!{JSON.stringify(eps.interoperabilityBAK)})
             .transition().duration(500)
             .call(chart);
           

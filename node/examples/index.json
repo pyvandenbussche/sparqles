@@ -51,7 +51,47 @@
 				  }
 				]
 	},
-	"interoperability":[{
+	"interoperability":{
+		"data":[
+				{
+					"key": "SPARQL 1.0",
+					"color": "#1f77b4",
+					"values": [
+					  { 
+						"label" : "Solution Modifiers" ,
+						"value" : 0.307646510375
+					  } , 
+					  { 
+						"label" : "Common Operators and Filters" ,
+						"value" : 0.756779544553
+					  },
+					  { 
+						"label" : "Graph and Datasets" ,
+						"value" : 0.256779544553
+					  }
+					]
+				  },
+				  {
+					"key": "SPARQL 1.1",
+					"color": "#2ca02c",
+					"values": [
+					  { 
+						"label" : "Aggregate" ,
+						"value" : 0.207646510375
+					  } , 
+					  { 
+						"label" : "Filter" ,
+						"value" : 0.356779544553
+					  },
+					  { 
+						"label" : "Other" ,
+						"value" : 0.016779544553
+					  }
+					]
+				  }
+				]
+	},
+	"interoperabilityBAK":[{
 		"key": "Compliancy percentage",
 		"values": [
 		  { 
