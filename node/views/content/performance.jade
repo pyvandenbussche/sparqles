@@ -14,15 +14,23 @@ block content
         article.wrp(style='padding-bottom: 1em;')
           .wrplInnerBox(style='height: 100%;')
             - function numberWithCommas(x) {if (x) return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");}
-            h3 #{epsPerf.nbEndpointsWithThreshold}/#{epsPerf.nbEndpointsTotal} endpoints suspected to enforce a result-size thresholds
-            h3 #{numberWithCommas(epsPerf.mostCommonThreshold)} is the most common result-size threshold  
+            div
+              b #{parseFloat((epsPerf.nbEndpointsWithThreshold/epsPerf.nbEndpointsTotal*100).toFixed(2))+ '%'} 
+              | (#{epsPerf.nbEndpointsWithThreshold}/#{epsPerf.nbEndpointsTotal}) 
+              | of the endpoints are suspected to 
+              b enforce a result-size thresholds
+
+            div
+              b #{numberWithCommas(epsPerf.mostCommonThreshold)} 
+              | is the 
+              b most common result-size threshold  
         article.wrp
           .wrplInnerBox(style='height: 100%;')
             table#table_current.psp-table(cellspacing='0', cellpadding='0', border='0', width='100%')
               thead
                 tr
-                  th.tablehead(scope='col', width='40%') SPARQL Endpoint
-                  th.tablehead(width='20%') Result-size thresholds
+                  th.tablehead(scope='col', width='50%') SPARQL Endpoint
+                  th.tablehead(width='10%') Result-size thresholds
                   th.tablehead(width='20%') ASK queries mean runtime (Cold-Warm)
                   th.tablehead(width='20%') Join queries mean runtime (Cold-Warm)
               tbody
