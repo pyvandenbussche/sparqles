@@ -1,4 +1,6 @@
 {
+	"SPARQL 1.0":"<p>SPARQL is the W3C standard query language for RDF. It allows to retrieve and manipulate data stored using several operators like joins, unions, optional patterns or filters.</p>",
+    "SPARQL 1.1":"<p>SPARQL 1.1 is the second version of the W3C standard query language for querying RDF databases. This new version adds new operators such aggregates, new functions and the possibility to federate queries to several SPARQL endpoints.</p>",
 	"ask[.]": "<p><b>SPARQL simple ASK query:</b></p><p>ASK {</p><p>?s ?o owl:Thing</p><p>} </p>",
 	"con[.]": "<p><b>SPARQL CONSTRUCT query with a single-triple pattern returning an RDF graph of resources and their types:</b></p><p>CONSTRUCT { ?x rdf:type ?o }</p><p>WHERE</p><p>{</p><p>&nbsp;&nbsp;?x rdf:type ?o .</p><p>} LIMIT 100</p>",
 	"con[join]": "<p><b>SPARQL CONSTRUCT query with two triple patterns and a join returning an RDF graph of resources and their types:</b></p><p>CONSTRUCT { ?x rdf:type ?v }</p><p>WHERE</p><p>{</p><p>&nbsp;&nbsp;?x rdf:type ?o .</p><p>&nbsp;&nbsp;?o rdf:type ?x</p><p>} LIMIT 100</p>",

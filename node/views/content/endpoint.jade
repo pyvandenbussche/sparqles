@@ -36,7 +36,7 @@ block content
             div(style="height:400px;")(class="wrplInnerBox")
               a(title='', href='./performance')
                 h2(style="float:left;") Performance
-                span(style="float:right;") Suspected Result size threshold: 
+                span(style='float:right;')(onmouseover='tooltip.show(\'#{configPerformance['Result-size thresholds']}\')')(onmouseout='tooltip.hide();') Suspected Result size threshold:
                   //- TODO handle case where no value
                   b #{numberWithCommas(ep.performance.threshold)}
               table(style='width:100%')
@@ -55,7 +55,8 @@ block content
                     table#table_current(cellspacing='0', cellpadding='0', border='0', width='100%')
                       thead
                         tr
-                          th.tablehead(colspan=2) SPARQL 1.0 features
+                          th.tablehead(colspan=2) 
+                            span(onmouseover='tooltip.show(\'#{configInterop['SPARQL 1.0']}\')')(onmouseout='tooltip.hide();') SPARQL 1.0 features
                       tbody
                         - each feature, i in ep.interoperability.SPARQL1Features
                           tr(class=(i % 2 == 0) ? 'odd' : 'even')
@@ -70,7 +71,8 @@ block content
                     table#table_current.psp-table(cellspacing='0', cellpadding='0', border='0', width='100%')
                       thead
                         tr
-                          th.tablehead(colspan=2) SPARQL 1.1 features
+                          th.tablehead(colspan=2)
+                            span(onmouseover='tooltip.show(\'#{configInterop['SPARQL 1.1']}\')')(onmouseout='tooltip.hide();') SPARQL 1.1 features
                       tbody
                         - each feature, i in ep.interoperability.SPARQL11Features
                           tr(class=(i % 2 == 0) ? 'odd' : 'even')

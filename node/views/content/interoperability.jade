@@ -59,8 +59,10 @@ block content
               thead
                 tr
                   th.tablehead(scope='col', width='50%') SPARQL Endpoint
-                  th.tablehead(width='25%') SPARQL 1.0 features
-                  th.tablehead(width='25%') SPARQL 1.1 features
+                  th.tablehead(width='25%') 
+                    span(onmouseover='tooltip.show(\'#{configInterop['SPARQL 1.0']}\')')(onmouseout='tooltip.hide();') SPARQL 1.0 features
+                  th.tablehead(width='25%') 
+                    span(onmouseover='tooltip.show(\'#{configInterop['SPARQL 1.1']}\')')(onmouseout='tooltip.hide();') SPARQL 1.1 features
               tbody
                 - each ep, i in epsInter.endpoints
                   tr(class=(i % 2 == 0) ? 'odd' : 'even')

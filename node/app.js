@@ -31,7 +31,9 @@ app.get('/', function(req, res){
 		var eps = JSON.parse(fs.readFileSync('./examples/index.json'));
         res.render('content/index.jade',{
             configInstanceTitle: configApp.get('configInstanceTitle'),
-            eps: eps
+            eps: eps,
+			configInterop: JSON.parse(fs.readFileSync('./texts/interoperability.json')),
+			configPerformance: JSON.parse(fs.readFileSync('./texts/performance.json'))
             });
 });
 
@@ -41,7 +43,8 @@ app.get('/endpoint', function(req, res){
         res.render('content/endpoint.jade',{
             ep: ep,
             lastUpdate: 'Monday 02 September 2013, 22:22',
-			configInterop: JSON.parse(fs.readFileSync('./texts/interoperability.json'))
+			configInterop: JSON.parse(fs.readFileSync('./texts/interoperability.json')),
+			configPerformance: JSON.parse(fs.readFileSync('./texts/performance.json'))
             });
 });
 
@@ -65,7 +68,8 @@ app.get('/performance', function(req, res){
 		var epsPerf = JSON.parse(fs.readFileSync('./examples/performance.json'));
         res.render('content/performance.jade',{
 			lastUpdate: 'Monday 02 September 2013, 22:22',
-			epsPerf: epsPerf
+			epsPerf: epsPerf,
+			configPerformance: JSON.parse(fs.readFileSync('./texts/performance.json'))
             });
 });
 
@@ -73,7 +77,8 @@ app.get('/interoperability', function(req, res){
 		var epsInter = JSON.parse(fs.readFileSync('./examples/interoperability.json'));
         res.render('content/interoperability.jade',{
 			lastUpdate: 'Monday 02 September 2013, 22:22',
-			epsInter: epsInter
+			epsInter: epsInter,
+			configInterop: JSON.parse(fs.readFileSync('./texts/interoperability.json'))
             });
 });
 

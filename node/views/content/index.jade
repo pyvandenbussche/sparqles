@@ -28,12 +28,13 @@ block content
                 h2 Performance
               span
                 b #{numberWithCommas(eps.performance.threshold)} 
-                | is the most common result-size threshold
+                | is the most common 
+                span(onmouseover='tooltip.show(\'#{configPerformance['Result-size thresholds']}\')')(onmouseout='tooltip.hide();') result-size threshold
               svg#perf
           article.wrpl(style='min-width: 400px;')
             .wrplInnerBox(style='height: 380px;')
               a(title='', href='./interoperability')
-                h2 Interoperability
+                h2#log Interoperability
               svg#interop
           article.wrpl(style='min-width: 400px;')
             .wrplInnerBox(style='height: 380px;')
@@ -102,6 +103,19 @@ block content
               .valueFormat(d3.format('.2%'))
               .forceY([0,1])
               .showControls(false);
+          $('#interop').on('click', function(e){
+            var elem = $(e.target),
+            currentItem, currentUrl;
+            
+            if(elem.parent('.tick').length) {
+            currentItem = e.target.getAttribute('class').match(/\d+/)[0];
+            currentUrl = _data[0].urls[ currentItem ];
+            
+            $('#log').text("yo");
+            //window.location = currentUrl
+            }
+          })
+          
           chart.yAxis
               .tickFormat(d3.format('.0%'));
           d3.select('#interop')
@@ -110,27 +124,6 @@ block content
               .call(chart);
           nv.utils.windowResize(chart.update);
           chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
-          return chart;
-        });
-        nv.addGraph(function() {  
-          var chart = nv.models.discreteBarChart()
-            .x(function(d) { return d.label })
-            .y(function(d) { return d.value })
-            .staggerLabels(true)
-            .tooltips(true)
-            .forceY([0,1])
-            .valueFormat(d3.format('.2%'))
-            .showValues(true);
-          
-          chart.yAxis.tickFormat(d3.format('.2%'));
-          
-          d3.select('#interopBAK')
-            .datum(!{JSON.stringify(eps.interoperabilityBAK)})
-            .transition().duration(500)
-            .call(chart);
-          
-          nv.utils.windowResize(chart.update);
-          
           return chart;
         });
         nv.addGraph(function() {
