@@ -1,6 +1,12 @@
 {
 	"SPARQL 1.0":"<p>SPARQL is the W3C standard query language for RDF. It allows to retrieve and manipulate data stored using several operators like joins, unions, optional patterns or filters.</p>",
     "SPARQL 1.1":"<p>SPARQL 1.1 is the second version of the W3C standard query language for querying RDF databases. This new version adds new operators such aggregates, new functions and the possibility to federate queries to several SPARQL endpoints.</p>",
+	"Solution Modifiers":"<p><b>SPARQL 1.0 with solution modifiers:</b></p><ul><li>SEL[.]*ORDERBY*OFFSET</li><li>SEL[.]*ORDERBY-ASC</li><li>SEL[.]*ORDERBY-DESC</li><li>SEL[.]*ORDERBY</li><li>SEL-DISTINCT[.]</li><li>SEL-REDUCED[.]</li></ul>",
+	"Common Operators and Filters":"<p><b>SPARQL 1.0 common operators and filters:</b></p><ul><li>SEL[.]</li><li>SEL[JOIN]</li><li>SEL[OPT]</li><li>SEL[UNION]</li><li>SEL[FIL(!BOUND)]</li><li>SEL[FIL(BLANK)]</li><li>SEL[FIL(BOOL)]</li><li>SEL[FIL(IRI)]</li><li>SEL[FIL(NUM)]</li><li>SEL[FIL(REGEX)]</li><li>SEL[FIL(REGEX-i)]</li><li>SEL[FIL(STR)]</li><li>SEL[BNODE]</li><li>SEL[EMPTY]</li></ul>",
+	"Graph and Datasets":"<p><b>SPARQL 1.0 GRAPH and dataset operators:</b></p><ul><li>SEL[FROM]</li><li>SEL[GRAPH]</li><li>SEL[GRAPH;JOIN]</li><li>SEL[GRAPH;UNION]</li></ul>",
+	"Aggregate":"<p><b>SPARQL 1.1 aggregate functions:</b></p><ul><li>SEL[AVG]*GROUPBY</li><li>SEL[AVG]</li><li>SEL[COUNT]*GROUPBY</li><li>SEL[MAX]</li><li>SEL[MIN]</li><li>SEL[MINUS]</li><li>SEL[SUM]</li></ul>",
+	"Filter":"<p><b>SPARQL 1.1 filter functions:</b></p><ul><li>SEL[FIL(!EXISTS)]</li><li>SEL[FIL(ABS)]</li><li>SEL[FIL(CONTAINS)]</li><li>SEL[FIL(EXISTS)]</li><li>SEL[FIL(START)]</li></ul>",
+	"Other":"<p><b>Other SPARQL 1.1 features:</b></p><ul><li>ASK[FIL(!IN)]</li><li>CON-[.]</li><li>SEL[BIND]</li><li>SEL[PATHS]</li><li>SEL[SERVICE]</li><li>SEL[SUBQ]</li><li>SEL[SUBQ;GRAPH]</li><li>SEL[VALUES]</li></ul>",
 	"ask[.]": "<p><b>SPARQL simple ASK query:</b></p><p>ASK {</p><p>?s ?o owl:Thing</p><p>} </p>",
 	"con[.]": "<p><b>SPARQL CONSTRUCT query with a single-triple pattern returning an RDF graph of resources and their types:</b></p><p>CONSTRUCT { ?x rdf:type ?o }</p><p>WHERE</p><p>{</p><p>&nbsp;&nbsp;?x rdf:type ?o .</p><p>} LIMIT 100</p>",
 	"con[join]": "<p><b>SPARQL CONSTRUCT query with two triple patterns and a join returning an RDF graph of resources and their types:</b></p><p>CONSTRUCT { ?x rdf:type ?v }</p><p>WHERE</p><p>{</p><p>&nbsp;&nbsp;?x rdf:type ?o .</p><p>&nbsp;&nbsp;?o rdf:type ?x</p><p>} LIMIT 100</p>",

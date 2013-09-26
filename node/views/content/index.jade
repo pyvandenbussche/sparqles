@@ -80,7 +80,7 @@ block content
           var chart = nv.models.multiBarHorizontalChart()
               .x(function(d) { return d.label })
               .y(function(d) { return d.value })
-              .margin({top: 0, right: 20, bottom: 50, left: 30})
+              .margin({top: 0, right: 20, bottom: 50, left: 80})
               .showValues(true)
               .showControls(false)
               .barColor(d3.scale.category20().range());
@@ -90,6 +90,11 @@ block content
               .datum(!{JSON.stringify(eps.performance.data)})
               .transition().duration(500)
               .call(chart);
+          var confPerf = !{JSON.stringify(configPerformance)}
+          d3.select('#perf')
+            .selectAll('.tick.major text')
+            .on('mouseover',function(d){tooltip.show(confPerf[d]);})
+            .on('mouseout',function(d){tooltip.hide();});
           nv.utils.windowResize(chart.update);
           chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
           return chart;
@@ -103,25 +108,17 @@ block content
               .valueFormat(d3.format('.2%'))
               .forceY([0,1])
               .showControls(false);
-          $('#interop').on('click', function(e){
-            var elem = $(e.target),
-            currentItem, currentUrl;
-            
-            if(elem.parent('.tick').length) {
-            currentItem = e.target.getAttribute('class').match(/\d+/)[0];
-            currentUrl = _data[0].urls[ currentItem ];
-            
-            $('#log').text("yo");
-            //window.location = currentUrl
-            }
-          })
-          
           chart.yAxis
               .tickFormat(d3.format('.0%'));
           d3.select('#interop')
               .datum(!{JSON.stringify(eps.interoperability.data)})
               .transition().duration(500)
               .call(chart);
+          var confInterop = !{JSON.stringify(configInterop)}
+          d3.select('#interop')
+            .selectAll('.tick.major text')
+            .on('mouseover',function(d){tooltip.show(confInterop[d]);})
+            .on('mouseout',function(d){tooltip.hide();});
           nv.utils.windowResize(chart.update);
           chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
           return chart;

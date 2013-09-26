@@ -151,6 +151,7 @@ block content
           chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
           return chart;
         });
+        var confPerf = !{JSON.stringify(configPerformance)}
         nv.addGraph(function() {
           var chart = nv.models.multiBarHorizontalChart()
               .x(function(d) { return d.label })
@@ -165,6 +166,10 @@ block content
               .datum(!{JSON.stringify(ep.performance.ask)})
               .transition().duration(500)
               .call(chart);
+          d3.select('#chartPerformanceAsk')
+            .selectAll('.tick.major text')
+            .on('mouseover',function(d){tooltip.show(confPerf[d]);})
+            .on('mouseout',function(d){tooltip.hide();});
           nv.utils.windowResize(chart.update);
           chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
           return chart;
@@ -184,6 +189,10 @@ block content
               .datum(!{JSON.stringify(ep.performance.join)})
               .transition().duration(500)
               .call(chart);
+          d3.select('#chartPerformanceJoin')
+            .selectAll('.tick.major text')
+            .on('mouseover',function(d){tooltip.show(confPerf[d]);})
+            .on('mouseout',function(d){tooltip.hide();});
           nv.utils.windowResize(chart.update);
           chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
           return chart;
