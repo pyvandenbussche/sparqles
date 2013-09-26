@@ -41,9 +41,12 @@ block content
               thead
                 tr
                   th.tablehead(scope='col', width='50%') SPARQL Endpoint
-                  th.tablehead(width='15%') VoID Description
-                  th.tablehead(width='15%') Service Description
-                  th.tablehead(width='20%') Server name (HTTP GET)
+                  th.tablehead(width='15%') 
+                    span(onmouseover='tooltip.show(\'#{configDisco['VoID Description']}\')', onmouseout='tooltip.hide();') VoID Description
+                  th.tablehead(width='15%') 
+                    span(onmouseover='tooltip.show(\'#{configDisco['Service Description']}\')', onmouseout='tooltip.hide();') Service Description
+                  th.tablehead(width='20%') 
+                    span(onmouseover='tooltip.show(\'#{configDisco['Server Name']}\')', onmouseout='tooltip.hide();') Server name (HTTP GET)
               tbody
                 - each ep, i in epsDisco.endpoints
                   tr(class=(i % 2 == 0) ? 'odd' : 'even')

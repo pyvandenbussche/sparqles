@@ -33,7 +33,8 @@ app.get('/', function(req, res){
             configInstanceTitle: configApp.get('configInstanceTitle'),
             eps: eps,
 			configInterop: JSON.parse(fs.readFileSync('./texts/interoperability.json')),
-			configPerformance: JSON.parse(fs.readFileSync('./texts/performance.json'))
+			configPerformance: JSON.parse(fs.readFileSync('./texts/performance.json')),
+			configDisco: JSON.parse(fs.readFileSync('./texts/discoverability.json'))
             });
 });
 
@@ -44,7 +45,8 @@ app.get('/endpoint', function(req, res){
             ep: ep,
             lastUpdate: 'Monday 02 September 2013, 22:22',
 			configInterop: JSON.parse(fs.readFileSync('./texts/interoperability.json')),
-			configPerformance: JSON.parse(fs.readFileSync('./texts/performance.json'))
+			configPerformance: JSON.parse(fs.readFileSync('./texts/performance.json')),
+			configDisco: JSON.parse(fs.readFileSync('./texts/discoverability.json'))
             });
 });
 
@@ -60,7 +62,8 @@ app.get('/discoverability', function(req, res){
 		var epsDisco = JSON.parse(fs.readFileSync('./examples/discoverability.json'));
         res.render('content/discoverability.jade',{
 			lastUpdate: 'Monday 02 September 2013, 22:22',
-			epsDisco: epsDisco
+			epsDisco: epsDisco,
+			configDisco: JSON.parse(fs.readFileSync('./texts/discoverability.json'))
             });
 });
 

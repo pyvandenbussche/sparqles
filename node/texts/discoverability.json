@@ -1,9 +1,9 @@
 {
-	"Server Name": "<p></p>",
-	"VoID Description": "<p></p>",
-	"Service Description": "<p></p>",
+	"Server Name": "<p>Name of the server found in the HTTP GET response header (as of the field \\'Server\\').</p>",
+	"VoID Description": "<p>VoID is an RDF Schema vocabulary for expressing metadata about RDF datasets. In particular it can be used to express general metadata about datasets contained by an SPARQL Endpoint.</p>",
+	"Service Description": "<p>SPARQL service description is a W3C recommendation. Service Description is both a method for discovering and a vocabulary for describing SPARQL services made available via the SPARQL 1.1 Protocol for RDF. These descriptions provide a mechanism by which a client or end user can discover information about the SPARQL service such as supported extension functions and details about the available dataset.</p>",
 	"HTTP GET header": "<p></p>",
-	"Well Known Location": "<p></p>",
-	"SPARQL Endpoint content": "<p></p>",
-	"Datahub.io": "<p></p>",
+	"Well Known Location": "<p>RFC 5785 standard recommends to publish the description at the location \\'http://hostname/.well-known/\\' ideally at the root.</p>",
+	"SPARQL Endpoint content": "<p>Description contained in the SPARQL Endpoint content</p>",
+	"Datahub.io": "<p>Description fetched from Datahub.io catalog</p>"
 }
