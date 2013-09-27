@@ -36,7 +36,7 @@ public class MongoDBTEST {
 	@Test
 	public void test() throws URISyntaxException, IOException {
 		
-		SPARQLESProperties.init(new File("src/main/resources/ends.properties"));
+		SPARQLESProperties.init(new File("src/test/resources/ends.properties"));
 		
 		
 		MongoDBManager m = new MongoDBManager();

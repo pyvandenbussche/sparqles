@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import sparqles.core.*;
-import sparqles.utils.DBManager;
+import sparqles.core.discovery.DTask;
 import sparqles.utils.FileManager;
 
 public class TaskTester {
