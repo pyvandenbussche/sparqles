@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.sql.rowset.serial.SerialBlob;
@@ -150,6 +151,56 @@ public class DBManager {
 			
 			Statement st = con.createStatement();
 			String query ="SELECT * FROM results WHERE Endpoint='"+ep.getUri().toString()+"' AND Task='"+cls.getSimpleName()+"';";
+			log.info("[QUERY] {}", query);
+			
+			ResultSet res = st.executeQuery(query);
+			while(res.next()){
+				Decoder decoder = DecoderFactory.get().binaryDecoder(res.getBinaryStream(3), null);
+				DatumReader<T> dr = new SpecificDatumReader<T>(cls);
+				
+				T t = dr.read(null, decoder);
+				reslist.add(t);
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return reslist;
+	}
+	
+	public <T> List<T> getResultsByDESCDate(Endpoint ep, Class<T> cls) {
+		ArrayList<T> reslist = new ArrayList<T>();
+		try {
+			
+			Statement st = con.createStatement();
+			String query ="SELECT * FROM results WHERE Endpoint='"+ep.getUri().toString()+"' AND Task='"+cls.getSimpleName()+"' ORDER BY Date DESC;";
+			log.info("[QUERY] {}", query);
+			
+			ResultSet res = st.executeQuery(query);
+			while(res.next()){
+				Decoder decoder = DecoderFactory.get().binaryDecoder(res.getBinaryStream(3), null);
+				DatumReader<T> dr = new SpecificDatumReader<T>(cls);
+				
+				T t = dr.read(null, decoder);
+				reslist.add(t);
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return reslist;
+	}
+
+	public <T> List<T> getResultsSince(Endpoint ep, Class<T> cls,
+			Long timestamp) {
+		ArrayList<T> reslist = new ArrayList<T>();
+		try {
+			Statement st = con.createStatement();
+			String query ="SELECT * FROM results WHERE Endpoint='"+ep.getUri().toString()+"' AND Task='"+cls.getSimpleName()+"' AND Date > '"+new java.sql.Timestamp(timestamp)+"' ORDER BY Date DESC;";
 			log.info("[QUERY] {}", query);
 			
 			ResultSet res = st.executeQuery(query);

@@ -6,16 +6,20 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-import core.Main;
+import sparqles.core.Main;
+
+
 
 public class SPARQLESCLITEST {
 
 	@Test
 	public void test() {
 		final String [] args = {
-				"SPARQLES",
-				"-p","test/resources/ends.properties",
-				"-s"};
+				"SPARQLES"
+				,"-p","test/resources/ends.properties"
+				,"-i"
+//				,"-s"
+				};
 		
 		try {
 			Thread t = new Thread(){
@@ -35,8 +39,8 @@ public class SPARQLESCLITEST {
 			Thread.sleep(120000);
 			
 			System.exit(0);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		} catch (Throwable ex) {
+			ex.printStackTrace();
 		}
 	}
 }

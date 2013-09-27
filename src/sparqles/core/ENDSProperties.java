@@ -13,10 +13,7 @@ import org.slf4j.LoggerFactory;
 public class ENDSProperties {
 	private static final Logger log = LoggerFactory.getLogger(ENDSProperties.class);
 
-	private static String DB_DRIVER ="org.h2.Driver";
-	private static String DB_URL="jdbc:h2:./db.h2";
-
-	private static String DATA_DIR = "./data";
+		private static String DATA_DIR = "./data";
 	
 	private static String SCHEDULE_CRON;
 	
@@ -35,18 +32,25 @@ public class ENDSProperties {
 	private static Integer TASK_THREADS=10;
 
 	private static String ENDPOINT_LIST;
-	
+
+	private static String DB_HOST = "localhost";
+	private static int DB_PORT=27017;
+
+	private static String DB_NAME;
 	
 	public static String getDATA_DIR() {
 		return DATA_DIR;
 	}
 	
-	public static String getDB_DRIVER() {
-		return DB_DRIVER;
+	public static String getDB_HOST() {
+		return DB_HOST;
+	}
+	public static String getDB_NAME() {
+		return DB_NAME;
 	}
 
-	public static String getDB_URL() {
-		return DB_URL;
+	public static int getDB_PORT() {
+		return DB_PORT;
 	}
 
 	public static String getPTASK_QUERIES() {
@@ -102,13 +106,15 @@ public class ENDSProperties {
 	}
 
 
-	private static void init(Properties props) {
+	public static void init(Properties props) {
 		
 
 
 		DATA_DIR = props.getProperty("data.dir", DATA_DIR);
-		DB_DRIVER = props.getProperty("db.driver",DB_DRIVER);
-		DB_URL = props.getProperty("db.url",DB_URL);
+
+		DB_HOST = props.getProperty("db.host",DB_HOST);
+		DB_NAME = props.getProperty("db.name",DB_NAME);
+		DB_PORT = Integer.valueOf(props.getProperty("db.port",""+DB_PORT));
 
 		FTASK_QUERIES = (props.getProperty("ftask.queries"));
 		PTASK_QUERIES = (props.getProperty("ptask.queries"));
@@ -123,7 +129,7 @@ public class ENDSProperties {
 
 		SCHEDULE_CRON = props.getProperty("schedule.cron");
 		
-		Object[] t = {DATA_DIR, DB_DRIVER, DB_URL};
+		Object[] t = {DATA_DIR, DB_HOST, DB_PORT};
 		log.debug("[LOAD] properties: {}",props );
 
 	}

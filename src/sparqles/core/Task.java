@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import sparqles.utils.DBManager;
 import sparqles.utils.FileManager;
+import sparqles.utils.MongoDBManager;
 
 /**
  * 
@@ -24,7 +25,7 @@ public abstract class Task<V extends SpecificRecordBase> implements Callable<V> 
 	private final EndpointResult _epr;
 	private final String _id;
 
-	private DBManager _dbm;
+	private MongoDBManager _dbm;
 	protected FileManager _fm;
 	
 	public Task(Endpoint ep) {
@@ -33,7 +34,7 @@ public abstract class Task<V extends SpecificRecordBase> implements Callable<V> 
 		_id = this.getClass().getSimpleName()+"("+_epr.getEndpoint().getUri()+")";
 	}
 	
-	public void setDBManager(DBManager dbm){
+	public void setDBManager(MongoDBManager dbm){
 		_dbm = dbm;
 	}
 	public void setFileManager(FileManager fm) {
@@ -47,7 +48,7 @@ public abstract class Task<V extends SpecificRecordBase> implements Callable<V> 
 		try{
 			sparqles.utils.LogHandler.run(log,this.getClass().getSimpleName(), _epr.getEndpoint().getUri().toString());
 			V v= process(_epr);
-			if(_dbm != null &&  !_dbm.insertResult(v)){
+			if(_dbm != null &&  !_dbm.insert(v)){
 				log.warn("Could not store record to DB");
 			}
 			if(_fm != null &&  !_fm.writeResult(v)){

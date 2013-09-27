@@ -1,0 +1,12 @@
+{
+"namespace": "sparqles.schedule",
+ "type": "record",
+ "name": "Schedule",
+ "fields": [
+    {"name": "endpoint", "type": "sparqles.core.Endpoint"},
+    {"name": "ATask", "type": "string"},
+    {"name": "FTask", "type": "string"},
+    {"name": "PTask", "type": "string"},
+    {"name": "DTask", "type": "string"}
+ 	]
+}

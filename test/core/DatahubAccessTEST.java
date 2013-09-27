@@ -2,6 +2,7 @@ package core;
 
 import org.junit.Test;
 
+import sparqles.core.EndpointManager;
 import sparqles.utils.DatahubAccess;
 
 public class DatahubAccessTEST {
@@ -9,6 +10,7 @@ public class DatahubAccessTEST {
 	
 	@Test
 	public void testAccess(){
-		DatahubAccess.checkEndpointList();
+		EndpointManager em = new EndpointManager();
+		DatahubAccess.checkEndpointList(em);
 	}
 }

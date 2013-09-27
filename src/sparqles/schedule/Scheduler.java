@@ -1,5 +1,7 @@
 package sparqles.schedule;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +19,7 @@ import sparqles.schedule.iter.ScheduleIterator;
 import sparqles.utils.DBManager;
 import sparqles.utils.FileManager;
 import sparqles.utils.LogHandler;
+import sparqles.utils.MongoDBManager;
 import sparqles.core.ENDSProperties;
 import sparqles.core.Endpoint;
 import sparqles.core.EndpointManager;
@@ -51,7 +54,7 @@ public class Scheduler {
 	private final ScheduledExecutorService SERVICE;
 
 	private FileManager _fm;
-	private DBManager _dbm;
+	private MongoDBManager _dbm;
 	
 	public Scheduler(){
 		this(ENDSProperties.getTASK_THREADS());
@@ -124,13 +127,37 @@ public class Scheduler {
 		log.info("[RESCHEDULED] {} next:'{}' policy:'{}'",s);
 	}
 
-	public void createDefaultSchedule(EndpointManager epm) {
-		for(Entry<String, Endpoint> ep: epm.getEndpointMap().entrySet()){
-			for(Entry<String,String> ent:taskSchedule.entrySet()){
-				epm.updateSchedule(ep.getKey(), ent.getKey(), ent.getValue());
-			}
+	public static Collection<Schedule> createDefaultSchedule(
+			Collection<Endpoint> eps) {
+		List<Schedule> l = new ArrayList<Schedule>();
+		
+		for(Endpoint ep: eps){
+			Schedule s = defaultSchedule(ep);
+			l.add(s);
 		}
+		
+		return l;
 	}
+	
+	private static Schedule defaultSchedule(Endpoint ep) {
+		Schedule s = new Schedule();
+		s.setEndpoint(ep);
+		
+		s.setATask(taskSchedule.get("ATask"));
+		s.setPTask(taskSchedule.get("PTask"));
+		s.setFTask(taskSchedule.get("FTask"));
+		s.setDTask(taskSchedule.get("DTask"));
+		
+		
+		
+		return s;
+	}
+
+//	public List<Schedule> createDefaultSchedule(EndpointManager epm) {
+//		for(Entry<String, Endpoint> ep: epm.getEndpointMap().entrySet()){
+//			
+//		}
+//	}
 
 	public void close() {
 		log.info("Shutting down scheduler service");
@@ -144,15 +171,8 @@ public class Scheduler {
 		
 	}
 
-	public void useDB(boolean b) {
-		if(b){
-			_dbm = new DBManager();
-		}else{
-			if(_dbm != null){
-				_dbm.close();
-			}
-			_dbm = null;
-		}
+	public void useDB(MongoDBManager dbm) {
+		_dbm = dbm;
 	}
 
 	public void useFileManager(boolean b) {
@@ -165,4 +185,6 @@ public class Scheduler {
 			_fm = null;
 		}
 	}
+
+
 }

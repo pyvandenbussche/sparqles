@@ -3,6 +3,19 @@
  "type": "record",
  "name": "Endpoint",
  "fields": [
-    {"name": "uri", "type": "string" }
- ]
+    {"name": "uri", "type": "string" },
+    {"name": "datasets", "type":
+    	{"type": "array", "items": 
+    		{	
+    			"namespace": "sparqles.core",	
+ 				"name": "Dataset",
+      			"type": "record",
+        		"fields" : [
+        			{ "name": "uri", "type": "string"},
+        			{ "name": "label", "type": "string"}
+      			]
+      		}
+      	}
+   	} 
+ 	]
 }

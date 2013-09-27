@@ -1,34 +1,36 @@
 package sparqles.utils;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.conn.HttpClientConnectionManager;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.conn.BasicHttpClientConnectionManager;
 import org.apache.http.util.EntityUtils;
 import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.node.ArrayNode;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import sparqles.core.ENDSProperties;
+import sparqles.core.Dataset;
 import sparqles.core.Endpoint;
 import sparqles.core.EndpointFactory;
-import sparqles.core.EndpointManager;
 
 //http://datahub.io/api/2/search/resource?format=api/sparql&all_fields=1&limit=1000
 
@@ -36,181 +38,119 @@ public class DatahubAccess {
 	private static final Logger log = LoggerFactory.getLogger(DatahubAccess.class);
 
 
-	
+
 	/**
 	 * This class fetch the SPARQL endpoint list from datahub using the datahub API 
 	 * @param epm 
 	 **/
-	public static Collection<Endpoint> checkEndpointList(EndpointManager epm){
-		Map<String, Endpoint> results = epm.getEndpointMap();
+	public static Collection<Endpoint> checkEndpointList(){
+		Map<String, Endpoint> results = new HashMap<String, Endpoint>();
 		/* LOAD PROPERTIES */
 		try {
-
-			HttpClient httpClient = new DefaultHttpClient();
+			
+			HttpClientConnectionManager connMrg = new BasicHttpClientConnectionManager();
+			CloseableHttpClient httpClient = HttpClients.custom()
+			        .setConnectionManager(connMrg)
+			        .build();
+			
 			HttpGet getRequest = new HttpGet("http://datahub.io/api/2/search/resource?format=api/sparql&all_fields=1&limit=1000");
-			HttpResponse response = httpClient.execute(getRequest);
+			CloseableHttpResponse response = httpClient.execute(getRequest);
 			if (response.getStatusLine().getStatusCode() != 200) {
 				throw new RuntimeException("Failed : HTTP error code : "
 						+ response.getStatusLine().getStatusCode());
 			}
 			String respString = EntityUtils.toString(response.getEntity());
-//			System.out.println(respString);
-
+			response.close();
+			
 			JsonFactory factory = new JsonFactory();
 			ObjectMapper mapper = new ObjectMapper(factory);
 			JsonNode rootNode = mapper.readTree(respString);  
 
-
 			JsonNode res = rootNode.get("results");
-//			System.out.println(res instanceof ArrayNode);
+			log.info("We found {} datasets",res.size());
 			Iterator<JsonNode> iter = res.getElements();
-			//Iterator<Entry<String, JsonNode>> iter = rootNode.get("results").getFields();
+			int c=1;
+			
+			Map<String,Set<String>> map = new HashMap<String, Set<String>>();
 			while(iter.hasNext()){
-				String endpointURL = iter.next().findPath("url").getTextValue();
-				if(endpointURL.trim().length()!=0){
-					Endpoint ep;
+				JsonNode node = iter.next();
+				String endpointURL = node.findPath("url").getTextValue().trim();
+				String datasetId = node.findPath("package_id").getTextValue().trim();
+				
+				Set<String> s = map.get(endpointURL);
+				if(s==null){
+					s= new HashSet<String>();
+					map.put(endpointURL, s);
+				}
+				s.add(datasetId);
+			}
+			for(Entry<String,Set<String>> ent: map.entrySet()){
+				String endpointURL = ent.getKey(); 
+
+				if(endpointURL.length()==0) continue;
+				Endpoint ep = results.get(endpointURL);
+				if(ep == null){
 					try {
 						ep = EndpointFactory.newEndpoint(new URI(endpointURL));
+						List<Dataset> l = new ArrayList<Dataset>();
+						ep.setDatasets(l);
 						results.put(endpointURL, ep);
-//						System.out.println(ep);
 					} catch (URISyntaxException e) {
 						log.warn("URISyntaxException:{}",e.getMessage());
 					}
 				}
+				if(ent.getValue().size()!=0){
+					for(String ds : ent.getValue()){
+						ep = checkForDataset(ep,ds,httpClient );
+					}
+				}
+				if(c==49){
+					System.out.println("ASDASD");
+				}
+				log.info("[GET] [{}] {}",c++,ep);
 			}
-			log.info("Found {} endpoints",results.size());
-			
-
-			//			JSONObject json = (JSONObject) JSONSerializer.toJSON( respString);        
-			//	        JSONArray resources = json.getJSONArray("results");
-			//	        for (int i = 0; i < resources.size(); i++) {
-			//	        	
-			//	        	// for each dataset (if not already existing with same value, fetch dataset information)
-			//	        	JSONObject resource = (JSONObject)resources.get(i);
-			//	        	String endpointURL = resource.getString("url");
-			//	        	String datasetId = resource.getString("package_id");
-			//	        	if(endpointURL.trim().length()>0 && !results.containsKey(endpointURL)){
-			//	        		Endpoint ep;
-			//					try {
-			//						ep = EndpointFactory.newEndpoint(new URI(endpointURL));
-			//						results.put(endpointURL, ep);
-			//					} catch (URISyntaxException e) {
-			//						e.printStackTrace();
-			//					}
-			////		        	boolean alreadyExisting=false;
-			////		        	for (int j = 0; j < results.size(); j++) {
-			////						if(results.get(j).getPackageUuid().equals(datasetId) && results.get(j).getEndpointURL().equals(endpointURL)){
-			////							alreadyExisting=true;
-			////							break;
-			////						}
-			////					}
-			////		        	if(!alreadyExisting) results.add(getEndpointDetails(datasetId,endpointURL));
-			//	        	}
-			//	        	
-			//			}
-			httpClient.getConnectionManager().shutdown();
-
-//			storeMap(results);
-			//write down csv file
-			//			StringBuilder st = new StringBuilder();
-			//			for (Entry<String, Endpoint> ent : results.entrySet()) {
-			//				st.append(ent.getValue()+"\n");
-			//			}
-			////		    System.out.println(st.toString());
-
-		} catch (FileNotFoundException e2) {
-			e2.printStackTrace();
-		} catch (IOException e2) {
+//			httpClient.getConnectionManager().shutdown();
+		} catch (Exception e2) {
+			log.warn("[EXEC] {}",e2);
 			e2.printStackTrace();
 		} 
-
+		log.info("Found {} endpoints",results.size());
+		
 		return results.values();
 	}
-	
-	//	
-	//	private static EndpointResult getEndpointDetails(String datasetId,String endpointURL){
-	//		try {
-	//			
-	//			 
-	//			HttpClient httpClient = new DefaultHttpClient();
-	//			HttpGet getRequest = new HttpGet("http://datahub.io/api/2/rest/dataset/"+datasetId);
-	//			HttpResponse response = httpClient.execute(getRequest);
-	//			if (response.getStatusLine().getStatusCode() != 200) {
-	//				throw new RuntimeException("Failed : HTTP error code : "
-	//				   + response.getStatusLine().getStatusCode());
-	//			}
-	//	 
-	//			BufferedReader br = new BufferedReader(new InputStreamReader((response.getEntity().getContent())));
-	//	 
-	//			StringBuilder datasetIdList = new StringBuilder();
-	////			System.out.println("Output from Server .... \n");
-	//			String line = "";
-	//			while ((line = br.readLine()) != null) {
-	//				datasetIdList.append(line);
-	//			}
-	//			
-	//			JSONObject json = (JSONObject) JSONSerializer.toJSON( datasetIdList.toString() );        
-	//	        String ckan_url = json.getString( "ckan_url" );
-	//	        String title = json.getString("title").trim();
-	//	        String name = json.getString("name");
-	//	        EndpointResult result = new EndpointResult();
-	//	        result.setPackageUuid(datasetId);
-	//			result.setPackageId(name);
-	//	        result.setDatasetURI(ckan_url);
-	//			result.setEndpointURL(endpointURL);
-	//			result.setDatasetTitle(title);
-	//	        
-	//	        
-	//	        System.out.println(datasetId+"\t"+ckan_url+"\t"+title+"\t"+name+"\t"+endpointURL);
-	////	        JSONObject pilot = json.getJSONObject("pilot");
-	//	        
-	//	 
-	//			httpClient.getConnectionManager().shutdown();
-	//			return result;
-	//	 
-	//		  } catch (ClientProtocolException e) {
-	//	 
-	//			e.printStackTrace();
-	//	 
-	//		  } catch (IOException e) {
-	//	 
-	//			e.printStackTrace();
-	//		  }
-	//		return null;
-	//	}
-	//	
-	//	public static List<EndpointResult> getEndpointList(){
-	//		List<EndpointResult> results = new ArrayList<EndpointResult>();
-	//		/* LOAD PROPERTIES */
-	//	 	try {
-	//			Properties prop = new Properties();
-	//			String fileName = "endpointStatus.config";
-	//			InputStream is = new FileInputStream(fileName);
-	//			prop.load(is);
-	//			String endpoints_list_store=  prop.getProperty("ENDPOINTS_LIST_STORE");
-	//		
-	//			File file = new File(endpoints_list_store);
-	//			// input
-	//		     FileInputStream fis  = new FileInputStream(file);
-	//		     BufferedReader in = new BufferedReader
-	//		         (new InputStreamReader(fis));
-	//	
-	//		     String thisLine="";
-	//		     while ((thisLine = in.readLine()) != null) {
-	//		    	 EndpointResult res = new EndpointResult();
-	//		    	 System.out.println(thisLine);
-	//		    	 res.fromCSV(thisLine);
-	//		    	 results.add(res);
-	//		     }
-	//		     in.close();
-	//	//	     System.out.println(st.toString());     
-	//		    
-	//	 	} catch (FileNotFoundException e2) {
-	//			e2.printStackTrace();
-	//		} catch (IOException e2) {
-	//			e2.printStackTrace();
-	//		}
-	//		return results;
-	//	}
-	
+
+	private static Endpoint checkForDataset(Endpoint ep, String datasetId, CloseableHttpClient httpClient){
+		log.debug("[GET] dataset info for {} and {}", datasetId,ep);
+		HttpGet getRequest = null;
+		try {
+			getRequest = new HttpGet("http://datahub.io/api/2/rest/dataset/"+datasetId);
+			CloseableHttpResponse response = httpClient.execute(getRequest);
+			if (response.getStatusLine().getStatusCode() != 200) {
+				throw new RuntimeException("Failed : HTTP error code : "
+						+ response.getStatusLine().getStatusCode());
+			}
+			String respString = EntityUtils.toString(response.getEntity());
+			response.close();
+			
+//			JsonFactory factory = new JsonFactory();
+//			ObjectMapper mapper = new ObjectMapper(factory);
+//			JsonNode rootNode = mapper.readTree(respString); 
+//
+//			String ckan_url = rootNode.findPath("ckan_url").getTextValue();
+//			String title = rootNode.findPath("title").getTextValue().trim();
+//
+//			Dataset d = new Dataset();
+//			d.setLabel(title);
+//			d.setUri(ckan_url);
+//			List<Dataset> l =  ep.getDatasets();
+//			l.add(d);
+//			ep.setDatasets(l);
+
+			return ep;
+
+		} catch (Exception e) {
+			log.warn("[EXEC] {}",e);
+		} 
+		return ep;
+	}
 }

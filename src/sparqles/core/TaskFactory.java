@@ -13,18 +13,19 @@ import sparqles.core.performance.PTask;
 import sparqles.core.performance.SpecificPTask;
 import sparqles.utils.DBManager;
 import sparqles.utils.FileManager;
+import sparqles.utils.MongoDBManager;
 
 public class TaskFactory {
 	private static final Logger log = LoggerFactory.getLogger(TaskFactory.class);
 	
 	
-	public static Task create(String task, String endpoint, DBManager dbm,
+	public static Task create(String task, String endpoint, MongoDBManager dbm,
 			FileManager fm) throws URISyntaxException {
 		Endpoint ep = EndpointFactory.newEndpoint(endpoint);
 		return create(task, ep, dbm, fm);
 	}
 	
-	public static Task create(String task, Endpoint ep, DBManager dbm,
+	public static Task create(String task, Endpoint ep, MongoDBManager dbm,
 			FileManager fm) {
 		Task t = null;
 		if(task.equalsIgnoreCase("ptask")){
