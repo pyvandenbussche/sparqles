@@ -7,7 +7,7 @@ package sparqles.schedule;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class Schedule extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Schedule\",\"namespace\":\"sparqles.schedule\",\"fields\":[{\"name\":\"endpoint\",\"type\":{\"type\":\"record\",\"name\":\"Endpoint\",\"namespace\":\"sparqles.core\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"},{\"name\":\"datasets\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Dataset\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"},{\"name\":\"label\",\"type\":\"string\"}]}}}]}},{\"name\":\"ATask\",\"type\":\"string\"},{\"name\":\"FTask\",\"type\":\"string\"},{\"name\":\"PTask\",\"type\":\"string\"},{\"name\":\"DTask\",\"type\":\"string\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Schedule\",\"namespace\":\"sparqles.schedule\",\"fields\":[{\"name\":\"endpoint\",\"type\":{\"type\":\"record\",\"name\":\"Endpoint\",\"namespace\":\"sparqles.core\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"},{\"name\":\"datasets\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Dataset\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"},{\"name\":\"label\",\"type\":\"string\"}]}}}]}},{\"name\":\"ATask\",\"type\":[\"string\",\"null\"]},{\"name\":\"FTask\",\"type\":[\"string\",\"null\"]},{\"name\":\"PTask\",\"type\":[\"string\",\"null\"]},{\"name\":\"DTask\",\"type\":[\"string\",\"null\"]}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public sparqles.core.Endpoint endpoint;
   @Deprecated public java.lang.CharSequence ATask;
@@ -340,6 +340,7 @@ public class Schedule extends org.apache.avro.specific.SpecificRecordBase implem
       return this;
     }
 
+    
     public Schedule build() {
       try {
         Schedule record = new Schedule();

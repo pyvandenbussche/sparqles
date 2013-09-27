@@ -50,33 +50,16 @@ public class EndpointManager {
 		Collection<Schedule> s = dbm.get(Schedule.class, Schedule.SCHEMA$);
 		for(Schedule sd: s){
 			Endpoint ep = sd.getEndpoint();
-			updateSchedule(ep.getUri().toString(), "ATask", sd.getATask().toString());
-			updateSchedule(ep.getUri().toString(), "PTask", sd.getPTask().toString());
-			updateSchedule(ep.getUri().toString(), "FTask", sd.getFTask().toString());
-			updateSchedule(ep.getUri().toString(), "DTask", sd.getDTask().toString());
+			if(sd.getATask()!=null)
+				updateSchedule(ep.getUri().toString(), "ATask", sd.getATask().toString());
+			if(sd.getPTask()!=null)
+				updateSchedule(ep.getUri().toString(), "PTask", sd.getPTask().toString());
+			if(sd.getFTask()!=null)
+				updateSchedule(ep.getUri().toString(), "FTask", sd.getFTask().toString());
+			if(sd.getDTask()!=null)
+				updateSchedule(ep.getUri().toString(), "DTask", sd.getDTask().toString());
 		}
-		
-//		
-//		
-//		Scanner s = null;
-//		if( ENDSProperties.getSCHEDULE_CRON().startsWith("file:")){
-//			try {
-//				File f= new File(ENDSProperties.getSCHEDULE_CRON().replace("file:", ""));
-//				if(f.exists()){
-//					s = new Scanner(f);
-//				}
-//			} catch (FileNotFoundException e) {
-//				LogHandler.warn(log, "loading scheduler map", e);
-////				log.warn("FileNotFoundException for scheduler map, msg:{}",ENDSProperties.getSCHEDULE_CRON());
-//			}
-//		}else{
-//			s = new Scanner(ClassLoader.getSystemResourceAsStream(ENDSProperties.getSCHEDULE_CRON()));
-//		}
-//		if(s!=null){
-//			while(s.hasNextLine()){
-//				parseLine(s.nextLine().trim());
-//			}
-//		}
+		log.info("[INIT] Loaded {} schedule information for endpoints",s.size());
 	}
 
 	private void parseLine(String line) {
@@ -146,47 +129,13 @@ public class EndpointManager {
 		
 		Collection<Endpoint> eps = dbm.get(Endpoint.class, Endpoint.SCHEMA$);
 		
+		
 		for(Endpoint ep: eps){
 			_epMap.put(ep.getUri().toString(), ep);
 		}
+		log.info("[INIT] Loaded {} endpoints",eps.size());
 	}
-//		
-//		Scanner s = null;
-//		
-//		
-//		
-//		
-//		
-//		
-//		
-//		
-//		
-//		if( ENDSProperties.getENDPOINT_LIST().startsWith("file:")){
-//			try {
-//				File f= new File(ENDSProperties.getENDPOINT_LIST().replace("file:", ""));
-//				if(f.exists()){
-//					s = new Scanner(f);
-//				}
-//			} catch (FileNotFoundException e) {
-//				LogHandler.warn(log, "loading endpoint map", e);
-//
-//			}
-//		}else{
-//			s = new Scanner(ClassLoader.getSystemResourceAsStream(ENDSProperties.getENDPOINT_LIST()));
-//		}
-//		if(s!=null){
-//			while(s.hasNextLine()){
-//				String line = s.nextLine().trim().toLowerCase();
-//				if(line.length()>0 && line.startsWith("http://")){
-//					try {
-//						Endpoint ep = EndpointFactory.newEndpoint(line);
-//						_epMap.put(line, ep);
-//					} catch (URISyntaxException e) {
-//						LogHandler.warn(log, "loading scheduler map", e);
-//					}
-//				}
-//			}}
-//	}
+
 
 	public void updateSchedule(String ep, String task, String cron) {
 
@@ -197,7 +146,6 @@ public class EndpointManager {
 			map= new String[4];
 			_epScheduleMap.put(ep, map);
 		}
-
 		Integer id = getTaskID(task);
 		if(id != null){
 			if(map[id] != null){
@@ -236,34 +184,6 @@ public class EndpointManager {
 			pw.close();
 		}
 	}
-
-//	private  void storeMap(Map<String, Endpoint> results) {
-//		PrintWriter pw=null;
-//		if(ENDSProperties.getENDPOINT_LIST().startsWith("file:")){
-//			File f= new File(ENDSProperties.getENDPOINT_LIST().replace("file:", ""));
-//			try {
-//				pw = new PrintWriter(f);
-//			} catch (FileNotFoundException e) {
-//				LogHandler.warn(log, "storing endpoint list", e);
-////				log.warn("Did not store endpoint list: {}:{}", e.getClass().getSimpleName(), e.getMessage());
-//			}
-//		}else{
-//			log.info("Not storing endpoint list, since file is in classpath");
-//		}
-//		if(pw!=null){
-//			for(String ep: results.keySet()){
-//				pw.println(ep);
-//			}
-//			pw.close();
-//		}
-//	}
-
-	public void updateEndpointDB() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
 }
 
 

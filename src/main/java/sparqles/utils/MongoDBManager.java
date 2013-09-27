@@ -3,34 +3,27 @@ package sparqles.utils;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.UnknownHostException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
-import javax.sql.rowset.serial.SerialBlob;
-
 import org.apache.avro.Schema;
-import org.apache.avro.generic.GenericDatumWriter;
-import org.apache.avro.io.DatumReader;
-import org.apache.avro.io.Decoder;
 import org.apache.avro.io.DecoderFactory;
-import org.apache.avro.io.Encoder;
 import org.apache.avro.io.EncoderFactory;
 import org.apache.avro.io.JsonDecoder;
 import org.apache.avro.io.JsonEncoder;
 import org.apache.avro.specific.SpecificDatumReader;
 import org.apache.avro.specific.SpecificDatumWriter;
 import org.apache.avro.specific.SpecificRecordBase;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import sparqles.core.Endpoint;
+import sparqles.core.SPARQLESProperties;
+import sparqles.core.availability.AResult;
+import sparqles.core.discovery.DResult;
+import sparqles.core.features.FResult;
+import sparqles.core.performance.PResult;
+import sparqles.schedule.Schedule;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -38,17 +31,11 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoException;
+import com.mongodb.MongoException.DuplicateKey;
 import com.mongodb.WriteConcern;
 import com.mongodb.WriteResult;
 import com.mongodb.util.JSON;
-
-import sparqles.core.SPARQLESProperties;
-import sparqles.core.Endpoint;
-import sparqles.core.availability.AResult;
-import sparqles.core.discovery.DResult;
-import sparqles.core.features.FResult;
-import sparqles.core.performance.PResult;
-import sparqles.schedule.Schedule;
 
 
 
@@ -82,6 +69,7 @@ public class MongoDBManager {
 		if(client == null || db == null) return false;
 		return true;
 	}
+
 	private void setup()  {
 		try {
 			client = new MongoClient( SPARQLESProperties.getDB_HOST() , SPARQLESProperties.getDB_PORT() );
@@ -92,17 +80,17 @@ public class MongoDBManager {
 		}
 	}
 	
-	
 	public void initEndpointCollection() {
 		DBCollection c = db.getCollection(COLL_ENDS);
 		c.drop();
-		c.ensureIndex(new BasicDBObject("uri", 1).append("unique", true));
+		DBObject d = new BasicDBObject("uri", 1);
+		c.ensureIndex(d, new BasicDBObject("unique", true));
 	}
 
 	public void initScheduleCollection() {
 		DBCollection c = db.getCollection(COLL_SCHED);
 		c.drop();
-		c.ensureIndex(new BasicDBObject("endpoint.uri", 1).append("unique", true));
+		c.ensureIndex(new BasicDBObject("endpoint.uri", 1), new BasicDBObject("unique", true));
 	}
 
 
@@ -117,14 +105,6 @@ public class MongoDBManager {
 		if(res instanceof Schedule) return insert(COLL_SCHED, res, res.getSchema() );
 		return true;
 	}
-
-//	public boolean insert(Schedule ep) {
-//		return insert(COLL_SCHED, ep, ep.getSchema());
-//	}
-//
-//	public boolean insert(Endpoint ep){
-//		return insert(COLL_ENDS, ep, ep.getSchema());
-//	}
 	
 	private boolean insert(String collName, Object e, Schema schema){
 		DBCollection c = db.getCollection(collName);
@@ -135,12 +115,17 @@ public class MongoDBManager {
 			if(wr.getError()!=null){
 				System.out.println("error");
 			}else{
-				log.info("[INSERT] [SUCC] {}",e.toString());
+				log.info("[INSERT] [SUCC] {}:{}",collName,e.toString());
 			}
 
 			return true;
-		}catch(Exception ex){
+		}catch(DuplicateKey ex){
+			log.info("[INSERT] [DUPLICATE] uri key");
+			return true;
+		}catch(MongoException ex){
 			log.warn("[EXEC] {}",ex);
+		}catch(Exception exx){
+			log.warn("[EXEC] {}",exx);
 		}
 		return false;
 	}
@@ -191,7 +176,7 @@ public class MongoDBManager {
 			curs = c.find();
 		}else{
 			BasicDBObject q = new BasicDBObject();
-			q.append("endpoint.uri", ep.getUri().toString());
+			q.append("endpointResult.endpoint.uri", ep.getUri().toString());
 			c.find(q);
 		}
 		
@@ -216,6 +201,7 @@ public class MongoDBManager {
 		return null;
 	}
 
+	
 	
 
 //	public <T> List<T> getResultsByDESCDate(Endpoint ep, Class<T> cls) {

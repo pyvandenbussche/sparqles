@@ -1,4 +1,6 @@
-package core;
+package sparqles.core;
+
+
 
 import java.net.URI;
 

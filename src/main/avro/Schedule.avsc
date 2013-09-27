@@ -4,9 +4,9 @@
  "name": "Schedule",
  "fields": [
     {"name": "endpoint", "type": "sparqles.core.Endpoint"},
-    {"name": "ATask", "type": "string"},
-    {"name": "FTask", "type": "string"},
-    {"name": "PTask", "type": "string"},
-    {"name": "DTask", "type": "string"}
+    {"name": "ATask", "type": ["string", "null"]},
+    {"name": "FTask", "type": ["string", "null"]},
+    {"name": "PTask", "type": ["string", "null"]},
+    {"name": "DTask", "type": ["string", "null"]}
  	]
 }

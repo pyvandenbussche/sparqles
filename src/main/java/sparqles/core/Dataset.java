@@ -181,6 +181,7 @@ public class Dataset extends org.apache.avro.specific.SpecificRecordBase impleme
       return this;
     }
 
+    
     public Dataset build() {
       try {
         Dataset record = new Dataset();
