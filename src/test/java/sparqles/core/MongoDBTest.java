@@ -13,7 +13,7 @@ public class MongoDBTest {
 	@Test
 	public void test() {
 		
-		SPARQLESProperties.init(new File("test/main/resources/ends.properties"));
+		SPARQLESProperties.init(new File("src/test/esources/ends.properties"));
 		
 		MongoDBManager m = new MongoDBManager();
 		assertTrue(m.isRunning());
