@@ -1,9 +1,9 @@
 #!/bin/bash
 
 
-LIB=WebContent/WEB-INF/lib
-AVRO_JAR=avro-tools-1.7.4.jar
-AVRO_DIR=src/sparqles/core/avro
+LIB=target/dependency
+AVRO_JAR=avro-tools-1.7.5.jar
+AVRO_DIR=src/main/avro
 
 EP=$AVRO_DIR/Endpoint.avsc
 EPR=$AVRO_DIR/EndpointResult.avsc
@@ -14,6 +14,6 @@ FR=$AVRO_DIR/FResult.avsc
 S=$AVRO_DIR/Schedule.avsc
 
 
-SRC=src
+SRC=src/main/java
 
 java -jar $LIB/$AVRO_JAR compile schema $EP $EPR $PR $AR $DR $FR $S $SRC  

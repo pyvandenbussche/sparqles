@@ -1,0 +1,8 @@
+PREFIX xsd:      <http://www.w3.org/2001/XMLSchema#> 
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+SELECT REDUCED * 
+WHERE { 
+  { ?s rdf:type ?o } UNION { ?s rdf:type owl:Thing }
+} LIMIT 100
+

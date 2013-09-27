@@ -1,0 +1,10 @@
+{"namespace": "sparqles.core",
+ "type": "record",
+ "import" : "Endpoint.avsc",
+ "name": "EndpointResult",
+  "fields": [
+     {"name": "endpoint", "type": "sparqles.core.Endpoint"},
+     {"name": "start", "type": "long"},
+     {"name": "end", "type": "long"}
+ ]
+}

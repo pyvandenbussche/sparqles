@@ -1,0 +1,7 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+CONSTRUCT { ?x rdf:type ?v }
+WHERE
+{
+  ?x rdf:type ?o .
+  OPTIONAL {?o rdf:type ?v }
+} LIMIT 100

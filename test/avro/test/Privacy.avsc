@@ -1,5 +1,0 @@
-{ 
-  "type": "enum",
-  "name": "Privacy",
-  "symbols" : ["Public", "Private"]
-}

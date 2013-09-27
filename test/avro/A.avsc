@@ -1,8 +1,0 @@
-{
-"namespace": "ends.core",
- "type": "record",
- "name": "Endpoint",
- "fields": [
-    {"name": "uri", "type": "string" }
- ]
-}
