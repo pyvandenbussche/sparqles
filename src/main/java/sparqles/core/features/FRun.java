@@ -21,7 +21,7 @@ import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.sparql.util.FmtUtils;
 
-import sparqles.core.ENDSProperties;
+import sparqles.core.SPARQLESProperties;
 import sparqles.core.Endpoint;
 import sparqles.core.performance.Run;
 
@@ -49,7 +49,7 @@ public class FRun {
 	public FRun(Endpoint ep, String queryFile, Long start) {
 		_queryFile = queryFile;
 		
-		_query = QueryManager.getQuery(ENDSProperties.getFTASK_QUERIES(),queryFile);
+		_query = QueryManager.getQuery(SPARQLESProperties.getFTASK_QUERIES(),queryFile);
 		_ep = ep;
 		_start =start;
 	}

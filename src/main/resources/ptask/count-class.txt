@@ -1,0 +1,1 @@
+SELECT (COUNT(?c) AS ?x) WHERE { ?s a ?c . }

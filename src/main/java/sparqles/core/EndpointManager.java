@@ -214,8 +214,8 @@ public class EndpointManager {
 	}
 	private void storeSchedule(Map<String, String[]> results) {
 		PrintWriter pw=null;
-		if(ENDSProperties.getSCHEDULE_CRON().startsWith("file:")){
-			File f= new File(ENDSProperties.getSCHEDULE_CRON().replace("file:", ""));
+		if(SPARQLESProperties.getSCHEDULE_CRON().startsWith("file:")){
+			File f= new File(SPARQLESProperties.getSCHEDULE_CRON().replace("file:", ""));
 			try {
 				pw = new PrintWriter(f);
 			} catch (FileNotFoundException e) {

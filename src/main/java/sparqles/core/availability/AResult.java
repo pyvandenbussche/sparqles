@@ -390,7 +390,6 @@ public class AResult extends org.apache.avro.specific.SpecificRecordBase impleme
       return this;
     }
 
-    @Override
     public AResult build() {
       try {
         AResult record = new AResult();

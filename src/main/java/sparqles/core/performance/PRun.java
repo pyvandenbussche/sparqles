@@ -22,7 +22,7 @@ import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.sparql.util.FmtUtils;
 
-import sparqles.core.ENDSProperties;
+import sparqles.core.SPARQLESProperties;
 import sparqles.core.Endpoint;
 
 public class PRun {
@@ -40,7 +40,7 @@ public class PRun {
 	public PRun(Endpoint ep, Object object, String queryFile) {
 		_queryFile = queryFile;
 		
-		_query = QueryManager.getQuery(ENDSProperties.getPTASK_QUERIES(),queryFile);
+		_query = QueryManager.getQuery(SPARQLESProperties.getPTASK_QUERIES(),queryFile);
 		_ep = ep;
 	}
 
@@ -69,7 +69,7 @@ public class PRun {
         result.setCold(run());
         
         try {
-			Thread.sleep(ENDSProperties.getPTASK_WAITTIME());
+			Thread.sleep(SPARQLESProperties.getPTASK_WAITTIME());
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

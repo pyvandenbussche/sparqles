@@ -19,7 +19,7 @@ import sparqles.schedule.iter.ScheduleIterator;
 import sparqles.utils.FileManager;
 import sparqles.utils.LogHandler;
 import sparqles.utils.MongoDBManager;
-import sparqles.core.ENDSProperties;
+import sparqles.core.SPARQLESProperties;
 import sparqles.core.Endpoint;
 import sparqles.core.EndpointManager;
 import sparqles.core.Task;
@@ -56,7 +56,7 @@ public class Scheduler {
 	private MongoDBManager _dbm;
 	
 	public Scheduler(){
-		this(ENDSProperties.getTASK_THREADS());
+		this(SPARQLESProperties.getTASK_THREADS());
 	}
 	
 	public Scheduler(int threads){

@@ -1,0 +1,9 @@
+{
+"namespace": "ends.core.discovery",
+ "type": "record",
+ "name": "DResultGET",
+ "fields": [
+  {"name": "endpointResult", "type": ends.core.ER},
+  {"name": "date", "type": "string"}
+ ]
+}

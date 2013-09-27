@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import sparqles.utils.LogHandler;
 
-import sparqles.core.ENDSProperties;
+import sparqles.core.SPARQLESProperties;
 import sparqles.core.Endpoint;
 import sparqles.core.EndpointResult;
 import sparqles.core.Task;
@@ -29,7 +29,7 @@ public class FTask extends Task<FResult>{
     public FTask(Endpoint ep, SpecificFTask ... tasks) {
 		super(ep);
 		_tasks = tasks;
-		Object [] s = {ep.getUri().toString(), tasks.length, ENDSProperties.getFTASK_WAITTIME()};
+		Object [] s = {ep.getUri().toString(), tasks.length, SPARQLESProperties.getFTASK_WAITTIME()};
 		LogHandler.init(log,"{} with {} tasks and a waittime of {} ms", s);
 		
     }
@@ -57,7 +57,7 @@ public class FTask extends Task<FResult>{
 				failures++;
 			}
 			try {
-				Thread.sleep(ENDSProperties.getFTASK_WAITTIME());
+				Thread.sleep(SPARQLESProperties.getFTASK_WAITTIME());
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

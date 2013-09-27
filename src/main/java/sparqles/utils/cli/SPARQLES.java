@@ -14,7 +14,7 @@ import sparqles.schedule.Scheduler;
 import sparqles.utils.DatahubAccess;
 import sparqles.utils.DateFormater;
 import sparqles.utils.MongoDBManager;
-import sparqles.core.ENDSProperties;
+import sparqles.core.SPARQLESProperties;
 import sparqles.core.Endpoint;
 import sparqles.core.EndpointManager;
 
@@ -94,7 +94,7 @@ public class SPARQLES extends CLIObject{
 			File propFile = new File(CLIObject.getOptionValue(cmd, ARGUMENTS.PARAM_PROP_FILE));
 			if(propFile.exists()){
 				log.info("Reading properties from {}",propFile);
-				ENDSProperties.init(propFile);
+				SPARQLESProperties.init(propFile);
 			}else{
 				log.warn("Specified property file ({}) does not exist", propFile);
 			}

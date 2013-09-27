@@ -1,0 +1,9 @@
+{
+"namespace": "ends.core.test",
+ "type": "record",
+ "name": "C",
+ "fields": [
+     {"name": "b", "type": ends.core.B},
+     {"name": "name", "type": "string"}
+ ]
+}

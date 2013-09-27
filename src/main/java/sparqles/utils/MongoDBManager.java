@@ -42,7 +42,7 @@ import com.mongodb.WriteConcern;
 import com.mongodb.WriteResult;
 import com.mongodb.util.JSON;
 
-import sparqles.core.ENDSProperties;
+import sparqles.core.SPARQLESProperties;
 import sparqles.core.Endpoint;
 import sparqles.core.availability.AResult;
 import sparqles.core.discovery.DResult;
@@ -93,8 +93,8 @@ public class MongoDBManager {
 
 	private void setup()  {
 		try {
-			client = new MongoClient( ENDSProperties.getDB_HOST() , ENDSProperties.getDB_PORT() );
-			db = client.getDB( ENDSProperties.getDB_NAME() );
+			client = new MongoClient( SPARQLESProperties.getDB_HOST() , SPARQLESProperties.getDB_PORT() );
+			db = client.getDB( SPARQLESProperties.getDB_NAME() );
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}

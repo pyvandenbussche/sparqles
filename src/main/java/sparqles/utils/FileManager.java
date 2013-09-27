@@ -32,7 +32,7 @@ import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.sparql.util.FmtUtils;
 
-import sparqles.core.ENDSProperties;
+import sparqles.core.SPARQLESProperties;
 import sparqles.core.Endpoint;
 import sparqles.core.EndpointFactory;
 import sparqles.core.availability.AResult;
@@ -57,7 +57,7 @@ public class FileManager {
 
 	
 	public FileManager() {
-		String folder = ENDSProperties.getDATA_DIR();
+		String folder = SPARQLESProperties.getDATA_DIR();
 		if(folder.startsWith("file:")){
 			folder = folder.replace("file:","");
 		}
