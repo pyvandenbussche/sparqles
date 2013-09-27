@@ -85,6 +85,7 @@ public class MongoDBManager {
 	private void setup()  {
 		try {
 			client = new MongoClient( SPARQLESProperties.getDB_HOST() , SPARQLESProperties.getDB_PORT() );
+			log.info("[INIT] MongoDB {} ", client);
 			db = client.getDB( SPARQLESProperties.getDB_NAME() );
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
