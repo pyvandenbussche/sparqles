@@ -234,7 +234,6 @@ public class PSingleResult extends org.apache.avro.specific.SpecificRecordBase i
       return this;
     }
 
-    @Override
     public PSingleResult build() {
       try {
         PSingleResult record = new PSingleResult();

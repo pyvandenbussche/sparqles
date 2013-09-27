@@ -512,7 +512,6 @@ public class GetResult extends org.apache.avro.specific.SpecificRecordBase imple
       return this;
     }
 
-    @Override
     public GetResult build() {
       try {
         GetResult record = new GetResult();

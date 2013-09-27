@@ -171,7 +171,6 @@ public class VoidResult extends org.apache.avro.specific.SpecificRecordBase impl
       return this;
     }
 
-    @Override
     public VoidResult build() {
       try {
         VoidResult record = new VoidResult();

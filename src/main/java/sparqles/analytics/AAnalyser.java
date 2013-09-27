@@ -6,15 +6,16 @@ import java.util.List;
 
 import sparqles.core.Endpoint;
 import sparqles.core.availability.AResult;
-import sparqles.utils.DBManager;
+
+import sparqles.utils.MongoDBManager;
 
 public class AAnalyser {
 
 	
-	private DBManager _db;
+	private MongoDBManager _db;
 
 
-	public AAnalyser(DBManager db) {
+	public AAnalyser(MongoDBManager db) {
 		_db = db;
 	}
 	

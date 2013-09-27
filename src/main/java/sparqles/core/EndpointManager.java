@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import sparqles.schedule.Schedule;
+import sparqles.utils.LogHandler;
 import sparqles.utils.MongoDBManager;
 
 /**

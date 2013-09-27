@@ -3,7 +3,6 @@ package sparqles.utils;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.openjena.atlas.logging.Log;
 import org.slf4j.Logger;
 
 public class LogHandler {

@@ -202,6 +202,12 @@ public class MongoDBManager {
 		return reslist;
 	}
 
+	public List<AResult> getResultsSince(Endpoint ep, Class<AResult> class1,
+			long timeInMillis) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 //	public <T> List<T> getResultsByDESCDate(Endpoint ep, Class<T> cls) {
 //		ArrayList<T> reslist = new ArrayList<T>();
 //		try {

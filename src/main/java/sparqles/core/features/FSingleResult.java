@@ -181,7 +181,6 @@ public class FSingleResult extends org.apache.avro.specific.SpecificRecordBase i
       return this;
     }
 
-    @Override
     public FSingleResult build() {
       try {
         FSingleResult record = new FSingleResult();
