@@ -78,6 +78,20 @@ public class MongoDBManager {
 		setup();
 	}
 
+	public boolean isRunning() {
+		if(client == null || db == null) return false;
+		return true;
+	}
+	private void setup()  {
+		try {
+			client = new MongoClient( SPARQLESProperties.getDB_HOST() , SPARQLESProperties.getDB_PORT() );
+			db = client.getDB( SPARQLESProperties.getDB_NAME() );
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 	public void initEndpointCollection() {
 		DBCollection c = db.getCollection(COLL_ENDS);
 		c.drop();
@@ -91,14 +105,7 @@ public class MongoDBManager {
 	}
 
 
-	private void setup()  {
-		try {
-			client = new MongoClient( SPARQLESProperties.getDB_HOST() , SPARQLESProperties.getDB_PORT() );
-			db = client.getDB( SPARQLESProperties.getDB_NAME() );
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		}
-	}
+	
 
 	public <V extends SpecificRecordBase> boolean insert(V res) {
 		if(res instanceof DResult) return insert(COLL_DISC, res, res.getSchema() );
@@ -207,6 +214,8 @@ public class MongoDBManager {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 //	public <T> List<T> getResultsByDESCDate(Endpoint ep, Class<T> cls) {
 //		ArrayList<T> reslist = new ArrayList<T>();

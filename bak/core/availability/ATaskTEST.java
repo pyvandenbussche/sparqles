@@ -11,7 +11,8 @@ import core.Endpoints;
 import sparqles.core.*;
 import sparqles.core.availability.AResult;
 import sparqles.core.availability.ATask;
-import sparqles.utils.DBManager;
+
+import sparqles.utils.MongoDBManager;
 
 public class ATaskTEST {
 
@@ -21,7 +22,7 @@ public class ATaskTEST {
 		Endpoint ep = Endpoints.DBPEDIA;
 		
 		
-		DBManager db = new DBManager();
+		MongoDBManager db = new MongoDBManager();
 		sparqles.utils.FileManager fm = new sparqles.utils.FileManager();
 		
 		ATask task = new ATask(ep);
@@ -31,7 +32,7 @@ public class ATaskTEST {
 		AResult res = task.call();
 		
 		
-		List<AResult> r = db.getResults(ep, AResult.class);
+		List<AResult> r = db.getResults(ep, AResult.class, AResult.SCHEMA$);
 		for(AResult rr: r){
 			System.out.println("From db:"+rr);
 		}
