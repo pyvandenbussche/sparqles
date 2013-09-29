@@ -1,6 +1,0 @@
-SELECT * 
-{ 
-   { ?s ?p ?o }
-  UNION
-   { GRAPH ?g { ?s ?p ?o } }
-} LIMIT 100

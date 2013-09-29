@@ -12,6 +12,7 @@ AR=$AVRO_DIR/AResult.avsc
 DR=$AVRO_DIR/DResult.avsc
 FR=$AVRO_DIR/FResult.avsc
 S=$AVRO_DIR/Schedule.avsc
+I=$AVRO_JAR/Index.avsc
 
 
 SRC=src/main/java

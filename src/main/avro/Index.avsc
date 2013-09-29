@@ -1,0 +1,10 @@
+{
+"namespace": "sparqles.core",
+ "type": "record",
+ "name": "Index",
+ "fields": [ 
+ 	 {"name": "lastUpdate", "type": "long" },
+ 	 {"name": "availability", "type": "map", "values":["string",  {"type":
+"map", "values": ["long", "double"]}]},
+ 	 ]
+}

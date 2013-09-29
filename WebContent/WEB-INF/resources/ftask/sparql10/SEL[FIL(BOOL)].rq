@@ -1,3 +1,0 @@
-SELECT * WHERE {
-?s ?o false
-} LIMIT 100

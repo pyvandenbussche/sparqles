@@ -1,3 +1,0 @@
-SELECT * WHERE {
-?s ?o 12
-} LIMIT 100

@@ -1,7 +1,0 @@
-SELECT ?p
-{
-   ?p rdf:type ?o 
-} 
-VALUES ?o {
- owl:Thing
-}
