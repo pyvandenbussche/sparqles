@@ -1,10 +1,21 @@
 {
-"namespace": "sparqles.core",
+"namespace": "sparqles.analytics.avro",
  "type": "record",
  "name": "Index",
  "fields": [ 
  	 {"name": "lastUpdate", "type": "long" },
- 	 {"name": "availability", "type": "map", "values":["string",  {"type":
-"map", "values": ["long", "double"]}]},
- 	 ]
-}
+ 	 
+ 	 {"name": "availability", "type":
+    	{"type": "array", "items": 
+    		{	
+    			"namespace": "sparqles.analytics.avro",	
+ 				"name": "AvailabilityIndex",
+      			"type": "record",
+        		"fields" : [
+        			{ "name": "key", "type": "string"},
+        			{ "name": "values", "type": {"type": "map", "values": "string"}}
+      			]
+      		}
+      	}
+   	}] 
+ }

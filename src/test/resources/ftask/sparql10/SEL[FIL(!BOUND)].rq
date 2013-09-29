@@ -1,0 +1,8 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT  ?a ?c
+WHERE
+    { ?a rdf:type ?c . 
+      OPTIONAL
+        { ?c rdf:type ?e } . 
+      FILTER (! bound(?e)) 
+    } LIMIT 100

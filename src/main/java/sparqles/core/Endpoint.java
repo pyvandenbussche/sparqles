@@ -181,7 +181,7 @@ public class Endpoint extends org.apache.avro.specific.SpecificRecordBase implem
       return this;
     }
 
-    
+    @Override
     public Endpoint build() {
       try {
         Endpoint record = new Endpoint();

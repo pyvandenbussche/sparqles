@@ -17,6 +17,8 @@ import org.apache.avro.specific.SpecificRecordBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import sparqles.analytics.avro.AvailabilityView;
+import sparqles.analytics.avro.EPView;
 import sparqles.core.Endpoint;
 import sparqles.core.SPARQLESProperties;
 import sparqles.core.availability.AResult;
@@ -33,6 +35,7 @@ import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 import com.mongodb.MongoException.DuplicateKey;
+import com.mongodb.QueryBuilder;
 import com.mongodb.WriteConcern;
 import com.mongodb.WriteResult;
 import com.mongodb.util.JSON;
@@ -58,7 +61,6 @@ public class MongoDBManager {
 	private final static String COLL_PERF_AGG="ptasks_agg";
 	private final static String COLL_DISC_AGG="dtasks_agg";
 	private final static String COLL_FEAT_AGG="ftasks_agg";
-
 	private final static String COLL_EP_VIEW="epview";
 
 	public MongoDBManager()  {
@@ -103,6 +105,8 @@ public class MongoDBManager {
 		if(res instanceof FResult) return insert(COLL_FEAT, res, res.getSchema() );
 		if(res instanceof Endpoint) return insert(COLL_ENDS, res, res.getSchema() );
 		if(res instanceof Schedule) return insert(COLL_SCHED, res, res.getSchema() );
+		if(res instanceof AvailabilityView) return insert(COLL_AVAIL_AGG, res, res.getSchema() );
+		if(res instanceof EPView) return insert(COLL_EP_VIEW, res, res.getSchema() );
 		return true;
 	}
 	
@@ -142,6 +146,8 @@ public class MongoDBManager {
 		if(cls.getName().equals(FResult.class.getName())) return scan(ep,COLL_FEAT, cls,schema);
 		if(cls.getName().equals(Endpoint.class.getName())) return scan(ep,COLL_ENDS, cls,schema);
 		if(cls.getName().equals(Schedule.class.getName())) return scan(ep,COLL_SCHED, cls,schema);
+		if(cls.getName().equals(AvailabilityView.class.getName())) return scan(ep,COLL_AVAIL_AGG, cls,schema);
+		if(cls.getName().equals(EPView.class.getName())) return scan(ep,COLL_EP_VIEW, cls,schema); 
 		return null;
 	}
 	
@@ -177,7 +183,7 @@ public class MongoDBManager {
 		}else{
 			BasicDBObject q = new BasicDBObject();
 			q.append("endpointResult.endpoint.uri", ep.getUri().toString());
-			c.find(q);
+			curs = c.find(q);
 		}
 		
 		while(curs.hasNext()){
@@ -195,10 +201,39 @@ public class MongoDBManager {
 		return reslist;
 	}
 
-	public List<AResult> getResultsSince(Endpoint ep, Class<AResult> class1,
-			long timeInMillis) {
-		// TODO Auto-generated method stub
-		return null;
+	public <T extends SpecificRecordBase> List<T> getResultsSince(Endpoint ep, Class<T> cls,
+			Schema schema, long since) {
+		
+		ArrayList<T> reslist = new ArrayList<T>();	
+
+		DBCollection c  = db.getCollection(COLL_AVAIL);
+		DBCursor curs = null;
+		if(ep==null){
+			curs = c.find();
+		}else{
+			
+			DBObject q =
+			QueryBuilder.start().and(
+					QueryBuilder.start("endpointResult.endpoint.uri").is(ep.getUri().toString()).get(),
+					QueryBuilder.start("endpointResult.start").greaterThan(since).get()).get();
+			log.info("[EXEC] {}",q);
+			curs = c.find(q);
+		}
+		
+		while(curs.hasNext()){
+			DBObject o = curs.next();
+			SpecificDatumReader r = new SpecificDatumReader<T>(cls);
+			JsonDecoder d;
+			try {
+				d = DecoderFactory.get().jsonDecoder(schema, o.toString());
+				T t =(T) r.read(null, d);
+				reslist.add(t);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return reslist;
+		
 	}
 
 	

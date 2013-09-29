@@ -1,0 +1,4 @@
+SELECT ?s ?str WHERE {
+	?s ?p ?str
+	FILTER STRSTARTS(STR(?str), "1")
+}
