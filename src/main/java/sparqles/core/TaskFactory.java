@@ -5,6 +5,8 @@ import java.net.URISyntaxException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import sparqles.analytics.AAnalyser;
+import sparqles.analytics.Analytics;
 import sparqles.core.availability.ATask;
 import sparqles.core.discovery.DTask;
 import sparqles.core.features.FTask;
@@ -27,10 +29,12 @@ public class TaskFactory {
 	public static Task create(String task, Endpoint ep, MongoDBManager dbm,
 			FileManager fm) {
 		Task t = null;
+		Analytics a = null;
 		if(task.equalsIgnoreCase("ptask")){
 			t= new PTask(ep, SpecificPTask.values());
 		}else if(task.equalsIgnoreCase("atask")){
 			t= new ATask(ep);
+			a = new AAnalyser(dbm);
 		}else if(task.equalsIgnoreCase("ftask")){
 			t= new FTask(ep, SpecificFTask.values());
 		}else if(task.equalsIgnoreCase("dtask")){
@@ -43,6 +47,8 @@ public class TaskFactory {
 			t.setDBManager(dbm);
 		if(fm != null && t!=null)
 			t.setFileManager(fm);
+		
+		t.setAnalytics(a);
 		
 		return t;
 	}
