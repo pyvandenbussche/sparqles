@@ -7,6 +7,7 @@ import org.apache.avro.specific.SpecificRecordBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import sparqles.analytics.Analytics;
 import sparqles.utils.FileManager;
 import sparqles.utils.LogHandler;
 import sparqles.utils.MongoDBManager;
@@ -27,6 +28,8 @@ public abstract class Task<V extends SpecificRecordBase> implements Callable<V> 
 
 	private MongoDBManager _dbm;
 	protected FileManager _fm;
+
+	private Analytics _analytics;
 	
 	public Task(Endpoint ep) {
 		_epr = new EndpointResult();
@@ -47,9 +50,13 @@ public abstract class Task<V extends SpecificRecordBase> implements Callable<V> 
 		try{
 			LogHandler.run(log,this.getClass().getSimpleName(), _epr.getEndpoint().getUri().toString());
 			V v= process(_epr);
+			
+			//insert into database
 			if(_dbm != null &&  !_dbm.insert(v)){
 				log.warn("Could not store record to DB");
 			}
+			
+			//write to file
 			if(_fm != null &&  !_fm.writeResult(v)){
 				log.warn("Could not store record to file");
 			}
@@ -72,5 +79,10 @@ public abstract class Task<V extends SpecificRecordBase> implements Callable<V> 
 	@Override
 	public String toString() {
 		return _id; 
+	}
+
+	public void setAnalytics(Analytics a) {
+		_analytics = a;
+		
 	}
 }

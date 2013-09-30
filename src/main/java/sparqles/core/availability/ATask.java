@@ -109,6 +109,4 @@ public class ATask extends Task<AResult>{
 			return result;
 		}
 	}
-
-	
 }

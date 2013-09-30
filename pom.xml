@@ -12,6 +12,7 @@
 		<project.build.outputEncoding>UTF-8</project.build.outputEncoding>
 		<maven.compiler>2.0.2</maven.compiler>
 		<avro.version>1.7.5</avro.version>
+
 	</properties>
 	<build>
 		<plugins>
@@ -26,11 +27,6 @@
 					<showWarnings>true</showWarnings>
 				</configuration>
 			</plugin>
-			<!-- <plugin> <groupId>org.apache.avro</groupId> <artifactId>avro-maven-plugin</artifactId> 
-				<version>${avro.version}</version> <executions> <execution> <phase>generate-sources</phase> 
-				<goals> <goal>schema</goal> </goals> <configuration> <sourceDirectory>src/main/avro</sourceDirectory> 
-				<outputDirectory>src/main/java</outputDirectory> <imports> <import>/src/main/avro/</import> 
-				</imports> </configuration> </execution> </executions> </plugin> -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
@@ -38,7 +34,65 @@
 				<configuration>
 					<mainClass>sparqles.core.Main</mainClass>
 				</configuration>
+			</plugin>
 
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>appassembler-maven-plugin</artifactId>
+				<version>1.5</version>
+				<configuration>
+					<!-- Set the target configuration directory to be used in the bin scripts 
+						<configurationDirectory>conf</configurationDirectory> -->
+					<!-- Copy the contents from "/src/main/config" to the target configuration 
+						directory in the assembled application <copyConfigurationDirectory>true</copyConfigurationDirectory> -->
+					<!-- Include the target configuration directory in the beginning of 
+						the classpath declaration in the bin scripts -->
+					<includeConfigurationDirectoryInClasspath>true</includeConfigurationDirectoryInClasspath>
+					<!-- set alternative assemble directory -->
+					<assembleDirectory>${basedir}</assembleDirectory>
+					<!-- Extra JVM arguments that will be included in the bin scripts -->
+					<extraJvmArguments>-Xms2G</extraJvmArguments>
+					<!-- Generate bin scripts for windows and unix pr default -->
+					<platforms>
+						<platform>windows</platform>
+						<platform>unix</platform>
+					</platforms>
+
+					<daemons>
+						<daemon>
+							<id>sparqles_service</id>
+							<mainClass>sparqles.core.Main</mainClass>
+							<commandLineArguments>
+								<commandLineArgument>SPARQLES</commandLineArgument>
+							</commandLineArguments>
+							<platforms>
+								<platform>jsw</platform>
+							</platforms>
+						</daemon>
+					</daemons>
+
+
+
+					<programs>
+						<program>
+							<mainClass>sparqles.core.Main</mainClass>
+							<commandLineArguments>
+								<!-- Add two predefined command line arguments to the call of App3 -->
+								<commandLineArgument>SPARQLES</commandLineArgument>
+							</commandLineArguments>
+							<name>sparqles</name>
+						</program>
+					</programs>
+				</configuration>
+				  <executions>
+          <execution>
+            <id>generate-jsw-scripts</id>
+            <phase>package</phase>
+            <goals>
+              <goal>generate-daemons</goal>
+            </goals>
+          </execution>
+        </executions>
 			</plugin>
 		</plugins>
 	</build>
