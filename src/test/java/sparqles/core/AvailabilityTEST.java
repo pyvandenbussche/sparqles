@@ -39,10 +39,9 @@ public class AvailabilityTEST {
 
 		Endpoint ep = Endpoints.DBPEDIA;
 		
-		
 		m.initEndpointCollection();
+		m.initAggregateCollections();
 		m.insert(ep);
-		
 		
 		Schedule sc = new Schedule();
 		sc.setEndpoint(ep);
@@ -57,7 +56,7 @@ public class AvailabilityTEST {
 		s.init(epm);
 		
 		try {
-			Thread.sleep(30*60*60*1000);
+			Thread.sleep(60*60*1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

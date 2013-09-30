@@ -32,6 +32,8 @@ public class AAnalyticsInitTEST {
 	
 	@Test
 	public void test() {
+		m.initAggregateCollections();
+		
 		AAnalyserInit a = new AAnalyserInit(m);
 		a.run();
 	}

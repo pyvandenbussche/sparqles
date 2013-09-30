@@ -48,6 +48,9 @@ public class MongoDBManager {
 	private MongoClient client;
 	private DB db;
 
+	
+	private final static String RESULT_KEY="endpointResult.endpoint.uri";
+	private final static String VIEW_KEY="endpoint.uri";
 	private final static String COLL_SCHED="schedule";
 
 	private final static String COLL_AVAIL="atasks";
@@ -94,6 +97,15 @@ public class MongoDBManager {
 		c.drop();
 		c.ensureIndex(new BasicDBObject("endpoint.uri", 1), new BasicDBObject("unique", true));
 	}
+	
+	public void initAggregateCollections() {
+		String []cols = {COLL_AVAIL_AGG, COLL_DISC_AGG, COLL_FEAT_AGG, COLL_FEAT_AGG, COLL_EP_VIEW};
+		for(String col: cols){
+			DBCollection c = db.getCollection(col);
+			c.drop();
+//			c.ensureIndex(new BasicDBObject("endpoint.uri", 1), new BasicDBObject("unique", true));	
+		}
+	}
 
 
 	
@@ -107,8 +119,10 @@ public class MongoDBManager {
 		if(res instanceof Schedule) return insert(COLL_SCHED, res, res.getSchema() );
 		if(res instanceof AvailabilityView) return insert(COLL_AVAIL_AGG, res, res.getSchema() );
 		if(res instanceof EPView) return insert(COLL_EP_VIEW, res, res.getSchema() );
-		return true;
+		return false;
 	}
+	
+	
 	
 	private boolean insert(String collName, Object e, Schema schema){
 		DBCollection c = db.getCollection(collName);
@@ -127,27 +141,64 @@ public class MongoDBManager {
 			log.info("[INSERT] [DUPLICATE] uri key");
 			return true;
 		}catch(MongoException ex){
+			log.warn("[INSERT] [EXEC] {}",ex);
+		}catch(Exception exx){
+			log.warn("[INSERT] [EXEC] {}",exx);
+		}
+		return false;
+	}
+
+	
+	public <V extends SpecificRecordBase> boolean update(V res){
+		if(res instanceof AvailabilityView) return update(COLL_AVAIL_AGG, ((AvailabilityView) res).getEndpoint(),res, res.getSchema(),VIEW_KEY );
+		if(res instanceof EPView) return update(COLL_EP_VIEW, ((EPView) res).getEndpoint(), res, res.getSchema(),VIEW_KEY );
+		return false;
+	}
+	
+	private boolean update(String collName, Endpoint ep, Object e, Schema schema, String key){
+		DBCollection c = db.getCollection(collName);
+		try{
+			DBObject dbObject = getObject(e, schema);
+			BasicDBObject q = new BasicDBObject();
+			q.append(key, ep.getUri().toString());
+			
+			WriteResult wr = c.update(q, dbObject);
+			System.out.println(wr.toString());
+			if(wr.getError()!=null){
+				System.out.println("error");
+			}else{
+				log.info("[UPDATE] [SUCC] {}:{}",collName,e.toString());
+			}
+
+			return true;
+		}catch(DuplicateKey ex){
+			log.info("[UPDATE] [DUPLICATE] uri key");
+			return true;
+		}catch(MongoException ex){
 			log.warn("[EXEC] {}",ex);
 		}catch(Exception exx){
 			log.warn("[EXEC] {}",exx);
 		}
 		return false;
 	}
-
+		
+	
+	
 	public <V extends SpecificRecordBase> List<V> get(Class<V> cls, Schema schema) {
 		return getResults(null, cls, schema);
 	}
 
 	
 	public <T> List<T> getResults(Endpoint ep, Class<T> cls, Schema schema) {
-		if(cls.getName().equals(DResult.class.getName())) return scan(ep,COLL_DISC, cls,schema);
-		if(cls.getName().equals(AResult.class.getName())) return scan(ep,COLL_AVAIL,cls, schema);
-		if(cls.getName().equals(PResult.class.getName())) return scan(ep,COLL_PERF, cls,schema);
-		if(cls.getName().equals(FResult.class.getName())) return scan(ep,COLL_FEAT, cls,schema);
-		if(cls.getName().equals(Endpoint.class.getName())) return scan(ep,COLL_ENDS, cls,schema);
-		if(cls.getName().equals(Schedule.class.getName())) return scan(ep,COLL_SCHED, cls,schema);
-		if(cls.getName().equals(AvailabilityView.class.getName())) return scan(ep,COLL_AVAIL_AGG, cls,schema);
-		if(cls.getName().equals(EPView.class.getName())) return scan(ep,COLL_EP_VIEW, cls,schema); 
+		if(cls.getName().equals(DResult.class.getName())) return scan(ep,COLL_DISC, cls,schema, RESULT_KEY);
+		if(cls.getName().equals(AResult.class.getName())) return scan(ep,COLL_AVAIL,cls, schema, RESULT_KEY);
+		if(cls.getName().equals(PResult.class.getName())) return scan(ep,COLL_PERF, cls,schema, RESULT_KEY);
+		if(cls.getName().equals(FResult.class.getName())) return scan(ep,COLL_FEAT, cls,schema, RESULT_KEY);
+		if(cls.getName().equals(Endpoint.class.getName())) return scan(ep,COLL_ENDS, cls,schema, VIEW_KEY);
+		if(cls.getName().equals(Schedule.class.getName())) return scan(ep,COLL_SCHED, cls,schema, VIEW_KEY);
+		
+		if(cls.getName().equals(AvailabilityView.class.getName())) return scan(ep,COLL_AVAIL_AGG, cls,schema, VIEW_KEY);
+		if(cls.getName().equals(EPView.class.getName())) return scan(ep,COLL_EP_VIEW, cls,schema, VIEW_KEY); 
 		return null;
 	}
 	
@@ -173,7 +224,7 @@ public class MongoDBManager {
 		return null;
 	}
 
-	private <T> List<T> scan(Endpoint ep,String colName, Class<T> cls, Schema schema) {
+	private <T> List<T> scan(Endpoint ep,String colName, Class<T> cls, Schema schema, String key) {
 		ArrayList<T> reslist = new ArrayList<T>();	
 
 		DBCollection c  = db.getCollection(colName);
@@ -182,7 +233,7 @@ public class MongoDBManager {
 			curs = c.find();
 		}else{
 			BasicDBObject q = new BasicDBObject();
-			q.append("endpointResult.endpoint.uri", ep.getUri().toString());
+			q.append(key, ep.getUri().toString());
 			curs = c.find(q);
 		}
 		
@@ -234,6 +285,40 @@ public class MongoDBManager {
 		}
 		return reslist;
 		
+	}
+
+	public <T extends SpecificRecordBase> List<T> getResultsSince(Endpoint ep, Class<T> cls,
+			Schema schema, long from, long to) {
+		ArrayList<T> reslist = new ArrayList<T>();	
+
+		DBCollection c  = db.getCollection(COLL_AVAIL);
+		DBCursor curs = null;
+		if(ep==null){
+			curs = c.find();
+		}else{
+			
+			DBObject q =
+			QueryBuilder.start().and(
+					QueryBuilder.start("endpointResult.endpoint.uri").is(ep.getUri().toString()).get(),
+					QueryBuilder.start("endpointResult.start").greaterThan(from).get(),
+					QueryBuilder.start("endpointResult.start").lessThanEquals(to).get()).get();
+			log.info("[EXEC] {}",q);
+			curs = c.find(q);
+		}
+		
+		while(curs.hasNext()){
+			DBObject o = curs.next();
+			SpecificDatumReader r = new SpecificDatumReader<T>(cls);
+			JsonDecoder d;
+			try {
+				d = DecoderFactory.get().jsonDecoder(schema, o.toString());
+				T t =(T) r.read(null, d);
+				reslist.add(t);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return reslist;
 	}
 
 	

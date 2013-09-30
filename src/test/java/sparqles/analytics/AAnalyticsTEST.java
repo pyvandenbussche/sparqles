@@ -38,11 +38,13 @@ public class AAnalyticsTEST {
 	
 	@Test
 	public void test() throws URISyntaxException {
-		
+		m.initAggregateCollections();
 		AAnalyser a = new AAnalyser(m);
 		
 		Endpoint ep = EndpointFactory.newEndpoint("http://dbpedia.org/sparql");
 		System.out.println("Analyse");
+		
+		
 		a.analyse(ep);
 		
 		

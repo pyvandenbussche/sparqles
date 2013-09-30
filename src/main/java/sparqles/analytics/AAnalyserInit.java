@@ -44,7 +44,7 @@ public class AAnalyserInit {
 			for(AResult epres: epRes){
 				res.add(epres);
 			}
-			for(AResult ares: res.descendingSet()){
+			for(AResult ares: res){
 				System.out.println(ares);
 				a.analyse(ares);
 			}	

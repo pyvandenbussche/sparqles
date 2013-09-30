@@ -29,7 +29,7 @@ public abstract class Task<V extends SpecificRecordBase> implements Callable<V> 
 	private MongoDBManager _dbm;
 	protected FileManager _fm;
 
-	private Analytics _analytics;
+	private Analytics<V> _analytics;
 	
 	public Task(Endpoint ep) {
 		_epr = new EndpointResult();
@@ -50,6 +50,10 @@ public abstract class Task<V extends SpecificRecordBase> implements Callable<V> 
 		try{
 			LogHandler.run(log,this.getClass().getSimpleName(), _epr.getEndpoint().getUri().toString());
 			V v= process(_epr);
+			long end = System.currentTimeMillis();
+			
+			LogHandler.success(log,this.getClass().getSimpleName(), _epr.getEndpoint().getUri().toString(), end-start);
+			_epr.setEnd(end);
 			
 			//insert into database
 			if(_dbm != null &&  !_dbm.insert(v)){
@@ -60,10 +64,9 @@ public abstract class Task<V extends SpecificRecordBase> implements Callable<V> 
 			if(_fm != null &&  !_fm.writeResult(v)){
 				log.warn("Could not store record to file");
 			}
-			long end = System.currentTimeMillis();
+			if(_analytics != null && !_analytics.analyse(v))
 			
-			LogHandler.success(log,this.getClass().getSimpleName(), _epr.getEndpoint().getUri().toString(), end-start);
-			_epr.setEnd(end);
+			
 			return v;
 		}catch(Exception e){
 			LogHandler.error(log,this.getClass().getSimpleName(), _epr.getEndpoint().getUri().toString(),e);
