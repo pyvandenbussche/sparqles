@@ -284,7 +284,6 @@ public class AvailabilityView extends org.apache.avro.specific.SpecificRecordBas
       return this;
     }
 
-    @Override
     public AvailabilityView build() {
       try {
         AvailabilityView record = new AvailabilityView();

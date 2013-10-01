@@ -45,7 +45,7 @@ public class AAnalyticsTEST {
 		System.out.println("Analyse");
 		
 		
-		a.analyse(ep);
+//		a.analyse(ep);
 		
 		
 	}

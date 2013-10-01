@@ -21,20 +21,15 @@ public class AAnalyserInit {
 	 * Computes the aggregated statistics for the Availability task
 	 * @param ep
 	 */
-
-
-
 	public void run() {
 
 		List<Endpoint> eps =_db.get(Endpoint.class, Endpoint.SCHEMA$);
 		AAnalyser a = new AAnalyser(_db);
 		
 		
-		for(Endpoint ep: eps){
+		for (Endpoint ep: eps) {
 			System.out.println(ep);
 			TreeSet<AResult> res = new TreeSet<AResult>(new Comparator<AResult>() {
-
-				@Override
 				public int compare(AResult o1, AResult o2) {
 					int diff =o1.getEndpointResult().getStart().compareTo(o2.getEndpointResult().getStart()); 
 					return diff;
@@ -49,6 +44,5 @@ public class AAnalyserInit {
 				a.analyse(ares);
 			}	
 		}
-		
 	}
 }

@@ -39,6 +39,7 @@ public class Scheduler {
 	private final static String CRON_FIRST_SAT_AT_MONTH_AT_TWO="0 0 2 ? 1/1 SAT#1 *";
 	private final static String CRON_EVERY_FIVE_MINUTES="0 0/5 * 1/1 * ? *";
 	
+	
 	private final static Map<String,String> taskSchedule = new HashMap<String,String>();
 	static{
 		taskSchedule.put("ATask", CRON_EVERY_HOUR);

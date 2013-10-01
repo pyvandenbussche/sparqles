@@ -68,10 +68,10 @@ public class SPARQLES extends CLIObject{
 			}
 		}
 		
-//		Runtime.getRuntime().addShutdownHook (new ShutdownThread(this));
-//		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_START)){
-//			start();
-//		}
+		Runtime.getRuntime().addShutdownHook (new ShutdownThread(this));
+		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_START)){
+			start();
+		}
 	}
 
 	public void start() {
