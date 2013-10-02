@@ -14,6 +14,7 @@ import sparqles.schedule.Scheduler;
 import sparqles.utils.DatahubAccess;
 import sparqles.utils.DateFormater;
 import sparqles.utils.MongoDBManager;
+import sparqles.analytics.AAnalyserInit;
 import sparqles.core.SPARQLESProperties;
 import sparqles.core.Endpoint;
 import sparqles.core.EndpointManager;
@@ -42,6 +43,7 @@ public class SPARQLES extends CLIObject{
 		opts.addOption(ARGUMENTS.OPTION_PROP_FILE);
 		opts.addOption(ARGUMENTS.OPTION_INIT);
 		opts.addOption(ARGUMENTS.OPTION_START);
+		opts.addOption(ARGUMENTS.OPTION_RECOMPUTE);
 	}
 
 	@Override
@@ -67,14 +69,27 @@ public class SPARQLES extends CLIObject{
 					dbm.insert(ep);
 			}
 		}
+		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_RECOMPUTE)){
+			recomputeAnalytics();
+		}
 		
-		Runtime.getRuntime().addShutdownHook (new ShutdownThread(this));
 		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_START)){
 			start();
 		}
+		
+		Runtime.getRuntime().addShutdownHook (new ShutdownThread(this));
 	}
 
-	public void start() {
+	
+	
+	
+	private void recomputeAnalytics() {
+		dbm.initAggregateCollections();
+		AAnalyserInit a = new AAnalyserInit(dbm);
+		a.run();
+	}
+
+	private void start() {
 		epm.init(dbm);
 		scheduler.init(epm);
 		try {
@@ -112,14 +127,12 @@ public class SPARQLES extends CLIObject{
 		// Init the endpoint manager
 		epm = new EndpointManager();
 		
-
 		//Init the scheduler
 		scheduler = new Scheduler();
 		
 		if(useDB){
 			dbm = new MongoDBManager();
 			scheduler.useDB(dbm);
-			
 		}
 		scheduler.useFileManager(useFM);
 	}
