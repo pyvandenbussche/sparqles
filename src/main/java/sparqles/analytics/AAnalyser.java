@@ -58,12 +58,12 @@ public class AAnalyser implements Analytics<AResult> {
 		//get the views
 		AvailabilityView aview=getView(ep);
 		EPView epview=getEPView(ep);
+		System.err.println(epview);
 
 		
 		// query mongodb for all AResults in the last 31 days 
-		log.debug("Query for {}< - >={}", dates[LAST_31DAYS].getTime(), now.getTime());
 		List<AResult> results = _db.getResultsSince(ep, AResult.class, AResult.SCHEMA$,  dates[LAST_31DAYS].getTimeInMillis(), now.getTimeInMillis());
-
+		log.debug("Query for {}< - >={} returned "+results.size()+" results", dates[LAST_31DAYS].getTime(), now.getTime());
 		
 		SummaryStatistics last24HoursStats = new SummaryStatistics();
 		SummaryStatistics last7DaysStats = new SummaryStatistics();
@@ -78,10 +78,9 @@ public class AAnalyser implements Analytics<AResult> {
 			next.setTimeInMillis(start);
 			
 			if(start > dates[LAST_24HOURS].getTimeInMillis()){
-				update(last7DaysStats,res);
+				update(last24HoursStats,res);
 				log.debug("  {} -24h-> {}",next.getTime(), dates[LAST_24HOURS].getTime());
 			}
-
 			if(start > dates[LAST_7DAYS].getTimeInMillis()){
 				update(last7DaysStats,res);
 				log.debug("  {} -7d-> {}",next.getTime(), dates[LAST_7DAYS].getTime());
@@ -119,18 +118,23 @@ public class AAnalyser implements Analytics<AResult> {
 		if(!Double.isNaN(thisWeekStats.getMean())){
 			thisweek = thisWeekStats.getMean();
 		}
-		epav.getData().getValues().put((CharSequence) (""+dates[THIS_WEEK].getTimeInMillis()), thisweek);
+		
+		CharSequence key = ""+dates[THIS_WEEK].getTimeInMillis();
+		epav.getData().getValues().put(key, thisweek);
 		epav.getData().setKey("Availability");
-
+		if(thisweek<1D && thisweek>0D){
+			System.out.println("Hello");
+		}
+		
 		double last31dayMean = 0;
 		if(!Double.isNaN(last31DaysStats.getMean()))
 			last31dayMean=last31DaysStats.getMean(); 
 		epav.setUptimeLast31d(last31dayMean);
 
+		//update overallUp
 		int runs = epav.getTestRuns();
-		Double mean = epav.getUptimeOverall();
+		Double mean = epav.getUptimeOverall()*runs;
 		if(mean==null) mean=0D;
-		SummaryStatistics s = new SummaryStatistics();
 		if(upNow) mean+=1;
 		epav.setTestRuns(runs+1);
 		epav.setUptimeOverall(mean/(double)(runs+1));
@@ -158,11 +162,6 @@ public class AAnalyser implements Analytics<AResult> {
 		return false;
 		
 	}
-
-
-
-
-	
 
 	private void update(SummaryStatistics stats, AResult res) {
 		if(res.getIsAvailable()){
@@ -282,9 +281,17 @@ class DateCalculator{
 		
 
 		Calendar thisweek = Calendar.getInstance();
-			thisweek.set(Calendar.YEAR, now.get(Calendar.YEAR));
-			thisweek.set(Calendar.WEEK_OF_YEAR, now.get(Calendar.WEEK_OF_YEAR));
+		thisweek.set(Calendar.YEAR, now.get(Calendar.YEAR));
+		thisweek.set(Calendar.WEEK_OF_YEAR, now.get(Calendar.WEEK_OF_YEAR));
+		thisweek.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+		thisweek.set(Calendar.HOUR_OF_DAY, 0);
+		thisweek.set(Calendar.MINUTE, 0);
+		thisweek.set(Calendar.SECOND, 0);
+		thisweek.set(Calendar.MILLISECOND, 0);
+		
 
+		
+		System.out.println(thisweek.getTime());
 		Calendar [] c = new Calendar[5];
 		c[AAnalyser.LAST_HOUR]=lastHour;
 		c[AAnalyser.LAST_24HOURS]=last24Hour;
