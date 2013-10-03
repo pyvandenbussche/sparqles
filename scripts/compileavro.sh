@@ -14,8 +14,8 @@ FR=$AVRO_DIR/FResult.avsc
 S=$AVRO_DIR/Schedule.avsc
 EPVIEW=$AVRO_DIR/EPView.avsc
 AVIEW=$AVRO_DIR/AvailabilityView.avsc
-
+IDX=$AVRO_DIR/Index.avsc
 
 SRC=src/main/java
 
-java -jar $LIB/$AVRO_JAR compile schema $EP $EPR $PR $AR $DR $FR $S $EPVIEW $AVIEW  $SRC  
+java -jar $LIB/$AVRO_JAR compile schema $EP $EPR $PR $AR $DR $FR $S $EPVIEW $AVIEW $IDX  $SRC  

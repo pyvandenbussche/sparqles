@@ -21,9 +21,10 @@ import sparqles.utils.LogHandler;
 import sparqles.utils.MongoDBManager;
 import sparqles.core.SPARQLESProperties;
 import sparqles.core.Endpoint;
-import sparqles.core.EndpointManager;
+import sparqles.core.EndpointTask;
 import sparqles.core.Task;
 import sparqles.core.TaskFactory;
+import static sparqles.core.CONSTANTS.*;
 
 public class Scheduler {
 	
@@ -35,21 +36,24 @@ public class Scheduler {
 	private final static String CRON_EVERY_WED_THU_AT_410="0 10 4 ? * WED,THU *";
 	
 	private final static String CRON_EVERY_SUN_AT_310="0 10 3 ? * SUN *";
+	private final static String CRON_EVERY_SUN_AT_2330="0 30 23 ? * SUN *";
 	private final static String CRON_EVERY_SAT_AT_310="0 10 3 ? * SAT *";
 	private final static String CRON_FIRST_SAT_AT_MONTH_AT_TWO="0 0 2 ? 1/1 SAT#1 *";
 	private final static String CRON_EVERY_FIVE_MINUTES="0 0/5 * 1/1 * ? *";
 	
-	
+
+	/**
+	 * The default schedules for various tasks
+	 */
 	private final static Map<String,String> taskSchedule = new HashMap<String,String>();
 	static{
-		taskSchedule.put("ATask", CRON_EVERY_HOUR);
-//		taskSchedule.put("PTask", CRON_EVERY_SUN_AT_310);
-//		taskSchedule.put("FTask", CRON_FIRST_SAT_AT_MONTH_AT_TWO);
-		
-		taskSchedule.put("PTask", CRON_EVERY_ONETEN);
-		taskSchedule.put("FTask", CRON_EVERY_SUN_AT_310);
-		taskSchedule.put("DTask", CRON_EVERY_SAT_AT_310);
+		taskSchedule.put(ATASK, CRON_EVERY_HOUR);
+		taskSchedule.put(PTASK, CRON_EVERY_ONETEN);
+		taskSchedule.put(FTASK, CRON_EVERY_SUN_AT_310);
+		taskSchedule.put(DTASK, CRON_EVERY_SAT_AT_310);
+		taskSchedule.put(ITASK, CRON_EVERY_SUN_AT_2330);
 	}
+	
 	
 	private final ScheduledExecutorService SERVICE;
 
@@ -65,19 +69,38 @@ public class Scheduler {
 		log.info("[INIT] Scheduler with {} threads",threads);
 	}
 	
-	public void init(EndpointManager epm) {
-		sparqles.utils.LogHandler.init(log," Scheduling tasks for {} endpoints", epm.getEndpointScheduleMap().size());
-		for(Entry<String, String[]> ent: epm.getEndpointScheduleMap().entrySet()){
-			String [] cronSchedules = ent.getValue();
-			for(int i=0; i < cronSchedules.length;i++){
-				if(cronSchedules[i]!=null){
-					try {
-						schedule(TaskFactory.create(epm.getTask(i),ent.getKey(), _dbm, _fm ), new CronBasedIterator(cronSchedules[i]));
-					} catch (Exception e) {
-						LogHandler.warn(log,"",e);
-					}
-				}
+	public void init(MongoDBManager db) {
+		
+		Collection<Schedule> schedules = db.get(Schedule.class, Schedule.SCHEMA$);
+		sparqles.utils.LogHandler.init(log," [Scheduling tasks for {} endpoints", schedules.size());
+		
+		for(Schedule sd: schedules){
+			
+			Endpoint ep = sd.getEndpoint();
+			String task=null, schedule= null;
+			
+			if(sd.getATask()!=null){
+				task=ATASK;
+				schedule=sd.getATask().toString();
 			}
+			if(sd.getPTask()!=null){
+				task=PTASK;
+				schedule=sd.getPTask().toString();
+			}				
+			if(sd.getFTask()!=null){
+				task=FTASK;
+				schedule=sd.getFTask().toString();				
+			}			
+			if(sd.getDTask()!=null){
+				task=DTASK;
+				schedule=sd.getDTask().toString();			
+			}
+			if(sd.getITask()!=null){
+				task=ITASK;
+				schedule=sd.getITask().toString();			
+			}
+			
+			schedule(TaskFactory.create(task,ep, _dbm, _fm ), new CronBasedIterator(schedule));
 		}
 	}
 
@@ -91,8 +114,7 @@ public class Scheduler {
         }
         public void run() {
             try {
-//            	log.debug("[EXEC] {}",schedulerTask.getClass().getSimpleName());
-				schedulerTask.call();
+				schedulerTask.execute();
 				reschedule(schedulerTask, iterator);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -143,21 +165,13 @@ public class Scheduler {
 		Schedule s = new Schedule();
 		s.setEndpoint(ep);
 		
-		s.setATask(taskSchedule.get("ATask"));
-		s.setPTask(taskSchedule.get("PTask"));
-		s.setFTask(taskSchedule.get("FTask"));
-		s.setDTask(taskSchedule.get("DTask"));
-		
-		
+		s.setATask(taskSchedule.get(ATASK));
+		s.setPTask(taskSchedule.get(PTASK));
+		s.setFTask(taskSchedule.get(FTASK));
+		s.setDTask(taskSchedule.get(DTASK));
 		
 		return s;
 	}
-
-//	public List<Schedule> createDefaultSchedule(EndpointManager epm) {
-//		for(Entry<String, Endpoint> ep: epm.getEndpointMap().entrySet()){
-//			
-//		}
-//	}
 
 	public void close() {
 		log.info("Shutting down scheduler service");
@@ -167,8 +181,6 @@ public class Scheduler {
 		if(_dbm != null){
 			_dbm.close();
 		}
-		
-		
 	}
 
 	public void useDB(MongoDBManager dbm) {
@@ -185,6 +197,4 @@ public class Scheduler {
 			_fm = null;
 		}
 	}
-
-
 }

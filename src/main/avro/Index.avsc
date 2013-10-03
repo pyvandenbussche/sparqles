@@ -2,9 +2,9 @@
 "namespace": "sparqles.analytics.avro",
  "type": "record",
  "name": "Index",
- "fields": [ 
+ "fields": [
+ 	 {"name": "endpoint", "type": "sparqles.core.Endpoint"},
  	 {"name": "lastUpdate", "type": "long" },
- 	 
  	 {"name": "availability", "type":
     	{"type": "array", "items": 
     		{	
@@ -13,7 +13,7 @@
       			"type": "record",
         		"fields" : [
         			{ "name": "key", "type": "string"},
-        			{ "name": "values", "type": {"type": "map", "values": "string"}}
+        			{ "name": "values", "type": {"type": "map", "values": "double"}}
       			]
       		}
       	}

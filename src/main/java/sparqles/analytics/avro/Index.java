@@ -7,10 +7,11 @@ package sparqles.analytics.avro;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class Index extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Index\",\"namespace\":\"sparqles.analytics.avro\",\"fields\":[{\"name\":\"endpoint\",\"type\":{\"type\":\"record\",\"name\":\"Endpoint\",\"namespace\":\"sparqles.core\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"},{\"name\":\"datasets\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Dataset\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"},{\"name\":\"label\",\"type\":\"string\"}]}}}]}},{\"name\":\"availability\",\"type\":{\"type\":\"record\",\"name\":\"EPViewAvailability\",\"fields\":[{\"name\":\"upNow\",\"type\":\"boolean\"},{\"name\":\"testRuns\",\"type\":\"int\"},{\"name\":\"uptimeLast24h\",\"type\":\"double\"},{\"name\":\"uptimeLast7d\",\"type\":\"double\"},{\"name\":\"uptimeLast31d\",\"type\":\"double\"},{\"name\":\"uptimeOverall\",\"type\":\"double\"},{\"name\":\"data\",\"type\":{\"type\":\"record\",\"name\":\"EPViewAvailabilityData\",\"fields\":[{\"name\":\"key\",\"type\":\"string\"},{\"name\":\"values\",\"type\":{\"type\":\"map\",\"values\":\"long\"}}]}}]}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Index\",\"namespace\":\"sparqles.analytics.avro\",\"fields\":[{\"name\":\"endpoint\",\"type\":{\"type\":\"record\",\"name\":\"Endpoint\",\"namespace\":\"sparqles.core\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"},{\"name\":\"datasets\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Dataset\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"},{\"name\":\"label\",\"type\":\"string\"}]}}}]}},{\"name\":\"lastUpdate\",\"type\":\"long\"},{\"name\":\"availability\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"AvailabilityIndex\",\"fields\":[{\"name\":\"key\",\"type\":\"string\"},{\"name\":\"values\",\"type\":{\"type\":\"map\",\"values\":\"double\"}}]}}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public sparqles.core.Endpoint endpoint;
-  @Deprecated public sparqles.analytics.avro.EPViewAvailability availability;
+  @Deprecated public long lastUpdate;
+  @Deprecated public java.util.List<sparqles.analytics.avro.AvailabilityIndex> availability;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -22,8 +23,9 @@ public class Index extends org.apache.avro.specific.SpecificRecordBase implement
   /**
    * All-args constructor.
    */
-  public Index(sparqles.core.Endpoint endpoint, sparqles.analytics.avro.EPViewAvailability availability) {
+  public Index(sparqles.core.Endpoint endpoint, java.lang.Long lastUpdate, java.util.List<sparqles.analytics.avro.AvailabilityIndex> availability) {
     this.endpoint = endpoint;
+    this.lastUpdate = lastUpdate;
     this.availability = availability;
   }
 
@@ -32,7 +34,8 @@ public class Index extends org.apache.avro.specific.SpecificRecordBase implement
   public java.lang.Object get(int field$) {
     switch (field$) {
     case 0: return endpoint;
-    case 1: return availability;
+    case 1: return lastUpdate;
+    case 2: return availability;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -41,7 +44,8 @@ public class Index extends org.apache.avro.specific.SpecificRecordBase implement
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
     case 0: endpoint = (sparqles.core.Endpoint)value$; break;
-    case 1: availability = (sparqles.analytics.avro.EPViewAvailability)value$; break;
+    case 1: lastUpdate = (java.lang.Long)value$; break;
+    case 2: availability = (java.util.List<sparqles.analytics.avro.AvailabilityIndex>)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -62,9 +66,24 @@ public class Index extends org.apache.avro.specific.SpecificRecordBase implement
   }
 
   /**
+   * Gets the value of the 'lastUpdate' field.
+   */
+  public java.lang.Long getLastUpdate() {
+    return lastUpdate;
+  }
+
+  /**
+   * Sets the value of the 'lastUpdate' field.
+   * @param value the value to set.
+   */
+  public void setLastUpdate(java.lang.Long value) {
+    this.lastUpdate = value;
+  }
+
+  /**
    * Gets the value of the 'availability' field.
    */
-  public sparqles.analytics.avro.EPViewAvailability getAvailability() {
+  public java.util.List<sparqles.analytics.avro.AvailabilityIndex> getAvailability() {
     return availability;
   }
 
@@ -72,7 +91,7 @@ public class Index extends org.apache.avro.specific.SpecificRecordBase implement
    * Sets the value of the 'availability' field.
    * @param value the value to set.
    */
-  public void setAvailability(sparqles.analytics.avro.EPViewAvailability value) {
+  public void setAvailability(java.util.List<sparqles.analytics.avro.AvailabilityIndex> value) {
     this.availability = value;
   }
 
@@ -98,7 +117,8 @@ public class Index extends org.apache.avro.specific.SpecificRecordBase implement
     implements org.apache.avro.data.RecordBuilder<Index> {
 
     private sparqles.core.Endpoint endpoint;
-    private sparqles.analytics.avro.EPViewAvailability availability;
+    private long lastUpdate;
+    private java.util.List<sparqles.analytics.avro.AvailabilityIndex> availability;
 
     /** Creates a new Builder */
     private Builder() {
@@ -112,9 +132,13 @@ public class Index extends org.apache.avro.specific.SpecificRecordBase implement
         this.endpoint = data().deepCopy(fields()[0].schema(), other.endpoint);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.availability)) {
-        this.availability = data().deepCopy(fields()[1].schema(), other.availability);
+      if (isValidValue(fields()[1], other.lastUpdate)) {
+        this.lastUpdate = data().deepCopy(fields()[1].schema(), other.lastUpdate);
         fieldSetFlags()[1] = true;
+      }
+      if (isValidValue(fields()[2], other.availability)) {
+        this.availability = data().deepCopy(fields()[2].schema(), other.availability);
+        fieldSetFlags()[2] = true;
       }
     }
     
@@ -125,9 +149,13 @@ public class Index extends org.apache.avro.specific.SpecificRecordBase implement
         this.endpoint = data().deepCopy(fields()[0].schema(), other.endpoint);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.availability)) {
-        this.availability = data().deepCopy(fields()[1].schema(), other.availability);
+      if (isValidValue(fields()[1], other.lastUpdate)) {
+        this.lastUpdate = data().deepCopy(fields()[1].schema(), other.lastUpdate);
         fieldSetFlags()[1] = true;
+      }
+      if (isValidValue(fields()[2], other.availability)) {
+        this.availability = data().deepCopy(fields()[2].schema(), other.availability);
+        fieldSetFlags()[2] = true;
       }
     }
 
@@ -156,28 +184,52 @@ public class Index extends org.apache.avro.specific.SpecificRecordBase implement
       return this;
     }
 
+    /** Gets the value of the 'lastUpdate' field */
+    public java.lang.Long getLastUpdate() {
+      return lastUpdate;
+    }
+    
+    /** Sets the value of the 'lastUpdate' field */
+    public sparqles.analytics.avro.Index.Builder setLastUpdate(long value) {
+      validate(fields()[1], value);
+      this.lastUpdate = value;
+      fieldSetFlags()[1] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'lastUpdate' field has been set */
+    public boolean hasLastUpdate() {
+      return fieldSetFlags()[1];
+    }
+    
+    /** Clears the value of the 'lastUpdate' field */
+    public sparqles.analytics.avro.Index.Builder clearLastUpdate() {
+      fieldSetFlags()[1] = false;
+      return this;
+    }
+
     /** Gets the value of the 'availability' field */
-    public sparqles.analytics.avro.EPViewAvailability getAvailability() {
+    public java.util.List<sparqles.analytics.avro.AvailabilityIndex> getAvailability() {
       return availability;
     }
     
     /** Sets the value of the 'availability' field */
-    public sparqles.analytics.avro.Index.Builder setAvailability(sparqles.analytics.avro.EPViewAvailability value) {
-      validate(fields()[1], value);
+    public sparqles.analytics.avro.Index.Builder setAvailability(java.util.List<sparqles.analytics.avro.AvailabilityIndex> value) {
+      validate(fields()[2], value);
       this.availability = value;
-      fieldSetFlags()[1] = true;
+      fieldSetFlags()[2] = true;
       return this; 
     }
     
     /** Checks whether the 'availability' field has been set */
     public boolean hasAvailability() {
-      return fieldSetFlags()[1];
+      return fieldSetFlags()[2];
     }
     
     /** Clears the value of the 'availability' field */
     public sparqles.analytics.avro.Index.Builder clearAvailability() {
       availability = null;
-      fieldSetFlags()[1] = false;
+      fieldSetFlags()[2] = false;
       return this;
     }
 
@@ -186,7 +238,8 @@ public class Index extends org.apache.avro.specific.SpecificRecordBase implement
       try {
         Index record = new Index();
         record.endpoint = fieldSetFlags()[0] ? this.endpoint : (sparqles.core.Endpoint) defaultValue(fields()[0]);
-        record.availability = fieldSetFlags()[1] ? this.availability : (sparqles.analytics.avro.EPViewAvailability) defaultValue(fields()[1]);
+        record.lastUpdate = fieldSetFlags()[1] ? this.lastUpdate : (java.lang.Long) defaultValue(fields()[1]);
+        record.availability = fieldSetFlags()[2] ? this.availability : (java.util.List<sparqles.analytics.avro.AvailabilityIndex>) defaultValue(fields()[2]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

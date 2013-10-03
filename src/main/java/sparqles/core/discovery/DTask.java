@@ -7,7 +7,7 @@ import sparqles.utils.LogHandler;
 
 import sparqles.core.Endpoint;
 import sparqles.core.EndpointResult;
-import sparqles.core.Task;
+import sparqles.core.EndpointTask;
 
 /**
  * DTaskGET: This task inspects the header and content after a HTTP GET on the endpoint URI. 
@@ -19,7 +19,7 @@ import sparqles.core.Task;
  * @author UmbrichJ
  *
  */
-public class DTask extends Task<DResult> {
+public class DTask extends EndpointTask<DResult> {
 	private static final Logger log = LoggerFactory.getLogger(DTask.class);
 	
 	public DTask(Endpoint ep) {

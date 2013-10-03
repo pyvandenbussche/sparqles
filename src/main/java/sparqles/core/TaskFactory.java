@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import sparqles.analytics.AAnalyser;
 import sparqles.analytics.Analytics;
+import sparqles.analytics.IndexViewAnalytics;
 import sparqles.core.availability.ATask;
 import sparqles.core.discovery.DTask;
 import sparqles.core.features.FTask;
@@ -15,6 +16,7 @@ import sparqles.core.performance.PTask;
 import sparqles.core.performance.SpecificPTask;
 import sparqles.utils.FileManager;
 import sparqles.utils.MongoDBManager;
+import static sparqles.core.CONSTANTS.*;
 
 public class TaskFactory {
 	private static final Logger log = LoggerFactory.getLogger(TaskFactory.class);
@@ -30,25 +32,29 @@ public class TaskFactory {
 			FileManager fm) {
 		Task t = null;
 		Analytics a = null;
-		if(task.equalsIgnoreCase("ptask")){
+		if(task.equalsIgnoreCase(PTASK)){
 			t= new PTask(ep, SpecificPTask.values());
-		}else if(task.equalsIgnoreCase("atask")){
+		}else if(task.equalsIgnoreCase(ATASK)){
 			t= new ATask(ep);
 			a = new AAnalyser(dbm);
-		}else if(task.equalsIgnoreCase("ftask")){
+		}else if(task.equalsIgnoreCase(FTASK)){
 			t= new FTask(ep, SpecificFTask.values());
-		}else if(task.equalsIgnoreCase("dtask")){
+		}else if(task.equalsIgnoreCase(DTASK)){
 			t= new DTask(ep);
-		}else{
+		}else  if(task.equalsIgnoreCase(ITASK)){
+			t = new IndexViewAnalytics();
+		}
+		else{
 			log.warn("Task {} not supported or known", task);
 			return null;	
 		}
 		if(dbm!=null && t!=null)
 			t.setDBManager(dbm);
-		if(fm != null && t!=null)
-			t.setFileManager(fm);
+		if(fm != null && t!=null && t instanceof EndpointTask)
+			((EndpointTask)t).setFileManager(fm);
 		
-		t.setAnalytics(a);
+		if(t instanceof EndpointTask)
+			((EndpointTask)t).setAnalytics(a);
 		
 		return t;
 	}

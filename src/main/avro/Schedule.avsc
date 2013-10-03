@@ -7,6 +7,7 @@
     {"name": "ATask", "type": ["string", "null"]},
     {"name": "FTask", "type": ["string", "null"]},
     {"name": "PTask", "type": ["string", "null"]},
-    {"name": "DTask", "type": ["string", "null"]}
+    {"name": "DTask", "type": ["string", "null"]},
+    {"name": "ITask", "type": ["string", "null"]}
  	]
 }

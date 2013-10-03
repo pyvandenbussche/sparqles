@@ -10,7 +10,7 @@ import com.hp.hpl.jena.query.QueryExecution;
 
 import sparqles.core.Endpoint;
 import sparqles.core.EndpointResult;
-import sparqles.core.Task;
+import sparqles.core.EndpointTask;
 
 /**
  * This class performs the required task to study the availability of an endpoint. 
@@ -20,8 +20,11 @@ import sparqles.core.Task;
  * @author UmbrichJ
  *
  */
-public class ATask extends Task<AResult>{
+public class ATask extends EndpointTask<AResult>{
 	
+	/**
+	 * static class logger
+	 */
 	private static final Logger log = LoggerFactory.getLogger(ATask.class);
 	
 	private final static String ASKQUERY = "ASK WHERE{?s ?p ?o}";
@@ -30,6 +33,12 @@ public class ATask extends Task<AResult>{
 	public ATask(Endpoint ep) {
 		super(ep);
 	}
+	
+	@Override
+	public String getTaskID() {
+		return "ATask";
+	}
+
 	
 	@Override
 	public AResult process(EndpointResult epr) {

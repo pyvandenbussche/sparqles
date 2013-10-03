@@ -12,10 +12,10 @@ import sparqles.utils.LogHandler;
 import sparqles.core.SPARQLESProperties;
 import sparqles.core.Endpoint;
 import sparqles.core.EndpointResult;
-import sparqles.core.Task;
+import sparqles.core.EndpointTask;
 
 
-public class PTask extends Task<PResult>{
+public class PTask extends EndpointTask<PResult>{
 	
 	private static final Logger log = LoggerFactory.getLogger(PTask.class);
 	
