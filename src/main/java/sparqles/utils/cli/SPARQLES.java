@@ -41,6 +41,7 @@ public class SPARQLES extends CLIObject{
 		opts.addOption(ARGUMENTS.OPTION_START);
 		opts.addOption(ARGUMENTS.OPTION_RECOMPUTE);
 		opts.addOption(ARGUMENTS.OPTION_RESCHEDULE);
+		opts.addOption(ARGUMENTS.OPTION_RUN);
 	}
 
 	@Override
