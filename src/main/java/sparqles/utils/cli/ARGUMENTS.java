@@ -37,6 +37,7 @@ public class ARGUMENTS {
 	public static final String [] PARAM_FLAG_START = 	createParam("s","start");
 	public static final String [] PARAM_FLAG_RECOMPUTE = createParam("r","recompute");
 	public static final String [] PARAM_FLAG_RESCHEDULE = createParam("rs","reschedule");
+	public static final String [] PARAM_RUN = createParam("run","run");
 		
 	public static final Option OPTION_PROP_FILE = createOption("property file", 1, "SPARQLES (additional) property file", 
 			PARAM_PROP_FILE[SHORT_ARG], PARAM_PROP_FILE[LONG_ARG],true);
@@ -48,8 +49,10 @@ public class ARGUMENTS {
 			PARAM_FLAG_START[SHORT_ARG],PARAM_FLAG_START[LONG_ARG],false);
 	public static final Option OPTION_RECOMPUTE  = createOption("flag",0,"recompute the analytics",
 			PARAM_FLAG_RECOMPUTE[SHORT_ARG],PARAM_FLAG_RECOMPUTE[LONG_ARG],false);
-	public static final Option OPTION_RESCHEDULE  = createOption("flag",0,"recompute the analytics",
+	public static final Option OPTION_RESCHEDULE  = createOption("flag",0,"create default schedule",
 			PARAM_FLAG_RESCHEDULE[SHORT_ARG],PARAM_FLAG_RESCHEDULE[LONG_ARG],false);
+	public static final Option OPTION_RUN  = createOption("task",1,"run task (itask, atask)",
+			PARAM_RUN[SHORT_ARG],PARAM_RUN[LONG_ARG],false);
 	
 
 	/**
@@ -72,17 +75,17 @@ public class ARGUMENTS {
 			o  = OptionBuilder.withArgName(argName)
 			.withDescription(description).create(shortArgname);
 		}
-		else
+		else{
 			o  = OptionBuilder.withArgName(argName)
 			.withDescription(description).create();
-
+		}
 		if(longArgname!=null){
 			o.setLongOpt(longArgname);
 		}
 		if(args >= 0)
 			o.setArgs(args);
-		
 		o.setRequired(mandatory);
+
 		return o;
 	}
 }

@@ -20,8 +20,6 @@ public class AAnalyticsInitTEST {
 	public void setUp() throws Exception {
 		SPARQLESProperties.init(new File("src/test/resources/ends.properties"));
 		m = new MongoDBManager();
-		
-		
 	}
 
 	@After

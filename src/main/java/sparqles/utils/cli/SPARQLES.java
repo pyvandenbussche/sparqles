@@ -9,6 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import sparqles.analytics.AAnalyserInit;
+import sparqles.analytics.IndexViewAnalytics;
+import sparqles.core.CONSTANTS;
 import sparqles.core.Endpoint;
 import sparqles.core.SPARQLESProperties;
 import sparqles.schedule.Schedule;
@@ -43,8 +45,6 @@ public class SPARQLES extends CLIObject{
 
 	@Override
 	protected void execute(CommandLine cmd) {
-
-		
 		parseCMD(cmd);
 				
 		//reinitialise datahub 
@@ -61,6 +61,15 @@ public class SPARQLES extends CLIObject{
 		}
 		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_FLAG_RECOMPUTE)){
 			recomputeAnalytics();
+		}
+		
+		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_RUN)){
+			String task = CLIObject.getOptionValue(cmd, ARGUMENTS.PARAM_RUN).trim();
+			if(task.equalsIgnoreCase(CONSTANTS.ITASK)){
+				IndexViewAnalytics a = new IndexViewAnalytics();
+				a.setDBManager(dbm);
+				a.execute();
+			}
 		}
 		
 		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_FLAG_START)){
@@ -101,7 +110,6 @@ public class SPARQLES extends CLIObject{
 				log.warn("Specified property file ({}) does not exist", propFile);
 			}
 		}
-
 		setup(true,true);
 	}
 
