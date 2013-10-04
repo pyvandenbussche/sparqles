@@ -38,6 +38,7 @@ public class SPARQLES extends CLIObject{
 		opts.addOption(ARGUMENTS.OPTION_INIT);
 		opts.addOption(ARGUMENTS.OPTION_START);
 		opts.addOption(ARGUMENTS.OPTION_RECOMPUTE);
+		opts.addOption(ARGUMENTS.OPTION_RESCHEDULE);
 	}
 
 	@Override
@@ -47,36 +48,28 @@ public class SPARQLES extends CLIObject{
 		parseCMD(cmd);
 				
 		//reinitialise datahub 
-		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_INIT)){
+		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_FLAG_INIT)){
 			//check the endpoint list
-			
 			Collection<Endpoint> eps = DatahubAccess.checkEndpointList();
 			dbm.initEndpointCollection();
-			for(Endpoint ep: eps){
-				if(dbm!=null)
-					dbm.insert(ep);
-			}
-			Collection<Schedule> epss = Scheduler.createDefaultSchedule(eps);
-			dbm.initScheduleCollection();
-			for(Schedule ep: epss){
-				if(dbm!=null)
-					dbm.insert(ep);
-			}
+			dbm.insert(eps);			 
 		}
-		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_RECOMPUTE)){
+		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_FLAG_RESCHEDULE)){
+			Collection<Schedule> epss = Scheduler.createDefaultSchedule(dbm);
+			dbm.initScheduleCollection();
+			dbm.insert(epss);
+		}
+		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_FLAG_RECOMPUTE)){
 			recomputeAnalytics();
 		}
 		
-		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_START)){
+		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_FLAG_START)){
 			start();
 		}
 		
 		Runtime.getRuntime().addShutdownHook (new ShutdownThread(this));
 	}
 
-	
-	
-	
 	private void recomputeAnalytics() {
 		dbm.initAggregateCollections();
 		AAnalyserInit a = new AAnalyserInit(dbm);

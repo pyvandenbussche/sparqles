@@ -1,12 +1,12 @@
 package sparqles.schedule;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -17,11 +17,9 @@ import org.slf4j.LoggerFactory;
 import sparqles.schedule.iter.CronBasedIterator;
 import sparqles.schedule.iter.ScheduleIterator;
 import sparqles.utils.FileManager;
-import sparqles.utils.LogHandler;
 import sparqles.utils.MongoDBManager;
 import sparqles.core.SPARQLESProperties;
 import sparqles.core.Endpoint;
-import sparqles.core.EndpointTask;
 import sparqles.core.Task;
 import sparqles.core.TaskFactory;
 import static sparqles.core.CONSTANTS.*;
@@ -69,6 +67,10 @@ public class Scheduler {
 		log.info("[INIT] Scheduler with {} threads",threads);
 	}
 	
+	/**
+	 * Initial the scheduler with the schedules from the underlying DB.
+	 * @param db
+	 */
 	public void init(MongoDBManager db) {
 		
 		Collection<Schedule> schedules = db.get(Schedule.class, Schedule.SCHEMA$);
@@ -99,11 +101,19 @@ public class Scheduler {
 				task=ITASK;
 				schedule=sd.getITask().toString();			
 			}
-			
-			schedule(TaskFactory.create(task,ep, _dbm, _fm ), new CronBasedIterator(schedule));
+			try {
+				schedule(TaskFactory.create(task,ep, _dbm, _fm ), new CronBasedIterator(schedule));
+			} catch (ParseException e) {
+				log.warn("[EXEC] ParseException: {} for {}",e.getMessage(), ep.uri);
+			}
 		}
 	}
 
+	/**
+	 * A timer task which executes the assigned task and automatically reschedules the data
+	 * @author umbrichj
+	 *
+	 */
 	class SchedulerTimerTask implements Runnable {
 		private ScheduleIterator iterator;
 		private Task schedulerTask;
@@ -149,18 +159,35 @@ public class Scheduler {
 		log.info("[RESCHEDULED] {} next:'{}' policy:'{}'",s);
 	}
 
+	
+	/**
+	 * Creates for all endpoints in the DB a default schedule
+	 * @param dbm
+	 * @return
+	 */
 	public static Collection<Schedule> createDefaultSchedule(
-			Collection<Endpoint> eps) {
+			MongoDBManager dbm) {
 		List<Schedule> l = new ArrayList<Schedule>();
-		
+		Collection<Endpoint> eps = dbm.get(Endpoint.class, Endpoint.SCHEMA$); 
 		for(Endpoint ep: eps){
 			Schedule s = defaultSchedule(ep);
 			l.add(s);
 		}
 		
+		//add the analytics schedules for 
+		Schedule s = new Schedule();
+		s.setEndpoint(SPARQLES);
+		s.setITask(taskSchedule.get(ITASK));
+		l.add(s);
+		
 		return l;
 	}
 	
+	/**
+	 *  Returns the default schedule element
+	 * @param ep
+	 * @return
+	 */
 	private static Schedule defaultSchedule(Endpoint ep) {
 		Schedule s = new Schedule();
 		s.setEndpoint(ep);
@@ -169,6 +196,7 @@ public class Scheduler {
 		s.setPTask(taskSchedule.get(PTASK));
 		s.setFTask(taskSchedule.get(FTASK));
 		s.setDTask(taskSchedule.get(DTASK));
+		s.setITask(taskSchedule.get(ITASK));
 		
 		return s;
 	}

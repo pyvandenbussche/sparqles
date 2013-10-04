@@ -7,36 +7,43 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import sparqles.analytics.avro.AvailabilityIndex;
 import sparqles.analytics.avro.EPView;
 import sparqles.analytics.avro.Index;
 import sparqles.core.CONSTANTS;
 import sparqles.core.Task;
 import sparqles.utils.MongoDBManager;
+import sparqles.utils.cli.SPARQLES;
 
 public class IndexViewAnalytics implements Task<Index>{
 
+	private static final Logger log = LoggerFactory.getLogger(IndexViewAnalytics.class);
+	
 	private MongoDBManager _dbm;
 
 	@Override
 	public void execute() {
 		Collection<Index> idxs = _dbm.get(Index.class, Index.SCHEMA$);
-		
 		Collection<EPView> epviews = _dbm.get(EPView.class, EPView.SCHEMA$);
 		
-		Map< String, SimpleHistogram> weekHist = new HashMap<String, SimpleHistogram>();
 		
+		log.info("Found {} idx views and {} epviews", idxs.size(), epviews.size());
+		
+		
+		Map< String, SimpleHistogram> weekHist = new HashMap<String, SimpleHistogram>();
 		for(EPView epv: epviews){
 			for(Entry<CharSequence, Double> values: epv.getAvailability().getData().getValues().entrySet()){
 				update(values, weekHist);
 			}
 		}
+		System.out.println("Updated values for epviews");
 		
 		Index idx=null;
 		if(idxs.size()==0){
-			
 			idx = createIndex();
-			
 			_dbm.insert(idx);
 		}else if(idxs.size()>1){
 //			log.warn("Too many results");
@@ -64,6 +71,10 @@ public class IndexViewAnalytics implements Task<Index>{
 				aidx.getValues().put(week.getKey(), value/(double)total);
 			}
 		}
+		
+		log.info("Updated view {}", idx);
+		_dbm.update(idx);
+		
 	}
 
 	private Index createIndex() {

@@ -15,7 +15,7 @@ import sparqles.utils.MongoDBManager;
 
 public class MongoDBTest {
 
-	private MongoDBManager m;
+	protected MongoDBManager m;
 
 	@Before
 	public void setUp() throws Exception {

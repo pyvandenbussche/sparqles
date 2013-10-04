@@ -49,11 +49,9 @@ public class AvailabilityTEST {
 		m.insert(sc);
 		
 		Scheduler s = new Scheduler();
-		EndpointManager epm = new  EndpointManager();
 		
-		epm.init(m);
 		s.useDB(m);
-		s.init(epm);
+		s.init(m);
 		
 		try {
 			Thread.sleep(60*60*1000);

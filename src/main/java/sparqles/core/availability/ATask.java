@@ -34,11 +34,6 @@ public class ATask extends EndpointTask<AResult>{
 		super(ep);
 	}
 	
-	@Override
-	public String getTaskID() {
-		return "ATask";
-	}
-
 	
 	@Override
 	public AResult process(EndpointResult epr) {
