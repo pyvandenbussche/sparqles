@@ -17,10 +17,9 @@ import sparqles.core.Endpoint;
 import sparqles.core.availability.AResult;
 import sparqles.utils.MongoDBManager;
 
-public class AAnalyser implements Analytics<AResult> {
+public class AAnalyser extends Analytics<AResult> {
 	private static final Logger log = LoggerFactory.getLogger(AAnalyser.class);
 
-	private MongoDBManager _db;
 
 	public static DateCalculator _dates = new DateCalculator();
 	public final static int LAST_HOUR=0;
@@ -30,10 +29,12 @@ public class AAnalyser implements Analytics<AResult> {
 	public final static int THIS_WEEK=4;
 
 
-	public AAnalyser(MongoDBManager db) {
-		_db = db;
-		
+	
+
+	public AAnalyser(MongoDBManager dbm) {
+		super(dbm);
 	}
+
 
 	static void setDateCalculator(DateCalculator calc){
 		_dates = calc;
@@ -58,7 +59,8 @@ public class AAnalyser implements Analytics<AResult> {
 		//get the views
 		AvailabilityView aview=getView(ep);
 		EPView epview=getEPView(ep);
-		System.err.println(epview);
+		
+//		System.err.println(epview);
 
 		
 		// query mongodb for all AResults in the last 31 days 
@@ -121,7 +123,7 @@ public class AAnalyser implements Analytics<AResult> {
 		
 		CharSequence key = ""+dates[THIS_WEEK].getTimeInMillis();
 		epav.getData().getValues().put(key, thisweek);
-		epav.getData().setKey("Availability");
+		
 		if(thisweek<1D && thisweek>0D){
 			System.out.println("Hello");
 		}
@@ -142,15 +144,10 @@ public class AAnalyser implements Analytics<AResult> {
 		log.debug("  [AView] {}", aview);
 		log.debug("  [EPView] {}", epview);
 
-		boolean succ=false;
-		if( runs ==0){
-			succ=_db.insert(aview);
-			succ=_db.insert(epview);
-		}
-		else{
+		boolean succ = false;
 			succ=_db.update(aview);
 			succ=_db.update(epview);
-		}
+		
 //		System.err.println("AView (after)="+aview);
 //		System.err.println("EPView (after)="+epview);
 		
@@ -162,6 +159,8 @@ public class AAnalyser implements Analytics<AResult> {
 		return false;
 		
 	}
+
+
 
 	private void update(SummaryStatistics stats, AResult res) {
 		if(res.getIsAvailable()){
@@ -179,32 +178,15 @@ public class AAnalyser implements Analytics<AResult> {
 		if(views.size()==0){
 			view = new AvailabilityView();
 			view.setEndpoint(ep);
-
+			_db.insert(view);
+			
 		}else{
 			view = views.get(0);
 		}
 		return view;
 	}
 
-	private EPView getEPView(Endpoint ep) {
-		EPView view =null;
-		List<EPView> views = _db.getResults(ep,EPView.class, EPView.SCHEMA$);
-		if(views.size()!=1){
-			Log.warn("We have {} EPView, expected was 1",views.size());
-		}
-		if(views.size()==0){
-			view = new EPView();
-			view.setEndpoint(ep);
-			EPViewAvailability av = new EPViewAvailability();
-			view.setAvailability(av);
-			EPViewAvailabilityData data = new EPViewAvailabilityData();
-			av.setData(data);
-			data.setValues(new HashMap<CharSequence, Double>());
-		}else{
-			view = views.get(0);
-		}
-		return view;
-	}
+	
 
 	
 	

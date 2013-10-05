@@ -52,9 +52,7 @@ public class Scheduler {
 		taskSchedule.put(ITASK, CRON_EVERY_SUN_AT_2330);
 	}
 	
-	
 	private final ScheduledExecutorService SERVICE;
-
 	private FileManager _fm;
 	private MongoDBManager _dbm;
 	
@@ -124,7 +122,7 @@ public class Scheduler {
         }
         public void run() {
             try {
-				schedulerTask.execute();
+				schedulerTask.call();
 				reschedule(schedulerTask, iterator);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -151,6 +149,11 @@ public class Scheduler {
 	private void reschedule(Task task,
 			ScheduleIterator iter) {
 		Date time = iter.next();
+		
+		if(time.getTime() <  System.currentTimeMillis()){
+			log.warn("[PAST] stop scheduling task, next date is in the past!");
+			return;
+		}
 		
 		long startTime = time.getTime() - System.currentTimeMillis();
         SchedulerTimerTask t = new SchedulerTimerTask(task,iter);
@@ -215,14 +218,7 @@ public class Scheduler {
 		_dbm = dbm;
 	}
 
-	public void useFileManager(boolean b) {
-		if(b){
-			_fm = new FileManager();
-		}else{
-			if(_fm != null){
-				;
-			}
-			_fm = null;
-		}
+	public void useFileManager(FileManager fm) {
+		_fm = fm;
 	}
 }

@@ -46,7 +46,6 @@ public class PTask extends EndpointTask<PResult>{
 		for(SpecificPTask sp: _tasks){
 			LogHandler.run(log, "{} {}",epr.getEndpoint().getUri().toString(),sp.name());
 			PRun run = sp.get(epr.getEndpoint());
-			
 			PSingleResult pres = run.execute();
 
 			results.put(sp.name(), pres);

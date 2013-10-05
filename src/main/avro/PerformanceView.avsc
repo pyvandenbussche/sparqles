@@ -1,0 +1,12 @@
+{
+"namespace": "sparqles.analytics.avro",
+"type": "record",
+"name": "PerformanceView",
+"fields": [ 
+	{"name": "endpoint", "type": "sparqles.core.Endpoint"},
+	{"name": "askMeanCold", "type": "double"},
+	{"name": "askMeanWarm", "type": "double"},
+	{"name": "joinMeanCold", "type": "double"},
+	{"name": "joinMeanWarm", "type": "double"}
+]
+}

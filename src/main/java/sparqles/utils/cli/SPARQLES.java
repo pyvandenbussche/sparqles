@@ -2,6 +2,12 @@ package sparqles.utils.cli;
 
 import java.io.File;
 import java.util.Collection;
+import java.util.concurrent.CompletionService;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorCompletionService;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Options;
@@ -13,10 +19,15 @@ import sparqles.analytics.IndexViewAnalytics;
 import sparqles.core.CONSTANTS;
 import sparqles.core.Endpoint;
 import sparqles.core.SPARQLESProperties;
+import sparqles.core.Task;
+import sparqles.core.TaskFactory;
+import sparqles.core.availability.AResult;
 import sparqles.schedule.Schedule;
 import sparqles.schedule.Scheduler;
+import sparqles.schedule.iter.OneTimeIterator;
 import sparqles.utils.DatahubAccess;
 import sparqles.utils.DateFormater;
+import sparqles.utils.FileManager;
 import sparqles.utils.MongoDBManager;
 
 /**
@@ -28,6 +39,7 @@ public class SPARQLES extends CLIObject{
 	private static final Logger log = LoggerFactory.getLogger(SPARQLES.class);
 	private Scheduler scheduler;
 	private MongoDBManager dbm;
+	private FileManager _fm;
 	
 	@Override
 	public String getDescription() {
@@ -69,7 +81,30 @@ public class SPARQLES extends CLIObject{
 			if(task.equalsIgnoreCase(CONSTANTS.ITASK)){
 				IndexViewAnalytics a = new IndexViewAnalytics();
 				a.setDBManager(dbm);
-				a.execute();
+				try {
+					a.call();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}else if(task.equalsIgnoreCase(CONSTANTS.ATASK)){
+				Collection<Endpoint> eps = dbm.get(Endpoint.class, Endpoint.SCHEMA$);
+				
+				ExecutorService executor = Executors.newFixedThreadPool(100);
+			    CompletionService<AResult> compService = new ExecutorCompletionService<AResult>(executor);
+			    
+			    for(Endpoint ep: eps){
+					Task<AResult> t = TaskFactory.create(CONSTANTS.ATASK, ep, dbm, _fm);
+					compService.submit(t);
+				}
+			    Future<AResult> f= null;
+			    try {
+					while((f = compService.take())!=null){
+						log.info("Task for {} completed", f.get().endpointResult.endpoint.uri);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			    executor.shutdown();
 			}
 		}
 		
@@ -127,7 +162,10 @@ public class SPARQLES extends CLIObject{
 			dbm = new MongoDBManager();
 			scheduler.useDB(dbm);
 		}
-		scheduler.useFileManager(useFM);
+		if(useFM){
+			_fm = new FileManager();
+		}
+		scheduler.useFileManager(_fm);
 	}
 
 	public void stop() {

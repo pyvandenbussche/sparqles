@@ -25,11 +25,11 @@ public class IndexViewAnalyticsTEST {
 	}
 
 	@Test
-	public void test() {
+	public void test() throws Exception {
 		
 		IndexViewAnalytics a = new IndexViewAnalytics();
 		a.setDBManager(m);
-		a.execute();
+		a.call();
 	}
 
 }

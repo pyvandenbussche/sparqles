@@ -1,21 +1,58 @@
 {
 "namespace": "sparqles.analytics.avro",
- "type": "record",
- "name": "Index",
- "fields": [
- 	 {"name": "endpoint", "type": "sparqles.core.Endpoint"},
- 	 {"name": "lastUpdate", "type": "long" },
- 	 {"name": "availability", "type":
-    	{"type": "array", "items": 
-    		{	
-    			"namespace": "sparqles.analytics.avro",	
- 				"name": "AvailabilityIndex",
-      			"type": "record",
-        		"fields" : [
-        			{ "name": "key", "type": "string"},
-        			{ "name": "values", "type": {"type": "map", "values": "double"}}
-      			]
-      		}
-      	}
-   	}] 
- }
+"type": "record",
+"name": "Index",
+"fields": [
+	{"name": "endpoint", "type": "sparqles.core.Endpoint"},
+	{"name": "lastUpdate", "type": "long" },
+	{"name": "availability", "type":
+		{"type": "array", "items": 
+			{	
+				"namespace": "sparqles.analytics.avro",	
+				"name": "AvailabilityIndex",
+				"type": "record",
+				"fields" : [
+					{ "name": "key", "type": "string"},
+					{ "name": "values", "type": {"type": "map", "values": "double"}}
+				]
+			}
+		}
+	},{"name": "performance", "type":
+		{
+			"namespace":"sparqles.core.analytics.avro",
+			"type":"record",
+			"name":"IndexViewPerformance",
+			"fields":[
+				{"name": "threshold", "type": "long"},
+   	 			{"name": "data" , "type":
+   	 				{"type": "array", "items": 
+						{	
+    						"namespace": "sparqles.analytics.avro",	
+ 							"name": "IndexViewPerformanceData",
+      						"type": "record",
+        					"fields" : [
+        						{ "name": "key", "type": "string"},
+        						{ "name": "color", "type": "string"},
+        						{ "name": "data" , "type":
+   	 								{ "type": "array", "items": 
+    									{	
+    										"namespace": "sparqles.analytics.avro",	
+ 											"name": "IndexViewPerformanceDataValues",
+      										"type": "record",
+        									"fields" : [
+        										{ "name": "label", "type": "string"},
+        										{ "name": "value", "type": "double"}
+        									]
+      									}
+      								}
+   	 							}
+        					]
+      					}
+      				}
+      			}
+   	 		]
+   	 	}
+ 	}
+] 
+}
+

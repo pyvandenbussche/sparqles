@@ -5,7 +5,8 @@ import java.util.Date;
 
 
 public class HourlyIterator implements ScheduleIterator {
-    private final int minute, second;
+
+	private final int minute, second;
     private final Calendar calendar = Calendar.getInstance();
 
     public HourlyIterator(int minute, int second) {
@@ -28,5 +29,6 @@ public class HourlyIterator implements ScheduleIterator {
         calendar.add(Calendar.HOUR, 1);
         return calendar.getTime();
     }
+
 
 }

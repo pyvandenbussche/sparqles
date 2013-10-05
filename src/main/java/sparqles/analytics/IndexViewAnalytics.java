@@ -25,7 +25,7 @@ public class IndexViewAnalytics implements Task<Index>{
 	private MongoDBManager _dbm;
 
 	@Override
-	public void execute() {
+	public Index call() throws Exception {
 		Collection<Index> idxs = _dbm.get(Index.class, Index.SCHEMA$);
 		Collection<EPView> epviews = _dbm.get(EPView.class, EPView.SCHEMA$);
 		
@@ -74,6 +74,8 @@ public class IndexViewAnalytics implements Task<Index>{
 		
 		log.info("Updated view {}", idx);
 		_dbm.update(idx);
+		
+		return idx;
 		
 	}
 
@@ -137,4 +139,8 @@ public class IndexViewAnalytics implements Task<Index>{
 		}
 		
 	}
+
+
+
+	
 }

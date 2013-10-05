@@ -80,8 +80,6 @@ public class PRun {
 	}
 
 	private Run run() {
-		
-		
 		Run r = new Run();
 		r.setFrestout(FIRST_RESULT_TIMEOUT);
         r.setExectout(EXECUTION_TIMEOUT);

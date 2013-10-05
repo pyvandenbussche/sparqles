@@ -7,11 +7,12 @@ package sparqles.analytics.avro;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class Index extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Index\",\"namespace\":\"sparqles.analytics.avro\",\"fields\":[{\"name\":\"endpoint\",\"type\":{\"type\":\"record\",\"name\":\"Endpoint\",\"namespace\":\"sparqles.core\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"},{\"name\":\"datasets\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Dataset\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"},{\"name\":\"label\",\"type\":\"string\"}]}}}]}},{\"name\":\"lastUpdate\",\"type\":\"long\"},{\"name\":\"availability\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"AvailabilityIndex\",\"fields\":[{\"name\":\"key\",\"type\":\"string\"},{\"name\":\"values\",\"type\":{\"type\":\"map\",\"values\":\"double\"}}]}}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Index\",\"namespace\":\"sparqles.analytics.avro\",\"fields\":[{\"name\":\"endpoint\",\"type\":{\"type\":\"record\",\"name\":\"Endpoint\",\"namespace\":\"sparqles.core\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"},{\"name\":\"datasets\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Dataset\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"},{\"name\":\"label\",\"type\":\"string\"}]}}}]}},{\"name\":\"lastUpdate\",\"type\":\"long\"},{\"name\":\"availability\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"AvailabilityIndex\",\"fields\":[{\"name\":\"key\",\"type\":\"string\"},{\"name\":\"values\",\"type\":{\"type\":\"map\",\"values\":\"double\"}}]}}},{\"name\":\"performance\",\"type\":{\"type\":\"record\",\"name\":\"IndexViewPerformance\",\"namespace\":\"sparqles.core.analytics.avro\",\"fields\":[{\"name\":\"threshold\",\"type\":\"long\"},{\"name\":\"data\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"IndexViewPerformanceData\",\"namespace\":\"sparqles.analytics.avro\",\"fields\":[{\"name\":\"key\",\"type\":\"string\"},{\"name\":\"color\",\"type\":\"string\"},{\"name\":\"data\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"IndexViewPerformanceDataValues\",\"fields\":[{\"name\":\"label\",\"type\":\"string\"},{\"name\":\"value\",\"type\":\"double\"}]}}}]}}}]}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public sparqles.core.Endpoint endpoint;
   @Deprecated public long lastUpdate;
   @Deprecated public java.util.List<sparqles.analytics.avro.AvailabilityIndex> availability;
+  @Deprecated public sparqles.core.analytics.avro.IndexViewPerformance performance;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -23,10 +24,11 @@ public class Index extends org.apache.avro.specific.SpecificRecordBase implement
   /**
    * All-args constructor.
    */
-  public Index(sparqles.core.Endpoint endpoint, java.lang.Long lastUpdate, java.util.List<sparqles.analytics.avro.AvailabilityIndex> availability) {
+  public Index(sparqles.core.Endpoint endpoint, java.lang.Long lastUpdate, java.util.List<sparqles.analytics.avro.AvailabilityIndex> availability, sparqles.core.analytics.avro.IndexViewPerformance performance) {
     this.endpoint = endpoint;
     this.lastUpdate = lastUpdate;
     this.availability = availability;
+    this.performance = performance;
   }
 
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
@@ -36,6 +38,7 @@ public class Index extends org.apache.avro.specific.SpecificRecordBase implement
     case 0: return endpoint;
     case 1: return lastUpdate;
     case 2: return availability;
+    case 3: return performance;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -46,6 +49,7 @@ public class Index extends org.apache.avro.specific.SpecificRecordBase implement
     case 0: endpoint = (sparqles.core.Endpoint)value$; break;
     case 1: lastUpdate = (java.lang.Long)value$; break;
     case 2: availability = (java.util.List<sparqles.analytics.avro.AvailabilityIndex>)value$; break;
+    case 3: performance = (sparqles.core.analytics.avro.IndexViewPerformance)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -95,6 +99,21 @@ public class Index extends org.apache.avro.specific.SpecificRecordBase implement
     this.availability = value;
   }
 
+  /**
+   * Gets the value of the 'performance' field.
+   */
+  public sparqles.core.analytics.avro.IndexViewPerformance getPerformance() {
+    return performance;
+  }
+
+  /**
+   * Sets the value of the 'performance' field.
+   * @param value the value to set.
+   */
+  public void setPerformance(sparqles.core.analytics.avro.IndexViewPerformance value) {
+    this.performance = value;
+  }
+
   /** Creates a new Index RecordBuilder */
   public static sparqles.analytics.avro.Index.Builder newBuilder() {
     return new sparqles.analytics.avro.Index.Builder();
@@ -119,6 +138,7 @@ public class Index extends org.apache.avro.specific.SpecificRecordBase implement
     private sparqles.core.Endpoint endpoint;
     private long lastUpdate;
     private java.util.List<sparqles.analytics.avro.AvailabilityIndex> availability;
+    private sparqles.core.analytics.avro.IndexViewPerformance performance;
 
     /** Creates a new Builder */
     private Builder() {
@@ -140,6 +160,10 @@ public class Index extends org.apache.avro.specific.SpecificRecordBase implement
         this.availability = data().deepCopy(fields()[2].schema(), other.availability);
         fieldSetFlags()[2] = true;
       }
+      if (isValidValue(fields()[3], other.performance)) {
+        this.performance = data().deepCopy(fields()[3].schema(), other.performance);
+        fieldSetFlags()[3] = true;
+      }
     }
     
     /** Creates a Builder by copying an existing Index instance */
@@ -156,6 +180,10 @@ public class Index extends org.apache.avro.specific.SpecificRecordBase implement
       if (isValidValue(fields()[2], other.availability)) {
         this.availability = data().deepCopy(fields()[2].schema(), other.availability);
         fieldSetFlags()[2] = true;
+      }
+      if (isValidValue(fields()[3], other.performance)) {
+        this.performance = data().deepCopy(fields()[3].schema(), other.performance);
+        fieldSetFlags()[3] = true;
       }
     }
 
@@ -233,6 +261,31 @@ public class Index extends org.apache.avro.specific.SpecificRecordBase implement
       return this;
     }
 
+    /** Gets the value of the 'performance' field */
+    public sparqles.core.analytics.avro.IndexViewPerformance getPerformance() {
+      return performance;
+    }
+    
+    /** Sets the value of the 'performance' field */
+    public sparqles.analytics.avro.Index.Builder setPerformance(sparqles.core.analytics.avro.IndexViewPerformance value) {
+      validate(fields()[3], value);
+      this.performance = value;
+      fieldSetFlags()[3] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'performance' field has been set */
+    public boolean hasPerformance() {
+      return fieldSetFlags()[3];
+    }
+    
+    /** Clears the value of the 'performance' field */
+    public sparqles.analytics.avro.Index.Builder clearPerformance() {
+      performance = null;
+      fieldSetFlags()[3] = false;
+      return this;
+    }
+
     @Override
     public Index build() {
       try {
@@ -240,6 +293,7 @@ public class Index extends org.apache.avro.specific.SpecificRecordBase implement
         record.endpoint = fieldSetFlags()[0] ? this.endpoint : (sparqles.core.Endpoint) defaultValue(fields()[0]);
         record.lastUpdate = fieldSetFlags()[1] ? this.lastUpdate : (java.lang.Long) defaultValue(fields()[1]);
         record.availability = fieldSetFlags()[2] ? this.availability : (java.util.List<sparqles.analytics.avro.AvailabilityIndex>) defaultValue(fields()[2]);
+        record.performance = fieldSetFlags()[3] ? this.performance : (sparqles.core.analytics.avro.IndexViewPerformance) defaultValue(fields()[3]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

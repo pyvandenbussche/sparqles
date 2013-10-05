@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import sparqles.analytics.Analytics;
+import sparqles.analytics.avro.Index;
 import sparqles.utils.FileManager;
 import sparqles.utils.LogHandler;
 import sparqles.utils.MongoDBManager;
@@ -18,7 +19,7 @@ import sparqles.utils.MongoDBManager;
  *
  * @param <V> is one of ATask, PTask, FTask or DTask
  */
-public abstract class EndpointTask<V extends SpecificRecordBase> implements Task{
+public abstract class EndpointTask<V extends SpecificRecordBase> implements Task<V>{
 	private static final Logger log = LoggerFactory.getLogger(EndpointTask.class);
 		
 	private final EndpointResult _epr;
@@ -42,12 +43,14 @@ public abstract class EndpointTask<V extends SpecificRecordBase> implements Task
 		_fm =fm;
 	}
 	
-	public void execute(){
+	@Override
+	public V call() throws Exception {
 		long start = System.currentTimeMillis();
 		_epr.setStart(start);
+		V v = null;
 		try{
 			LogHandler.run(log,this.getClass().getSimpleName(), _epr.getEndpoint().getUri().toString());
-			V v= process(_epr);
+			 v= process(_epr);
 			long end = System.currentTimeMillis();
 			
 			LogHandler.success(log,this.getClass().getSimpleName(), _epr.getEndpoint().getUri().toString(), end-start);
@@ -69,6 +72,7 @@ public abstract class EndpointTask<V extends SpecificRecordBase> implements Task
 			LogHandler.error(log,this.getClass().getSimpleName(), _epr.getEndpoint().getUri().toString(),e);
 		}
 		_epr.setEnd(System.currentTimeMillis());
+		return v;
 	}
 	
 	

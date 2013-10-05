@@ -26,6 +26,43 @@
       			}
       		}
       	]}
-	}
+	},
+	{"name": "performance", "type":
+		{
+			"namespace":"sparqles.core.analytics.avro",
+			"type":"record",
+			"name":"EPViewPerformance",
+			"fields":[
+				{"name": "threshold", "type": "long"},
+				{"name": "ask" , "type": 
+					{"type": "array", "items": 
+						{
+    						"namespace": "sparqles.analytics.avro",	
+ 							"name": "EPViewPerformanceData",
+      						"type": "record",
+        					"fields" : [
+        						{ "name": "key", "type": "string"},
+        						{ "name": "color", "type": "string"},
+        						{ "name": "data" , "type":
+   	 								{ "type": "array", "items": 
+    									{	
+    										"namespace": "sparqles.analytics.avro",	
+ 											"name": "EPViewPerformanceDataValues",
+     										"type": "record",
+        									"fields" : [
+        										{ "name": "label", "type": "string"},
+        										{ "name": "value", "type": "double"}
+        									]
+      									}
+      								}
+   	 							}
+        					]
+      					}	
+      				}
+				},
+				{"name": "join" , "type": {"type": "array", "items": "array", "items" : "sparqles.analytics.avro.EPViewPerformanceData"}}
+   	 		]
+   	 	}
+ 	}
    	]
 }
