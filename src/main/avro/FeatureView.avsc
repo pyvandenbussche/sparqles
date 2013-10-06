@@ -1,0 +1,10 @@
+{
+"namespace": "sparqles.analytics.avro",
+"type": "record",
+"name": "InteroperabilityView",
+"fields": [ 
+	{"name": "endpoint", "type": "sparqles.core.Endpoint"},
+	{"name": "nbCompliantSPARQL1Features", "type": "int"},
+	{"name": "nbCompliantSPARQL11Features", "type": "int"}
+]
+}

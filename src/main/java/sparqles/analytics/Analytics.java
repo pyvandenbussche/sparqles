@@ -10,8 +10,10 @@ import org.mortbay.log.Log;
 import sparqles.analytics.avro.EPView;
 import sparqles.analytics.avro.EPViewAvailability;
 import sparqles.analytics.avro.EPViewAvailabilityData;
+import sparqles.analytics.avro.EPViewInteroperabilityData;
 import sparqles.analytics.avro.EPViewPerformanceData;
 import sparqles.core.Endpoint;
+import sparqles.core.analytics.avro.EPViewInteroperability;
 import sparqles.core.analytics.avro.EPViewPerformance;
 import sparqles.utils.MongoDBManager;
 
@@ -46,7 +48,6 @@ public abstract class Analytics<V extends SpecificRecordBase> {
 			
 			EPViewAvailability av = new EPViewAvailability();
 			view.setAvailability(av);
-			
 			EPViewAvailabilityData data = new EPViewAvailabilityData();
 			av.setData(data);
 			data.setKey("Availability");
@@ -60,8 +61,15 @@ public abstract class Analytics<V extends SpecificRecordBase> {
 			p.setAsk(askdata);
 			p.setJoin(joindata);
 			
+			EPViewInteroperability iv = new EPViewInteroperability();
+			iv.setSPARQL11Features(new ArrayList<EPViewInteroperabilityData>());
+			iv.setSPARQL1Features(new ArrayList<EPViewInteroperabilityData>());
+			
 			view.setPerformance(p);
 			view.setAvailability(av);
+			view.setInteroperability(iv);
+			
+			
 			
 			
 			_db.insert(view);

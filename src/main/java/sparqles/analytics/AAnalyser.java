@@ -1,7 +1,6 @@
 package sparqles.analytics;
 
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
@@ -12,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import sparqles.analytics.avro.AvailabilityView;
 import sparqles.analytics.avro.EPView;
 import sparqles.analytics.avro.EPViewAvailability;
-import sparqles.analytics.avro.EPViewAvailabilityData;
 import sparqles.core.Endpoint;
 import sparqles.core.availability.AResult;
 import sparqles.utils.MongoDBManager;
@@ -28,18 +26,13 @@ public class AAnalyser extends Analytics<AResult> {
 	public final static int LAST_31DAYS=3;
 	public final static int THIS_WEEK=4;
 
-
-	
-
 	public AAnalyser(MongoDBManager dbm) {
 		super(dbm);
 	}
 
-
 	static void setDateCalculator(DateCalculator calc){
 		_dates = calc;
 	}
-
 
 	/**
 	 * Computes the aggregated statistics for the Availability task
@@ -60,9 +53,6 @@ public class AAnalyser extends Analytics<AResult> {
 		AvailabilityView aview=getView(ep);
 		EPView epview=getEPView(ep);
 		
-//		System.err.println(epview);
-
-		
 		// query mongodb for all AResults in the last 31 days 
 		List<AResult> results = _db.getResultsSince(ep, AResult.class, AResult.SCHEMA$,  dates[LAST_31DAYS].getTimeInMillis(), now.getTimeInMillis());
 		log.debug("Query for {}< - >={} returned "+results.size()+" results", dates[LAST_31DAYS].getTime(), now.getTime());
@@ -71,8 +61,6 @@ public class AAnalyser extends Analytics<AResult> {
 		SummaryStatistics last7DaysStats = new SummaryStatistics();
 		SummaryStatistics last31DaysStats = new SummaryStatistics();
 		SummaryStatistics thisWeekStats = new SummaryStatistics();
-
-//		long last = ares.getEndpointResult().getStart();
 		
 		for(AResult res: results){
 			long start = res.getEndpointResult().getStart();

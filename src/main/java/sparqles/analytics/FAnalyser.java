@@ -16,28 +16,31 @@ import sparqles.analytics.avro.EPViewPerformanceDataValues;
 import sparqles.analytics.avro.PerformanceView;
 import sparqles.core.Endpoint;
 import sparqles.core.analytics.avro.EPViewPerformance;
+import sparqles.core.features.FResult;
 import sparqles.core.performance.PResult;
 import sparqles.core.performance.PSingleResult;
 import sparqles.utils.MongoDBManager;
 
-public class PAnalyser extends Analytics<PResult> {
-	private static final Logger log = LoggerFactory.getLogger(PAnalyser.class);
+public class FAnalyser extends Analytics<FResult> {
+	private static final Logger log = LoggerFactory.getLogger(FAnalyser.class);
 
 	
 	
-	public PAnalyser(MongoDBManager db) {
+	public FAnalyser(MongoDBManager db) {
 		super(db);
 	}
 
 
 	@Override
-	public boolean analyse(PResult pres) {
+	public boolean analyse(FResult pres) {
 		log.info("[Analytics] {}",pres);
 		
 		Endpoint ep = pres.getEndpointResult().getEndpoint();
 		
-		PerformanceView pview=getView(ep);
+		FeatureView fview= getView(ep);
 		EPView epview=getEPView(ep);
+		
+		
 		
 		SummaryStatistics askStatsCold = new SummaryStatistics();
 		SummaryStatistics askStatsWarm = new SummaryStatistics();
@@ -98,10 +101,10 @@ public class PAnalyser extends Analytics<PResult> {
 		
 		
 		//Update pview data
-		pview.setAskMeanCold(checkForNAN(askStatsCold.getMean()));
-		pview.setAskMeanWarm(checkForNAN(askStatsWarm.getMean()));
-		pview.setJoinMeanCold(checkForNAN(joinStatsCold.getMean()));
-		pview.setJoinMeanWarm(checkForNAN(joinStatsWarm.getMean()));
+		pview.setAskMeanCold(askStatsCold.getMean());
+		pview.setAskMeanWarm(askStatsWarm.getMean());
+		pview.setJoinMeanCold(joinStatsCold.getMean());
+		pview.setJoinMeanWarm(joinStatsWarm.getMean());
 		
 		
 		System.out.println(pview);
@@ -113,22 +116,14 @@ public class PAnalyser extends Analytics<PResult> {
 	}
 
 
-	private Double checkForNAN(double mean) {
-		if (Double.isNaN(mean)){
-			return -1D;
-		}
-		return mean;
-	}
-
-
-	private PerformanceView getView(Endpoint ep) {
-		PerformanceView view =null;
-		List<PerformanceView> views = _db.getResults(ep,PerformanceView.class, PerformanceView.SCHEMA$);
+	private FeatureView getView(Endpoint ep) {
+		FeatureView view =null;
+		List<FeatureView> views = _db.getResults(ep,FeatureView.class, FeatureView.SCHEMA$);
 		if(views.size()!=1){
-			Log.warn("We have {} AvailabilityView, expected was 1",views.size());
+			Log.warn("We have {} FeatureView, expected was 1",views.size());
 		}
 		if(views.size()==0){
-			view = new PerformanceView();
+			view = new FeatureView();
 			view.setEndpoint(ep);
 			_db.insert(view);
 

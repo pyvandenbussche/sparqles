@@ -63,6 +63,29 @@
 				{"name": "join" , "type": {"type": "array", "items": "array", "items" : "sparqles.analytics.avro.EPViewPerformanceData"}}
    	 		]
    	 	}
+ 	},
+ 	{"name": "interoperability", "type":
+		{
+			"namespace":"sparqles.core.analytics.avro",
+			"type":"record",
+			"name":"EPViewInteroperability",
+			"fields":[
+				{"name": "SPARQL1Features" , "type": 
+					{"type": "array", "items": 
+						{
+    						"namespace": "sparqles.analytics.avro",	
+ 							"name": "EPViewInteroperabilityData",
+      						"type": "record",
+        					"fields" : [
+        						{ "name": "label", "type": "string"},
+        						{ "name": "value", "type": "double"}
+        					]
+      					}	
+      				}
+				},
+				{"name": "SPARQL11Features" , "type": {"type": "array", "items": "array", "items" : "sparqles.analytics.avro.EPViewInteroperabilityData"}}
+   	 		]
+   	 	}
  	}
    	]
 }
