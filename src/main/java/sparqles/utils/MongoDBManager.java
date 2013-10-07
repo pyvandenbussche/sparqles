@@ -21,6 +21,7 @@ import org.slf4j.LoggerFactory;
 import sparqles.analytics.avro.AvailabilityView;
 import sparqles.analytics.avro.EPView;
 import sparqles.analytics.avro.Index;
+import sparqles.analytics.avro.InteroperabilityView;
 import sparqles.analytics.avro.PerformanceView;
 import sparqles.core.Endpoint;
 import sparqles.core.SPARQLESProperties;
@@ -127,10 +128,14 @@ public class MongoDBManager {
 		if(res instanceof FResult) return insert(COLL_FEAT, res, res.getSchema() );
 		if(res instanceof Endpoint) return insert(COLL_ENDS, res, res.getSchema() );
 		if(res instanceof Schedule) return insert(COLL_SCHED, res, res.getSchema() );
+		
 		if(res instanceof AvailabilityView) return insert(COLL_AVAIL_AGG, res, res.getSchema() );
 		if(res instanceof EPView) return insert(COLL_EP_VIEW, res, res.getSchema() );
 		if(res instanceof Index) return insert(COLL_INDEX, res, res.getSchema() );
 		if(res instanceof PerformanceView) return insert(COLL_PERF_AGG, res, res.getSchema() );
+		if(res instanceof InteroperabilityView) return insert(COLL_FEAT_AGG, res, res.getSchema() );
+		
+		
 		return false;
 	}
 	
@@ -164,6 +169,8 @@ public class MongoDBManager {
 	public <V extends SpecificRecordBase> boolean update(V res){
 		if(res instanceof AvailabilityView) return update(COLL_AVAIL_AGG, ((AvailabilityView) res).getEndpoint(),res, res.getSchema(),VIEW_KEY );
 		if(res instanceof PerformanceView) return update(COLL_PERF_AGG, ((PerformanceView) res).getEndpoint(),res, res.getSchema(),VIEW_KEY );
+		if(res instanceof InteroperabilityView) return update(COLL_FEAT_AGG, ((PerformanceView) res).getEndpoint(),res, res.getSchema(),VIEW_KEY );
+		
 		
 		if(res instanceof EPView) return update(COLL_EP_VIEW, ((EPView) res).getEndpoint(), res, res.getSchema(),VIEW_KEY );
 		if(res instanceof Index) return update(COLL_INDEX, ((Index) res).getEndpoint(), res, res.getSchema(),VIEW_KEY );
@@ -214,6 +221,7 @@ public class MongoDBManager {
 		
 		if(cls.getName().equals(AvailabilityView.class.getName())) return scan(ep,COLL_AVAIL_AGG, cls,schema, VIEW_KEY);
 		if(cls.getName().equals(PerformanceView.class.getName())) return scan(ep,COLL_PERF_AGG, cls,schema, VIEW_KEY);
+		if(cls.getName().equals(InteroperabilityView.class.getName())) return scan(ep,COLL_FEAT_AGG, cls,schema, VIEW_KEY);
 		if(cls.getName().equals(EPView.class.getName())) return scan(ep,COLL_EP_VIEW, cls,schema, VIEW_KEY); 
 		if(cls.getName().equals(Index.class.getName())) return scan(ep,COLL_INDEX, cls,schema, VIEW_KEY);
 		return null;

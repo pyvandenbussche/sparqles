@@ -4,4 +4,3 @@ select * where {
     ?p rdf:type{2} ?z
 
 }  LIMIT 100
-

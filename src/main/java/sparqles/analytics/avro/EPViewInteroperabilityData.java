@@ -7,10 +7,10 @@ package sparqles.analytics.avro;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class EPViewInteroperabilityData extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"EPViewInteroperabilityData\",\"namespace\":\"sparqles.analytics.avro\",\"fields\":[{\"name\":\"label\",\"type\":\"string\"},{\"name\":\"value\",\"type\":\"double\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"EPViewInteroperabilityData\",\"namespace\":\"sparqles.analytics.avro\",\"fields\":[{\"name\":\"label\",\"type\":\"string\"},{\"name\":\"value\",\"type\":\"boolean\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public java.lang.CharSequence label;
-  @Deprecated public double value;
+  @Deprecated public boolean value;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -22,7 +22,7 @@ public class EPViewInteroperabilityData extends org.apache.avro.specific.Specifi
   /**
    * All-args constructor.
    */
-  public EPViewInteroperabilityData(java.lang.CharSequence label, java.lang.Double value) {
+  public EPViewInteroperabilityData(java.lang.CharSequence label, java.lang.Boolean value) {
     this.label = label;
     this.value = value;
   }
@@ -41,7 +41,7 @@ public class EPViewInteroperabilityData extends org.apache.avro.specific.Specifi
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
     case 0: label = (java.lang.CharSequence)value$; break;
-    case 1: value = (java.lang.Double)value$; break;
+    case 1: value = (java.lang.Boolean)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -64,7 +64,7 @@ public class EPViewInteroperabilityData extends org.apache.avro.specific.Specifi
   /**
    * Gets the value of the 'value' field.
    */
-  public java.lang.Double getValue() {
+  public java.lang.Boolean getValue() {
     return value;
   }
 
@@ -72,7 +72,7 @@ public class EPViewInteroperabilityData extends org.apache.avro.specific.Specifi
    * Sets the value of the 'value' field.
    * @param value the value to set.
    */
-  public void setValue(java.lang.Double value) {
+  public void setValue(java.lang.Boolean value) {
     this.value = value;
   }
 
@@ -98,7 +98,7 @@ public class EPViewInteroperabilityData extends org.apache.avro.specific.Specifi
     implements org.apache.avro.data.RecordBuilder<EPViewInteroperabilityData> {
 
     private java.lang.CharSequence label;
-    private double value;
+    private boolean value;
 
     /** Creates a new Builder */
     private Builder() {
@@ -157,12 +157,12 @@ public class EPViewInteroperabilityData extends org.apache.avro.specific.Specifi
     }
 
     /** Gets the value of the 'value' field */
-    public java.lang.Double getValue() {
+    public java.lang.Boolean getValue() {
       return value;
     }
     
     /** Sets the value of the 'value' field */
-    public sparqles.analytics.avro.EPViewInteroperabilityData.Builder setValue(double value) {
+    public sparqles.analytics.avro.EPViewInteroperabilityData.Builder setValue(boolean value) {
       validate(fields()[1], value);
       this.value = value;
       fieldSetFlags()[1] = true;
@@ -185,7 +185,7 @@ public class EPViewInteroperabilityData extends org.apache.avro.specific.Specifi
       try {
         EPViewInteroperabilityData record = new EPViewInteroperabilityData();
         record.label = fieldSetFlags()[0] ? this.label : (java.lang.CharSequence) defaultValue(fields()[0]);
-        record.value = fieldSetFlags()[1] ? this.value : (java.lang.Double) defaultValue(fields()[1]);
+        record.value = fieldSetFlags()[1] ? this.value : (java.lang.Boolean) defaultValue(fields()[1]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

@@ -78,7 +78,7 @@
       						"type": "record",
         					"fields" : [
         						{ "name": "label", "type": "string"},
-        						{ "name": "value", "type": "double"}
+        						{ "name": "value", "type": "boolean"}
         					]
       					}	
       				}

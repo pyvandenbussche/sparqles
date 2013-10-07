@@ -24,7 +24,6 @@ import sparqles.core.TaskFactory;
 import sparqles.core.availability.AResult;
 import sparqles.schedule.Schedule;
 import sparqles.schedule.Scheduler;
-import sparqles.schedule.iter.OneTimeIterator;
 import sparqles.utils.DatahubAccess;
 import sparqles.utils.DateFormater;
 import sparqles.utils.FileManager;
