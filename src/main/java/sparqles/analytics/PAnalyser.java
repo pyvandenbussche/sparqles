@@ -60,10 +60,9 @@ public class PAnalyser extends Analytics<PResult> {
 		
 		eppview.setAsk(askdata);
 		eppview.setJoin(joindata);
-		
-		
+				
 		Map<CharSequence, PSingleResult> map = pres.getResults();
-		int limit =0 ;
+		long limit =0 ;
 		
 		for(Entry<CharSequence, PSingleResult> ent: map.entrySet()){
 			PSingleResult res = ent.getValue();
@@ -74,16 +73,16 @@ public class PAnalyser extends Analytics<PResult> {
 				String key = ent.getKey().toString().replaceAll("ASK",	"").toLowerCase();
 				
 				
-				askCold.getData().add(new EPViewPerformanceDataValues(key,res.getCold().getClosetime()/(double)1000));
-				askWarm.getData().add(new EPViewPerformanceDataValues(key,res.getWarm().getClosetime()/(double)1000));
+				askCold.getData().add(new EPViewPerformanceDataValues(key,res.getCold().getClosetime()/(double)1000,res.getCold().getException()));
+				askWarm.getData().add(new EPViewPerformanceDataValues(key,res.getWarm().getClosetime()/(double)1000,res.getWarm().getException()));
 			}else if(ent.getKey().toString().startsWith("JOIN")){
 				joinStatsCold.addValue(res.getCold().getClosetime()/(double)1000);
 				joinStatsWarm.addValue(res.getCold().getClosetime()/(double)1000);
 		
 				String key = ent.getKey().toString().replaceAll("JOIN",	"").toLowerCase();
 				
-				joinCold.getData().add(new EPViewPerformanceDataValues(key,res.getCold().getClosetime()/(double)1000));
-				joinWarm.getData().add(new EPViewPerformanceDataValues(key,res.getWarm().getClosetime()/(double)1000));
+				joinCold.getData().add(new EPViewPerformanceDataValues(key,res.getCold().getClosetime()/(double)1000,res.getCold().getException()));
+				joinWarm.getData().add(new EPViewPerformanceDataValues(key,res.getWarm().getClosetime()/(double)1000,res.getWarm().getException()));
 			}else if(ent.getKey().toString().startsWith("LIMIT")){
 				int sol = res.getCold().getSolutions();
 				if(Math.max(limit, sol)==sol){
@@ -95,6 +94,8 @@ public class PAnalyser extends Analytics<PResult> {
 				}
 			}
 		}
+		eppview.setThreshold(limit);
+		
 		
 		
 		//Update pview data

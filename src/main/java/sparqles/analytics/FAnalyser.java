@@ -46,19 +46,18 @@ public class FAnalyser extends Analytics<FResult> {
 		InteroperabilityView fview= getView(ep);
 		EPView epview=getEPView(ep);
 		
-		
 		List<EPViewInteroperabilityData> sparql1Feat = new ArrayList<EPViewInteroperabilityData>();
 		List<EPViewInteroperabilityData> sparql11Feat = new ArrayList<EPViewInteroperabilityData>();
 		int SPARQL1=0, SPARQL11=0;
 		for(Entry<CharSequence, FSingleResult> ent: pres.getResults().entrySet()){
-			System.out.println(ent.getKey()+" -> "+ent.getValue());
+//			System.out.println(ent.getKey()+" -> "+ent.getValue());
 			String key = ent.getKey().toString();
 			Run run = ent.getValue().getRun();
 			String q = SpecificFTask.valueOf(key).toString().toLowerCase();
 			
 				if(key.startsWith("SPARQL1_")) {
 					q = q.replaceAll("sparql10/", "").replace(".rq", "");
-					EPViewInteroperabilityData t = new EPViewInteroperabilityData(q, false);
+					EPViewInteroperabilityData t = new EPViewInteroperabilityData(q, false,run.getException());
 					
 					if(run.getException()==null){
 						SPARQL1++;
@@ -67,8 +66,8 @@ public class FAnalyser extends Analytics<FResult> {
 					sparql1Feat.add(t);
 				}
 				if(key.startsWith("SPARQL11_")) {SPARQL11++;
-					q = q.replaceAll("sparql1/", "").replace(".rq", "");
-					EPViewInteroperabilityData t = new EPViewInteroperabilityData(q, false);
+					q = q.replaceAll("sparql11/", "").replace(".rq", "");
+					EPViewInteroperabilityData t = new EPViewInteroperabilityData(q, false,run.getException());
 					
 					if(run.getException()==null){
 						SPARQL11++;
@@ -78,12 +77,16 @@ public class FAnalyser extends Analytics<FResult> {
 					sparql11Feat.add(t);
 				}
 			
-			System.out.println(q);
-			
 		}
 		fview.setNbCompliantSPARQL1Features(SPARQL1);
 		fview.setNbCompliantSPARQL11Features(SPARQL11);
+		epview.getInteroperability().setSPARQL1Features(sparql1Feat);
+		epview.getInteroperability().setSPARQL11Features(sparql11Feat);
+		System.out.println(fview);
+		System.out.println(epview);
 		
+		_db.update(fview);
+		_db.update(epview);
 		return true;
 		
 //		SummaryStatistics askStatsCold = new SummaryStatistics();

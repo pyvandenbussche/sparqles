@@ -7,10 +7,11 @@ package sparqles.analytics.avro;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class EPViewPerformanceDataValues extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"EPViewPerformanceDataValues\",\"namespace\":\"sparqles.analytics.avro\",\"fields\":[{\"name\":\"label\",\"type\":\"string\"},{\"name\":\"value\",\"type\":\"double\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"EPViewPerformanceDataValues\",\"namespace\":\"sparqles.analytics.avro\",\"fields\":[{\"name\":\"label\",\"type\":\"string\"},{\"name\":\"value\",\"type\":\"double\"},{\"name\":\"exception\",\"type\":[\"string\",\"null\"]}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public java.lang.CharSequence label;
   @Deprecated public double value;
+  @Deprecated public java.lang.CharSequence exception;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -22,9 +23,10 @@ public class EPViewPerformanceDataValues extends org.apache.avro.specific.Specif
   /**
    * All-args constructor.
    */
-  public EPViewPerformanceDataValues(java.lang.CharSequence label, java.lang.Double value) {
+  public EPViewPerformanceDataValues(java.lang.CharSequence label, java.lang.Double value, java.lang.CharSequence exception) {
     this.label = label;
     this.value = value;
+    this.exception = exception;
   }
 
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
@@ -33,6 +35,7 @@ public class EPViewPerformanceDataValues extends org.apache.avro.specific.Specif
     switch (field$) {
     case 0: return label;
     case 1: return value;
+    case 2: return exception;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -42,6 +45,7 @@ public class EPViewPerformanceDataValues extends org.apache.avro.specific.Specif
     switch (field$) {
     case 0: label = (java.lang.CharSequence)value$; break;
     case 1: value = (java.lang.Double)value$; break;
+    case 2: exception = (java.lang.CharSequence)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -76,6 +80,21 @@ public class EPViewPerformanceDataValues extends org.apache.avro.specific.Specif
     this.value = value;
   }
 
+  /**
+   * Gets the value of the 'exception' field.
+   */
+  public java.lang.CharSequence getException() {
+    return exception;
+  }
+
+  /**
+   * Sets the value of the 'exception' field.
+   * @param value the value to set.
+   */
+  public void setException(java.lang.CharSequence value) {
+    this.exception = value;
+  }
+
   /** Creates a new EPViewPerformanceDataValues RecordBuilder */
   public static sparqles.analytics.avro.EPViewPerformanceDataValues.Builder newBuilder() {
     return new sparqles.analytics.avro.EPViewPerformanceDataValues.Builder();
@@ -99,6 +118,7 @@ public class EPViewPerformanceDataValues extends org.apache.avro.specific.Specif
 
     private java.lang.CharSequence label;
     private double value;
+    private java.lang.CharSequence exception;
 
     /** Creates a new Builder */
     private Builder() {
@@ -116,6 +136,10 @@ public class EPViewPerformanceDataValues extends org.apache.avro.specific.Specif
         this.value = data().deepCopy(fields()[1].schema(), other.value);
         fieldSetFlags()[1] = true;
       }
+      if (isValidValue(fields()[2], other.exception)) {
+        this.exception = data().deepCopy(fields()[2].schema(), other.exception);
+        fieldSetFlags()[2] = true;
+      }
     }
     
     /** Creates a Builder by copying an existing EPViewPerformanceDataValues instance */
@@ -128,6 +152,10 @@ public class EPViewPerformanceDataValues extends org.apache.avro.specific.Specif
       if (isValidValue(fields()[1], other.value)) {
         this.value = data().deepCopy(fields()[1].schema(), other.value);
         fieldSetFlags()[1] = true;
+      }
+      if (isValidValue(fields()[2], other.exception)) {
+        this.exception = data().deepCopy(fields()[2].schema(), other.exception);
+        fieldSetFlags()[2] = true;
       }
     }
 
@@ -180,12 +208,38 @@ public class EPViewPerformanceDataValues extends org.apache.avro.specific.Specif
       return this;
     }
 
+    /** Gets the value of the 'exception' field */
+    public java.lang.CharSequence getException() {
+      return exception;
+    }
+    
+    /** Sets the value of the 'exception' field */
+    public sparqles.analytics.avro.EPViewPerformanceDataValues.Builder setException(java.lang.CharSequence value) {
+      validate(fields()[2], value);
+      this.exception = value;
+      fieldSetFlags()[2] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'exception' field has been set */
+    public boolean hasException() {
+      return fieldSetFlags()[2];
+    }
+    
+    /** Clears the value of the 'exception' field */
+    public sparqles.analytics.avro.EPViewPerformanceDataValues.Builder clearException() {
+      exception = null;
+      fieldSetFlags()[2] = false;
+      return this;
+    }
+
     @Override
     public EPViewPerformanceDataValues build() {
       try {
         EPViewPerformanceDataValues record = new EPViewPerformanceDataValues();
         record.label = fieldSetFlags()[0] ? this.label : (java.lang.CharSequence) defaultValue(fields()[0]);
         record.value = fieldSetFlags()[1] ? this.value : (java.lang.Double) defaultValue(fields()[1]);
+        record.exception = fieldSetFlags()[2] ? this.exception : (java.lang.CharSequence) defaultValue(fields()[2]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

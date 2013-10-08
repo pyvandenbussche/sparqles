@@ -169,7 +169,7 @@ public class MongoDBManager {
 	public <V extends SpecificRecordBase> boolean update(V res){
 		if(res instanceof AvailabilityView) return update(COLL_AVAIL_AGG, ((AvailabilityView) res).getEndpoint(),res, res.getSchema(),VIEW_KEY );
 		if(res instanceof PerformanceView) return update(COLL_PERF_AGG, ((PerformanceView) res).getEndpoint(),res, res.getSchema(),VIEW_KEY );
-		if(res instanceof InteroperabilityView) return update(COLL_FEAT_AGG, ((PerformanceView) res).getEndpoint(),res, res.getSchema(),VIEW_KEY );
+		if(res instanceof InteroperabilityView) return update(COLL_FEAT_AGG, ((InteroperabilityView) res).getEndpoint(),res, res.getSchema(),VIEW_KEY );
 		
 		
 		if(res instanceof EPView) return update(COLL_EP_VIEW, ((EPView) res).getEndpoint(), res, res.getSchema(),VIEW_KEY );

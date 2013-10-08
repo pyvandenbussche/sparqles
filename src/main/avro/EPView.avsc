@@ -51,7 +51,8 @@
      										"type": "record",
         									"fields" : [
         										{ "name": "label", "type": "string"},
-        										{ "name": "value", "type": "double"}
+        										{ "name": "value", "type": "double"},
+        										{ "name": "exception", "type": ["string", "null"]}
         									]
       									}
       								}
@@ -78,7 +79,8 @@
       						"type": "record",
         					"fields" : [
         						{ "name": "label", "type": "string"},
-        						{ "name": "value", "type": "boolean"}
+        						{ "name": "value", "type": "boolean"},
+        						{ "name": "exception", "type": ["string", "null"]}
         					]
       					}	
       				}

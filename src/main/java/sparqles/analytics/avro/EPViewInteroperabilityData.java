@@ -7,10 +7,11 @@ package sparqles.analytics.avro;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class EPViewInteroperabilityData extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"EPViewInteroperabilityData\",\"namespace\":\"sparqles.analytics.avro\",\"fields\":[{\"name\":\"label\",\"type\":\"string\"},{\"name\":\"value\",\"type\":\"boolean\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"EPViewInteroperabilityData\",\"namespace\":\"sparqles.analytics.avro\",\"fields\":[{\"name\":\"label\",\"type\":\"string\"},{\"name\":\"value\",\"type\":\"boolean\"},{\"name\":\"exception\",\"type\":[\"string\",\"null\"]}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public java.lang.CharSequence label;
   @Deprecated public boolean value;
+  @Deprecated public java.lang.CharSequence exception;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -22,9 +23,10 @@ public class EPViewInteroperabilityData extends org.apache.avro.specific.Specifi
   /**
    * All-args constructor.
    */
-  public EPViewInteroperabilityData(java.lang.CharSequence label, java.lang.Boolean value) {
+  public EPViewInteroperabilityData(java.lang.CharSequence label, java.lang.Boolean value, java.lang.CharSequence exception) {
     this.label = label;
     this.value = value;
+    this.exception = exception;
   }
 
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
@@ -33,6 +35,7 @@ public class EPViewInteroperabilityData extends org.apache.avro.specific.Specifi
     switch (field$) {
     case 0: return label;
     case 1: return value;
+    case 2: return exception;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -42,6 +45,7 @@ public class EPViewInteroperabilityData extends org.apache.avro.specific.Specifi
     switch (field$) {
     case 0: label = (java.lang.CharSequence)value$; break;
     case 1: value = (java.lang.Boolean)value$; break;
+    case 2: exception = (java.lang.CharSequence)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -76,6 +80,21 @@ public class EPViewInteroperabilityData extends org.apache.avro.specific.Specifi
     this.value = value;
   }
 
+  /**
+   * Gets the value of the 'exception' field.
+   */
+  public java.lang.CharSequence getException() {
+    return exception;
+  }
+
+  /**
+   * Sets the value of the 'exception' field.
+   * @param value the value to set.
+   */
+  public void setException(java.lang.CharSequence value) {
+    this.exception = value;
+  }
+
   /** Creates a new EPViewInteroperabilityData RecordBuilder */
   public static sparqles.analytics.avro.EPViewInteroperabilityData.Builder newBuilder() {
     return new sparqles.analytics.avro.EPViewInteroperabilityData.Builder();
@@ -99,6 +118,7 @@ public class EPViewInteroperabilityData extends org.apache.avro.specific.Specifi
 
     private java.lang.CharSequence label;
     private boolean value;
+    private java.lang.CharSequence exception;
 
     /** Creates a new Builder */
     private Builder() {
@@ -116,6 +136,10 @@ public class EPViewInteroperabilityData extends org.apache.avro.specific.Specifi
         this.value = data().deepCopy(fields()[1].schema(), other.value);
         fieldSetFlags()[1] = true;
       }
+      if (isValidValue(fields()[2], other.exception)) {
+        this.exception = data().deepCopy(fields()[2].schema(), other.exception);
+        fieldSetFlags()[2] = true;
+      }
     }
     
     /** Creates a Builder by copying an existing EPViewInteroperabilityData instance */
@@ -128,6 +152,10 @@ public class EPViewInteroperabilityData extends org.apache.avro.specific.Specifi
       if (isValidValue(fields()[1], other.value)) {
         this.value = data().deepCopy(fields()[1].schema(), other.value);
         fieldSetFlags()[1] = true;
+      }
+      if (isValidValue(fields()[2], other.exception)) {
+        this.exception = data().deepCopy(fields()[2].schema(), other.exception);
+        fieldSetFlags()[2] = true;
       }
     }
 
@@ -180,12 +208,38 @@ public class EPViewInteroperabilityData extends org.apache.avro.specific.Specifi
       return this;
     }
 
+    /** Gets the value of the 'exception' field */
+    public java.lang.CharSequence getException() {
+      return exception;
+    }
+    
+    /** Sets the value of the 'exception' field */
+    public sparqles.analytics.avro.EPViewInteroperabilityData.Builder setException(java.lang.CharSequence value) {
+      validate(fields()[2], value);
+      this.exception = value;
+      fieldSetFlags()[2] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'exception' field has been set */
+    public boolean hasException() {
+      return fieldSetFlags()[2];
+    }
+    
+    /** Clears the value of the 'exception' field */
+    public sparqles.analytics.avro.EPViewInteroperabilityData.Builder clearException() {
+      exception = null;
+      fieldSetFlags()[2] = false;
+      return this;
+    }
+
     @Override
     public EPViewInteroperabilityData build() {
       try {
         EPViewInteroperabilityData record = new EPViewInteroperabilityData();
         record.label = fieldSetFlags()[0] ? this.label : (java.lang.CharSequence) defaultValue(fields()[0]);
         record.value = fieldSetFlags()[1] ? this.value : (java.lang.Boolean) defaultValue(fields()[1]);
+        record.exception = fieldSetFlags()[2] ? this.exception : (java.lang.CharSequence) defaultValue(fields()[2]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

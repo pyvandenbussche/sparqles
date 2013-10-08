@@ -1,6 +1,7 @@
 package sparqles.analytics;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +14,8 @@ import org.slf4j.LoggerFactory;
 
 import sparqles.analytics.avro.AvailabilityIndex;
 import sparqles.analytics.avro.EPView;
+import sparqles.analytics.avro.EPViewAvailability;
+import sparqles.analytics.avro.EPViewInteroperabilityData;
 import sparqles.analytics.avro.EPViewPerformanceData;
 import sparqles.analytics.avro.EPViewPerformanceDataValues;
 import sparqles.analytics.avro.Index;
@@ -22,6 +25,8 @@ import sparqles.analytics.avro.IndexViewPerformanceDataValues;
 import sparqles.analytics.avro.PerformanceView;
 import sparqles.core.CONSTANTS;
 import sparqles.core.Task;
+import sparqles.core.analytics.avro.EPViewInteroperability;
+import sparqles.core.analytics.avro.EPViewPerformance;
 import sparqles.core.analytics.avro.IndexViewInteroperability;
 import sparqles.core.analytics.avro.IndexViewPerformance;
 import sparqles.utils.MongoDBManager;
@@ -31,7 +36,11 @@ public class IndexViewAnalytics implements Task<Index>{
 	private static final Logger log = LoggerFactory.getLogger(IndexViewAnalytics.class);
 	
 	private MongoDBManager _dbm;
-
+	final int askCold=0, askWarm=1, joinCold=2, joinWarm=3;
+	final int sparql1_solMods=0, sparql1_com=1, sparql1_graph=2,
+			  sparql11_agg=3, sparql11_filter=4, sparql11_other=5;
+	
+	
 	@Override
 	public Index call() throws Exception {
 		
@@ -48,25 +57,119 @@ public class IndexViewAnalytics implements Task<Index>{
 		
 		//get epview
 		Collection<EPView> epviews = _dbm.get(EPView.class, EPView.SCHEMA$);
-		
 		log.info("Found {} idx views and {} epviews", idxs.size(), epviews.size());
-		Map< String, SimpleHistogram> weekHist = new HashMap<String, SimpleHistogram>();
-		SummaryStatistics askCold = new SummaryStatistics();
-		SummaryStatistics askWarm = new SummaryStatistics();
-		SummaryStatistics joinCold = new SummaryStatistics();
-		SummaryStatistics joinWarm = new SummaryStatistics();
-		for(EPView epv: epviews){
-			//update availability
-			for(Entry<CharSequence, Double> values: epv.getAvailability().getData().getValues().entrySet()){
-				update(values, weekHist);
-			}
-			//update performance
-			update(epv.getPerformance().getAsk(), askCold, askWarm);
-			update(epv.getPerformance().getJoin(), joinCold, joinWarm);
-		}
-		List<AvailabilityIndex> aidxs = idx.getAvailability();
-
 		
+		
+		//Prepare aggregated analytics
+		Map< String, SimpleHistogram> weekHist = new HashMap<String, SimpleHistogram>();
+		
+		SummaryStatistics [] perfStats = {new SummaryStatistics(),
+				new SummaryStatistics(), new SummaryStatistics(),
+				new SummaryStatistics()};
+		
+		SummaryStatistics [] interStats = {new SummaryStatistics(),
+				new SummaryStatistics(), new SummaryStatistics(),
+				new SummaryStatistics(), new SummaryStatistics(),
+				new SummaryStatistics()};
+		
+		//iterate over all epviews and analyse them
+		for(EPView epv: epviews){
+			System.err.println(epv);
+			//analyse availability
+			analyseAvailability(epv.getAvailability(), weekHist);
+			
+			//analyse performance
+			analysePerformance(epv.getPerformance(), perfStats );
+			
+			//analyse interoperability
+			analyseInteroperability(epv.getInteroperability(), interStats);
+		}
+		
+		//update the index view
+		updateAvailabilityStats(idx, weekHist);
+		
+		//update performance stats
+		updatePerformanceStats(idx, perfStats);
+		
+		//update interoperability stats
+		
+		
+		
+		log.info("Updated view {}", idx);
+		_dbm.update(idx);
+		
+		return idx;
+	}
+
+	private void analyseInteroperability(
+			EPViewInteroperability interoperability,
+			SummaryStatistics[] interStats) {
+		
+		boolean [] all  = new boolean[6];
+		Arrays.fill(all, false);
+				
+		
+		for(EPViewInteroperabilityData d : interoperability.getSPARQL1Features()){
+			System.out.println("1:"+d.getLabel());
+			String l = d.getLabel().toString();
+			if(l.contains("fil") &&	l.contains("bnode") && 
+				l.contains("empty")){
+				all[sparql1_com] =all[sparql1_com]&& d.getValue();
+			}
+			else if(l.contains("ask") &&	l.contains("graph") && 
+					l.contains("con[")&& l.contains("sel[from]")){
+					all[sparql1_graph] =all[sparql1_graph]&& d.getValue();
+				}
+			else{
+				all[sparql1_solMods] =all[sparql1_solMods]&& d.getValue();
+			}
+		}
+		for(EPViewInteroperabilityData d : interoperability.getSPARQL11Features()){
+			System.out.println("11"+ d.getLabel());
+			String l = d.getLabel().toString();
+			
+			else if(l.contains("sel[fil")){
+					all[sparql11_filter] =all[sparql11_filter]&& d.getValue();
+				}
+		}
+	}
+
+	private void analysePerformance(EPViewPerformance performance,
+			SummaryStatistics[] perfStats) {
+		update(performance.getAsk(), perfStats[askCold], perfStats[askWarm]);
+		update(performance.getJoin(), perfStats[joinCold], perfStats[joinWarm]);
+	}
+
+	private void analyseAvailability(EPViewAvailability availability,
+			Map<String, SimpleHistogram> weekHist) {
+		for(Entry<CharSequence, Double> values: availability.getData().getValues().entrySet()){
+			update(values, weekHist);
+		}
+	}
+
+	private void updatePerformanceStats(Index idx, SummaryStatistics[] perfStats) {
+		ArrayList<IndexViewPerformanceData> data = new ArrayList<IndexViewPerformanceData>();
+		List<IndexViewPerformanceDataValues> l = new ArrayList<IndexViewPerformanceDataValues>();
+		IndexViewPerformanceData cold = new IndexViewPerformanceData("Cold Tests", "#1f77b4",l);
+		l = new ArrayList<IndexViewPerformanceDataValues>();
+		IndexViewPerformanceData warm = new IndexViewPerformanceData("Warm Tests", "#2ca02c",l);
+		data.add(cold);
+		data.add(warm);
+		
+		cold.getData().add(new IndexViewPerformanceDataValues("Average ASK", perfStats[askCold].getMean()));
+		cold.getData().add(new IndexViewPerformanceDataValues("Average JOIN", perfStats[joinCold].getMean()));
+		
+		warm.getData().add(new IndexViewPerformanceDataValues("Average ASK", perfStats[askWarm].getMean()));
+		warm.getData().add(new IndexViewPerformanceDataValues("Average JOIN", perfStats[joinWarm].getMean()));
+		
+		idx.getPerformance().setThreshold(-1L);
+		idx.getPerformance().setData(data);
+		
+	}
+
+	private void updateAvailabilityStats(Index idx,
+			Map<String, SimpleHistogram> weekHist) {
+		List<AvailabilityIndex> aidxs = idx.getAvailability();
 		//update availability stats
 		for(Entry<String, SimpleHistogram> week: weekHist.entrySet()){
 			SimpleHistogram sh = week.getValue();
@@ -87,31 +190,6 @@ public class IndexViewAnalytics implements Task<Index>{
 				aidx.getValues().put(week.getKey(), value/(double)total);
 			}
 		}
-		
-		//update performance stats
-		ArrayList<IndexViewPerformanceData> data = new ArrayList<IndexViewPerformanceData>();
-		List<IndexViewPerformanceDataValues> l = new ArrayList<IndexViewPerformanceDataValues>();
-		IndexViewPerformanceData cold = new IndexViewPerformanceData("Cold Tests", "#1f77b4",l);
-		l = new ArrayList<IndexViewPerformanceDataValues>();
-		IndexViewPerformanceData warm = new IndexViewPerformanceData("Warm Tests", "#2ca02c",l);
-		data.add(cold);
-		data.add(warm);
-		
-		cold.getData().add(new IndexViewPerformanceDataValues("Average ASK", askCold.getMean()));
-		cold.getData().add(new IndexViewPerformanceDataValues("Average JOIN", joinCold.getMean()));
-		
-		warm.getData().add(new IndexViewPerformanceDataValues("Average ASK", askWarm.getMean()));
-		warm.getData().add(new IndexViewPerformanceDataValues("Average JOIN", joinWarm.getMean()));
-		
-		
-		idx.getPerformance().setThreshold(-1L);
-		idx.getPerformance().setData(data);
-		
-		
-		log.info("Updated view {}", idx);
-		_dbm.update(idx);
-		
-		return idx;
 	}
 
 	private void update(List<EPViewPerformanceData> results,
