@@ -1,0 +1,9 @@
+PREFIX : <http://www.example.org/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT ?s (AVG(?o) AS ?avg)
+WHERE {
+	?s rdf:type ?o
+} 
+GROUP BY ?s
+HAVING (AVG(?o) <= 2.0)
+LIMIT 100
