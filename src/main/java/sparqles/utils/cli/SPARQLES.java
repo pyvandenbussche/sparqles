@@ -22,6 +22,9 @@ import sparqles.core.SPARQLESProperties;
 import sparqles.core.Task;
 import sparqles.core.TaskFactory;
 import sparqles.core.availability.AResult;
+import sparqles.core.discovery.DResult;
+import sparqles.core.features.FResult;
+import sparqles.core.performance.PResult;
 import sparqles.schedule.Schedule;
 import sparqles.schedule.Scheduler;
 import sparqles.utils.DatahubAccess;
@@ -86,25 +89,24 @@ public class SPARQLES extends CLIObject{
 					e.printStackTrace();
 				}
 			}else if(task.equalsIgnoreCase(CONSTANTS.ATASK)){
-				Collection<Endpoint> eps = dbm.get(Endpoint.class, Endpoint.SCHEMA$);
-				
-				ExecutorService executor = Executors.newFixedThreadPool(100);
-			    CompletionService<AResult> compService = new ExecutorCompletionService<AResult>(executor);
-			    
-			    for(Endpoint ep: eps){
-					Task<AResult> t = TaskFactory.create(CONSTANTS.ATASK, ep, dbm, _fm);
-					compService.submit(t);
-				}
-			    Future<AResult> f= null;
-			    try {
-					while((f = compService.take())!=null){
-						log.info("Task for {} completed", f.get().endpointResult.endpoint.uri);
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			    executor.shutdown();
+				OneTimeExecution<AResult> ex = new OneTimeExecution<AResult>(dbm,_fm); 
+				ex.run(CONSTANTS.ATASK);
 			}
+			else if(task.equalsIgnoreCase(CONSTANTS.FTASK)){
+				OneTimeExecution<FResult> ex = new OneTimeExecution<FResult>(dbm,_fm); 
+				ex.run(CONSTANTS.FTASK);
+			}
+			else if(task.equalsIgnoreCase(CONSTANTS.PTASK)){
+				OneTimeExecution<PResult> ex = new OneTimeExecution<PResult>(dbm,_fm); 
+				ex.run(CONSTANTS.PTASK);
+			}
+			else if(task.equalsIgnoreCase(CONSTANTS.DTASK)){
+				OneTimeExecution<DResult> ex = new OneTimeExecution<DResult>(dbm,_fm); 
+				ex.run(CONSTANTS.DTASK);
+			}else{
+				log.warn("Task {} not known", task);
+			}
+			
 		}
 		
 		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_FLAG_START)){
