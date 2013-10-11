@@ -7,12 +7,10 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import sparqles.utils.LogHandler;
-
-import sparqles.core.SPARQLESProperties;
 import sparqles.core.Endpoint;
 import sparqles.core.EndpointResult;
 import sparqles.core.EndpointTask;
+import sparqles.core.SPARQLESProperties;
 
 
 public class FTask extends EndpointTask<FResult>{
@@ -30,31 +28,32 @@ public class FTask extends EndpointTask<FResult>{
 		super(ep);
 		_tasks = tasks;
 		Object [] s = {ep.getUri().toString(), tasks.length, SPARQLESProperties.getFTASK_WAITTIME()};
-		LogHandler.init(log,"{} with {} tasks and a waittime of {} ms", s);
-		
+		log.info("[INIT] {} with {} tasks and {} ms wait time", this, tasks.length, SPARQLESProperties.getPTASK_WAITTIME());
     }
 
     @Override
 	public FResult process(EndpointResult epr) {
     	FResult res = new FResult();
 		res.setEndpointResult(epr);
-		LogHandler.run(log, "{}",epr.getEndpoint().getUri().toString());
 		
 		Map<CharSequence, FSingleResult> results = new HashMap<CharSequence, FSingleResult>(_tasks.length);
 		
 		int failures=0;
 		for(SpecificFTask sp: _tasks){
-			System.out.println(sp.name());
-			LogHandler.run(log, "{} [{}]",epr.getEndpoint().getUri().toString(), sp.name());
+			log.debug("[EXEC] {}:{}", this, sp.name());
 			
 			FRun run = sp.get(epr);
 			run.setFileManager(_fm);
-			FSingleResult pres = run.execute();
+			FSingleResult fres = run.execute();
 
-			results.put(sp.name(), pres);
+			results.put(sp.name(), fres);
 			
-			if(pres.getRun().getException()!=null){
+			if(fres.getRun().getException()!=null){
 				failures++;
+				
+				String exec = fres.getRun().getException().toString();
+				exec = exec.substring(0,exec.indexOf("\n"));
+				log.debug("[FAILED] {} exec: {}", this, exec);
 			}
 			try {
 				Thread.sleep(SPARQLESProperties.getFTASK_WAITTIME());
@@ -63,11 +62,8 @@ public class FTask extends EndpointTask<FResult>{
 			}
 		}
 		res.setResults(results);
-		if(failures==0)
-			LogHandler.debugSuccess(log, "{}", epr.getEndpoint());
-		else{
-			LogHandler.debugERROR(log, "{}: {}/{}",  epr.getEndpoint().getUri().toString(), failures, _tasks.length);
-		}
+		log.info("[EXECUTED] {} {}/{} tasks without error", this, _task.length()-failures, _task.length());
+		
 		return res;
     }
 }

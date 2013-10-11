@@ -1,0 +1,10 @@
+{
+"namespace": "sparqles.analytics.avro",
+"type": "record",
+"name": "DiscoverabilityView",
+"fields": [ 
+	{"name": "VoID", "type": "sparqles.core.Endpoint"},
+	{"name": "SD", "type": "boolean"},
+	{"name": "serverName", "type": "string"}
+]
+}

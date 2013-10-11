@@ -1,19 +1,16 @@
 package sparqles.core;
 
 import org.apache.avro.specific.SpecificRecordBase;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import sparqles.analytics.Analytics;
-import sparqles.analytics.avro.Index;
 import sparqles.utils.FileManager;
-import sparqles.utils.LogHandler;
 import sparqles.utils.MongoDBManager;
 
 /**
  * 
- * Abstract Task class
+ * Abstract task definition for an endpoint
  * 
  * @author UmbrichJ
  *
@@ -29,10 +26,16 @@ public abstract class EndpointTask<V extends SpecificRecordBase> implements Task
 	protected FileManager _fm;
 
 	private Analytics<V> _analytics;
+
+	protected final String _task;
+
+	protected final String _epURI;
 	
 	public EndpointTask(Endpoint ep) {
 		_epr = new EndpointResult();
 		_epr.setEndpoint(ep);
+		_epURI = ep.getUri().toString();
+		_task = this.getClass().getSimpleName();
 		_id = this.getClass().getSimpleName()+"("+_epr.getEndpoint().getUri()+")";
 	}
 	
@@ -49,29 +52,30 @@ public abstract class EndpointTask<V extends SpecificRecordBase> implements Task
 		_epr.setStart(start);
 		V v = null;
 		try{
-			LogHandler.run(log,this.getClass().getSimpleName(), _epr.getEndpoint().getUri().toString());
-			 v= process(_epr);
-			long end = System.currentTimeMillis();
+			log.info("[EXEC] {}", _id);
 			
-			LogHandler.success(log,this.getClass().getSimpleName(), _epr.getEndpoint().getUri().toString(), end-start);
+			v = process(_epr);
+			long end = System.currentTimeMillis();	
 			_epr.setEnd(end);
 			
 			//insert into database
-			if(_dbm != null &&  !_dbm.insert(v)){
-				log.warn("Could not store record to DB");
-			}
+			boolean i_succ=true, a_succ = true, f_succ= true;
+			if(_dbm != null)
+				i_succ=_dbm.insert(v);
 			
 			//write to file
-			if(_fm != null &&  !_fm.writeResult(v)){
-				log.warn("Could not store record to file");
-			}
-			if(_analytics != null && !_analytics.analyse(v)){
-				log.warn("Could not analyse the task results");
-			}
+			if(_fm != null)
+				f_succ = _fm.writeResult(v);
+			
+			//analyse the results	
+			if(_analytics != null)
+				a_succ=  _analytics.analyse(v);
+
+				
+			log.info("[EXECUTED] {} in {} ms (insert:{}, file:{}, analysed:{})", _id, end-start, i_succ, f_succ, a_succ);
 		}catch(Exception e){
-			LogHandler.error(log,this.getClass().getSimpleName(), _epr.getEndpoint().getUri().toString(),e);
+			log.warn("[FAILED] {} #> {}: {}", _id, e.getClass().getSimpleName(), e.getMessage());
 		}
-		_epr.setEnd(System.currentTimeMillis());
 		return v;
 	}
 	
