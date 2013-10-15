@@ -111,8 +111,6 @@ public class DGETRun extends DRun<GetResult>{
 			map.put(key,1);	
 	}
 
-
-
 	private Lang getLangFromType(String type) {
 		if(type.contains("application/x-turtle")||type.contains("text/turtle"))
 			return Lang.TTL;
