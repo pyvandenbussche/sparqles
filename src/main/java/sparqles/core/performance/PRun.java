@@ -21,7 +21,7 @@ public class PRun extends TaskRun{
 
 
 	public PRun(Endpoint ep, String queryFile, Long start) {
-		super( ep, queryFile, start,log);
+		super( ep, queryFile,SPARQLESProperties.getPTASK_QUERIES(), start,log);
 		
 	}
 	

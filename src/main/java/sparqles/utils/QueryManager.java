@@ -30,7 +30,7 @@ public class QueryManager {
 				e.printStackTrace();
 			}
 		}else{
-			scanner = new Scanner(ClassLoader.getSystemResourceAsStream(folder+qFile));
+			scanner = new Scanner(QueryManager.class.getClassLoader().getSystemResourceAsStream(folder+qFile));
 		}
 		if(scanner == null){
 			log.warn("[FAILED] Could not load query file {} from {}", qFile, folder);

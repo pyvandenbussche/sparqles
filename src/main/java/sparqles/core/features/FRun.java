@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import sparqles.core.Endpoint;
+import sparqles.core.SPARQLESProperties;
 
 public class FRun extends TaskRun {
 
@@ -20,7 +21,7 @@ public class FRun extends TaskRun {
 
 
 	public FRun(Endpoint ep, String queryFile, Long start) {
-		super( ep, queryFile, start,log);
+		super( ep, queryFile, SPARQLESProperties.getFTASK_QUERIES(),start,log);
 		
 	}
 

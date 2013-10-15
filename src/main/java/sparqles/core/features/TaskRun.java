@@ -36,11 +36,11 @@ public abstract class TaskRun {
 	private Logger log;
 
 	
-	public TaskRun(Endpoint ep, String queryFile, Long start, Logger log) {
+	public TaskRun(Endpoint ep, String queryFile,String queryRoot, Long start, Logger log) {
 		_queryFile = queryFile;
 		this.log = log;
 		
-		_query = QueryManager.getQuery(SPARQLESProperties.getFTASK_QUERIES(),queryFile);
+		_query = QueryManager.getQuery(queryRoot,queryFile);
 		_ep = ep;
 		_start =start;
 	}
