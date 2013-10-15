@@ -68,6 +68,7 @@ public class DatahubAccess {
 			Iterator<JsonNode> iter = res.getElements();
 			int c=1;
 			
+			
 			Map<String,Set<String>> map = new HashMap<String, Set<String>>();
 			while(iter.hasNext()){
 				JsonNode node = iter.next();
@@ -85,6 +86,7 @@ public class DatahubAccess {
 				String endpointURL = ent.getKey(); 
 
 				if(endpointURL.length()==0) continue;
+				
 				Endpoint ep = results.get(endpointURL);
 				if(ep == null){
 					try {
@@ -99,7 +101,10 @@ public class DatahubAccess {
 				if(ent.getValue().size()!=0){
 					for(String ds : ent.getValue()){
 						ep = checkForDataset(ep,ds,httpClient );
+						log.info("Found dataset information for {}", ep);
 					}
+				}else{
+					System.err.println("This should not happend for ep"+ep);
 				}
 				if(c==49){
 					System.out.println("ASDASD");
@@ -133,15 +138,24 @@ public class DatahubAccess {
 			ObjectMapper mapper = new ObjectMapper(factory);
 			JsonNode rootNode = mapper.readTree(respString); 
 
+//			System.out.println(rootNode);
 			String ckan_url = rootNode.findPath("ckan_url").getTextValue();
-			String title = rootNode.findPath("title").getTextValue().trim();
+			List<JsonNode> titles  = rootNode.findValues("title");
+			String title = null;
+			for(JsonNode s : titles){
+//				System.out.println(s);
+				if(!s.toString().contains("Linking Open"))
+					title = s.asText();
+				
+			}
+					
 
 			Dataset d = new Dataset();
 			d.setLabel(title);
 			d.setUri(ckan_url);
 			List<Dataset> l =  ep.getDatasets();
 			l.add(d);
-			ep.setDatasets(l);
+//			ep.setDatasets(l);
 
 			return ep;
 
