@@ -10,7 +10,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -198,7 +200,12 @@ public class FileManager {
 	
 	private File createResultFile(Endpoint ep, String query, Long date) {
 		try {
-			return new File(resultsFolder, URLEncoder.encode(ep.getUri().toString(), "UTF-8")+"_"+query.replaceAll("/", "-")+"_"+date+".results.gz");
+			File folder = new File( resultsFolder,URLEncoder.encode(ep.getUri().toString(), "UTF-8"));
+			folder.mkdir();
+			
+			folder = new File(folder, DateFormater.getDataAsString(DateFormater.YYYYMMDD));
+			folder.mkdir();
+			return new File(folder, query.replaceAll("/", "-")+"_"+date+".results.gz");
 		} catch (UnsupportedEncodingException e) {
 			log.warn("UnsupportedEncodingException: {} for {}", e.getMessage(), ep.getUri().toString() );
 		}

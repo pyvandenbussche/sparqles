@@ -72,7 +72,7 @@ public class Scheduler {
 	public void init(MongoDBManager db) {
 
 		Collection<Schedule> schedules = db.get(Schedule.class, Schedule.SCHEMA$);
-		sparqles.utils.LogHandler.init(log," [Scheduling tasks for {} endpoints", schedules.size());
+		sparqles.utils.LogFormater.init(log," [Scheduling tasks for {} endpoints", schedules.size());
 
 		for(Schedule sd: schedules){
 			Endpoint ep = sd.getEndpoint();

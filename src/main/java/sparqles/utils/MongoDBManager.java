@@ -148,14 +148,14 @@ public class MongoDBManager {
 			DBObject dbObject = getObject(e, schema);
 			WriteResult wr = c.insert(dbObject,WriteConcern.FSYNC_SAFE);
 			if(wr.getError()!=null){
-				System.out.println("error");
+				log.debug("[INSERT] [ERROR] {}:{} #>{}",collName,e.toString(), wr.getError());
+				return false;
 			}else{
-				log.info("[INSERT] [SUCC] {}:{}",collName,e.toString());
+				log.debug("[INSERT] [SUCC] {}:{}",collName,e.toString());
 			}
-
 			return true;
 		}catch(DuplicateKey ex){
-			log.info("[INSERT] [DUPLICATE] uri key");
+			log.debug("[INSERT] [DUPLICATE] uri key for {}",e);
 			return true;
 		}catch(MongoException ex){
 			log.warn("[INSERT] [EXEC] {}",ex);

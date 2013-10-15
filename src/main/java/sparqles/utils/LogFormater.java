@@ -5,9 +5,20 @@ import java.io.StringWriter;
 
 import org.slf4j.Logger;
 
-public class LogHandler {
+public class LogFormater {
 
-
+	
+	//used for initalisation processes
+	public static final String INIT ="[INIT]";
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/*
 	 * Exception handling
 	 */
@@ -44,19 +55,17 @@ public class LogHandler {
 	 * @param ep
 	 */
 	public static void run(Logger log, String task, String ep) {
-		log.info("[EXEC] [{}] {}", task,ep);
+		log.info("[EXEC] {} {}", task, ep);
 	}
 	public static void success(Logger log, String task, String ep, Long time) {
-		Object []t = {task,ep, time};
-		log.info("[SUCC] [{}] {} in {} ms", t);
+		log.info("[SUCC] {} {} #> in {} ms", task, ep, time);
 	}
 	public static void error(Logger log, String task, String ep, Exception e) {
-		log.info("[ERROR] [{}] {}", task,ep);
+		log.warn("[FAILED] {} {} #> {}: {}", task,ep, e.getClass().getSimpleName(), e.getMessage());
 	}
 
 	public static void debugSuccess(Logger log, String string, Object ...  o) {
 		log.debug("[SUCC] "+string, o);
-		
 	}
 
 	public static void debugERROR(Logger log, String msg, Object ... o) {

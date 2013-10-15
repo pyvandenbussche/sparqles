@@ -64,7 +64,7 @@ public enum  SpecificPTask {
     }
    
     public PRun get(Endpoint ep){
-        return new PRun(ep, null, query);
+        return new PRun(ep, query);
     }
    
     public static List<PRun> allTasks(Endpoint ep){
