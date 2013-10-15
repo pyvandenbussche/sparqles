@@ -3,7 +3,6 @@ package sparqles.core.discovery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import sparqles.utils.LogFormater;
 
 import sparqles.core.Endpoint;
 import sparqles.core.EndpointResult;

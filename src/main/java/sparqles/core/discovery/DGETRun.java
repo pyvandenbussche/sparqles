@@ -1,5 +1,6 @@
 package sparqles.core.discovery;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -17,6 +18,8 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.apache.jena.riot.Lang;
+import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.lang.PipedRDFIterator;
 import org.apache.jena.riot.lang.PipedRDFStream;
 import org.apache.jena.riot.lang.PipedTriplesStream;
@@ -63,8 +66,16 @@ public class DGETRun extends DRun<GetResult>{
 			if(status.startsWith("2")){
 				String content = EntityUtils.toString(resp.getEntity());	
 				
+				
+				
 				PipedRDFIterator<Triple> iter = new PipedRDFIterator<Triple>();
 			    final PipedRDFStream<Triple> inputStream = new PipedTriplesStream(iter);
+			    ByteArrayInputStream bais = new ByteArrayInputStream(content.getBytes());
+			    RDFDataMgr.parse(inputStream, bais,_ep.getUri().toString(), Lang.RDFXML );
+			    
+			    while(iter.hasNext()){
+			    	System.out.println(iter.next());
+			    }
 			    
 			    
 			    Map<CharSequence, Object> voidPred = new HashMap<CharSequence, Object>();

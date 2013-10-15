@@ -73,6 +73,7 @@ public abstract class Analytics<V extends SpecificRecordBase> {
 			
 			
 			EPViewDiscoverability dv = new EPViewDiscoverability("", new ArrayList<EPViewDiscoverabilityData>(),new ArrayList<EPViewDiscoverabilityData>());
+			view.setDiscoverability(dv);
 			
 			_db.insert(view);
 		}else{
