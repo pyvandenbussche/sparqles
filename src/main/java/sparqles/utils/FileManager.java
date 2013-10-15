@@ -83,15 +83,13 @@ public class FileManager {
 		if(rootFolder.isFile()){ log.warn("The specified folder {} is not a directory", rootFolder);
 			return;
 		}
-		for( File f: avroFolder.listFiles()){
+		for(File f: avroFolder.listFiles()){
 			String name = f.getName().replace(".avro", "");
 			try {
 				String ep = URLDecoder.decode(name.substring(0, name.lastIndexOf(".")),  "UTF-8");
 				String task = name.substring(name.lastIndexOf(".")+1);
 
 				put(ep,task,f);
-
-
 			} catch (UnsupportedEncodingException e) {
 				log.warn("UnsupportedEncodingException: {} for {}", e.getMessage(),f );
 			}

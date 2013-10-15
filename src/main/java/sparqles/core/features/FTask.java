@@ -52,7 +52,7 @@ public class FTask extends EndpointTask<FResult>{
 				failures++;
 				
 				String exec = fres.getRun().getException().toString();
-				exec = exec.substring(0,exec.indexOf("\n"));
+				
 				log.debug("[FAILED] {} exec: {}", this, exec);
 			}
 			try {

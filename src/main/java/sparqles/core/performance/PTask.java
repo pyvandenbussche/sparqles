@@ -53,10 +53,6 @@ public class PTask extends EndpointTask<PResult>{
 				failures++;
 				String cold = pres.getCold().getException().toString();
 				String warm = pres.getWarm().getException().toString();
-				if(cold!=null) 
-					cold = cold.substring(0,cold.indexOf("\n"));
-				if(warm!=null) 
-					warm = warm.substring(0,warm.indexOf("\n"));
 				
 				log.debug("[FAILED] {} (cold: {}, warm: {})", this, cold,warm); 
 			}
