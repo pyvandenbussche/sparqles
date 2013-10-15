@@ -7,6 +7,8 @@ var express = require('express')
   , fs = require('fs');
  
 var ConfigProvider = require('./configprovider').ConfigProvider;
+var MongoDBProvider = require('./mongodbprovider').MongoDBProvider;
+var mongoDBProvider = new MongoDBProvider('localhost', 27017);
 var configApp = new ConfigProvider('../config.json');
 
 var app = express();
@@ -52,10 +54,21 @@ app.get('/endpoint', function(req, res){
 
 app.get('/availability', function(req, res){
 		var epsAvail = JSON.parse(fs.readFileSync('./examples/availability.json'));
-        res.render('content/availability.jade',{
-			lastUpdate: 'Monday 02 September 2013, 22:22',
-			epsAvail: epsAvail
-            });
+		mongoDBProvider.getAvailView( function(error,docs){
+		    var nbEndpointsUp=0;
+			for (i in docs){
+				if(docs[i].upNow==true){
+					nbEndpointsUp++;
+				}
+			}
+			res.render('content/availability.jade',{
+				lastUpdate: 'Monday 02 September 2013, 22:22',
+				epsAvail: epsAvail,
+				atasks_agg: docs,
+				nbEndpointsUp:nbEndpointsUp,
+				nbEndpointsTotal:docs.length
+				});
+		});
 });
 
 app.get('/discoverability', function(req, res){
