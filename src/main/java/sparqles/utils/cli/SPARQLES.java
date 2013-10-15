@@ -118,6 +118,7 @@ public class SPARQLES extends CLIObject{
 
 	private void recomputeAnalytics() {
 		dbm.initAggregateCollections();
+		
 		AAnalyserInit a = new AAnalyserInit(dbm);
 		a.run();
 	}

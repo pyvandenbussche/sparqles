@@ -36,6 +36,7 @@ public class OneTimeExecution<T extends SpecificRecordBase> {
 	    
 	    for(Endpoint ep: eps){
 			Task<T> t = TaskFactory.create(task, ep, dbm, fm);
+			log.info("OneTimeSchedule {}", ep);
 			compService.submit(t);
 		}
 	    Future<T> f= null;
