@@ -28,11 +28,20 @@ public class LogFormater {
 	}
 
 	public static String toString(Exception e){
+		return e.getClass().getSimpleName()+":"+e.getMessage();
+//		StringWriter sw = new StringWriter();
+//		PrintWriter pw = new PrintWriter(sw);
+//		e.printStackTrace(pw);
+//		return sw.toString();
+	}
+	
+	public static String toFullString(Exception e){
 		StringWriter sw = new StringWriter();
 		PrintWriter pw = new PrintWriter(sw);
 		e.printStackTrace(pw);
 		return sw.toString();
 	}
+
 	
 	
 	public static void run(Logger log, String msg, Object ... o) {

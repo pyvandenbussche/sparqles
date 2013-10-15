@@ -131,7 +131,8 @@ public class AAnalyser extends Analytics<AResult> {
 
 		log.debug("  [AView] {}", aview);
 		log.debug("  [EPView] {}", epview);
-
+		aview.setLastUpdate(ares.getEndpointResult().getEnd());
+		
 		boolean succ = false;
 			succ=_db.update(aview);
 			succ=_db.update(epview);

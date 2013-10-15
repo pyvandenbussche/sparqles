@@ -100,16 +100,16 @@
 					{"type": "array", "items": 
 						{
     						"namespace": "sparqles.analytics.avro",	
- 							"name": "EPViewDiscoverabiityData",
+ 							"name": "EPViewDiscoverabilityData",
       						"type": "record",
         					"fields" : [
         						{ "name": "label", "type": "string"},
-        						{ "name": "value", "type": "boolean"},
+        						{ "name": "value", "type": "boolean"}
         					]
       					}	
       				}
 				},
-				{"name": "SDDescription" , "type": {"type": "array", "items": "array", "items" : "sparqles.analytics.avro.EPViewDiscoverabiityData"}}
+				{"name": "SDDescription" , "type": {"type": "array", "items": "array", "items" : "sparqles.analytics.avro.EPViewDiscoverabilityData"}}
    	 		]
    	 	}
  	}

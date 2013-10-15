@@ -85,6 +85,8 @@ public class FAnalyser extends Analytics<FResult> {
 		System.out.println(fview);
 		System.out.println(epview);
 		
+		fview.setLastUpdate(pres.getEndpointResult().getEnd());
+		
 		_db.update(fview);
 		_db.update(epview);
 		return true;
