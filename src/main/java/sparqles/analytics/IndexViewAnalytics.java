@@ -19,6 +19,7 @@ import sparqles.analytics.avro.EPViewInteroperabilityData;
 import sparqles.analytics.avro.EPViewPerformanceData;
 import sparqles.analytics.avro.EPViewPerformanceDataValues;
 import sparqles.analytics.avro.Index;
+import sparqles.analytics.avro.IndexViewDiscoverabilityData;
 import sparqles.analytics.avro.IndexViewInterData;
 import sparqles.analytics.avro.IndexViewInterDataValues;
 import sparqles.analytics.avro.IndexViewPerformanceData;
@@ -27,6 +28,7 @@ import sparqles.core.CONSTANTS;
 import sparqles.core.Task;
 import sparqles.core.analytics.avro.EPViewInteroperability;
 import sparqles.core.analytics.avro.EPViewPerformance;
+import sparqles.core.analytics.avro.IndexViewDiscoverability;
 import sparqles.core.analytics.avro.IndexViewInteroperability;
 import sparqles.core.analytics.avro.IndexViewPerformance;
 import sparqles.utils.MongoDBManager;
@@ -409,12 +411,17 @@ public class IndexViewAnalytics implements Task<Index>{
 		idxp.setData(new ArrayList<IndexViewPerformanceData>());
 		idx.setPerformance(idxp);
 
-
 		IndexViewInteroperability idxi = new IndexViewInteroperability();
 		idxi.setData(new ArrayList<IndexViewInterData>());
 		idx.setInteroperability(idxi);
 
-
+		IndexViewDiscoverability idxd = new IndexViewDiscoverability();
+		idxd.setNoDescription(-1D);
+		idxd.setSDDescription(-1D);
+		idxd.setVoIDDescription(-1D);
+		idxd.setServerName(new ArrayList<IndexViewDiscoverabilityData>());
+		idx.setDiscoverability(idxd);
+		
 		return idx;
 	}
 
