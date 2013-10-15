@@ -7,7 +7,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import sparqles.utils.LogHandler;
+import sparqles.utils.LogFormater;
 
 import sparqles.core.SPARQLESProperties;
 import sparqles.core.Endpoint;
@@ -29,29 +29,32 @@ public class PTask extends EndpointTask<PResult>{
     public PTask(Endpoint ep, SpecificPTask ... tasks) {
 		super(ep);
 		_tasks = tasks;
-		Object [] s = {ep.getUri().toString(), tasks.length, SPARQLESProperties.getPTASK_WAITTIME()};
-		LogHandler.init(log,"{} with {} tasks and a waittime of {} ms", s);
+		
+		log.info("[INIT] {} with {} tasks and {} ms wait time", this, tasks.length, SPARQLESProperties.getPTASK_WAITTIME());
     }
 
     @Override
 	public PResult process(EndpointResult epr) {
     	PResult res = new PResult();
 		res.setEndpointResult(epr);
-    	LogHandler.run(log, "{}",epr.getEndpoint().getUri().toString());
 		
-    	
     	Map<CharSequence, PSingleResult> results = new HashMap<CharSequence, PSingleResult>(_tasks.length);
 		
 		int failures=0;
 		for(SpecificPTask sp: _tasks){
-			LogHandler.run(log, "{} {}",epr.getEndpoint().getUri().toString(),sp.name());
+			log.debug("[EXEC] {}:{}", this, sp.name());
 			PRun run = sp.get(epr.getEndpoint());
 			PSingleResult pres = run.execute();
 
 			results.put(sp.name(), pres);
 			
+			
 			if(pres.getCold().getException()!=null ||pres.getWarm().getException()!=null){
 				failures++;
+				String cold = pres.getCold().getException().toString();
+				String warm = pres.getWarm().getException().toString();
+				
+				log.debug("[FAILED] {} (cold: {}, warm: {})", this, cold,warm); 
 			}
 			try {
 				Thread.sleep(SPARQLESProperties.getPTASK_WAITTIME());
@@ -60,11 +63,9 @@ public class PTask extends EndpointTask<PResult>{
 			}
 		}
 		res.setResults(results);
-		if(failures==0)
-			LogHandler.debugSuccess(log, "{}", epr.getEndpoint());
-		else{
-			LogHandler.debugERROR(log, "{}: {}/{}",  epr.getEndpoint().getUri().toString(), failures, _tasks.length);
-		}
+		
+		log.info("[EXECUTED] {} {}/{} tasks without error", this, _task.length()-failures, _task.length());
+		
 		return res;
     }
 }

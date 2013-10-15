@@ -52,7 +52,8 @@
       			}
    	 		]
    	 	}
- 	},{"name": "interoperability", "type":
+ 	},
+ 	{"name": "interoperability", "type":
 		{
 			"namespace":"sparqles.core.analytics.avro",
 			"type":"record",
@@ -86,6 +87,45 @@
       			}
    	 		]
    	 	}
+ 	},
+ 	
+ 	{"name": "discoverability", "type":
+		{
+			"namespace":"sparqles.core.analytics.avro",
+			"type":"record",
+			"name":"IndexViewDiscoverability",
+			"fields":[
+				{"name": "serverName" , "type":
+   	 				{"type": "array", "items": 
+						{	
+    						"namespace": "sparqles.analytics.avro",	
+ 							"name": "IndexViewDiscoverabilityData",
+      						"type": "record",
+        					"fields" : [
+        						{ "name": "key", "type": "string"},
+        						{ "name": "values" , "type":
+   	 								{ "type": "array", "items": 
+    									{	
+    										"namespace": "sparqles.analytics.avro",	
+ 											"name": "IndexViewDiscoverabilityDataValues",
+      										"type": "record",
+        									"fields" : [
+        										{ "name": "label", "type": "string"},
+        										{ "name": "value", "type": "double"}
+        									]
+      									}
+      								}
+   	 							}
+        					]
+      					}
+      				}
+      			},
+      			{ "name": "VoIDDescription", "type": "double"},
+   	 			{ "name": "SDDescription", "type": "double"},
+   	 			{ "name": "NoDescription", "type": "double"}
+   	 		]
+   	 	}
+   	 	
  	}
 ] 
 }

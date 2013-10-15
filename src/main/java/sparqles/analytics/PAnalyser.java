@@ -104,9 +104,7 @@ public class PAnalyser extends Analytics<PResult> {
 		pview.setJoinMeanCold(checkForNAN(joinStatsCold.getMean()));
 		pview.setJoinMeanWarm(checkForNAN(joinStatsWarm.getMean()));
 		
-		
-		System.out.println(pview);
-		System.out.println(epview);
+		pview.setLastUpdate(pres.getEndpointResult().getEnd());
 		_db.update(pview);
 		_db.update(epview);
 		

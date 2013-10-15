@@ -7,12 +7,13 @@ package sparqles.analytics.avro;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class AvailabilityView extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"AvailabilityView\",\"namespace\":\"sparqles.analytics.avro\",\"fields\":[{\"name\":\"endpoint\",\"type\":{\"type\":\"record\",\"name\":\"Endpoint\",\"namespace\":\"sparqles.core\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"},{\"name\":\"datasets\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Dataset\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"},{\"name\":\"label\",\"type\":\"string\"}]}}}]}},{\"name\":\"upNow\",\"type\":\"boolean\"},{\"name\":\"uptimeLast24h\",\"type\":\"double\"},{\"name\":\"uptimeLast7d\",\"type\":\"double\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"AvailabilityView\",\"namespace\":\"sparqles.analytics.avro\",\"fields\":[{\"name\":\"endpoint\",\"type\":{\"type\":\"record\",\"name\":\"Endpoint\",\"namespace\":\"sparqles.core\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"},{\"name\":\"datasets\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Dataset\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"},{\"name\":\"label\",\"type\":\"string\"}]}}}]}},{\"name\":\"upNow\",\"type\":\"boolean\"},{\"name\":\"uptimeLast24h\",\"type\":\"double\"},{\"name\":\"uptimeLast7d\",\"type\":\"double\"},{\"name\":\"lastUpdate\",\"type\":\"long\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public sparqles.core.Endpoint endpoint;
   @Deprecated public boolean upNow;
   @Deprecated public double uptimeLast24h;
   @Deprecated public double uptimeLast7d;
+  @Deprecated public long lastUpdate;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -24,11 +25,12 @@ public class AvailabilityView extends org.apache.avro.specific.SpecificRecordBas
   /**
    * All-args constructor.
    */
-  public AvailabilityView(sparqles.core.Endpoint endpoint, java.lang.Boolean upNow, java.lang.Double uptimeLast24h, java.lang.Double uptimeLast7d) {
+  public AvailabilityView(sparqles.core.Endpoint endpoint, java.lang.Boolean upNow, java.lang.Double uptimeLast24h, java.lang.Double uptimeLast7d, java.lang.Long lastUpdate) {
     this.endpoint = endpoint;
     this.upNow = upNow;
     this.uptimeLast24h = uptimeLast24h;
     this.uptimeLast7d = uptimeLast7d;
+    this.lastUpdate = lastUpdate;
   }
 
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
@@ -39,6 +41,7 @@ public class AvailabilityView extends org.apache.avro.specific.SpecificRecordBas
     case 1: return upNow;
     case 2: return uptimeLast24h;
     case 3: return uptimeLast7d;
+    case 4: return lastUpdate;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -50,6 +53,7 @@ public class AvailabilityView extends org.apache.avro.specific.SpecificRecordBas
     case 1: upNow = (java.lang.Boolean)value$; break;
     case 2: uptimeLast24h = (java.lang.Double)value$; break;
     case 3: uptimeLast7d = (java.lang.Double)value$; break;
+    case 4: lastUpdate = (java.lang.Long)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -114,6 +118,21 @@ public class AvailabilityView extends org.apache.avro.specific.SpecificRecordBas
     this.uptimeLast7d = value;
   }
 
+  /**
+   * Gets the value of the 'lastUpdate' field.
+   */
+  public java.lang.Long getLastUpdate() {
+    return lastUpdate;
+  }
+
+  /**
+   * Sets the value of the 'lastUpdate' field.
+   * @param value the value to set.
+   */
+  public void setLastUpdate(java.lang.Long value) {
+    this.lastUpdate = value;
+  }
+
   /** Creates a new AvailabilityView RecordBuilder */
   public static sparqles.analytics.avro.AvailabilityView.Builder newBuilder() {
     return new sparqles.analytics.avro.AvailabilityView.Builder();
@@ -139,6 +158,7 @@ public class AvailabilityView extends org.apache.avro.specific.SpecificRecordBas
     private boolean upNow;
     private double uptimeLast24h;
     private double uptimeLast7d;
+    private long lastUpdate;
 
     /** Creates a new Builder */
     private Builder() {
@@ -164,6 +184,10 @@ public class AvailabilityView extends org.apache.avro.specific.SpecificRecordBas
         this.uptimeLast7d = data().deepCopy(fields()[3].schema(), other.uptimeLast7d);
         fieldSetFlags()[3] = true;
       }
+      if (isValidValue(fields()[4], other.lastUpdate)) {
+        this.lastUpdate = data().deepCopy(fields()[4].schema(), other.lastUpdate);
+        fieldSetFlags()[4] = true;
+      }
     }
     
     /** Creates a Builder by copying an existing AvailabilityView instance */
@@ -184,6 +208,10 @@ public class AvailabilityView extends org.apache.avro.specific.SpecificRecordBas
       if (isValidValue(fields()[3], other.uptimeLast7d)) {
         this.uptimeLast7d = data().deepCopy(fields()[3].schema(), other.uptimeLast7d);
         fieldSetFlags()[3] = true;
+      }
+      if (isValidValue(fields()[4], other.lastUpdate)) {
+        this.lastUpdate = data().deepCopy(fields()[4].schema(), other.lastUpdate);
+        fieldSetFlags()[4] = true;
       }
     }
 
@@ -284,6 +312,31 @@ public class AvailabilityView extends org.apache.avro.specific.SpecificRecordBas
       return this;
     }
 
+    /** Gets the value of the 'lastUpdate' field */
+    public java.lang.Long getLastUpdate() {
+      return lastUpdate;
+    }
+    
+    /** Sets the value of the 'lastUpdate' field */
+    public sparqles.analytics.avro.AvailabilityView.Builder setLastUpdate(long value) {
+      validate(fields()[4], value);
+      this.lastUpdate = value;
+      fieldSetFlags()[4] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'lastUpdate' field has been set */
+    public boolean hasLastUpdate() {
+      return fieldSetFlags()[4];
+    }
+    
+    /** Clears the value of the 'lastUpdate' field */
+    public sparqles.analytics.avro.AvailabilityView.Builder clearLastUpdate() {
+      fieldSetFlags()[4] = false;
+      return this;
+    }
+
+    @Override
     public AvailabilityView build() {
       try {
         AvailabilityView record = new AvailabilityView();
@@ -291,6 +344,7 @@ public class AvailabilityView extends org.apache.avro.specific.SpecificRecordBas
         record.upNow = fieldSetFlags()[1] ? this.upNow : (java.lang.Boolean) defaultValue(fields()[1]);
         record.uptimeLast24h = fieldSetFlags()[2] ? this.uptimeLast24h : (java.lang.Double) defaultValue(fields()[2]);
         record.uptimeLast7d = fieldSetFlags()[3] ? this.uptimeLast7d : (java.lang.Double) defaultValue(fields()[3]);
+        record.lastUpdate = fieldSetFlags()[4] ? this.lastUpdate : (java.lang.Long) defaultValue(fields()[4]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

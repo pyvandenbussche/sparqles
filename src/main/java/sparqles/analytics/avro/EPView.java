@@ -7,12 +7,13 @@ package sparqles.analytics.avro;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class EPView extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"EPView\",\"namespace\":\"sparqles.analytics.avro\",\"fields\":[{\"name\":\"endpoint\",\"type\":{\"type\":\"record\",\"name\":\"Endpoint\",\"namespace\":\"sparqles.core\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"},{\"name\":\"datasets\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Dataset\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"},{\"name\":\"label\",\"type\":\"string\"}]}}}]}},{\"name\":\"availability\",\"type\":{\"type\":\"record\",\"name\":\"EPViewAvailability\",\"fields\":[{\"name\":\"upNow\",\"type\":\"boolean\"},{\"name\":\"testRuns\",\"type\":\"int\"},{\"name\":\"uptimeLast24h\",\"type\":\"double\"},{\"name\":\"uptimeLast7d\",\"type\":\"double\"},{\"name\":\"uptimeLast31d\",\"type\":\"double\"},{\"name\":\"uptimeOverall\",\"type\":\"double\"},{\"name\":\"data\",\"type\":{\"type\":\"record\",\"name\":\"EPViewAvailabilityData\",\"fields\":[{\"name\":\"key\",\"type\":\"string\"},{\"name\":\"values\",\"type\":{\"type\":\"map\",\"values\":\"double\"}}]}}]}},{\"name\":\"performance\",\"type\":{\"type\":\"record\",\"name\":\"EPViewPerformance\",\"namespace\":\"sparqles.core.analytics.avro\",\"fields\":[{\"name\":\"threshold\",\"type\":\"long\"},{\"name\":\"ask\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"EPViewPerformanceData\",\"namespace\":\"sparqles.analytics.avro\",\"fields\":[{\"name\":\"key\",\"type\":\"string\"},{\"name\":\"color\",\"type\":\"string\"},{\"name\":\"data\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"EPViewPerformanceDataValues\",\"fields\":[{\"name\":\"label\",\"type\":\"string\"},{\"name\":\"value\",\"type\":\"double\"},{\"name\":\"exception\",\"type\":[\"string\",\"null\"]}]}}}]}}},{\"name\":\"join\",\"type\":{\"type\":\"array\",\"items\":\"sparqles.analytics.avro.EPViewPerformanceData\"}}]}},{\"name\":\"interoperability\",\"type\":{\"type\":\"record\",\"name\":\"EPViewInteroperability\",\"namespace\":\"sparqles.core.analytics.avro\",\"fields\":[{\"name\":\"SPARQL1Features\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"EPViewInteroperabilityData\",\"namespace\":\"sparqles.analytics.avro\",\"fields\":[{\"name\":\"label\",\"type\":\"string\"},{\"name\":\"value\",\"type\":\"boolean\"},{\"name\":\"exception\",\"type\":[\"string\",\"null\"]}]}}},{\"name\":\"SPARQL11Features\",\"type\":{\"type\":\"array\",\"items\":\"sparqles.analytics.avro.EPViewInteroperabilityData\"}}]}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"EPView\",\"namespace\":\"sparqles.analytics.avro\",\"fields\":[{\"name\":\"endpoint\",\"type\":{\"type\":\"record\",\"name\":\"Endpoint\",\"namespace\":\"sparqles.core\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"},{\"name\":\"datasets\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Dataset\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"},{\"name\":\"label\",\"type\":\"string\"}]}}}]}},{\"name\":\"availability\",\"type\":{\"type\":\"record\",\"name\":\"EPViewAvailability\",\"fields\":[{\"name\":\"upNow\",\"type\":\"boolean\"},{\"name\":\"testRuns\",\"type\":\"int\"},{\"name\":\"uptimeLast24h\",\"type\":\"double\"},{\"name\":\"uptimeLast7d\",\"type\":\"double\"},{\"name\":\"uptimeLast31d\",\"type\":\"double\"},{\"name\":\"uptimeOverall\",\"type\":\"double\"},{\"name\":\"data\",\"type\":{\"type\":\"record\",\"name\":\"EPViewAvailabilityData\",\"fields\":[{\"name\":\"key\",\"type\":\"string\"},{\"name\":\"values\",\"type\":{\"type\":\"map\",\"values\":\"double\"}}]}}]}},{\"name\":\"performance\",\"type\":{\"type\":\"record\",\"name\":\"EPViewPerformance\",\"namespace\":\"sparqles.core.analytics.avro\",\"fields\":[{\"name\":\"threshold\",\"type\":\"long\"},{\"name\":\"ask\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"EPViewPerformanceData\",\"namespace\":\"sparqles.analytics.avro\",\"fields\":[{\"name\":\"key\",\"type\":\"string\"},{\"name\":\"color\",\"type\":\"string\"},{\"name\":\"data\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"EPViewPerformanceDataValues\",\"fields\":[{\"name\":\"label\",\"type\":\"string\"},{\"name\":\"value\",\"type\":\"double\"},{\"name\":\"exception\",\"type\":[\"string\",\"null\"]}]}}}]}}},{\"name\":\"join\",\"type\":{\"type\":\"array\",\"items\":\"sparqles.analytics.avro.EPViewPerformanceData\"}}]}},{\"name\":\"interoperability\",\"type\":{\"type\":\"record\",\"name\":\"EPViewInteroperability\",\"namespace\":\"sparqles.core.analytics.avro\",\"fields\":[{\"name\":\"SPARQL1Features\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"EPViewInteroperabilityData\",\"namespace\":\"sparqles.analytics.avro\",\"fields\":[{\"name\":\"label\",\"type\":\"string\"},{\"name\":\"value\",\"type\":\"boolean\"},{\"name\":\"exception\",\"type\":[\"string\",\"null\"]}]}}},{\"name\":\"SPARQL11Features\",\"type\":{\"type\":\"array\",\"items\":\"sparqles.analytics.avro.EPViewInteroperabilityData\"}}]}},{\"name\":\"discoverability\",\"type\":{\"type\":\"record\",\"name\":\"EPViewDiscoverability\",\"namespace\":\"sparqles.core.analytics.avro\",\"fields\":[{\"name\":\"serverName\",\"type\":\"string\"},{\"name\":\"VoIDDescription\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"EPViewDiscoverabilityData\",\"namespace\":\"sparqles.analytics.avro\",\"fields\":[{\"name\":\"label\",\"type\":\"string\"},{\"name\":\"value\",\"type\":\"boolean\"}]}}},{\"name\":\"SDDescription\",\"type\":{\"type\":\"array\",\"items\":\"sparqles.analytics.avro.EPViewDiscoverabilityData\"}}]}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public sparqles.core.Endpoint endpoint;
   @Deprecated public sparqles.analytics.avro.EPViewAvailability availability;
   @Deprecated public sparqles.core.analytics.avro.EPViewPerformance performance;
   @Deprecated public sparqles.core.analytics.avro.EPViewInteroperability interoperability;
+  @Deprecated public sparqles.core.analytics.avro.EPViewDiscoverability discoverability;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -24,11 +25,12 @@ public class EPView extends org.apache.avro.specific.SpecificRecordBase implemen
   /**
    * All-args constructor.
    */
-  public EPView(sparqles.core.Endpoint endpoint, sparqles.analytics.avro.EPViewAvailability availability, sparqles.core.analytics.avro.EPViewPerformance performance, sparqles.core.analytics.avro.EPViewInteroperability interoperability) {
+  public EPView(sparqles.core.Endpoint endpoint, sparqles.analytics.avro.EPViewAvailability availability, sparqles.core.analytics.avro.EPViewPerformance performance, sparqles.core.analytics.avro.EPViewInteroperability interoperability, sparqles.core.analytics.avro.EPViewDiscoverability discoverability) {
     this.endpoint = endpoint;
     this.availability = availability;
     this.performance = performance;
     this.interoperability = interoperability;
+    this.discoverability = discoverability;
   }
 
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
@@ -39,6 +41,7 @@ public class EPView extends org.apache.avro.specific.SpecificRecordBase implemen
     case 1: return availability;
     case 2: return performance;
     case 3: return interoperability;
+    case 4: return discoverability;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -50,6 +53,7 @@ public class EPView extends org.apache.avro.specific.SpecificRecordBase implemen
     case 1: availability = (sparqles.analytics.avro.EPViewAvailability)value$; break;
     case 2: performance = (sparqles.core.analytics.avro.EPViewPerformance)value$; break;
     case 3: interoperability = (sparqles.core.analytics.avro.EPViewInteroperability)value$; break;
+    case 4: discoverability = (sparqles.core.analytics.avro.EPViewDiscoverability)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -114,6 +118,21 @@ public class EPView extends org.apache.avro.specific.SpecificRecordBase implemen
     this.interoperability = value;
   }
 
+  /**
+   * Gets the value of the 'discoverability' field.
+   */
+  public sparqles.core.analytics.avro.EPViewDiscoverability getDiscoverability() {
+    return discoverability;
+  }
+
+  /**
+   * Sets the value of the 'discoverability' field.
+   * @param value the value to set.
+   */
+  public void setDiscoverability(sparqles.core.analytics.avro.EPViewDiscoverability value) {
+    this.discoverability = value;
+  }
+
   /** Creates a new EPView RecordBuilder */
   public static sparqles.analytics.avro.EPView.Builder newBuilder() {
     return new sparqles.analytics.avro.EPView.Builder();
@@ -139,6 +158,7 @@ public class EPView extends org.apache.avro.specific.SpecificRecordBase implemen
     private sparqles.analytics.avro.EPViewAvailability availability;
     private sparqles.core.analytics.avro.EPViewPerformance performance;
     private sparqles.core.analytics.avro.EPViewInteroperability interoperability;
+    private sparqles.core.analytics.avro.EPViewDiscoverability discoverability;
 
     /** Creates a new Builder */
     private Builder() {
@@ -164,6 +184,10 @@ public class EPView extends org.apache.avro.specific.SpecificRecordBase implemen
         this.interoperability = data().deepCopy(fields()[3].schema(), other.interoperability);
         fieldSetFlags()[3] = true;
       }
+      if (isValidValue(fields()[4], other.discoverability)) {
+        this.discoverability = data().deepCopy(fields()[4].schema(), other.discoverability);
+        fieldSetFlags()[4] = true;
+      }
     }
     
     /** Creates a Builder by copying an existing EPView instance */
@@ -184,6 +208,10 @@ public class EPView extends org.apache.avro.specific.SpecificRecordBase implemen
       if (isValidValue(fields()[3], other.interoperability)) {
         this.interoperability = data().deepCopy(fields()[3].schema(), other.interoperability);
         fieldSetFlags()[3] = true;
+      }
+      if (isValidValue(fields()[4], other.discoverability)) {
+        this.discoverability = data().deepCopy(fields()[4].schema(), other.discoverability);
+        fieldSetFlags()[4] = true;
       }
     }
 
@@ -287,6 +315,31 @@ public class EPView extends org.apache.avro.specific.SpecificRecordBase implemen
       return this;
     }
 
+    /** Gets the value of the 'discoverability' field */
+    public sparqles.core.analytics.avro.EPViewDiscoverability getDiscoverability() {
+      return discoverability;
+    }
+    
+    /** Sets the value of the 'discoverability' field */
+    public sparqles.analytics.avro.EPView.Builder setDiscoverability(sparqles.core.analytics.avro.EPViewDiscoverability value) {
+      validate(fields()[4], value);
+      this.discoverability = value;
+      fieldSetFlags()[4] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'discoverability' field has been set */
+    public boolean hasDiscoverability() {
+      return fieldSetFlags()[4];
+    }
+    
+    /** Clears the value of the 'discoverability' field */
+    public sparqles.analytics.avro.EPView.Builder clearDiscoverability() {
+      discoverability = null;
+      fieldSetFlags()[4] = false;
+      return this;
+    }
+
     @Override
     public EPView build() {
       try {
@@ -295,6 +348,7 @@ public class EPView extends org.apache.avro.specific.SpecificRecordBase implemen
         record.availability = fieldSetFlags()[1] ? this.availability : (sparqles.analytics.avro.EPViewAvailability) defaultValue(fields()[1]);
         record.performance = fieldSetFlags()[2] ? this.performance : (sparqles.core.analytics.avro.EPViewPerformance) defaultValue(fields()[2]);
         record.interoperability = fieldSetFlags()[3] ? this.interoperability : (sparqles.core.analytics.avro.EPViewInteroperability) defaultValue(fields()[3]);
+        record.discoverability = fieldSetFlags()[4] ? this.discoverability : (sparqles.core.analytics.avro.EPViewDiscoverability) defaultValue(fields()[4]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

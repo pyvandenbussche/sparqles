@@ -5,6 +5,7 @@
 "fields": [ 
 	{"name": "endpoint", "type": "sparqles.core.Endpoint"},
 	{"name": "nbCompliantSPARQL1Features", "type": "int"},
-	{"name": "nbCompliantSPARQL11Features", "type": "int"}
+	{"name": "nbCompliantSPARQL11Features", "type": "int"},
+	{"name": "lastUpdate", "type": "long"}
 ]
 }

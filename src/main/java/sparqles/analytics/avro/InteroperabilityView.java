@@ -7,11 +7,12 @@ package sparqles.analytics.avro;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class InteroperabilityView extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"InteroperabilityView\",\"namespace\":\"sparqles.analytics.avro\",\"fields\":[{\"name\":\"endpoint\",\"type\":{\"type\":\"record\",\"name\":\"Endpoint\",\"namespace\":\"sparqles.core\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"},{\"name\":\"datasets\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Dataset\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"},{\"name\":\"label\",\"type\":\"string\"}]}}}]}},{\"name\":\"nbCompliantSPARQL1Features\",\"type\":\"int\"},{\"name\":\"nbCompliantSPARQL11Features\",\"type\":\"int\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"InteroperabilityView\",\"namespace\":\"sparqles.analytics.avro\",\"fields\":[{\"name\":\"endpoint\",\"type\":{\"type\":\"record\",\"name\":\"Endpoint\",\"namespace\":\"sparqles.core\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"},{\"name\":\"datasets\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Dataset\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"},{\"name\":\"label\",\"type\":\"string\"}]}}}]}},{\"name\":\"nbCompliantSPARQL1Features\",\"type\":\"int\"},{\"name\":\"nbCompliantSPARQL11Features\",\"type\":\"int\"},{\"name\":\"lastUpdate\",\"type\":\"long\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public sparqles.core.Endpoint endpoint;
   @Deprecated public int nbCompliantSPARQL1Features;
   @Deprecated public int nbCompliantSPARQL11Features;
+  @Deprecated public long lastUpdate;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -23,10 +24,11 @@ public class InteroperabilityView extends org.apache.avro.specific.SpecificRecor
   /**
    * All-args constructor.
    */
-  public InteroperabilityView(sparqles.core.Endpoint endpoint, java.lang.Integer nbCompliantSPARQL1Features, java.lang.Integer nbCompliantSPARQL11Features) {
+  public InteroperabilityView(sparqles.core.Endpoint endpoint, java.lang.Integer nbCompliantSPARQL1Features, java.lang.Integer nbCompliantSPARQL11Features, java.lang.Long lastUpdate) {
     this.endpoint = endpoint;
     this.nbCompliantSPARQL1Features = nbCompliantSPARQL1Features;
     this.nbCompliantSPARQL11Features = nbCompliantSPARQL11Features;
+    this.lastUpdate = lastUpdate;
   }
 
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
@@ -36,6 +38,7 @@ public class InteroperabilityView extends org.apache.avro.specific.SpecificRecor
     case 0: return endpoint;
     case 1: return nbCompliantSPARQL1Features;
     case 2: return nbCompliantSPARQL11Features;
+    case 3: return lastUpdate;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -46,6 +49,7 @@ public class InteroperabilityView extends org.apache.avro.specific.SpecificRecor
     case 0: endpoint = (sparqles.core.Endpoint)value$; break;
     case 1: nbCompliantSPARQL1Features = (java.lang.Integer)value$; break;
     case 2: nbCompliantSPARQL11Features = (java.lang.Integer)value$; break;
+    case 3: lastUpdate = (java.lang.Long)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -95,6 +99,21 @@ public class InteroperabilityView extends org.apache.avro.specific.SpecificRecor
     this.nbCompliantSPARQL11Features = value;
   }
 
+  /**
+   * Gets the value of the 'lastUpdate' field.
+   */
+  public java.lang.Long getLastUpdate() {
+    return lastUpdate;
+  }
+
+  /**
+   * Sets the value of the 'lastUpdate' field.
+   * @param value the value to set.
+   */
+  public void setLastUpdate(java.lang.Long value) {
+    this.lastUpdate = value;
+  }
+
   /** Creates a new InteroperabilityView RecordBuilder */
   public static sparqles.analytics.avro.InteroperabilityView.Builder newBuilder() {
     return new sparqles.analytics.avro.InteroperabilityView.Builder();
@@ -119,6 +138,7 @@ public class InteroperabilityView extends org.apache.avro.specific.SpecificRecor
     private sparqles.core.Endpoint endpoint;
     private int nbCompliantSPARQL1Features;
     private int nbCompliantSPARQL11Features;
+    private long lastUpdate;
 
     /** Creates a new Builder */
     private Builder() {
@@ -140,6 +160,10 @@ public class InteroperabilityView extends org.apache.avro.specific.SpecificRecor
         this.nbCompliantSPARQL11Features = data().deepCopy(fields()[2].schema(), other.nbCompliantSPARQL11Features);
         fieldSetFlags()[2] = true;
       }
+      if (isValidValue(fields()[3], other.lastUpdate)) {
+        this.lastUpdate = data().deepCopy(fields()[3].schema(), other.lastUpdate);
+        fieldSetFlags()[3] = true;
+      }
     }
     
     /** Creates a Builder by copying an existing InteroperabilityView instance */
@@ -156,6 +180,10 @@ public class InteroperabilityView extends org.apache.avro.specific.SpecificRecor
       if (isValidValue(fields()[2], other.nbCompliantSPARQL11Features)) {
         this.nbCompliantSPARQL11Features = data().deepCopy(fields()[2].schema(), other.nbCompliantSPARQL11Features);
         fieldSetFlags()[2] = true;
+      }
+      if (isValidValue(fields()[3], other.lastUpdate)) {
+        this.lastUpdate = data().deepCopy(fields()[3].schema(), other.lastUpdate);
+        fieldSetFlags()[3] = true;
       }
     }
 
@@ -232,6 +260,30 @@ public class InteroperabilityView extends org.apache.avro.specific.SpecificRecor
       return this;
     }
 
+    /** Gets the value of the 'lastUpdate' field */
+    public java.lang.Long getLastUpdate() {
+      return lastUpdate;
+    }
+    
+    /** Sets the value of the 'lastUpdate' field */
+    public sparqles.analytics.avro.InteroperabilityView.Builder setLastUpdate(long value) {
+      validate(fields()[3], value);
+      this.lastUpdate = value;
+      fieldSetFlags()[3] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'lastUpdate' field has been set */
+    public boolean hasLastUpdate() {
+      return fieldSetFlags()[3];
+    }
+    
+    /** Clears the value of the 'lastUpdate' field */
+    public sparqles.analytics.avro.InteroperabilityView.Builder clearLastUpdate() {
+      fieldSetFlags()[3] = false;
+      return this;
+    }
+
     @Override
     public InteroperabilityView build() {
       try {
@@ -239,6 +291,7 @@ public class InteroperabilityView extends org.apache.avro.specific.SpecificRecor
         record.endpoint = fieldSetFlags()[0] ? this.endpoint : (sparqles.core.Endpoint) defaultValue(fields()[0]);
         record.nbCompliantSPARQL1Features = fieldSetFlags()[1] ? this.nbCompliantSPARQL1Features : (java.lang.Integer) defaultValue(fields()[1]);
         record.nbCompliantSPARQL11Features = fieldSetFlags()[2] ? this.nbCompliantSPARQL11Features : (java.lang.Integer) defaultValue(fields()[2]);
+        record.lastUpdate = fieldSetFlags()[3] ? this.lastUpdate : (java.lang.Long) defaultValue(fields()[3]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

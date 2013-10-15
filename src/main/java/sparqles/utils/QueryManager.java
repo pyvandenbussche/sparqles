@@ -15,7 +15,10 @@ import sparqles.core.Endpoint;
 public class QueryManager {
 
 	private static final Logger log = LoggerFactory.getLogger(QueryManager.class);
-
+	
+	
+	
+	
 	public static String getQuery(String folder, String qFile) {
 		String content;
 		Scanner scanner=null;
@@ -27,23 +30,23 @@ public class QueryManager {
 				e.printStackTrace();
 			}
 		}else{
-			scanner = new Scanner(ClassLoader.getSystemResourceAsStream(folder+qFile));
+			scanner = new Scanner(QueryManager.class.getClassLoader().getSystemResourceAsStream(folder+qFile));
 		}
 		if(scanner == null){
-			log.warn("Could not load query file {} from {}", qFile, folder);
+			log.warn("[FAILED] Could not load query file {} from {}", qFile, folder);
 			return null;
 		}
 
 
 		content = scanner.useDelimiter("\\Z").next();
-		log.debug("Parsed from {} query {}", qFile, content);
+		log.debug("[PARSED] input:{},output:{}", qFile, content);
 		scanner.close();
 		return content;
 	}
 
 	public static QueryExecution getExecution(Endpoint ep, String query) throws Exception {
 		try {
-			log.info("Create QueryExecution for {} with query  {}",ep.getUri(),query);
+			log.debug("[INIT] QueryExecution for {} with query  {}",ep.getUri(),query.replaceAll("\n", ""));
 			return QueryExecutionFactory.sparqlService(ep.getUri().toString(), query);
 		}
 		catch (Exception e) {  

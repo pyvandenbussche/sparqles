@@ -3,7 +3,7 @@ package sparqles.core.discovery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import sparqles.utils.LogHandler;
+import sparqles.utils.LogFormater;
 
 import sparqles.core.Endpoint;
 import sparqles.core.EndpointResult;
@@ -31,7 +31,6 @@ public class DTask extends EndpointTask<DResult> {
 		DResult result = new DResult();
 		result.setEndpointResult(epr);
 		
-		LogHandler.run(log, "{}",epr.getEndpoint().getUri().toString());
 		
 		int failures=0;
 		GetResult res = SpecificDTask.newGetRun(epr.getEndpoint()).execute();
@@ -48,12 +47,8 @@ public class DTask extends EndpointTask<DResult> {
 		if(vres.getException()!=null)failures++;
 		if(vsres.getException()!=null)failures++;
 		
-		if(failures==0)
-			LogHandler.debugSuccess(log, "{}", epr.getEndpoint());
-		else{
-			Object [] s = { epr.getEndpoint().getUri().toString(), failures, 3};
-			LogHandler.debugERROR(log, "{}: {}/{}", epr.getEndpoint().getUri().toString(), failures, 3);
-		}
+		log.info("[EXECUTED] {} {}/3 without error", this, 3-failures);
+	
 		return result;
 	}
 }

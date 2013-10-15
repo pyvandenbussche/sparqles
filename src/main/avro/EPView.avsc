@@ -88,6 +88,30 @@
 				{"name": "SPARQL11Features" , "type": {"type": "array", "items": "array", "items" : "sparqles.analytics.avro.EPViewInteroperabilityData"}}
    	 		]
    	 	}
+ 	},
+ 	{"name": "discoverability", "type":
+		{
+			"namespace":"sparqles.core.analytics.avro",
+			"type":"record",
+			"name":"EPViewDiscoverability",
+			"fields":[
+				{"name": "serverName" , "type" : "string"}, 
+				{"name": "VoIDDescription" , "type": 
+					{"type": "array", "items": 
+						{
+    						"namespace": "sparqles.analytics.avro",	
+ 							"name": "EPViewDiscoverabilityData",
+      						"type": "record",
+        					"fields" : [
+        						{ "name": "label", "type": "string"},
+        						{ "name": "value", "type": "boolean"}
+        					]
+      					}	
+      				}
+				},
+				{"name": "SDDescription" , "type": {"type": "array", "items": "array", "items" : "sparqles.analytics.avro.EPViewDiscoverabilityData"}}
+   	 		]
+   	 	}
  	}
    	]
 }
