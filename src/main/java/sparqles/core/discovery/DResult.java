@@ -7,7 +7,7 @@ package sparqles.core.discovery;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class DResult extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"DResult\",\"namespace\":\"sparqles.core.discovery\",\"fields\":[{\"name\":\"endpointResult\",\"type\":{\"type\":\"record\",\"name\":\"EndpointResult\",\"namespace\":\"sparqles.core\",\"fields\":[{\"name\":\"endpoint\",\"type\":{\"type\":\"record\",\"name\":\"Endpoint\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"}]}},{\"name\":\"start\",\"type\":\"long\"},{\"name\":\"end\",\"type\":\"long\"}],\"imports\":[\"Endpoint.avsc\"]}},{\"name\":\"GetResult\",\"type\":{\"type\":\"record\",\"name\":\"GetResult\",\"fields\":[{\"name\":\"ResponseType\",\"type\":\"string\"},{\"name\":\"ResponseCode\",\"type\":\"string\"},{\"name\":\"ResponseServer\",\"type\":\"string\"},{\"name\":\"ResponseLink\",\"type\":\"string\"},{\"name\":\"SPARQLDESCterms\",\"type\":\"long\"},{\"name\":\"Exception\",\"type\":[\"string\",\"null\"]},{\"name\":\"VOIDterms\",\"type\":\"long\"},{\"name\":\"SPARQLDESCpreds\",\"type\":{\"type\":\"map\",\"values\":[\"string\",\"long\"]}},{\"name\":\"voiDpreds\",\"type\":{\"type\":\"map\",\"values\":[\"string\",\"long\"]}}]}},{\"name\":\"VoidResult\",\"type\":{\"type\":\"record\",\"name\":\"VoidResult\",\"fields\":[{\"name\":\"voidFile\",\"type\":{\"type\":\"array\",\"items\":\"string\"}},{\"name\":\"Exception\",\"type\":[\"string\",\"null\"]}]}},{\"name\":\"VoidStoreResult\",\"type\":\"VoidResult\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"DResult\",\"namespace\":\"sparqles.core.discovery\",\"fields\":[{\"name\":\"endpointResult\",\"type\":{\"type\":\"record\",\"name\":\"EndpointResult\",\"namespace\":\"sparqles.core\",\"fields\":[{\"name\":\"endpoint\",\"type\":{\"type\":\"record\",\"name\":\"Endpoint\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"},{\"name\":\"datasets\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Dataset\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"},{\"name\":\"label\",\"type\":\"string\"}]}}}]}},{\"name\":\"start\",\"type\":\"long\"},{\"name\":\"end\",\"type\":\"long\"}],\"import\":\"Endpoint.avsc\"}},{\"name\":\"GetResult\",\"type\":{\"type\":\"record\",\"name\":\"GetResult\",\"fields\":[{\"name\":\"ResponseType\",\"type\":\"string\"},{\"name\":\"ResponseCode\",\"type\":\"string\"},{\"name\":\"ResponseServer\",\"type\":\"string\"},{\"name\":\"ResponseLink\",\"type\":\"string\"},{\"name\":\"SPARQLDESCterms\",\"type\":\"int\"},{\"name\":\"Exception\",\"type\":[\"string\",\"null\"]},{\"name\":\"VOIDterms\",\"type\":\"int\"},{\"name\":\"SPARQLDESCpreds\",\"type\":{\"type\":\"map\",\"values\":[\"int\"]}},{\"name\":\"voiDpreds\",\"type\":{\"type\":\"map\",\"values\":[\"int\"]}}]}},{\"name\":\"VoidResult\",\"type\":{\"type\":\"record\",\"name\":\"VoidResult\",\"fields\":[{\"name\":\"voidFile\",\"type\":{\"type\":\"array\",\"items\":\"string\"}},{\"name\":\"Exception\",\"type\":[\"string\",\"null\"]}]}},{\"name\":\"VoidStoreResult\",\"type\":\"VoidResult\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public sparqles.core.EndpointResult endpointResult;
   @Deprecated public sparqles.core.discovery.GetResult GetResult;
@@ -15,7 +15,9 @@ public class DResult extends org.apache.avro.specific.SpecificRecordBase impleme
   @Deprecated public sparqles.core.discovery.VoidResult VoidStoreResult;
 
   /**
-   * Default constructor.
+   * Default constructor.  Note that this does not initialize fields
+   * to their default values from the schema.  If that is desired then
+   * one should use {@link \#newBuilder()}. 
    */
   public DResult() {}
 
@@ -146,6 +148,22 @@ public class DResult extends org.apache.avro.specific.SpecificRecordBase impleme
     /** Creates a Builder by copying an existing Builder */
     private Builder(sparqles.core.discovery.DResult.Builder other) {
       super(other);
+      if (isValidValue(fields()[0], other.endpointResult)) {
+        this.endpointResult = data().deepCopy(fields()[0].schema(), other.endpointResult);
+        fieldSetFlags()[0] = true;
+      }
+      if (isValidValue(fields()[1], other.GetResult)) {
+        this.GetResult = data().deepCopy(fields()[1].schema(), other.GetResult);
+        fieldSetFlags()[1] = true;
+      }
+      if (isValidValue(fields()[2], other.VoidResult)) {
+        this.VoidResult = data().deepCopy(fields()[2].schema(), other.VoidResult);
+        fieldSetFlags()[2] = true;
+      }
+      if (isValidValue(fields()[3], other.VoidStoreResult)) {
+        this.VoidStoreResult = data().deepCopy(fields()[3].schema(), other.VoidStoreResult);
+        fieldSetFlags()[3] = true;
+      }
     }
     
     /** Creates a Builder by copying an existing DResult instance */
@@ -269,6 +287,7 @@ public class DResult extends org.apache.avro.specific.SpecificRecordBase impleme
       return this;
     }
 
+    @Override
     public DResult build() {
       try {
         DResult record = new DResult();

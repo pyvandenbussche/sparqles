@@ -46,7 +46,7 @@ public class DTask extends EndpointTask<DResult> {
 		if(vres.getException()!=null)failures++;
 		if(vsres.getException()!=null)failures++;
 		
-		log.info("[EXECUTED] {} {}/3 without error", this, 3-failures);
+		log.info("[EXECUTED] {} {}/3 tasks without error", this, 3-failures);
 	
 		return result;
 	}
