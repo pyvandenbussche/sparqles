@@ -4,26 +4,27 @@ var Server = require('mongodb').Server;
 var BSON = require('mongodb').BSON;
 var ObjectID = require('mongodb').ObjectID;
 
-ArticleProvider = function(host, port) {
-  this.db= new Db('node-mongo-blog', new Server(host, port, {auto_reconnect: true}, {}));
+MongoDBProvider = function(host, port) {
+  this.db= new Db('sparqles', new Server(host, port, {auto_reconnect: true}, {}));
   this.db.open(function(){});
 };
 
 //getCollection
 
-ArticleProvider.prototype.getCollection= function(callback) {
-  this.db.collection('articles', function(error, article_collection) {
+MongoDBProvider.prototype.getCollection= function(collectionName, callback) {
+  this.db.collection(collectionName, function(error, collection) {
     if( error ) callback(error);
-    else callback(null, article_collection);
+    else callback(null, collection);
   });
 };
 
 //findAll
-ArticleProvider.prototype.findAll = function(callback) {
-    this.getCollection(function(error, article_collection) {
+MongoDBProvider.prototype.getAvailView = function(callback) {
+    this.getCollection('atasks_agg',function(error, collection) {
       if( error ) callback(error)
       else {
-        article_collection.find().toArray(function(error, results) {
+		//TODO sort by label
+        collection.find().sort({"endpoint.datasets.0.label":1,"endpoint.uri":1}).toArray(function(error, results) {
           if( error ) callback(error)
           else callback(null, results)
         });
@@ -33,7 +34,7 @@ ArticleProvider.prototype.findAll = function(callback) {
 
 //findById
 
-ArticleProvider.prototype.findById = function(id, callback) {
+MongoDBProvider.prototype.findById = function(id, callback) {
     this.getCollection(function(error, article_collection) {
       if( error ) callback(error)
       else {
@@ -46,7 +47,7 @@ ArticleProvider.prototype.findById = function(id, callback) {
 };
 
 //save
-ArticleProvider.prototype.save = function(articles, callback) {
+MongoDBProvider.prototype.save = function(articles, callback) {
     this.getCollection(function(error, article_collection) {
       if( error ) callback(error)
       else {
@@ -69,4 +70,4 @@ ArticleProvider.prototype.save = function(articles, callback) {
     });
 };
 
-exports.ArticleProvider = ArticleProvider;
+exports.MongoDBProvider = MongoDBProvider;

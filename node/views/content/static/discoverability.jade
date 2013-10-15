@@ -1,0 +1,74 @@
+extends ../layout
+block content
+      section#post
+        article
+          header.wrpl
+            h1 Discoverability
+            time Last update: #{lastUpdate}
+            details
+              summary Description:
+              p
+                | For any data consumer to find relevant information about an endpoint (What type of data it contains? Where can I access a data dump? etc.) the data publisher needs to publish some fundamental metadata about the policies, features and content of its endpoint. The Discoverability is searching for VoID and SPARQL 1.1 Service Description metadata in the SPARQL Endpoint itself as well as in a seperate file. The information of server name from the HTTP GET answer is given.
+      .line
+      section#posts.default-area
+        article.wrp(style='padding-bottom: 1em;')
+          .wrplInnerBox(style='height: 100%;')
+            div
+              b #{parseFloat((epsDisco.nbEndpointsVoID/epsDisco.nbEndpointsTotal*100).toFixed(2))+ '%'} 
+              | (#{epsDisco.nbEndpointsVoID}/#{epsDisco.nbEndpointsTotal}) of the endpoints present a  
+              b VoID description
+            div
+              b #{parseFloat((epsDisco.nbEndpointsSD/epsDisco.nbEndpointsTotal*100).toFixed(2))+ '%'} 
+              | (#{epsDisco.nbEndpointsSD}/#{epsDisco.nbEndpointsTotal}) of the endpoints present a 
+              b Service description
+            div
+              b #{parseFloat((epsDisco.nbEndpointsServerName/epsDisco.nbEndpointsTotal*100).toFixed(2))+ '%'} 
+              | (#{epsDisco.nbEndpointsServerName}/#{epsDisco.nbEndpointsTotal}) of the endpoints have a 
+              b meaningful server name 
+              | in the HTTP Get answer
+        article.wrp(style='padding-bottom: 1em;')
+          .wrplInnerBox(style='height: 100%;')
+            section
+              .wrpl(style='padding-left: 2em;')
+                img(src='./images/green.png')
+                span(style='padding-left: 0.75em;') Description available
+              .wrpl(style='padding-left: 2em;')
+                img(src='./images/gray.png')
+                span(style='padding-left: 0.75em;') Description not available
+        article.wrp
+          .wrplInnerBox(style='height: 100%;')
+            table#table_current.psp-table(cellspacing='0', cellpadding='0', border='0', width='100%')
+              thead
+                tr
+                  th.tablehead(scope='col', width='50%') SPARQL Endpoint
+                  th.tablehead(width='15%') 
+                    span(onmouseover='tooltip.show(\'#{configDisco['VoID Description']}\')', onmouseout='tooltip.hide();') VoID Description
+                  th.tablehead(width='15%') 
+                    span(onmouseover='tooltip.show(\'#{configDisco['Service Description']}\')', onmouseout='tooltip.hide();') Service Description
+                  th.tablehead(width='20%') 
+                    span(onmouseover='tooltip.show(\'#{configDisco['Server Name']}\')', onmouseout='tooltip.hide();') Server name (HTTP GET)
+              tbody
+                - each ep, i in epsDisco.endpoints
+                  tr(class=(i % 2 == 0) ? 'odd' : 'even')
+                    //-Display Endpoint Label
+                    //-TODO: if more than one endpoint then display how many and their names 
+                    if ep.datasets.length>1
+                      td
+                        a(href="/endpoint?uri=#{ep.uri}") #{ep.uri}
+                    else
+                      td 
+                        a(href="/endpoint?uri=#{ep.uri}") #{ep.datasets[0].label}
+                    //-Display VoID Description
+                    td.tdcenter
+                      if ep.VoID
+                        img(src='./images/green.png')
+                      else
+                        img(src='./images/gray.png')
+                    //-Display SD Description
+                    td.tdcenter
+                      if ep.SD
+                        img(src='./images/green.png')
+                      else
+                        img(src='./images/gray.png')
+                    //-Display VoID Description
+                    td.tdcenter #{ep.serverName}

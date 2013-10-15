@@ -1,4 +1,3 @@
--//TODO update last date
 extends ../layout
 block content
       section#post
@@ -34,12 +33,9 @@ block content
                 span(style='padding-left: 0.75em;') Still alive?
         article.wrp
           .wrplInnerBox(style='height: 100%;')
-            div
-              b #{parseFloat((nbEndpointsUp/nbEndpointsTotal*100).toFixed(2))+ '%'} 
-              | (#{nbEndpointsUp}/#{nbEndpointsTotal}) endpoints are 
-              b available
+            h3 #{epsAvail.nbEndpointsUp}/#{epsAvail.nbEndpointsTotal} endpoints are available
             br
-            -//#{JSON.stringify(atasks_agg[0])}
+            #{JSON.stringify(atasks_agg)}
             table#table_current.psp-table(cellspacing='0', cellpadding='0', border='0', width='100%')
               thead
                 tr
@@ -47,7 +43,7 @@ block content
                   th.tablehead(width='25%') Uptime Last 24h
                   th.tablehead(width='25%') Uptime Last 7 days
               tbody
-                - each ep, i in atasks_agg
+                - each ep, i in epsAvail.endpoints
                   tr(class=(i % 2 == 0) ? 'odd' : 'even')
                     //-Display Availability color image
                     td
@@ -63,16 +59,12 @@ block content
                           img(src='./images/gray.png')
                     //-Display Endpoint Label
                     //-TODO: if more than one endpoint then display how many and their names 
-                    if ep.endpoint.datasets.length>1
+                    if ep.datasets.length>1
                       td
-                        a(href="/endpoint?uri=#{ep.endpoint.uri}") #{ep.endpoint.uri}
+                        a(href="/endpoint?uri=#{ep.uri}") #{ep.uri}
                     else
-                      if ep.endpoint.datasets.length>0
-                        td 
-                          a(href="/endpoint?uri=#{ep.endpoint.uri}") #{ep.endpoint.datasets[0].label}
-                      else 
-                        td
-                          a(href="/endpoint?uri=#{ep.endpoint.uri}") #{ep.endpoint.uri}
+                      td 
+                        a(href="/endpoint?uri=#{ep.uri}") #{ep.datasets[0].label}
                     //-Display uptime last 24h
                     td #{parseFloat((ep.uptimeLast24h*100).toFixed(2))+ '%'}
                     //-Display uptime last 7d
