@@ -62,10 +62,15 @@ block content
                         else
                           img(src='./images/gray.png')
                     //-Display Endpoint Label
-                    //-TODO: if more than one endpoint then display how many and their names 
                     if ep.endpoint.datasets.length>1
+                      - var generateTooltip = function(datasets){tooltipHtml='This endpoint includes <b>'+datasets.length+' datasets</b>:<ul>';
+                      -   for(var i in datasets){tooltipHtml+='<li>'+datasets[i].label+'</li>';}
+                      -   tooltipHtml+='</ul>';
+                      -   return tooltipHtml;
+                      - }
                       td
-                        a(href="/endpoint?uri=#{ep.endpoint.uri}") #{ep.endpoint.uri}
+                        a(href="/endpoint?uri=#{ep.endpoint.uri}")
+                          span(onmouseover='tooltip.show(\'#{generateTooltip(ep.endpoint.datasets)}\')', onmouseout='tooltip.hide();') #{ep.endpoint.uri} (#{ep.endpoint.datasets.length})
                     else
                       if ep.endpoint.datasets.length>0
                         td 
