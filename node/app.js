@@ -105,11 +105,45 @@ app.get('/performance', function(req, res){
 
 app.get('/interoperability', function(req, res){
 		var epsInter = JSON.parse(fs.readFileSync('./examples/interoperability.json'));
-        res.render('content/interoperability.jade',{
-			lastUpdate: 'Monday 02 September 2013, 22:22',
+		var nbSPARQL1Features=28;
+		var nbSPARQL11Features=20;
+		mongoDBProvider.getInteropView( function(error,docs){
+			var lastUpdate=0;
+			var nbCompliantSPARQL1Features=0;
+			var nbFullCompliantSPARQL1Features=0;
+			var nbCompliantSPARQL11Features=0;
+			var nbFullCompliantSPARQL11Features=0;
+			for (i in docs){
+				if(docs[i].nbCompliantSPARQL1Features>0){
+					nbCompliantSPARQL1Features++;
+					if(docs[i].nbCompliantSPARQL1Features==nbSPARQL1Features){
+						nbFullCompliantSPARQL1Features++;
+					}
+				}
+				if(docs[i].nbCompliantSPARQL11Features>0){
+					nbCompliantSPARQL11Features++;
+					if(docs[i].nbCompliantSPARQL11Features==nbSPARQL11Features){
+						nbFullCompliantSPARQL11Features++;
+					}
+				}
+				if(docs[i].lastUpdate>lastUpdate){
+					lastUpdate=docs[i].lastUpdate;
+				}
+			}
+			console.log(nbCompliantSPARQL1Features+' - '+nbFullCompliantSPARQL1Features+' - '+nbCompliantSPARQL11Features+' - '+nbFullCompliantSPARQL11Features);
+			res.render('content/interoperability.jade',{
+			lastUpdate: new Date(lastUpdate).toUTCString(),
 			epsInter: epsInter,
-			configInterop: JSON.parse(fs.readFileSync('./texts/interoperability.json'))
+			configInterop: JSON.parse(fs.readFileSync('./texts/interoperability.json')),
+			nbSPARQL1Features: nbSPARQL1Features,
+			nbSPARQL11Features: nbSPARQL11Features,
+			nbCompliantSPARQL1Features: nbCompliantSPARQL1Features,
+			nbFullCompliantSPARQL1Features: nbFullCompliantSPARQL1Features,
+			nbCompliantSPARQL11Features: nbCompliantSPARQL11Features,
+			nbFullCompliantSPARQL11Features: nbFullCompliantSPARQL11Features,
+			ftasks_agg: docs
             });
+		});
 });
 
 http.createServer(app).listen(app.get('port'), function(){

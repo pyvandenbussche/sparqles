@@ -15,20 +15,20 @@ block content
           .wrplInnerBox(style='height: 100%;width:100%')
             - function numberWithCommas(x) {if (x) return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");}
             div
-              b #{parseFloat((epsInter.nbEndpointsSPARQL1/epsInter.nbEndpointsTotal*100).toFixed(2))+ '%'} 
-              | (#{epsInter.nbEndpointsSPARQL1}/#{epsInter.nbEndpointsTotal}) of the endpoints are 
+              b #{parseFloat((nbCompliantSPARQL1Features/ftasks_agg.length*100).toFixed(2))+ '%'} 
+              | (#{nbCompliantSPARQL1Features}/#{ftasks_agg.length}) of the endpoints are 
               b compliant with some SPARQL 1.0 features
             div
-              b #{parseFloat((epsInter.nbEndpointsFullSPARQL1/epsInter.nbEndpointsTotal*100).toFixed(2))+ '%'} 
-              | (#{epsInter.nbEndpointsFullSPARQL1}/#{epsInter.nbEndpointsTotal}) of the endpoints are 
+              b #{parseFloat((nbFullCompliantSPARQL1Features/ftasks_agg.length*100).toFixed(2))+ '%'} 
+              | (#{nbFullCompliantSPARQL1Features}/#{ftasks_agg.length}) of the endpoints are 
               b Fully compliant with some SPARQL 1.0
             div
-              b #{parseFloat((epsInter.nbEndpointsSPARQL11/epsInter.nbEndpointsTotal*100).toFixed(2))+ '%'} 
-              | (#{epsInter.nbEndpointsSPARQL11}/#{epsInter.nbEndpointsTotal}) of the endpoints are 
+              b #{parseFloat((nbCompliantSPARQL11Features/ftasks_agg.length*100).toFixed(2))+ '%'} 
+              | (#{nbCompliantSPARQL11Features}/#{ftasks_agg.length}) of the endpoints are 
               b compliant with some SPARQL 1.1 features
             div
-              b #{parseFloat((epsInter.nbEndpointsFullSPARQL11/epsInter.nbEndpointsTotal*100).toFixed(2))+ '%'} 
-              | (#{epsInter.nbEndpointsFullSPARQL11}/#{epsInter.nbEndpointsTotal}) of the endpoints are 
+              b #{parseFloat((nbFullCompliantSPARQL11Features/ftasks_agg.length*100).toFixed(2))+ '%'} 
+              | (#{nbFullCompliantSPARQL11Features}/#{ftasks_agg.length}) of the endpoints are 
               b Fully compliant with some SPARQL 1.1
         article.wrp(style='padding-bottom: 1em;')
           .wrplInnerBox(style='height: 100%;')
