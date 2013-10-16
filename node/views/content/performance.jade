@@ -1,3 +1,6 @@
+-//Filter limit threshold
+-//compute most common limit threshold
+-//compute pct enforced endpoints
 extends ../layout
 block content
       section#post
@@ -31,27 +34,35 @@ block content
                 tr
                   th.tablehead(scope='col', width='50%') SPARQL Endpoint
                   th.tablehead(width='10%') 
-                    span(onmouseover='tooltip.show(\'#{configPerformance['Result-size thresholds']}\')')(onmouseout='tooltip.hide();') Result-size thresholds
+                    span(onmouseover='tooltip.show(\'#{configPerformance['Result-size thresholds']}\')', onmouseout='tooltip.hide();') Result-size thresholds
                   th.tablehead(width='20%') 
-                    span(onmouseover='tooltip.show(\'#{configPerformance['ASK queries']}\')')(onmouseout='tooltip.hide();') ASK queries mean runtime 
-                    span(onmouseover='tooltip.show(\'#{configPerformance['Cold-Warm']}\')')(onmouseout='tooltip.hide();') (Cold-Warm)
+                    span(onmouseover='tooltip.show(\'#{configPerformance['ASK queries']}\')', onmouseout='tooltip.hide();') ASK queries mean runtime 
+                    span(onmouseover='tooltip.show(\'#{configPerformance['Cold-Warm']}\')', onmouseout='tooltip.hide();') (Cold-Warm)
                   th.tablehead(width='20%') 
-                    span(onmouseover='tooltip.show(\'#{configPerformance['JOIN queries']}\')')(onmouseout='tooltip.hide();') Join queries mean runtime 
-                    span(onmouseover='tooltip.show(\'#{configPerformance['Cold-Warm']}\')')(onmouseout='tooltip.hide();') (Cold-Warm)
+                    span(onmouseover='tooltip.show(\'#{configPerformance['JOIN queries']}\')', onmouseout='tooltip.hide();') Join queries mean runtime 
+                    span(onmouseover='tooltip.show(\'#{configPerformance['Cold-Warm']}\')', onmouseout='tooltip.hide();') (Cold-Warm)
               tbody
-                - each ep, i in epsPerf.endpoints
+                - each ep, i in ptasks_agg
                   tr(class=(i % 2 == 0) ? 'odd' : 'even')
                     //-Display Endpoint Label
                     //-TODO: if more than one endpoint then display how many and their names 
-                    if ep.datasets.length>1
+                    if ep.endpoint.datasets.length>1
                       td
-                        a(href="/endpoint?uri=#{ep.uri}") #{ep.uri}
+                        a(href="/endpoint?uri=#{ep.endpoint.uri}") #{ep.endpoint.uri}
                     else
                       td 
-                        a(href="/endpoint?uri=#{ep.uri}") #{ep.datasets[0].label}
+                        a(href="/endpoint?uri=#{ep.endpoint.uri}") #{ep.endpoint.datasets[0].label}
                     //-Display Threshold 
                     td.tdright #{numberWithCommas(ep.threshold)}
                     //-Display ASK
-                    td.tdright #{parseFloat(ep.askMeanCold.toFixed(2))}-#{parseFloat(ep.askMeanWarm.toFixed(2))} s
+                    td.tdright 
+                      if ep.askMeanCold+ep.askMeanWarm>0
+                        | #{parseFloat(ep.askMeanCold.toFixed(2))}-#{parseFloat(ep.askMeanWarm.toFixed(2))} s
+                      else
+                        .textDisabled n/a
                     //-Display Join
-                    td.tdright #{parseFloat(ep.joinMeanCold.toFixed(2))}-#{parseFloat(ep.joinMeanWarm.toFixed(2))} s
+                    td.tdright 
+                      if ep.joinMeanCold+ep.joinMeanWarm>0
+                        | #{parseFloat(ep.joinMeanCold.toFixed(2))}-#{parseFloat(ep.joinMeanWarm.toFixed(2))} s
+                      else
+                        .textDisabled n/a

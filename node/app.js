@@ -55,14 +55,18 @@ app.get('/endpoint', function(req, res){
 app.get('/availability', function(req, res){
 		var epsAvail = JSON.parse(fs.readFileSync('./examples/availability.json'));
 		mongoDBProvider.getAvailView( function(error,docs){
-		    var nbEndpointsUp=0;
+			var lastUpdate=0;
+			var nbEndpointsUp=0;
 			for (i in docs){
 				if(docs[i].upNow==true){
 					nbEndpointsUp++;
 				}
+				if(docs[i].lastUpdate>lastUpdate){
+					lastUpdate=docs[i].lastUpdate;
+				}
 			}
 			res.render('content/availability.jade',{
-				lastUpdate: 'Monday 02 September 2013, 22:22',
+				lastUpdate: new Date(lastUpdate).toUTCString(),
 				epsAvail: epsAvail,
 				atasks_agg: docs,
 				nbEndpointsUp:nbEndpointsUp,
@@ -82,11 +86,21 @@ app.get('/discoverability', function(req, res){
 
 app.get('/performance', function(req, res){
 		var epsPerf = JSON.parse(fs.readFileSync('./examples/performance.json'));
-        res.render('content/performance.jade',{
-			lastUpdate: 'Monday 02 September 2013, 22:22',
-			epsPerf: epsPerf,
-			configPerformance: JSON.parse(fs.readFileSync('./texts/performance.json'))
-            });
+		mongoDBProvider.getPerfView( function(error,docs){
+		    var lastUpdate=0;
+			for (i in docs){
+				if(docs[i].lastUpdate>lastUpdate){
+					lastUpdate=docs[i].lastUpdate;
+				}
+			}
+			//console.log(lastUpdate);
+			res.render('content/performance.jade',{
+				lastUpdate: new Date(lastUpdate).toUTCString(),
+				epsPerf: epsPerf,
+				configPerformance: JSON.parse(fs.readFileSync('./texts/performance.json')),
+				ptasks_agg: docs,
+				});
+		});
 });
 
 app.get('/interoperability', function(req, res){
