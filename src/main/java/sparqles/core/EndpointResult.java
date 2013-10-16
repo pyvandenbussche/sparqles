@@ -232,6 +232,7 @@ public class EndpointResult extends org.apache.avro.specific.SpecificRecordBase 
       return this;
     }
 
+    @Override
     public EndpointResult build() {
       try {
         EndpointResult record = new EndpointResult();

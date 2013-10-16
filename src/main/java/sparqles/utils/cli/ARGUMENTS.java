@@ -38,7 +38,10 @@ public class ARGUMENTS {
 	public static final String [] PARAM_FLAG_RECOMPUTE = createParam("r","recompute");
 	public static final String [] PARAM_FLAG_RESCHEDULE = createParam("rs","reschedule");
 	public static final String [] PARAM_RUN = createParam("run","run");
-		
+	public static final String [] PARAM_FLAG_INDEX = createParam("iv","indexview");
+	public static final String[] PARAM_FLAG_RECOMPUTELAST = createParam("rl","recomputeLast");
+	
+	
 	public static final Option OPTION_PROP_FILE = createOption("property file", 1, "SPARQLES (additional) property file", 
 			PARAM_PROP_FILE[SHORT_ARG], PARAM_PROP_FILE[LONG_ARG],true);
 	public static final Option OPTION_DEBUG = createOption("flag",0,"enable verbose mode",
@@ -53,6 +56,11 @@ public class ARGUMENTS {
 			PARAM_FLAG_RESCHEDULE[SHORT_ARG],PARAM_FLAG_RESCHEDULE[LONG_ARG],false);
 	public static final Option OPTION_RUN  = createOption("task",1,"run task (itask, atask)",
 			PARAM_RUN[SHORT_ARG],PARAM_RUN[LONG_ARG],false);
+	public static final Option OPTION_INDEX = createOption("flag",0,"run indexview computation",
+			PARAM_FLAG_INDEX[SHORT_ARG],PARAM_FLAG_INDEX[LONG_ARG],false);
+	
+	public static final Option OPTION_RECOMPUTELAST  = createOption("flag",0,"recompute the last analytics",
+			PARAM_FLAG_RECOMPUTELAST[SHORT_ARG],PARAM_FLAG_RECOMPUTELAST[LONG_ARG],false);
 	
 
 	/**
@@ -67,9 +75,6 @@ public class ARGUMENTS {
 		return arg;
 	}
 	protected static Option createOption(String argName, int args, String description, String shortArgname, String longArgname, boolean mandatory){
-
-		
-		
 		Option o;
 		if(shortArgname!=null){
 			o  = OptionBuilder.withArgName(argName)

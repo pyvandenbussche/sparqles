@@ -7,27 +7,29 @@ package sparqles.core.discovery;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class GetResult extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"GetResult\",\"namespace\":\"sparqles.core.discovery\",\"fields\":[{\"name\":\"ResponseType\",\"type\":\"string\"},{\"name\":\"ResponseCode\",\"type\":\"string\"},{\"name\":\"ResponseServer\",\"type\":\"string\"},{\"name\":\"ResponseLink\",\"type\":\"string\"},{\"name\":\"SPARQLDESCterms\",\"type\":\"long\"},{\"name\":\"Exception\",\"type\":[\"string\",\"null\"]},{\"name\":\"VOIDterms\",\"type\":\"long\"},{\"name\":\"SPARQLDESCpreds\",\"type\":{\"type\":\"map\",\"values\":[\"string\",\"long\"]}},{\"name\":\"voiDpreds\",\"type\":{\"type\":\"map\",\"values\":[\"string\",\"long\"]}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"GetResult\",\"namespace\":\"sparqles.core.discovery\",\"fields\":[{\"name\":\"ResponseType\",\"type\":\"string\"},{\"name\":\"ResponseCode\",\"type\":\"string\"},{\"name\":\"ResponseServer\",\"type\":\"string\"},{\"name\":\"ResponseLink\",\"type\":\"string\"},{\"name\":\"SPARQLDESCterms\",\"type\":\"int\"},{\"name\":\"Exception\",\"type\":[\"string\",\"null\"]},{\"name\":\"VOIDterms\",\"type\":\"int\"},{\"name\":\"SPARQLDESCpreds\",\"type\":{\"type\":\"map\",\"values\":[\"int\"]}},{\"name\":\"voiDpreds\",\"type\":{\"type\":\"map\",\"values\":[\"int\"]}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public java.lang.CharSequence ResponseType;
   @Deprecated public java.lang.CharSequence ResponseCode;
   @Deprecated public java.lang.CharSequence ResponseServer;
   @Deprecated public java.lang.CharSequence ResponseLink;
-  @Deprecated public long SPARQLDESCterms;
+  @Deprecated public int SPARQLDESCterms;
   @Deprecated public java.lang.CharSequence Exception;
-  @Deprecated public long VOIDterms;
+  @Deprecated public int VOIDterms;
   @Deprecated public java.util.Map<java.lang.CharSequence,java.lang.Object> SPARQLDESCpreds;
   @Deprecated public java.util.Map<java.lang.CharSequence,java.lang.Object> voiDpreds;
 
   /**
-   * Default constructor.
+   * Default constructor.  Note that this does not initialize fields
+   * to their default values from the schema.  If that is desired then
+   * one should use {@link \#newBuilder()}. 
    */
   public GetResult() {}
 
   /**
    * All-args constructor.
    */
-  public GetResult(java.lang.CharSequence ResponseType, java.lang.CharSequence ResponseCode, java.lang.CharSequence ResponseServer, java.lang.CharSequence ResponseLink, java.lang.Long SPARQLDESCterms, java.lang.CharSequence Exception, java.lang.Long VOIDterms, java.util.Map<java.lang.CharSequence,java.lang.Object> SPARQLDESCpreds, java.util.Map<java.lang.CharSequence,java.lang.Object> voiDpreds) {
+  public GetResult(java.lang.CharSequence ResponseType, java.lang.CharSequence ResponseCode, java.lang.CharSequence ResponseServer, java.lang.CharSequence ResponseLink, java.lang.Integer SPARQLDESCterms, java.lang.CharSequence Exception, java.lang.Integer VOIDterms, java.util.Map<java.lang.CharSequence,java.lang.Object> SPARQLDESCpreds, java.util.Map<java.lang.CharSequence,java.lang.Object> voiDpreds) {
     this.ResponseType = ResponseType;
     this.ResponseCode = ResponseCode;
     this.ResponseServer = ResponseServer;
@@ -63,9 +65,9 @@ public class GetResult extends org.apache.avro.specific.SpecificRecordBase imple
     case 1: ResponseCode = (java.lang.CharSequence)value$; break;
     case 2: ResponseServer = (java.lang.CharSequence)value$; break;
     case 3: ResponseLink = (java.lang.CharSequence)value$; break;
-    case 4: SPARQLDESCterms = (java.lang.Long)value$; break;
+    case 4: SPARQLDESCterms = (java.lang.Integer)value$; break;
     case 5: Exception = (java.lang.CharSequence)value$; break;
-    case 6: VOIDterms = (java.lang.Long)value$; break;
+    case 6: VOIDterms = (java.lang.Integer)value$; break;
     case 7: SPARQLDESCpreds = (java.util.Map<java.lang.CharSequence,java.lang.Object>)value$; break;
     case 8: voiDpreds = (java.util.Map<java.lang.CharSequence,java.lang.Object>)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
@@ -135,7 +137,7 @@ public class GetResult extends org.apache.avro.specific.SpecificRecordBase imple
   /**
    * Gets the value of the 'SPARQLDESCterms' field.
    */
-  public java.lang.Long getSPARQLDESCterms() {
+  public java.lang.Integer getSPARQLDESCterms() {
     return SPARQLDESCterms;
   }
 
@@ -143,7 +145,7 @@ public class GetResult extends org.apache.avro.specific.SpecificRecordBase imple
    * Sets the value of the 'SPARQLDESCterms' field.
    * @param value the value to set.
    */
-  public void setSPARQLDESCterms(java.lang.Long value) {
+  public void setSPARQLDESCterms(java.lang.Integer value) {
     this.SPARQLDESCterms = value;
   }
 
@@ -165,7 +167,7 @@ public class GetResult extends org.apache.avro.specific.SpecificRecordBase imple
   /**
    * Gets the value of the 'VOIDterms' field.
    */
-  public java.lang.Long getVOIDterms() {
+  public java.lang.Integer getVOIDterms() {
     return VOIDterms;
   }
 
@@ -173,7 +175,7 @@ public class GetResult extends org.apache.avro.specific.SpecificRecordBase imple
    * Sets the value of the 'VOIDterms' field.
    * @param value the value to set.
    */
-  public void setVOIDterms(java.lang.Long value) {
+  public void setVOIDterms(java.lang.Integer value) {
     this.VOIDterms = value;
   }
 
@@ -232,9 +234,9 @@ public class GetResult extends org.apache.avro.specific.SpecificRecordBase imple
     private java.lang.CharSequence ResponseCode;
     private java.lang.CharSequence ResponseServer;
     private java.lang.CharSequence ResponseLink;
-    private long SPARQLDESCterms;
+    private int SPARQLDESCterms;
     private java.lang.CharSequence Exception;
-    private long VOIDterms;
+    private int VOIDterms;
     private java.util.Map<java.lang.CharSequence,java.lang.Object> SPARQLDESCpreds;
     private java.util.Map<java.lang.CharSequence,java.lang.Object> voiDpreds;
 
@@ -246,6 +248,42 @@ public class GetResult extends org.apache.avro.specific.SpecificRecordBase imple
     /** Creates a Builder by copying an existing Builder */
     private Builder(sparqles.core.discovery.GetResult.Builder other) {
       super(other);
+      if (isValidValue(fields()[0], other.ResponseType)) {
+        this.ResponseType = data().deepCopy(fields()[0].schema(), other.ResponseType);
+        fieldSetFlags()[0] = true;
+      }
+      if (isValidValue(fields()[1], other.ResponseCode)) {
+        this.ResponseCode = data().deepCopy(fields()[1].schema(), other.ResponseCode);
+        fieldSetFlags()[1] = true;
+      }
+      if (isValidValue(fields()[2], other.ResponseServer)) {
+        this.ResponseServer = data().deepCopy(fields()[2].schema(), other.ResponseServer);
+        fieldSetFlags()[2] = true;
+      }
+      if (isValidValue(fields()[3], other.ResponseLink)) {
+        this.ResponseLink = data().deepCopy(fields()[3].schema(), other.ResponseLink);
+        fieldSetFlags()[3] = true;
+      }
+      if (isValidValue(fields()[4], other.SPARQLDESCterms)) {
+        this.SPARQLDESCterms = data().deepCopy(fields()[4].schema(), other.SPARQLDESCterms);
+        fieldSetFlags()[4] = true;
+      }
+      if (isValidValue(fields()[5], other.Exception)) {
+        this.Exception = data().deepCopy(fields()[5].schema(), other.Exception);
+        fieldSetFlags()[5] = true;
+      }
+      if (isValidValue(fields()[6], other.VOIDterms)) {
+        this.VOIDterms = data().deepCopy(fields()[6].schema(), other.VOIDterms);
+        fieldSetFlags()[6] = true;
+      }
+      if (isValidValue(fields()[7], other.SPARQLDESCpreds)) {
+        this.SPARQLDESCpreds = data().deepCopy(fields()[7].schema(), other.SPARQLDESCpreds);
+        fieldSetFlags()[7] = true;
+      }
+      if (isValidValue(fields()[8], other.voiDpreds)) {
+        this.voiDpreds = data().deepCopy(fields()[8].schema(), other.voiDpreds);
+        fieldSetFlags()[8] = true;
+      }
     }
     
     /** Creates a Builder by copying an existing GetResult instance */
@@ -390,12 +428,12 @@ public class GetResult extends org.apache.avro.specific.SpecificRecordBase imple
     }
 
     /** Gets the value of the 'SPARQLDESCterms' field */
-    public java.lang.Long getSPARQLDESCterms() {
+    public java.lang.Integer getSPARQLDESCterms() {
       return SPARQLDESCterms;
     }
     
     /** Sets the value of the 'SPARQLDESCterms' field */
-    public sparqles.core.discovery.GetResult.Builder setSPARQLDESCterms(long value) {
+    public sparqles.core.discovery.GetResult.Builder setSPARQLDESCterms(int value) {
       validate(fields()[4], value);
       this.SPARQLDESCterms = value;
       fieldSetFlags()[4] = true;
@@ -439,12 +477,12 @@ public class GetResult extends org.apache.avro.specific.SpecificRecordBase imple
     }
 
     /** Gets the value of the 'VOIDterms' field */
-    public java.lang.Long getVOIDterms() {
+    public java.lang.Integer getVOIDterms() {
       return VOIDterms;
     }
     
     /** Sets the value of the 'VOIDterms' field */
-    public sparqles.core.discovery.GetResult.Builder setVOIDterms(long value) {
+    public sparqles.core.discovery.GetResult.Builder setVOIDterms(int value) {
       validate(fields()[6], value);
       this.VOIDterms = value;
       fieldSetFlags()[6] = true;
@@ -512,6 +550,7 @@ public class GetResult extends org.apache.avro.specific.SpecificRecordBase imple
       return this;
     }
 
+    @Override
     public GetResult build() {
       try {
         GetResult record = new GetResult();
@@ -519,9 +558,9 @@ public class GetResult extends org.apache.avro.specific.SpecificRecordBase imple
         record.ResponseCode = fieldSetFlags()[1] ? this.ResponseCode : (java.lang.CharSequence) defaultValue(fields()[1]);
         record.ResponseServer = fieldSetFlags()[2] ? this.ResponseServer : (java.lang.CharSequence) defaultValue(fields()[2]);
         record.ResponseLink = fieldSetFlags()[3] ? this.ResponseLink : (java.lang.CharSequence) defaultValue(fields()[3]);
-        record.SPARQLDESCterms = fieldSetFlags()[4] ? this.SPARQLDESCterms : (java.lang.Long) defaultValue(fields()[4]);
+        record.SPARQLDESCterms = fieldSetFlags()[4] ? this.SPARQLDESCterms : (java.lang.Integer) defaultValue(fields()[4]);
         record.Exception = fieldSetFlags()[5] ? this.Exception : (java.lang.CharSequence) defaultValue(fields()[5]);
-        record.VOIDterms = fieldSetFlags()[6] ? this.VOIDterms : (java.lang.Long) defaultValue(fields()[6]);
+        record.VOIDterms = fieldSetFlags()[6] ? this.VOIDterms : (java.lang.Integer) defaultValue(fields()[6]);
         record.SPARQLDESCpreds = fieldSetFlags()[7] ? this.SPARQLDESCpreds : (java.util.Map<java.lang.CharSequence,java.lang.Object>) defaultValue(fields()[7]);
         record.voiDpreds = fieldSetFlags()[8] ? this.voiDpreds : (java.util.Map<java.lang.CharSequence,java.lang.Object>) defaultValue(fields()[8]);
         return record;

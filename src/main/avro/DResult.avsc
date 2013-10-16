@@ -13,14 +13,14 @@
         		{"name": "ResponseCode", "type": "string" },
         		{"name": "ResponseServer", "type": "string" },
         		{"name": "ResponseLink", "type": "string" },
-        		{"name": "SPARQLDESCterms", "type": "long" },
+        		{"name": "SPARQLDESCterms", "type": "int" },
         		{"name": "Exception", "type": ["string", "null"] },
-    			{"name": "VOIDterms", "type": "long" },
+    			{"name": "VOIDterms", "type": "int" },
       			{"name":"SPARQLDESCpreds",
-      			"type":{"type":"map","values":["string","long"]}
+      			"type":{"type":"map","values":["int"]}
 		      	},
        			{"name":"voiDpreds",
-      			"type":{"type":"map","values":["string","long"]}
+      			"type":{"type":"map","values":["int"]}
       			}
         	]}
     	},

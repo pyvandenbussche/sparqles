@@ -8,6 +8,7 @@
 	{"name": "askMeanWarm", "type": "double"},
 	{"name": "joinMeanCold", "type": "double"},
 	{"name": "joinMeanWarm", "type": "double"},
-	{"name": "lastUpdate", "type": "long"}
+	{"name": "lastUpdate", "type": "long"},
+	{"name": "threshold", "type": "long"}
 ]
 }

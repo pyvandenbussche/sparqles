@@ -2,12 +2,6 @@ package sparqles.utils.cli;
 
 import java.io.File;
 import java.util.Collection;
-import java.util.concurrent.CompletionService;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorCompletionService;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Options;
@@ -19,8 +13,6 @@ import sparqles.analytics.IndexViewAnalytics;
 import sparqles.core.CONSTANTS;
 import sparqles.core.Endpoint;
 import sparqles.core.SPARQLESProperties;
-import sparqles.core.Task;
-import sparqles.core.TaskFactory;
 import sparqles.core.availability.AResult;
 import sparqles.core.discovery.DResult;
 import sparqles.core.features.FResult;
@@ -54,8 +46,10 @@ public class SPARQLES extends CLIObject{
 		opts.addOption(ARGUMENTS.OPTION_INIT);
 		opts.addOption(ARGUMENTS.OPTION_START);
 		opts.addOption(ARGUMENTS.OPTION_RECOMPUTE);
+		opts.addOption(ARGUMENTS.OPTION_RECOMPUTELAST);
 		opts.addOption(ARGUMENTS.OPTION_RESCHEDULE);
 		opts.addOption(ARGUMENTS.OPTION_RUN);
+		opts.addOption(ARGUMENTS.OPTION_INDEX);
 	}
 
 	@Override
@@ -75,7 +69,13 @@ public class SPARQLES extends CLIObject{
 			dbm.insert(epss);
 		}
 		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_FLAG_RECOMPUTE)){
-			recomputeAnalytics();
+			recomputeAnalytics(false);
+		}
+		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_FLAG_RECOMPUTELAST)){
+			recomputeAnalytics(true);
+		}
+		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_FLAG_INDEX)){
+			recomputeIndexView();
 		}
 		
 		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_RUN)){
@@ -116,15 +116,26 @@ public class SPARQLES extends CLIObject{
 		Runtime.getRuntime().addShutdownHook (new ShutdownThread(this));
 	}
 
-	private void recomputeAnalytics() {
+	private void recomputeIndexView() {
+		IndexViewAnalytics a = new IndexViewAnalytics();
+		a.setDBManager(dbm);
+		try {
+			a.call();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	private void recomputeAnalytics(boolean onlyLast) {
 		dbm.initAggregateCollections();
 		
-		AAnalyserInit a = new AAnalyserInit(dbm);
+		AAnalyserInit a = new AAnalyserInit(dbm, onlyLast);
 		a.run();
 	}
 
 	private void start() {
-//		epm.init(dbm);
 		scheduler.init(dbm);
 		try {
 			long start = System.currentTimeMillis();

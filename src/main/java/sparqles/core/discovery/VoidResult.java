@@ -13,7 +13,9 @@ public class VoidResult extends org.apache.avro.specific.SpecificRecordBase impl
   @Deprecated public java.lang.CharSequence Exception;
 
   /**
-   * Default constructor.
+   * Default constructor.  Note that this does not initialize fields
+   * to their default values from the schema.  If that is desired then
+   * one should use {@link \#newBuilder()}. 
    */
   public VoidResult() {}
 
@@ -106,6 +108,14 @@ public class VoidResult extends org.apache.avro.specific.SpecificRecordBase impl
     /** Creates a Builder by copying an existing Builder */
     private Builder(sparqles.core.discovery.VoidResult.Builder other) {
       super(other);
+      if (isValidValue(fields()[0], other.voidFile)) {
+        this.voidFile = data().deepCopy(fields()[0].schema(), other.voidFile);
+        fieldSetFlags()[0] = true;
+      }
+      if (isValidValue(fields()[1], other.Exception)) {
+        this.Exception = data().deepCopy(fields()[1].schema(), other.Exception);
+        fieldSetFlags()[1] = true;
+      }
     }
     
     /** Creates a Builder by copying an existing VoidResult instance */
@@ -171,6 +181,7 @@ public class VoidResult extends org.apache.avro.specific.SpecificRecordBase impl
       return this;
     }
 
+    @Override
     public VoidResult build() {
       try {
         VoidResult record = new VoidResult();

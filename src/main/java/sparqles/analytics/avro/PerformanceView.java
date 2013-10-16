@@ -7,7 +7,7 @@ package sparqles.analytics.avro;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class PerformanceView extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"PerformanceView\",\"namespace\":\"sparqles.analytics.avro\",\"fields\":[{\"name\":\"endpoint\",\"type\":{\"type\":\"record\",\"name\":\"Endpoint\",\"namespace\":\"sparqles.core\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"},{\"name\":\"datasets\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Dataset\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"},{\"name\":\"label\",\"type\":\"string\"}]}}}]}},{\"name\":\"askMeanCold\",\"type\":\"double\"},{\"name\":\"askMeanWarm\",\"type\":\"double\"},{\"name\":\"joinMeanCold\",\"type\":\"double\"},{\"name\":\"joinMeanWarm\",\"type\":\"double\"},{\"name\":\"lastUpdate\",\"type\":\"long\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"PerformanceView\",\"namespace\":\"sparqles.analytics.avro\",\"fields\":[{\"name\":\"endpoint\",\"type\":{\"type\":\"record\",\"name\":\"Endpoint\",\"namespace\":\"sparqles.core\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"},{\"name\":\"datasets\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Dataset\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"},{\"name\":\"label\",\"type\":\"string\"}]}}}]}},{\"name\":\"askMeanCold\",\"type\":\"double\"},{\"name\":\"askMeanWarm\",\"type\":\"double\"},{\"name\":\"joinMeanCold\",\"type\":\"double\"},{\"name\":\"joinMeanWarm\",\"type\":\"double\"},{\"name\":\"lastUpdate\",\"type\":\"long\"},{\"name\":\"threshold\",\"type\":\"long\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public sparqles.core.Endpoint endpoint;
   @Deprecated public double askMeanCold;
@@ -15,6 +15,7 @@ public class PerformanceView extends org.apache.avro.specific.SpecificRecordBase
   @Deprecated public double joinMeanCold;
   @Deprecated public double joinMeanWarm;
   @Deprecated public long lastUpdate;
+  @Deprecated public long threshold;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -26,13 +27,14 @@ public class PerformanceView extends org.apache.avro.specific.SpecificRecordBase
   /**
    * All-args constructor.
    */
-  public PerformanceView(sparqles.core.Endpoint endpoint, java.lang.Double askMeanCold, java.lang.Double askMeanWarm, java.lang.Double joinMeanCold, java.lang.Double joinMeanWarm, java.lang.Long lastUpdate) {
+  public PerformanceView(sparqles.core.Endpoint endpoint, java.lang.Double askMeanCold, java.lang.Double askMeanWarm, java.lang.Double joinMeanCold, java.lang.Double joinMeanWarm, java.lang.Long lastUpdate, java.lang.Long threshold) {
     this.endpoint = endpoint;
     this.askMeanCold = askMeanCold;
     this.askMeanWarm = askMeanWarm;
     this.joinMeanCold = joinMeanCold;
     this.joinMeanWarm = joinMeanWarm;
     this.lastUpdate = lastUpdate;
+    this.threshold = threshold;
   }
 
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
@@ -45,6 +47,7 @@ public class PerformanceView extends org.apache.avro.specific.SpecificRecordBase
     case 3: return joinMeanCold;
     case 4: return joinMeanWarm;
     case 5: return lastUpdate;
+    case 6: return threshold;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -58,6 +61,7 @@ public class PerformanceView extends org.apache.avro.specific.SpecificRecordBase
     case 3: joinMeanCold = (java.lang.Double)value$; break;
     case 4: joinMeanWarm = (java.lang.Double)value$; break;
     case 5: lastUpdate = (java.lang.Long)value$; break;
+    case 6: threshold = (java.lang.Long)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -152,6 +156,21 @@ public class PerformanceView extends org.apache.avro.specific.SpecificRecordBase
     this.lastUpdate = value;
   }
 
+  /**
+   * Gets the value of the 'threshold' field.
+   */
+  public java.lang.Long getThreshold() {
+    return threshold;
+  }
+
+  /**
+   * Sets the value of the 'threshold' field.
+   * @param value the value to set.
+   */
+  public void setThreshold(java.lang.Long value) {
+    this.threshold = value;
+  }
+
   /** Creates a new PerformanceView RecordBuilder */
   public static sparqles.analytics.avro.PerformanceView.Builder newBuilder() {
     return new sparqles.analytics.avro.PerformanceView.Builder();
@@ -179,6 +198,7 @@ public class PerformanceView extends org.apache.avro.specific.SpecificRecordBase
     private double joinMeanCold;
     private double joinMeanWarm;
     private long lastUpdate;
+    private long threshold;
 
     /** Creates a new Builder */
     private Builder() {
@@ -212,6 +232,10 @@ public class PerformanceView extends org.apache.avro.specific.SpecificRecordBase
         this.lastUpdate = data().deepCopy(fields()[5].schema(), other.lastUpdate);
         fieldSetFlags()[5] = true;
       }
+      if (isValidValue(fields()[6], other.threshold)) {
+        this.threshold = data().deepCopy(fields()[6].schema(), other.threshold);
+        fieldSetFlags()[6] = true;
+      }
     }
     
     /** Creates a Builder by copying an existing PerformanceView instance */
@@ -240,6 +264,10 @@ public class PerformanceView extends org.apache.avro.specific.SpecificRecordBase
       if (isValidValue(fields()[5], other.lastUpdate)) {
         this.lastUpdate = data().deepCopy(fields()[5].schema(), other.lastUpdate);
         fieldSetFlags()[5] = true;
+      }
+      if (isValidValue(fields()[6], other.threshold)) {
+        this.threshold = data().deepCopy(fields()[6].schema(), other.threshold);
+        fieldSetFlags()[6] = true;
       }
     }
 
@@ -388,6 +416,30 @@ public class PerformanceView extends org.apache.avro.specific.SpecificRecordBase
       return this;
     }
 
+    /** Gets the value of the 'threshold' field */
+    public java.lang.Long getThreshold() {
+      return threshold;
+    }
+    
+    /** Sets the value of the 'threshold' field */
+    public sparqles.analytics.avro.PerformanceView.Builder setThreshold(long value) {
+      validate(fields()[6], value);
+      this.threshold = value;
+      fieldSetFlags()[6] = true;
+      return this; 
+    }
+    
+    /** Checks whether the 'threshold' field has been set */
+    public boolean hasThreshold() {
+      return fieldSetFlags()[6];
+    }
+    
+    /** Clears the value of the 'threshold' field */
+    public sparqles.analytics.avro.PerformanceView.Builder clearThreshold() {
+      fieldSetFlags()[6] = false;
+      return this;
+    }
+
     @Override
     public PerformanceView build() {
       try {
@@ -398,6 +450,7 @@ public class PerformanceView extends org.apache.avro.specific.SpecificRecordBase
         record.joinMeanCold = fieldSetFlags()[3] ? this.joinMeanCold : (java.lang.Double) defaultValue(fields()[3]);
         record.joinMeanWarm = fieldSetFlags()[4] ? this.joinMeanWarm : (java.lang.Double) defaultValue(fields()[4]);
         record.lastUpdate = fieldSetFlags()[5] ? this.lastUpdate : (java.lang.Long) defaultValue(fields()[5]);
+        record.threshold = fieldSetFlags()[6] ? this.threshold : (java.lang.Long) defaultValue(fields()[6]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);
