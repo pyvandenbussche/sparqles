@@ -68,7 +68,8 @@ public class AAnalyserInit {
 		for(PResult epres: epRes){
 			res.add(epres);
 		}
-		if(_onlyLast){
+		log.info("Analyse {} Performance results", epRes.size());
+		if(_onlyLast &&epRes.size()!=0){
 			p.analyse(res.last());
 		}else{
 			for(PResult ares: res){
@@ -90,7 +91,8 @@ public class AAnalyserInit {
 		for(FResult epres: epRes){
 			res.add(epres);
 		}
-		if(_onlyLast){
+		log.info("Analyse {} Interoperability results", epRes.size());
+		if(_onlyLast&&epRes.size()!=0){
 			f.analyse(res.last());
 		}else{
 			for(FResult ares: res){
@@ -114,7 +116,7 @@ public class AAnalyserInit {
 		for(AResult epres: epRes){
 			res.add(epres);
 		}
-		if(_onlyLast){
+		if(_onlyLast&&epRes.size()!=0){
 			a.analyse(res.last());
 		}else{
 			for(AResult ares: res){
