@@ -3,7 +3,8 @@
 "type": "record",
 "name": "DiscoverabilityView",
 "fields": [ 
-	{"name": "VoID", "type": "sparqles.core.Endpoint"},
+{"name": "endpoint", "type": "sparqles.core.Endpoint"},
+	{"name": "VoID", "type": "boolean"},
 	{"name": "SD", "type": "boolean"},
 	{"name": "serverName", "type": "string"},
 	{"name": "lastUpdate", "type": "long"}

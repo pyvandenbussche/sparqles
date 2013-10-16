@@ -30,8 +30,8 @@ import sparqles.utils.MongoDBManager;
 public class FAnalyser extends Analytics<FResult> {
 	private static final Logger log = LoggerFactory.getLogger(FAnalyser.class);
 
-	
-	
+
+
 	public FAnalyser(MongoDBManager db) {
 		super(db);
 	}
@@ -40,130 +40,54 @@ public class FAnalyser extends Analytics<FResult> {
 	@Override
 	public boolean analyse(FResult pres) {
 		log.info("[Analytics] {}",pres);
-		
+
 		Endpoint ep = pres.getEndpointResult().getEndpoint();
-		
+
 		InteroperabilityView fview= getView(ep);
 		EPView epview=getEPView(ep);
-		
+
 		List<EPViewInteroperabilityData> sparql1Feat = new ArrayList<EPViewInteroperabilityData>();
 		List<EPViewInteroperabilityData> sparql11Feat = new ArrayList<EPViewInteroperabilityData>();
+		
 		int SPARQL1=0, SPARQL11=0;
 		for(Entry<CharSequence, FSingleResult> ent: pres.getResults().entrySet()){
-//			System.out.println(ent.getKey()+" -> "+ent.getValue());
 			String key = ent.getKey().toString();
 			Run run = ent.getValue().getRun();
+		
 			String q = SpecificFTask.valueOf(key).toString().toLowerCase();
-			
-				if(key.startsWith("SPARQL1_")) {
-					q = q.replaceAll("sparql10/", "").replace(".rq", "");
-					EPViewInteroperabilityData t = new EPViewInteroperabilityData(q, false,run.getException());
-					
-					if(run.getException()==null){
-						SPARQL1++;
-						t.setValue(true);
-					}
-					sparql1Feat.add(t);
+			if(key.contains("SPARQL1_")) {
+				q = q.replaceAll("sparql10/", "").replace(".rq", "");
+				EPViewInteroperabilityData t = new EPViewInteroperabilityData(q, false, run.getException());
+
+				if(run.getException() == null){
+					SPARQL1++;
+					t.setValue(true);
 				}
-				if(key.startsWith("SPARQL11_")) {SPARQL11++;
-					q = q.replaceAll("sparql11/", "").replace(".rq", "");
-					EPViewInteroperabilityData t = new EPViewInteroperabilityData(q, false,run.getException());
-					
-					if(run.getException()==null){
-						SPARQL11++;
-						t.setValue(true);
-					}
-					
-					sparql11Feat.add(t);
+				sparql1Feat.add(t);
+			}
+			else if(key.contains("SPARQL11_")) {
+				q = q.replaceAll("sparql11/", "").replace(".rq", "");
+				EPViewInteroperabilityData t = new EPViewInteroperabilityData(q, false, run.getException());
+
+				if(run.getException()==null){
+					SPARQL11++;
+					t.setValue(true);
 				}
-			
+				sparql11Feat.add(t);
+			}
 		}
+		
 		fview.setNbCompliantSPARQL1Features(SPARQL1);
 		fview.setNbCompliantSPARQL11Features(SPARQL11);
 		epview.getInteroperability().setSPARQL1Features(sparql1Feat);
 		epview.getInteroperability().setSPARQL11Features(sparql11Feat);
-		System.out.println(fview);
-		System.out.println(epview);
-		
+
 		fview.setLastUpdate(pres.getEndpointResult().getEnd());
-		
+
 		_db.update(fview);
 		_db.update(epview);
 		return true;
-		
-//		SummaryStatistics askStatsCold = new SummaryStatistics();
-//		SummaryStatistics askStatsWarm = new SummaryStatistics();
-//		SummaryStatistics joinStatsCold = new SummaryStatistics();
-//		SummaryStatistics joinStatsWarm = new SummaryStatistics();
-//
-//		//prepare eppview data
-//		EPViewPerformance eppview = epview.getPerformance();
-//		EPViewPerformanceData askCold = new EPViewPerformanceData("Cold ASK Tests","#1f77b4", new ArrayList<EPViewPerformanceDataValues>());
-//		EPViewPerformanceData askWarm = new EPViewPerformanceData("WARM ASK Tests","#2ca02c", new ArrayList<EPViewPerformanceDataValues>());
-//		EPViewPerformanceData joinCold = new EPViewPerformanceData("Cold JOIN Tests","#1f77b4", new ArrayList<EPViewPerformanceDataValues>());
-//		EPViewPerformanceData joinWarm = new EPViewPerformanceData("Warm JOIN Tests","#2ca02c", new ArrayList<EPViewPerformanceDataValues>());
-//		
-//		ArrayList<EPViewPerformanceData> askdata= new ArrayList<EPViewPerformanceData>();
-//		askdata.add(askCold);
-//		askdata.add(askWarm);
-//		ArrayList<EPViewPerformanceData> joindata= new ArrayList<EPViewPerformanceData>();
-//		joindata.add(joinCold);
-//		joindata.add(joinWarm);
-//		
-//		eppview.setAsk(askdata);
-//		eppview.setJoin(joindata);
-//		
-//		
-//		Map<CharSequence, PSingleResult> map = pres.getResults();
-//		int limit =0 ;
-//		
-//		for(Entry<CharSequence, PSingleResult> ent: map.entrySet()){
-//			PSingleResult res = ent.getValue();
-//			if(ent.getKey().toString().startsWith("ASK")){
-//				askStatsCold.addValue(res.getCold().getClosetime()/(double)1000);
-//				askStatsWarm.addValue(res.getWarm().getClosetime()/(double)1000);
-//				
-//				String key = ent.getKey().toString().replaceAll("ASK",	"").toLowerCase();
-//				
-//				
-//				askCold.getData().add(new EPViewPerformanceDataValues(key,res.getCold().getClosetime()/(double)1000));
-//				askWarm.getData().add(new EPViewPerformanceDataValues(key,res.getWarm().getClosetime()/(double)1000));
-//			}else if(ent.getKey().toString().startsWith("JOIN")){
-//				joinStatsCold.addValue(res.getCold().getClosetime()/(double)1000);
-//				joinStatsWarm.addValue(res.getCold().getClosetime()/(double)1000);
-//		
-//				String key = ent.getKey().toString().replaceAll("JOIN",	"").toLowerCase();
-//				
-//				joinCold.getData().add(new EPViewPerformanceDataValues(key,res.getCold().getClosetime()/(double)1000));
-//				joinWarm.getData().add(new EPViewPerformanceDataValues(key,res.getWarm().getClosetime()/(double)1000));
-//			}else if(ent.getKey().toString().startsWith("LIMIT")){
-//				int sol = res.getCold().getSolutions();
-//				if(Math.max(limit, sol)==sol){
-//					limit = sol;
-//				}
-//				sol = res.getWarm().getSolutions();
-//				if(Math.max(limit, sol)==sol){
-//					limit = sol;
-//				}
-//			}
-//		}
-//		
-//		
-//		//Update pview data
-//		pview.setAskMeanCold(askStatsCold.getMean());
-//		pview.setAskMeanWarm(askStatsWarm.getMean());
-//		pview.setJoinMeanCold(joinStatsCold.getMean());
-//		pview.setJoinMeanWarm(joinStatsWarm.getMean());
-//		
-//		
-//		System.out.println(pview);
-//		System.out.println(epview);
-//		_db.update(pview);
-//		_db.update(epview);
-//		
-//		return true;
 	}
-
 
 	private InteroperabilityView getView(Endpoint ep) {
 		InteroperabilityView view =null;
