@@ -77,7 +77,7 @@ public class PAnalyser extends Analytics<PResult> {
 				askWarm.getData().add(new EPViewPerformanceDataValues(key,res.getWarm().getClosetime()/(double)1000,res.getWarm().getException()));
 			}else if(ent.getKey().toString().startsWith("JOIN")){
 				joinStatsCold.addValue(res.getCold().getClosetime()/(double)1000);
-				joinStatsWarm.addValue(res.getCold().getClosetime()/(double)1000);
+				joinStatsWarm.addValue(res.getWarm().getClosetime()/(double)1000);
 		
 				String key = ent.getKey().toString().replaceAll("JOIN",	"").toLowerCase();
 				
@@ -95,7 +95,7 @@ public class PAnalyser extends Analytics<PResult> {
 			}
 		}
 		eppview.setThreshold(limit);
-		
+		pview.setThreshold(limit);
 		
 		
 		//Update pview data

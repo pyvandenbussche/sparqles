@@ -19,13 +19,10 @@ public class PRun extends TaskRun{
 		this(ep, queryFile, System.currentTimeMillis());
 	}
 
-
 	public PRun(Endpoint ep, String queryFile, Long start) {
 		super( ep, queryFile,SPARQLESProperties.getPTASK_QUERIES(), start,log);
-		
 	}
 	
-
 	public PSingleResult execute() {
 		PSingleResult result = new PSingleResult();
 		

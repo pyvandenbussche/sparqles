@@ -54,6 +54,7 @@ public class SPARQLES extends CLIObject{
 		opts.addOption(ARGUMENTS.OPTION_INIT);
 		opts.addOption(ARGUMENTS.OPTION_START);
 		opts.addOption(ARGUMENTS.OPTION_RECOMPUTE);
+		opts.addOption(ARGUMENTS.OPTION_RECOMPUTELAST);
 		opts.addOption(ARGUMENTS.OPTION_RESCHEDULE);
 		opts.addOption(ARGUMENTS.OPTION_RUN);
 		opts.addOption(ARGUMENTS.OPTION_INDEX);
@@ -76,7 +77,10 @@ public class SPARQLES extends CLIObject{
 			dbm.insert(epss);
 		}
 		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_FLAG_RECOMPUTE)){
-			recomputeAnalytics();
+			recomputeAnalytics(false);
+		}
+		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_FLAG_RECOMPUTELAST)){
+			recomputeAnalytics(true);
 		}
 		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_FLAG_INDEX)){
 			recomputeIndexView();
@@ -132,10 +136,10 @@ public class SPARQLES extends CLIObject{
 		
 	}
 
-	private void recomputeAnalytics() {
+	private void recomputeAnalytics(boolean onlyLast) {
 		dbm.initAggregateCollections();
 		
-		AAnalyserInit a = new AAnalyserInit(dbm);
+		AAnalyserInit a = new AAnalyserInit(dbm, onlyLast);
 		a.run();
 	}
 
