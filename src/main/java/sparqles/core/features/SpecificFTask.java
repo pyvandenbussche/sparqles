@@ -40,7 +40,6 @@ SPARQL1_SELORDERBYOFFSET		("sparql10/SEL[.]*ORDERBY*OFFSET.rq"),
 
 
 
-
 SPARQL11_ASKFILNIN   	("sparql11/ASK[FIL(!IN)].rq"),
 SPARQL11_CON   			("sparql11/CON-[.].rq"),
 SPARQL11_SELAVG   		("sparql11/SEL[AVG].rq"),
@@ -61,6 +60,8 @@ SPARQL11_SELSUM   		("sparql11/SEL[SUM].rq"),
 SPARQL11_SELVALUES   	("sparql11/SEL[VALUES].rq"),
 SPARQL11_SELAVGGROUPBY   	("sparql11/SEL[AVG]*GROUPBY.rq"),
 SPARQL11_SELCOUNTGROUPBY   	("sparql11/SEL[COUNT]*GROUPBY.rq");
+
+
 
 
    
