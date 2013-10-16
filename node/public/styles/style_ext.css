@@ -74,6 +74,9 @@ a {
 .black {
   color: #3c3c3c;
 }
+.textDisabled{
+  color:#afafaf;
+}
 /* - - - - - - - - */
 body {
   color: #3c3c3c;

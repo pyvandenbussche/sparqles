@@ -18,12 +18,24 @@ MongoDBProvider.prototype.getCollection= function(collectionName, callback) {
   });
 };
 
-//findAll
+//Availability
 MongoDBProvider.prototype.getAvailView = function(callback) {
     this.getCollection('atasks_agg',function(error, collection) {
       if( error ) callback(error)
       else {
-		//TODO sort by label
+        collection.find().sort({"endpoint.datasets.0.label":1,"endpoint.uri":1}).toArray(function(error, results) {
+          if( error ) callback(error)
+          else callback(null, results)
+        });
+      }
+    });
+};
+
+//Performance
+MongoDBProvider.prototype.getPerfView = function(callback) {
+    this.getCollection('ptasks_agg',function(error, collection) {
+      if( error ) callback(error)
+      else {
         collection.find().sort({"endpoint.datasets.0.label":1,"endpoint.uri":1}).toArray(function(error, results) {
           if( error ) callback(error)
           else callback(null, results)
