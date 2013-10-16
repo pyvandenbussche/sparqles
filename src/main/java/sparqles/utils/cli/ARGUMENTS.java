@@ -55,7 +55,7 @@ public class ARGUMENTS {
 	public static final Option OPTION_RUN  = createOption("task",1,"run task (itask, atask)",
 			PARAM_RUN[SHORT_ARG],PARAM_RUN[LONG_ARG],false);
 	
-	public static final Option OPTION_INDEX = createOption("task",1,"run indexview computation",
+	public static final Option OPTION_INDEX = createOption("task",0,"run indexview computation",
 			PARAM_FLAG_INDEX[SHORT_ARG],PARAM_FLAG_INDEX[LONG_ARG],false);;
 	
 
