@@ -7,13 +7,10 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import sparqles.utils.LogFormater;
-
-import sparqles.core.SPARQLESProperties;
 import sparqles.core.Endpoint;
 import sparqles.core.EndpointResult;
 import sparqles.core.EndpointTask;
-
+import sparqles.core.SPARQLESProperties;
 
 public class PTask extends EndpointTask<PResult>{
 	
@@ -24,7 +21,6 @@ public class PTask extends EndpointTask<PResult>{
 
     Exception query_exc;
 	private SpecificPTask[] _tasks;
-	
 
     public PTask(Endpoint ep, SpecificPTask ... tasks) {
 		super(ep);
@@ -43,11 +39,11 @@ public class PTask extends EndpointTask<PResult>{
 		int failures=0;
 		for(SpecificPTask sp: _tasks){
 			log.debug("[EXEC] {}:{}", this, sp.name());
+			
 			PRun run = sp.get(epr.getEndpoint());
 			PSingleResult pres = run.execute();
 
 			results.put(sp.name(), pres);
-			
 			
 			if(pres.getCold().getException()!=null ||pres.getWarm().getException()!=null){
 				failures++;

@@ -56,6 +56,7 @@ public class SPARQLES extends CLIObject{
 		opts.addOption(ARGUMENTS.OPTION_RECOMPUTE);
 		opts.addOption(ARGUMENTS.OPTION_RESCHEDULE);
 		opts.addOption(ARGUMENTS.OPTION_RUN);
+		opts.addOption(ARGUMENTS.OPTION_INDEX);
 	}
 
 	@Override
@@ -76,6 +77,9 @@ public class SPARQLES extends CLIObject{
 		}
 		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_FLAG_RECOMPUTE)){
 			recomputeAnalytics();
+		}
+		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_FLAG_INDEX)){
+			recomputeIndexView();
 		}
 		
 		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_RUN)){
@@ -116,6 +120,18 @@ public class SPARQLES extends CLIObject{
 		Runtime.getRuntime().addShutdownHook (new ShutdownThread(this));
 	}
 
+	private void recomputeIndexView() {
+		IndexViewAnalytics a = new IndexViewAnalytics();
+		a.setDBManager(dbm);
+		try {
+			a.call();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
 	private void recomputeAnalytics() {
 		dbm.initAggregateCollections();
 		
@@ -124,7 +140,6 @@ public class SPARQLES extends CLIObject{
 	}
 
 	private void start() {
-//		epm.init(dbm);
 		scheduler.init(dbm);
 		try {
 			long start = System.currentTimeMillis();

@@ -41,14 +41,12 @@ public class OneTimeExecution<T extends SpecificRecordBase> {
 		}
 	    Future<T> f= null;
 	    try {
-			while((f = compService.take())!=null){
+	    	while((f = compService.poll()) != null){
 				log.info("Task for {} completed", f.get());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	    executor.shutdown();
-		
 	}
-
 }

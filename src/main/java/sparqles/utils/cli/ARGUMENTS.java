@@ -38,6 +38,7 @@ public class ARGUMENTS {
 	public static final String [] PARAM_FLAG_RECOMPUTE = createParam("r","recompute");
 	public static final String [] PARAM_FLAG_RESCHEDULE = createParam("rs","reschedule");
 	public static final String [] PARAM_RUN = createParam("run","run");
+	public static final String [] PARAM_FLAG_INDEX = createParam("iv","indexview");
 		
 	public static final Option OPTION_PROP_FILE = createOption("property file", 1, "SPARQLES (additional) property file", 
 			PARAM_PROP_FILE[SHORT_ARG], PARAM_PROP_FILE[LONG_ARG],true);
@@ -53,6 +54,9 @@ public class ARGUMENTS {
 			PARAM_FLAG_RESCHEDULE[SHORT_ARG],PARAM_FLAG_RESCHEDULE[LONG_ARG],false);
 	public static final Option OPTION_RUN  = createOption("task",1,"run task (itask, atask)",
 			PARAM_RUN[SHORT_ARG],PARAM_RUN[LONG_ARG],false);
+	
+	public static final Option OPTION_INDEX = createOption("task",1,"run indexview computation",
+			PARAM_FLAG_INDEX[SHORT_ARG],PARAM_FLAG_INDEX[LONG_ARG],false);;
 	
 
 	/**
