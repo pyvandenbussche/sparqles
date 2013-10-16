@@ -2,12 +2,6 @@ package sparqles.utils.cli;
 
 import java.io.File;
 import java.util.Collection;
-import java.util.concurrent.CompletionService;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorCompletionService;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Options;
@@ -19,8 +13,6 @@ import sparqles.analytics.IndexViewAnalytics;
 import sparqles.core.CONSTANTS;
 import sparqles.core.Endpoint;
 import sparqles.core.SPARQLESProperties;
-import sparqles.core.Task;
-import sparqles.core.TaskFactory;
 import sparqles.core.availability.AResult;
 import sparqles.core.discovery.DResult;
 import sparqles.core.features.FResult;
