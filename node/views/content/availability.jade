@@ -78,6 +78,14 @@ block content
                         td
                           a(href="/endpoint?uri=#{ep.endpoint.uri}") #{ep.endpoint.uri}
                     //-Display uptime last 24h
-                    td #{parseFloat((ep.uptimeLast24h*100).toFixed(2))+ '%'}
+                    td 
+                      if ep.uptimeLast24h==0
+                        .textDisabled 0%
+                      else
+                        | #{parseFloat((ep.uptimeLast24h*100).toFixed(2))+ '%'}
                     //-Display uptime last 7d
-                    td #{parseFloat((ep.uptimeLast7d*100).toFixed(2))+ '%'}
+                    td
+                      if ep.uptimeLast7d==0
+                        .textDisabled 0%
+                      else
+                        | #{parseFloat((ep.uptimeLast7d*100).toFixed(2))+ '%'}

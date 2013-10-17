@@ -64,37 +64,37 @@ block content
                   th.tablehead(width='25%') 
                     span(onmouseover='tooltip.show(\'#{configInterop['SPARQL 1.1']}\')')(onmouseout='tooltip.hide();') SPARQL 1.1 features
               tbody
-                - each ep, i in epsInter.endpoints
+                - each ep, i in ftasks_agg
                   tr(class=(i % 2 == 0) ? 'odd' : 'even')
                     //-Display Endpoint Label
                     //-TODO: if more than one endpoint then display how many and their names 
-                    if ep.datasets.length>1
+                    if ep.endpoint.datasets.length>1
                       td
-                        a(href="/endpoint?uri=#{ep.uri}") #{ep.uri}
+                        a(href="/endpoint?uri=#{ep.endpoint.uri}") #{ep.endpoint.uri}
                     else
                       td 
-                        a(href="/endpoint?uri=#{ep.uri}") #{ep.datasets[0].label}
+                        a(href="/endpoint?uri=#{ep.endpoint.uri}") #{ep.endpoint.datasets[0].label}
                     //-Display SPARQL 1.0 
                     td.tdcenter
-                      if ep.nbCompliantSPARQL1Features==epsInter.nbSPARQL1Features
+                      if ep.nbCompliantSPARQL1Features==nbSPARQL1Features
                         img(src='./images/green.png')
                       else
-                        if ep.nbCompliantSPARQL1Features>0 && (ep.nbCompliantSPARQL1Features/epsInter.nbSPARQL1Features)<0.5
+                        if ep.nbCompliantSPARQL1Features>0 && (ep.nbCompliantSPARQL1Features/nbSPARQL1Features)<0.5
                           img(src='./images/orange.png')
                         else
-                          if ep.nbCompliantSPARQL1Features>0 && (ep.nbCompliantSPARQL1Features/epsInter.nbSPARQL1Features)>=0.5
+                          if ep.nbCompliantSPARQL1Features>0 && (ep.nbCompliantSPARQL1Features/nbSPARQL1Features)>=0.5
                             img(src='./images/red.png')
                           else 
                             img(src='./images/gray.png')
                     //-Display SPARQL 1.0 
                     td.tdcenter
-                      if ep.nbCompliantSPARQL11Features==epsInter.nbSPARQL11Features
+                      if ep.nbCompliantSPARQL11Features==nbSPARQL11Features
                         img(src='./images/green.png')
                       else
-                        if ep.nbCompliantSPARQL11Features>0 && (ep.nbCompliantSPARQL11Features/epsInter.nbSPARQL11Features)<0.5
+                        if ep.nbCompliantSPARQL11Features>0 && (ep.nbCompliantSPARQL11Features/nbSPARQL11Features)<0.5
                           img(src='./images/orange.png')
                         else
-                          if ep.nbCompliantSPARQL11Features>0 && (ep.nbCompliantSPARQL11Features/epsInter.nbSPARQL11Features)>=0.5
+                          if ep.nbCompliantSPARQL11Features>0 && (ep.nbCompliantSPARQL11Features/nbSPARQL11Features)>=0.5
                             img(src='./images/red.png')
                           else 
                             img(src='./images/gray.png')
