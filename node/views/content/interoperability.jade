@@ -85,7 +85,10 @@ block content
                           if ep.nbCompliantSPARQL1Features>0 && (ep.nbCompliantSPARQL1Features/nbSPARQL1Features)>=0.5
                             img(src='./images/red.png')
                           else 
-                            img(src='./images/gray.png')
+                            if ep.nbCompliantSPARQL11Features==0
+                              .textDisabled n/a
+                            else
+                              img(src='./images/gray.png')
                     //-Display SPARQL 1.0 
                     td.tdcenter
                       if ep.nbCompliantSPARQL11Features==nbSPARQL11Features
@@ -97,4 +100,7 @@ block content
                           if ep.nbCompliantSPARQL11Features>0 && (ep.nbCompliantSPARQL11Features/nbSPARQL11Features)>=0.5
                             img(src='./images/red.png')
                           else 
-                            img(src='./images/gray.png')
+                            if ep.nbCompliantSPARQL1Features==0
+                              .textDisabled n/a
+                            else
+                              img(src='./images/gray.png')
