@@ -57,6 +57,32 @@ MongoDBProvider.prototype.getPerfView = function(callback) {
     });
 };
 
+//Discoverability
+MongoDBProvider.prototype.getDiscoView = function(callback) {
+    this.getCollection('dtasks_agg',function(error, collection) {
+      if( error ) callback(error)
+      else {
+        collection.find().sort({"endpoint.datasets.0.label":1,"endpoint.uri":1}).toArray(function(error, results) {
+          if( error ) callback(error)
+          else callback(null, results)
+        });
+      }
+    });
+};
+
+//Endpoint view
+MongoDBProvider.prototype.getEndpointView = function(epUri, callback) {
+    this.getCollection('epview',function(error, collection) {
+      if( error ) callback(error)
+      else {
+        collection.find({"endpoint.uri":epUri}).toArray(function(error, results) {
+          if( error ) callback(error)
+          else callback(null, results)
+        });
+      }
+    });
+};
+
 //findById
 
 MongoDBProvider.prototype.findById = function(id, callback) {

@@ -48,10 +48,10 @@ block content
                     //-TODO: if more than one endpoint then display how many and their names 
                     if ep.endpoint.datasets.length>1
                       td
-                        a(href="/endpoint?uri=#{ep.endpoint.uri}") #{ep.endpoint.uri}
+                        a(href="/endpoint/#{encodeURIComponent(ep.endpoint.uri)}") #{ep.endpoint.uri}
                     else
                       td 
-                        a(href="/endpoint?uri=#{ep.endpoint.uri}") #{ep.endpoint.datasets[0].label}
+                        a(href="/endpoint/#{encodeURIComponent(ep.endpoint.uri)}") #{ep.endpoint.datasets[0].label}
                     //-Display Threshold 
                     td.tdright #{numberWithCommas(ep.threshold)}
                     //-Display ASK

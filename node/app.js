@@ -40,16 +40,22 @@ app.get('/', function(req, res){
             });
 });
 
-app.get('/endpoint', function(req, res){
+app.get('/endpoint/:uri*', function(req, res){
 		var ep = JSON.parse(fs.readFileSync('./examples/endpoint.json'));
+		//console.log(req.param('uri'))
 	//TODO deal with no URI
-        res.render('content/endpoint.jade',{
-            ep: ep,
-            lastUpdate: 'Monday 02 September 2013, 22:22',
-			configInterop: JSON.parse(fs.readFileSync('./texts/interoperability.json')),
-			configPerformance: JSON.parse(fs.readFileSync('./texts/performance.json')),
-			configDisco: JSON.parse(fs.readFileSync('./texts/discoverability.json'))
+		mongoDBProvider.getEndpointView(req.param('uri'), function(error,docs){
+			console.log(docs);
+			res.render('content/endpoint.jade',{
+				ep: ep,
+				lastUpdate: req.param('uri'),
+				configInterop: JSON.parse(fs.readFileSync('./texts/interoperability.json')),
+				configPerformance: JSON.parse(fs.readFileSync('./texts/performance.json')),
+				configDisco: JSON.parse(fs.readFileSync('./texts/discoverability.json')),
+				epUri: req.param('uri'),
+				epData: docs[0]
             });
+		});
 });
 
 app.get('/availability', function(req, res){
@@ -130,7 +136,7 @@ app.get('/interoperability', function(req, res){
 					lastUpdate=docs[i].lastUpdate;
 				}
 			}
-			console.log(nbCompliantSPARQL1Features+' - '+nbFullCompliantSPARQL1Features+' - '+nbCompliantSPARQL11Features+' - '+nbFullCompliantSPARQL11Features);
+			//console.log(nbCompliantSPARQL1Features+' - '+nbFullCompliantSPARQL1Features+' - '+nbCompliantSPARQL11Features+' - '+nbFullCompliantSPARQL11Features);
 			res.render('content/interoperability.jade',{
 			lastUpdate: new Date(lastUpdate).toUTCString(),
 			epsInter: epsInter,

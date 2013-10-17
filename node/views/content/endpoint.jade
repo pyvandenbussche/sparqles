@@ -5,10 +5,10 @@ block content
           header.wrpl.w-3-4
             h1
               //-TODO: if more than one endpoint then display how many and their names 
-              if ep.datasets.length>1
-                a(href="/endpoint?uri=#{ep.uri}") #{ep.uri} Endpoint
+              if epData.endpoint.datasets.length>1
+                a(href="/endpoint/#{encodeURIComponent(epUri)}") #{epUri}
               else
-                a(href="/endpoint?uri=#{ep.uri}") #{ep.datasets[0].label} Endpoint
+                a(href="/endpoint/#{encodeURIComponent(epUri)}") #{epData.endpoint.datasets[0].label}
             time Last update: #{lastUpdate}
             details
               summary Description:
@@ -64,9 +64,9 @@ block content
                               span(onmouseover='tooltip.show(\'#{configInterop[feature.label]}\')', onmouseout='tooltip.hide();') #{feature.label}
                             td.tdcenter
                               if feature.value
-                                img(src='./images/green.png')
+                                img(src='/images/green.png')
                               else
-                                img(src='./images/red.png')
+                                img(src='/images/red.png')
                   td(valign='top', style='width:50%; padding: 0em 2em')
                     table#table_current.psp-table(cellspacing='0', cellpadding='0', border='0', width='100%')
                       thead
@@ -80,9 +80,9 @@ block content
                               span(onmouseover='tooltip.show(\'#{configInterop[feature.label]}\')', onmouseout='tooltip.hide();') #{feature.label}
                             td.tdcenter
                               if feature.value
-                                img(src='./images/green.png')
+                                img(src='/images/green.png')
                               else
-                                img(src='./images/red.png')
+                                img(src='/images/red.png')
           article.wrpl(style='min-width: 400px; width:100%;')
             div.wrplInnerBoxNoHeight
               a(title='', href='./discoverability')
@@ -116,9 +116,9 @@ block content
                               span(onmouseover='tooltip.show(\'#{configDisco[feature.label]}\')', onmouseout='tooltip.hide();') #{feature.label}
                             td.tdcenter
                               if feature.value
-                                img(src='./images/green.png')
+                                img(src='/images/green.png')
                               else
-                                img(src='./images/red.png')
+                                img(src='/images/red.png')
                   td(valign='top', style='width:33%; padding: 0em 2em;')
                     table#table_current(cellspacing='0', cellpadding='0', border='0', style='margin-left:1em;')
                       thead
@@ -133,9 +133,9 @@ block content
                               span(onmouseover='tooltip.show(\'#{configDisco[feature.label]}\')', onmouseout='tooltip.hide();') #{feature.label}
                             td.tdcenter
                               if feature.value
-                                img(src='./images/green.png')
+                                img(src='/images/green.png')
                               else
-                                img(src='./images/red.png')
+                                img(src='/images/red.png')
       script.
         var colors = d3.scale.category20();
         keyColor = function(d, i) {return colors(d.key)};
