@@ -45,15 +45,25 @@ app.get('/endpoint/:uri*', function(req, res){
 		//console.log(req.param('uri'))
 	//TODO deal with no URI
 		mongoDBProvider.getEndpointView(req.param('uri'), function(error,docs){
-			console.log(docs);
+
+			var perfParsed = JSON.parse(JSON.stringify(docs[0].performance), function(k, v) {
+				if (k === "data") 
+					this.values = v;
+				else
+					return v;
+			});
+			console.log(docs[0].availability);
 			res.render('content/endpoint.jade',{
 				ep: ep,
 				lastUpdate: req.param('uri'),
 				configInterop: JSON.parse(fs.readFileSync('./texts/interoperability.json')),
-				configPerformance: JSON.parse(fs.readFileSync('./texts/performance.json')),
+				configPerf: JSON.parse(fs.readFileSync('./texts/performance.json')),
 				configDisco: JSON.parse(fs.readFileSync('./texts/discoverability.json')),
 				epUri: req.param('uri'),
-				epData: docs[0]
+				epDetails: docs[0].endpoint,
+				epPerf: perfParsed,
+				epAvail: docs[0].availability,
+				epInterop: docs[0].interoperability
             });
 		});
 });
