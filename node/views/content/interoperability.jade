@@ -15,20 +15,20 @@ block content
           .wrplInnerBox(style='height: 100%;width:100%')
             - function numberWithCommas(x) {if (x) return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");}
             div
-              b #{parseFloat((nbCompliantSPARQL1Features/ftasks_agg.length*100).toFixed(2))+ '%'} 
-              | (#{nbCompliantSPARQL1Features}/#{ftasks_agg.length}) of the endpoints are 
+              b #{parseFloat((nbCompliantSPARQL1Features/nbEndpointsTotal*100).toFixed(2))+ '%'} 
+              | (#{nbCompliantSPARQL1Features}/#{nbEndpointsTotal}) of the available endpoints are 
               b compliant with some SPARQL 1.0 features
             div
-              b #{parseFloat((nbFullCompliantSPARQL1Features/ftasks_agg.length*100).toFixed(2))+ '%'} 
-              | (#{nbFullCompliantSPARQL1Features}/#{ftasks_agg.length}) of the endpoints are 
+              b #{parseFloat((nbFullCompliantSPARQL1Features/nbEndpointsTotal*100).toFixed(2))+ '%'} 
+              | (#{nbFullCompliantSPARQL1Features}/#{nbEndpointsTotal}) of the available endpoints are 
               b Fully compliant with some SPARQL 1.0
             div
-              b #{parseFloat((nbCompliantSPARQL11Features/ftasks_agg.length*100).toFixed(2))+ '%'} 
-              | (#{nbCompliantSPARQL11Features}/#{ftasks_agg.length}) of the endpoints are 
+              b #{parseFloat((nbCompliantSPARQL11Features/nbEndpointsTotal*100).toFixed(2))+ '%'} 
+              | (#{nbCompliantSPARQL11Features}/#{nbEndpointsTotal}) of the available endpoints are 
               b compliant with some SPARQL 1.1 features
             div
-              b #{parseFloat((nbFullCompliantSPARQL11Features/ftasks_agg.length*100).toFixed(2))+ '%'} 
-              | (#{nbFullCompliantSPARQL11Features}/#{ftasks_agg.length}) of the endpoints are 
+              b #{parseFloat((nbFullCompliantSPARQL11Features/nbEndpointsTotal*100).toFixed(2))+ '%'} 
+              | (#{nbFullCompliantSPARQL11Features}/#{nbEndpointsTotal}) of the available endpoints are 
               b Fully compliant with some SPARQL 1.1
         article.wrp(style='padding-bottom: 1em;')
           .wrplInnerBox(style='height: 100%;')
@@ -60,9 +60,9 @@ block content
                 tr
                   th.tablehead(scope='col', width='50%') SPARQL Endpoint
                   th.tablehead(width='25%') 
-                    span(onmouseover='tooltip.show(\'#{configInterop['SPARQL 1.0']}\')')(onmouseout='tooltip.hide();') SPARQL 1.0 features
+                    span(onmouseover='tooltip.show(\'#{configInterop['SPARQL 1.0']}\')', onmouseout='tooltip.hide();') SPARQL 1.0 features
                   th.tablehead(width='25%') 
-                    span(onmouseover='tooltip.show(\'#{configInterop['SPARQL 1.1']}\')')(onmouseout='tooltip.hide();') SPARQL 1.1 features
+                    span(onmouseover='tooltip.show(\'#{configInterop['SPARQL 1.1']}\')', onmouseout='tooltip.hide();') SPARQL 1.1 features
               tbody
                 - each ep, i in ftasks_agg
                   tr(class=(i % 2 == 0) ? 'odd' : 'even')

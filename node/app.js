@@ -74,12 +74,8 @@ app.get('/availability', function(req, res){
 			var lastUpdate=0;
 			var nbEndpointsUp=0;
 			for (i in docs){
-				if(docs[i].upNow==true){
-					nbEndpointsUp++;
-				}
-				if(docs[i].lastUpdate>lastUpdate){
-					lastUpdate=docs[i].lastUpdate;
-				}
+				if(docs[i].upNow==true) nbEndpointsUp++;
+				if(docs[i].lastUpdate>lastUpdate)lastUpdate=docs[i].lastUpdate;
 			}
 			res.render('content/availability.jade',{
 				lastUpdate: new Date(lastUpdate).toUTCString(),
@@ -145,23 +141,19 @@ app.get('/interoperability', function(req, res){
 			var nbCompliantSPARQL1Features=0;
 			var nbFullCompliantSPARQL1Features=0;
 			var nbCompliantSPARQL11Features=0;
+			var nbEndpointsTotal=0;
 			var nbFullCompliantSPARQL11Features=0;
 			for (i in docs){
+				if(docs[i].nbCompliantSPARQL1Features>0 && docs[i].nbCompliantSPARQL11Features>0)nbEndpointsTotal++;
 				if(docs[i].nbCompliantSPARQL1Features>0){
 					nbCompliantSPARQL1Features++;
-					if(docs[i].nbCompliantSPARQL1Features==nbSPARQL1Features){
-						nbFullCompliantSPARQL1Features++;
-					}
+					if(docs[i].nbCompliantSPARQL1Features==nbSPARQL1Features)nbFullCompliantSPARQL1Features++;
 				}
 				if(docs[i].nbCompliantSPARQL11Features>0){
 					nbCompliantSPARQL11Features++;
-					if(docs[i].nbCompliantSPARQL11Features==nbSPARQL11Features){
-						nbFullCompliantSPARQL11Features++;
-					}
+					if(docs[i].nbCompliantSPARQL11Features==nbSPARQL11Features)nbFullCompliantSPARQL11Features++;
 				}
-				if(docs[i].lastUpdate>lastUpdate){
-					lastUpdate=docs[i].lastUpdate;
-				}
+				if(docs[i].lastUpdate>lastUpdate)lastUpdate=docs[i].lastUpdate;
 			}
 			//console.log(nbCompliantSPARQL1Features+' - '+nbFullCompliantSPARQL1Features+' - '+nbCompliantSPARQL11Features+' - '+nbFullCompliantSPARQL11Features);
 			res.render('content/interoperability.jade',{
@@ -174,7 +166,8 @@ app.get('/interoperability', function(req, res){
 			nbFullCompliantSPARQL1Features: nbFullCompliantSPARQL1Features,
 			nbCompliantSPARQL11Features: nbCompliantSPARQL11Features,
 			nbFullCompliantSPARQL11Features: nbFullCompliantSPARQL11Features,
-			ftasks_agg: docs
+			ftasks_agg: docs,
+			nbEndpointsTotal: nbEndpointsTotal
             });
 		});
 });
