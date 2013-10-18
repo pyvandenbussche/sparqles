@@ -144,7 +144,7 @@ app.get('/interoperability', function(req, res){
 			var nbEndpointsTotal=0;
 			var nbFullCompliantSPARQL11Features=0;
 			for (i in docs){
-				if(docs[i].nbCompliantSPARQL1Features>0 && docs[i].nbCompliantSPARQL11Features>0)nbEndpointsTotal++;
+				if(docs[i].nbCompliantSPARQL1Features+docs[i].nbCompliantSPARQL11Features>0)nbEndpointsTotal++;
 				if(docs[i].nbCompliantSPARQL1Features>0){
 					nbCompliantSPARQL1Features++;
 					if(docs[i].nbCompliantSPARQL1Features==nbSPARQL1Features)nbFullCompliantSPARQL1Features++;
