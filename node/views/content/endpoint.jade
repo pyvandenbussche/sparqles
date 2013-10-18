@@ -40,9 +40,9 @@ block content
             div(style="height:400px;", class="wrplInnerBox")
               a(title='', href='./performance')
                 h2(style="float:left;") Performance
-                span(style='float:right;', onmouseover='tooltip.show(\'#{configPerf['Result-size thresholds']}\')', onmouseout='tooltip.hide();') Suspected Result size threshold: 
-                  //- TODO handle case where no value
-                  b #{numberWithCommas(epPerf.threshold)}
+                if epPerf.threshold>0  && epPerf.threshold%100==0
+                  span(style='float:right;', onmouseover='tooltip.show(\'#{configPerf['Result-size thresholds']}\')', onmouseout='tooltip.hide();') Suspected Result size threshold: 
+                    b #{numberWithCommas(epPerf.threshold)}
               table(style='width:100%')
                 tr
                   td

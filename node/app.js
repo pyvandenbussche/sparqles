@@ -104,17 +104,34 @@ app.get('/performance', function(req, res){
 		var epsPerf = JSON.parse(fs.readFileSync('./examples/performance.json'));
 		mongoDBProvider.getPerfView( function(error,docs){
 		    var lastUpdate=0;
+			var nbEndpointsWithThreshold=0;
+			var nbEndpointsTotal=0;
+			var thresholds=[];
 			for (i in docs){
-				if(docs[i].lastUpdate>lastUpdate){
-					lastUpdate=docs[i].lastUpdate;
+				if(docs[i].lastUpdate>lastUpdate) lastUpdate=docs[i].lastUpdate;
+				if(docs[i].threshold>0 && docs[i].threshold%100==0){
+					nbEndpointsWithThreshold++;
+					if(thresholds[docs[i].threshold])thresholds[docs[i].threshold]++;
+					else thresholds[docs[i].threshold]=1;
+				}
+				if(docs[i].askMeanCold+docs[i].askMeanWarm>0) nbEndpointsTotal++;
+			}
+			var mostCommonThreshold = [0,0];
+			for (i in thresholds){
+				if(thresholds[i]>mostCommonThreshold[1]){
+					mostCommonThreshold[0]=i;
+					mostCommonThreshold[1]=thresholds[i];
 				}
 			}
-			//console.log(lastUpdate);
+			//console.log(mostCommonThreshold);
 			res.render('content/performance.jade',{
 				lastUpdate: new Date(lastUpdate).toUTCString(),
 				epsPerf: epsPerf,
 				configPerformance: JSON.parse(fs.readFileSync('./texts/performance.json')),
 				ptasks_agg: docs,
+				nbEndpointsWithThreshold: nbEndpointsWithThreshold,
+				nbEndpointsTotal: nbEndpointsTotal,
+				mostCommonThreshold: mostCommonThreshold[0]
 				});
 		});
 });

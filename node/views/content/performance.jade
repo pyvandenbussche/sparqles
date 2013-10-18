@@ -18,13 +18,13 @@ block content
           .wrplInnerBox(style='height: 100%;')
             - function numberWithCommas(x) {if (x) return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");}
             div
-              b #{parseFloat((epsPerf.nbEndpointsWithThreshold/epsPerf.nbEndpointsTotal*100).toFixed(2))+ '%'} 
-              | (#{epsPerf.nbEndpointsWithThreshold}/#{epsPerf.nbEndpointsTotal}) 
-              | of the endpoints are suspected to 
+              b #{parseFloat((nbEndpointsWithThreshold/nbEndpointsTotal*100).toFixed(2))+ '%'} 
+              | (#{nbEndpointsWithThreshold}/#{nbEndpointsTotal)) 
+              | of the available endpoints are suspected to 
               b enforce a result-size thresholds
 
             div
-              b #{numberWithCommas(epsPerf.mostCommonThreshold)} 
+              b #{numberWithCommas(mostCommonThreshold)} 
               | is the 
               b most common result-size threshold  
         article.wrp
@@ -47,13 +47,21 @@ block content
                     //-Display Endpoint Label
                     //-TODO: if more than one endpoint then display how many and their names 
                     if ep.endpoint.datasets.length>1
+                      - var generateTooltip = function(datasets){tooltipHtml='This endpoint includes <b>'+datasets.length+' datasets</b>:<ul>';
+                      -   for(var i in datasets){tooltipHtml+='<li>'+datasets[i].label+'</li>';}
+                      -   tooltipHtml+='</ul>';
+                      -   return tooltipHtml;
+                      - }
                       td
-                        a(href="/endpoint/#{encodeURIComponent(ep.endpoint.uri)}") #{ep.endpoint.uri}
+                        a(href="/endpoint/#{encodeURIComponent(ep.endpoint.uri)}")
+                          span(onmouseover='tooltip.show(\'#{generateTooltip(ep.endpoint.datasets)}\')', onmouseout='tooltip.hide();') #{ep.endpoint.uri} (#{ep.endpoint.datasets.length})
                     else
                       td 
                         a(href="/endpoint/#{encodeURIComponent(ep.endpoint.uri)}") #{ep.endpoint.datasets[0].label}
                     //-Display Threshold 
-                    td.tdright #{numberWithCommas(ep.threshold)}
+                    td.tdright 
+                      if ep.threshold>0  && ep.threshold%100==0
+                        | #{numberWithCommas(ep.threshold)}
                     //-Display ASK
                     td.tdright 
                       if ep.askMeanCold+ep.askMeanWarm>0
