@@ -83,39 +83,14 @@ MongoDBProvider.prototype.getEndpointView = function(epUri, callback) {
     });
 };
 
-//findById
-
-MongoDBProvider.prototype.findById = function(id, callback) {
-    this.getCollection(function(error, article_collection) {
+//autocomplete
+MongoDBProvider.prototype.autocomplete = function(query, callback) {
+    this.getCollection('endpoints',function(error, collection) {
       if( error ) callback(error)
       else {
-        article_collection.findOne({_id: article_collection.db.bson_serializer.ObjectID.createFromHexString(id)}, function(error, result) {
+		collection.find({ 'datasets.label': {$regex: '.*'+query+'.*', $options: 'i'}, 'datasets.uri': {$regex: '.*'+query+'.*', $options: 'i'}}).limit(10).toArray(function(error, results) {
           if( error ) callback(error)
-          else callback(null, result)
-        });
-      }
-    });
-};
-
-//save
-MongoDBProvider.prototype.save = function(articles, callback) {
-    this.getCollection(function(error, article_collection) {
-      if( error ) callback(error)
-      else {
-        if( typeof(articles.length)=="undefined")
-          articles = [articles];
-
-        for( var i =0;i< articles.length;i++ ) {
-          article = articles[i];
-          article.created_at = new Date();
-          if( article.comments === undefined ) article.comments = [];
-          for(var j =0;j< article.comments.length; j++) {
-            article.comments[j].created_at = new Date();
-          }
-        }
-
-        article_collection.insert(articles, function() {
-          callback(null, articles);
+          else callback(null, results)
         });
       }
     });

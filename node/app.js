@@ -30,6 +30,9 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', function(req, res){
+		//mongoDBProvider.autocomplete('d', function(error,docs){
+		//	for(i in docs)console.log(docs[i].uri);
+		//});
 		var eps = JSON.parse(fs.readFileSync('./examples/index.json'));
         res.render('content/index.jade',{
             configInstanceTitle: configApp.get('configInstanceTitle'),
