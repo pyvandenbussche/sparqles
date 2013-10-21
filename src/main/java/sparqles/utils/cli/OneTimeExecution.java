@@ -1,11 +1,14 @@
 package sparqles.utils.cli;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.concurrent.CompletionService;
 import java.util.concurrent.ExecutorCompletionService;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.ThreadPoolExecutor;
 
 import org.apache.avro.specific.SpecificRecordBase;
 import org.slf4j.Logger;
@@ -39,14 +42,20 @@ public class OneTimeExecution<T extends SpecificRecordBase> {
 			log.info("OneTimeSchedule {}", ep);
 			compService.submit(t);
 		}
+	    
 	    Future<T> f= null;
 	    try {
 	    	while((f = compService.poll()) != null){
+	    		while(!f.isDone()){
+	    			Thread.sleep(500);
+	    			log.debug("Waiting unitl task {} is done", f.get());
+	    		}
 				log.info("Task for {} completed", f.get());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	    log.info("All tasks are done");
 	    executor.shutdown();
 	}
 }
