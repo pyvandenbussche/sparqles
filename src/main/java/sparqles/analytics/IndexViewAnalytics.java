@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import sparqles.analytics.avro.AvailabilityIndex;
 import sparqles.analytics.avro.EPView;
 import sparqles.analytics.avro.EPViewAvailability;
+import sparqles.analytics.avro.EPViewAvailabilityDataPoint;
 import sparqles.analytics.avro.EPViewInteroperabilityData;
 import sparqles.analytics.avro.EPViewPerformanceData;
 import sparqles.analytics.avro.EPViewPerformanceDataValues;
@@ -311,8 +312,8 @@ public class IndexViewAnalytics implements Task<Index>{
 
 	private void analyseAvailability(EPViewAvailability availability,
 			Map<String, SimpleHistogram> weekHist) {
-		for(Entry<CharSequence, Double> values: availability.getData().getValues().entrySet()){
-			update(values, weekHist);
+		for(EPViewAvailabilityDataPoint value: availability.getData().getValues()){
+			update(value, weekHist);
 		}
 	}
 
@@ -425,14 +426,14 @@ public class IndexViewAnalytics implements Task<Index>{
 		return idx;
 	}
 
-	private void update(Entry<CharSequence, Double> values,
+	private void update(EPViewAvailabilityDataPoint value,
 			Map<String, SimpleHistogram> weekHist) {
-		String key = values.getKey().toString();
+		String key = ""+value.getX();
 		SimpleHistogram sh = weekHist.get(key);
 		if(sh==null){ sh = new SimpleHistogram();
-		weekHist.put(key, sh);
+			weekHist.put(key, sh);
 		}
-		sh.add(values.getValue());
+		sh.add(value.getY());
 	}
 
 	@Override

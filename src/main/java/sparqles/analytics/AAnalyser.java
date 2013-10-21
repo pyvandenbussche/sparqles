@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import sparqles.analytics.avro.AvailabilityView;
 import sparqles.analytics.avro.EPView;
 import sparqles.analytics.avro.EPViewAvailability;
+import sparqles.analytics.avro.EPViewAvailabilityDataPoint;
 import sparqles.core.Endpoint;
 import sparqles.core.availability.AResult;
 import sparqles.utils.MongoDBManager;
@@ -109,8 +110,8 @@ public class AAnalyser extends Analytics<AResult> {
 			thisweek = thisWeekStats.getMean();
 		}
 		
-		CharSequence key = ""+dates[THIS_WEEK].getTimeInMillis();
-		epav.getData().getValues().put(key, thisweek);
+		Long key = dates[THIS_WEEK].getTimeInMillis();
+		epav.getData().getValues().add(new EPViewAvailabilityDataPoint(key, thisweek));
 		
 		if(thisweek<1D && thisweek>0D){
 			System.out.println("Hello");
