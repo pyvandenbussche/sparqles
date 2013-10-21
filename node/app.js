@@ -30,17 +30,28 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', function(req, res){
-		//mongoDBProvider.autocomplete('d', function(error,docs){
-		//	for(i in docs)console.log(docs[i].uri);
-		//});
 		var eps = JSON.parse(fs.readFileSync('./examples/index.json'));
-        res.render('content/index.jade',{
-            configInstanceTitle: configApp.get('configInstanceTitle'),
-            eps: eps,
-			configInterop: JSON.parse(fs.readFileSync('./texts/interoperability.json')),
-			configPerformance: JSON.parse(fs.readFileSync('./texts/performance.json')),
-			configDisco: JSON.parse(fs.readFileSync('./texts/discoverability.json'))
-            });
+		mongoDBProvider.endpointsCount(function(error,nbEndpoints){
+		//console.log(docs);
+			res.render('content/index.jade',{
+				configInstanceTitle: configApp.get('configInstanceTitle'),
+				eps: eps,
+				nbEndpoints: nbEndpoints,
+				configInterop: JSON.parse(fs.readFileSync('./texts/interoperability.json')),
+				configPerformance: JSON.parse(fs.readFileSync('./texts/performance.json')),
+				configDisco: JSON.parse(fs.readFileSync('./texts/discoverability.json'))
+				});
+		});
+});
+
+app.get('/api/endpointsAutoComplete', function(req, res){
+		mongoDBProvider.autocomplete(req.param('q'), function(error,docs){
+			//for(i in docs)console.log(docs[i].uri);
+			if(docs){
+				res.json(docs);
+			}
+			else res.end();
+		});
 });
 
 app.get('/endpoint/:uri*', function(req, res){

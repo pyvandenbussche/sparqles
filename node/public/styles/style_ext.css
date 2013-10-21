@@ -60,6 +60,35 @@ all the rest of the style can be managed with http://lesscss.org
 			*/
 
 }
+
+/* highlight results */
+.ui-autocomplete span.hl_results {
+    background-color: #ffff66;
+}
+ 
+/* scroll results */
+.ui-autocomplete {
+    z-index: 1000;
+    max-height: 350px;
+	max-width: 500px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+    /* add padding for vertical scrollbar */
+    padding-right: 5px;
+}
+ 
+.ui-autocomplete li {
+    font-size: 16px;
+}
+ 
+/* IE 6 doesn't support max-height
+* we use height instead, but this forces the menu to always be this tall
+*/
+* html .ui-autocomplete {
+    height: 250px;
+}
+
 .contents p {
   text-shadow: 1px 1px 0px white;
 }
@@ -391,18 +420,17 @@ article p {
 #footer-search {
   color: #888888;
   border: none;
-  background-color: #2f2f2f;
-  width: 100%;
+  background-color: #525252;
   border-radius: 6px;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
-  box-shadow: 0px 1px 0px #494949, inset 0px 1px 0px #2a2a2a;
-  -o-box-shadow: 0px 1px 0px #494949, inset 0px 1px 0px #2a2a2a;
-  -moz-box-shadow: 0px 1px 0px #494949, inset 0px 1px 0px #2a2a2a;
-  -webkit-box-shadow: 0px 1px 0px #494949, inset 0px 1px 0px #2a2a2a;
-  background-image: url("http://vittoriovittori.com/wp-content/themes/vv2012/img/search-sprite.png");
+  box-shadow: 0px 1px 0px #808080, inset 0px 1px 0px #2a2a2a;
+  -o-box-shadow: 0px 1px 0px #808080, inset 0px 1px 0px #2a2a2a;
+  -moz-box-shadow: 0px 1px 0px #808080, inset 0px 1px 0px #2a2a2a;
+  -webkit-box-shadow: 0px 1px 0px #808080, inset 0px 1px 0px #2a2a2a;
+  background-image: url("/images/search-sprite.png");
   background-repeat: no-repeat;
-  background-position: 4px -36px;
+  background-position: 4px 0px;
   -moz-transition-delay: initial;
   -moz-transition-duration: 0.3s;
   -moz-transition-property: all;
@@ -421,13 +449,9 @@ article p {
   transition-timing-function: ease-in-out;
   padding-left: 42px;
 }
-#footer-search:hover {
-  background-position: 4px 0px;
-}
 #footer-search:hover, #footer-search:focus {
   color: #d0d7da;
   text-shadow: none;
-  background-position: 4px 0px;
 }
 .features {
   padding-top: 1em;
