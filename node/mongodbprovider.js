@@ -109,4 +109,17 @@ MongoDBProvider.prototype.endpointsCount = function(callback) {
     });
 };
 
+//Last Update date
+MongoDBProvider.prototype.getLastUpdate = function(callback) {
+    this.getCollection('atasks_agg',function(error, collection) {
+      if( error ) callback(error)
+      else {
+        collection.find({},{"lastUpdate":1}).sort({"lastUpdate":-1}).limit(1).toArray(function(error, results) {
+          if( error ) callback(error)
+          else callback(null, results)
+        });
+      }
+    });
+};
+
 exports.MongoDBProvider = MongoDBProvider;
