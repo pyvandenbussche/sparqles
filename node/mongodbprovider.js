@@ -31,6 +31,19 @@ MongoDBProvider.prototype.getAvailView = function(callback) {
     });
 };
 
+//Interoperability
+MongoDBProvider.prototype.getInteropView = function(callback) {
+    this.getCollection('ftasks_agg',function(error, collection) {
+      if( error ) callback(error)
+      else {
+        collection.find().sort({"endpoint.datasets.0.label":1,"endpoint.uri":1}).toArray(function(error, results) {
+          if( error ) callback(error)
+          else callback(null, results)
+        });
+      }
+    });
+};
+
 //Performance
 MongoDBProvider.prototype.getPerfView = function(callback) {
     this.getCollection('ptasks_agg',function(error, collection) {
@@ -44,39 +57,40 @@ MongoDBProvider.prototype.getPerfView = function(callback) {
     });
 };
 
-//findById
-
-MongoDBProvider.prototype.findById = function(id, callback) {
-    this.getCollection(function(error, article_collection) {
+//Discoverability
+MongoDBProvider.prototype.getDiscoView = function(callback) {
+    this.getCollection('dtasks_agg',function(error, collection) {
       if( error ) callback(error)
       else {
-        article_collection.findOne({_id: article_collection.db.bson_serializer.ObjectID.createFromHexString(id)}, function(error, result) {
+        collection.find().sort({"endpoint.datasets.0.label":1,"endpoint.uri":1}).toArray(function(error, results) {
           if( error ) callback(error)
-          else callback(null, result)
+          else callback(null, results)
         });
       }
     });
 };
 
-//save
-MongoDBProvider.prototype.save = function(articles, callback) {
-    this.getCollection(function(error, article_collection) {
+//Endpoint view
+MongoDBProvider.prototype.getEndpointView = function(epUri, callback) {
+    this.getCollection('epview',function(error, collection) {
       if( error ) callback(error)
       else {
-        if( typeof(articles.length)=="undefined")
-          articles = [articles];
+        collection.find({"endpoint.uri":epUri}).toArray(function(error, results) {
+          if( error ) callback(error)
+          else callback(null, results)
+        });
+      }
+    });
+};
 
-        for( var i =0;i< articles.length;i++ ) {
-          article = articles[i];
-          article.created_at = new Date();
-          if( article.comments === undefined ) article.comments = [];
-          for(var j =0;j< article.comments.length; j++) {
-            article.comments[j].created_at = new Date();
-          }
-        }
-
-        article_collection.insert(articles, function() {
-          callback(null, articles);
+//autocomplete
+MongoDBProvider.prototype.autocomplete = function(query, callback) {
+    this.getCollection('endpoints',function(error, collection) {
+      if( error ) callback(error)
+      else {
+		collection.find({ 'datasets.label': {$regex: '.*'+query+'.*', $options: 'i'}, 'datasets.uri': {$regex: '.*'+query+'.*', $options: 'i'}}).limit(10).toArray(function(error, results) {
+          if( error ) callback(error)
+          else callback(null, results)
         });
       }
     });

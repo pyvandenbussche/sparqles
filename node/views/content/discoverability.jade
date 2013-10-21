@@ -30,10 +30,10 @@ block content
           .wrplInnerBox(style='height: 100%;')
             section
               .wrpl(style='padding-left: 2em;')
-                img(src='./images/green.png')
+                img(src='/images/green.png')
                 span(style='padding-left: 0.75em;') Description available
               .wrpl(style='padding-left: 2em;')
-                img(src='./images/gray.png')
+                img(src='/images/gray.png')
                 span(style='padding-left: 0.75em;') Description not available
         article.wrp
           .wrplInnerBox(style='height: 100%;')
@@ -54,21 +54,21 @@ block content
                     //-TODO: if more than one endpoint then display how many and their names 
                     if ep.datasets.length>1
                       td
-                        a(href="/endpoint?uri=#{ep.uri}") #{ep.uri}
+                        a(href="/endpoint/#{encodeURIComponent(ep.uri)}") #{ep.uri}
                     else
                       td 
-                        a(href="/endpoint?uri=#{ep.uri}") #{ep.datasets[0].label}
+                        a(href="/endpoint/#{encodeURIComponent(ep.uri)}") #{ep.datasets[0].label}
                     //-Display VoID Description
                     td.tdcenter
                       if ep.VoID
-                        img(src='./images/green.png')
+                        img(src='/images/green.png')
                       else
-                        img(src='./images/gray.png')
+                        img(src='/images/gray.png')
                     //-Display SD Description
                     td.tdcenter
                       if ep.SD
-                        img(src='./images/green.png')
+                        img(src='/images/green.png')
                       else
-                        img(src='./images/gray.png')
+                        img(src='/images/gray.png')
                     //-Display VoID Description
                     td.tdcenter #{ep.serverName}

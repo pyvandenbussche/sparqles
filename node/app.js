@@ -30,6 +30,9 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', function(req, res){
+		//mongoDBProvider.autocomplete('d', function(error,docs){
+		//	for(i in docs)console.log(docs[i].uri);
+		//});
 		var eps = JSON.parse(fs.readFileSync('./examples/index.json'));
         res.render('content/index.jade',{
             configInstanceTitle: configApp.get('configInstanceTitle'),
@@ -40,16 +43,32 @@ app.get('/', function(req, res){
             });
 });
 
-app.get('/endpoint', function(req, res){
+app.get('/endpoint/:uri*', function(req, res){
 		var ep = JSON.parse(fs.readFileSync('./examples/endpoint.json'));
+		//console.log(req.param('uri'))
 	//TODO deal with no URI
-        res.render('content/endpoint.jade',{
-            ep: ep,
-            lastUpdate: 'Monday 02 September 2013, 22:22',
-			configInterop: JSON.parse(fs.readFileSync('./texts/interoperability.json')),
-			configPerformance: JSON.parse(fs.readFileSync('./texts/performance.json')),
-			configDisco: JSON.parse(fs.readFileSync('./texts/discoverability.json'))
+		mongoDBProvider.getEndpointView(req.param('uri'), function(error,docs){
+
+			var perfParsed = JSON.parse(JSON.stringify(docs[0].performance), function(k, v) {
+				if (k === "data") 
+					this.values = v;
+				else
+					return v;
+			});
+			console.log(docs[0].availability);
+			res.render('content/endpoint.jade',{
+				ep: ep,
+				lastUpdate: req.param('uri'),
+				configInterop: JSON.parse(fs.readFileSync('./texts/interoperability.json')),
+				configPerf: JSON.parse(fs.readFileSync('./texts/performance.json')),
+				configDisco: JSON.parse(fs.readFileSync('./texts/discoverability.json')),
+				epUri: req.param('uri'),
+				epDetails: docs[0].endpoint,
+				epPerf: perfParsed,
+				epAvail: docs[0].availability,
+				epInterop: docs[0].interoperability
             });
+		});
 });
 
 app.get('/availability', function(req, res){
@@ -58,12 +77,8 @@ app.get('/availability', function(req, res){
 			var lastUpdate=0;
 			var nbEndpointsUp=0;
 			for (i in docs){
-				if(docs[i].upNow==true){
-					nbEndpointsUp++;
-				}
-				if(docs[i].lastUpdate>lastUpdate){
-					lastUpdate=docs[i].lastUpdate;
-				}
+				if(docs[i].upNow==true) nbEndpointsUp++;
+				if(docs[i].lastUpdate>lastUpdate)lastUpdate=docs[i].lastUpdate;
 			}
 			res.render('content/availability.jade',{
 				lastUpdate: new Date(lastUpdate).toUTCString(),
@@ -88,28 +103,76 @@ app.get('/performance', function(req, res){
 		var epsPerf = JSON.parse(fs.readFileSync('./examples/performance.json'));
 		mongoDBProvider.getPerfView( function(error,docs){
 		    var lastUpdate=0;
+			var nbEndpointsWithThreshold=0;
+			var nbEndpointsTotal=0;
+			var thresholds=[];
 			for (i in docs){
-				if(docs[i].lastUpdate>lastUpdate){
-					lastUpdate=docs[i].lastUpdate;
+				if(docs[i].lastUpdate>lastUpdate) lastUpdate=docs[i].lastUpdate;
+				if(docs[i].threshold>0 && docs[i].threshold%100==0){
+					nbEndpointsWithThreshold++;
+					if(thresholds[docs[i].threshold])thresholds[docs[i].threshold]++;
+					else thresholds[docs[i].threshold]=1;
+				}
+				if(docs[i].askMeanCold+docs[i].askMeanWarm>0) nbEndpointsTotal++;
+			}
+			var mostCommonThreshold = [0,0];
+			for (i in thresholds){
+				if(thresholds[i]>mostCommonThreshold[1]){
+					mostCommonThreshold[0]=i;
+					mostCommonThreshold[1]=thresholds[i];
 				}
 			}
-			//console.log(lastUpdate);
+			//console.log(mostCommonThreshold);
 			res.render('content/performance.jade',{
 				lastUpdate: new Date(lastUpdate).toUTCString(),
 				epsPerf: epsPerf,
 				configPerformance: JSON.parse(fs.readFileSync('./texts/performance.json')),
 				ptasks_agg: docs,
+				nbEndpointsWithThreshold: nbEndpointsWithThreshold,
+				nbEndpointsTotal: nbEndpointsTotal,
+				mostCommonThreshold: mostCommonThreshold[0]
 				});
 		});
 });
 
 app.get('/interoperability', function(req, res){
 		var epsInter = JSON.parse(fs.readFileSync('./examples/interoperability.json'));
-        res.render('content/interoperability.jade',{
-			lastUpdate: 'Monday 02 September 2013, 22:22',
+		var nbSPARQL1Features=28;
+		var nbSPARQL11Features=20;
+		mongoDBProvider.getInteropView( function(error,docs){
+			var lastUpdate=0;
+			var nbCompliantSPARQL1Features=0;
+			var nbFullCompliantSPARQL1Features=0;
+			var nbCompliantSPARQL11Features=0;
+			var nbEndpointsTotal=0;
+			var nbFullCompliantSPARQL11Features=0;
+			for (i in docs){
+				if(docs[i].nbCompliantSPARQL1Features+docs[i].nbCompliantSPARQL11Features>0)nbEndpointsTotal++;
+				if(docs[i].nbCompliantSPARQL1Features>0){
+					nbCompliantSPARQL1Features++;
+					if(docs[i].nbCompliantSPARQL1Features==nbSPARQL1Features)nbFullCompliantSPARQL1Features++;
+				}
+				if(docs[i].nbCompliantSPARQL11Features>0){
+					nbCompliantSPARQL11Features++;
+					if(docs[i].nbCompliantSPARQL11Features==nbSPARQL11Features)nbFullCompliantSPARQL11Features++;
+				}
+				if(docs[i].lastUpdate>lastUpdate)lastUpdate=docs[i].lastUpdate;
+			}
+			//console.log(nbCompliantSPARQL1Features+' - '+nbFullCompliantSPARQL1Features+' - '+nbCompliantSPARQL11Features+' - '+nbFullCompliantSPARQL11Features);
+			res.render('content/interoperability.jade',{
+			lastUpdate: new Date(lastUpdate).toUTCString(),
 			epsInter: epsInter,
-			configInterop: JSON.parse(fs.readFileSync('./texts/interoperability.json'))
+			configInterop: JSON.parse(fs.readFileSync('./texts/interoperability.json')),
+			nbSPARQL1Features: nbSPARQL1Features,
+			nbSPARQL11Features: nbSPARQL11Features,
+			nbCompliantSPARQL1Features: nbCompliantSPARQL1Features,
+			nbFullCompliantSPARQL1Features: nbFullCompliantSPARQL1Features,
+			nbCompliantSPARQL11Features: nbCompliantSPARQL11Features,
+			nbFullCompliantSPARQL11Features: nbFullCompliantSPARQL11Features,
+			ftasks_agg: docs,
+			nbEndpointsTotal: nbEndpointsTotal
             });
+		});
 });
 
 http.createServer(app).listen(app.get('port'), function(){
