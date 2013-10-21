@@ -35,7 +35,7 @@ block content
               a(title='', href='./performance')
                 h2 Performance
               span
-                b #{numberWithCommas(eps.performance.threshold)} 
+                b #{numberWithCommas(perf.threshold)} 
                 | is the most common 
                 span(onmouseover='tooltip.show(\'#{configPerformance['Result-size thresholds']}\')', onmouseout='tooltip.hide();') result-size threshold
               svg#perf
@@ -147,7 +147,7 @@ block content
           chart.yAxis
               .tickFormat(d3.format(',.2f'));
           d3.select('#perf')
-              .datum(!{JSON.stringify(eps.performance.data)})
+              .datum(!{JSON.stringify(perf.data)})
               .transition().duration(500)
               .call(chart);
           var confPerf = !{JSON.stringify(configPerformance)}
