@@ -10,6 +10,7 @@ import org.mortbay.log.Log;
 import sparqles.analytics.avro.EPView;
 import sparqles.analytics.avro.EPViewAvailability;
 import sparqles.analytics.avro.EPViewAvailabilityData;
+import sparqles.analytics.avro.EPViewAvailabilityDataPoint;
 import sparqles.analytics.avro.EPViewDiscoverabilityData;
 import sparqles.analytics.avro.EPViewInteroperabilityData;
 import sparqles.analytics.avro.EPViewPerformanceData;
@@ -53,7 +54,7 @@ public abstract class Analytics<V extends SpecificRecordBase> {
 			EPViewAvailabilityData data = new EPViewAvailabilityData();
 			av.setData(data);
 			data.setKey("Availability");
-			data.setValues(new HashMap<CharSequence, Double>());
+			data.setValues(new ArrayList<EPViewAvailabilityDataPoint>());
 			
 			
 			EPViewPerformance p = new EPViewPerformance();

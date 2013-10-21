@@ -7,10 +7,10 @@ package sparqles.analytics.avro;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class EPViewAvailabilityData extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"EPViewAvailabilityData\",\"namespace\":\"sparqles.analytics.avro\",\"fields\":[{\"name\":\"key\",\"type\":\"string\"},{\"name\":\"values\",\"type\":{\"type\":\"map\",\"values\":\"double\"}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"EPViewAvailabilityData\",\"namespace\":\"sparqles.analytics.avro\",\"fields\":[{\"name\":\"key\",\"type\":\"string\"},{\"name\":\"values\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"EPViewAvailabilityDataPoint\",\"fields\":[{\"name\":\"x\",\"type\":\"long\"},{\"name\":\"y\",\"type\":\"double\"}]}}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public java.lang.CharSequence key;
-  @Deprecated public java.util.Map<java.lang.CharSequence,java.lang.Double> values;
+  @Deprecated public java.util.List<sparqles.analytics.avro.EPViewAvailabilityDataPoint> values;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -22,7 +22,7 @@ public class EPViewAvailabilityData extends org.apache.avro.specific.SpecificRec
   /**
    * All-args constructor.
    */
-  public EPViewAvailabilityData(java.lang.CharSequence key, java.util.Map<java.lang.CharSequence,java.lang.Double> values) {
+  public EPViewAvailabilityData(java.lang.CharSequence key, java.util.List<sparqles.analytics.avro.EPViewAvailabilityDataPoint> values) {
     this.key = key;
     this.values = values;
   }
@@ -41,7 +41,7 @@ public class EPViewAvailabilityData extends org.apache.avro.specific.SpecificRec
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
     case 0: key = (java.lang.CharSequence)value$; break;
-    case 1: values = (java.util.Map<java.lang.CharSequence,java.lang.Double>)value$; break;
+    case 1: values = (java.util.List<sparqles.analytics.avro.EPViewAvailabilityDataPoint>)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -64,7 +64,7 @@ public class EPViewAvailabilityData extends org.apache.avro.specific.SpecificRec
   /**
    * Gets the value of the 'values' field.
    */
-  public java.util.Map<java.lang.CharSequence,java.lang.Double> getValues() {
+  public java.util.List<sparqles.analytics.avro.EPViewAvailabilityDataPoint> getValues() {
     return values;
   }
 
@@ -72,7 +72,7 @@ public class EPViewAvailabilityData extends org.apache.avro.specific.SpecificRec
    * Sets the value of the 'values' field.
    * @param value the value to set.
    */
-  public void setValues(java.util.Map<java.lang.CharSequence,java.lang.Double> value) {
+  public void setValues(java.util.List<sparqles.analytics.avro.EPViewAvailabilityDataPoint> value) {
     this.values = value;
   }
 
@@ -98,7 +98,7 @@ public class EPViewAvailabilityData extends org.apache.avro.specific.SpecificRec
     implements org.apache.avro.data.RecordBuilder<EPViewAvailabilityData> {
 
     private java.lang.CharSequence key;
-    private java.util.Map<java.lang.CharSequence,java.lang.Double> values;
+    private java.util.List<sparqles.analytics.avro.EPViewAvailabilityDataPoint> values;
 
     /** Creates a new Builder */
     private Builder() {
@@ -157,12 +157,12 @@ public class EPViewAvailabilityData extends org.apache.avro.specific.SpecificRec
     }
 
     /** Gets the value of the 'values' field */
-    public java.util.Map<java.lang.CharSequence,java.lang.Double> getValues() {
+    public java.util.List<sparqles.analytics.avro.EPViewAvailabilityDataPoint> getValues() {
       return values;
     }
     
     /** Sets the value of the 'values' field */
-    public sparqles.analytics.avro.EPViewAvailabilityData.Builder setValues(java.util.Map<java.lang.CharSequence,java.lang.Double> value) {
+    public sparqles.analytics.avro.EPViewAvailabilityData.Builder setValues(java.util.List<sparqles.analytics.avro.EPViewAvailabilityDataPoint> value) {
       validate(fields()[1], value);
       this.values = value;
       fieldSetFlags()[1] = true;
@@ -186,7 +186,7 @@ public class EPViewAvailabilityData extends org.apache.avro.specific.SpecificRec
       try {
         EPViewAvailabilityData record = new EPViewAvailabilityData();
         record.key = fieldSetFlags()[0] ? this.key : (java.lang.CharSequence) defaultValue(fields()[0]);
-        record.values = fieldSetFlags()[1] ? this.values : (java.util.Map<java.lang.CharSequence,java.lang.Double>) defaultValue(fields()[1]);
+        record.values = fieldSetFlags()[1] ? this.values : (java.util.List<sparqles.analytics.avro.EPViewAvailabilityDataPoint>) defaultValue(fields()[1]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);
