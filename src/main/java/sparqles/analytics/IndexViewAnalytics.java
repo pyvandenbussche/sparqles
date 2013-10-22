@@ -20,13 +20,16 @@ import sparqles.analytics.avro.EPViewInteroperabilityData;
 import sparqles.analytics.avro.EPViewPerformanceData;
 import sparqles.analytics.avro.EPViewPerformanceDataValues;
 import sparqles.analytics.avro.Index;
+import sparqles.analytics.avro.IndexAvailabilityDataPoint;
 import sparqles.analytics.avro.IndexViewDiscoverabilityData;
+import sparqles.analytics.avro.IndexViewDiscoverabilityDataValues;
 import sparqles.analytics.avro.IndexViewInterData;
 import sparqles.analytics.avro.IndexViewInterDataValues;
 import sparqles.analytics.avro.IndexViewPerformanceData;
 import sparqles.analytics.avro.IndexViewPerformanceDataValues;
 import sparqles.core.CONSTANTS;
 import sparqles.core.Task;
+import sparqles.core.analytics.avro.EPViewDiscoverability;
 import sparqles.core.analytics.avro.EPViewInteroperability;
 import sparqles.core.analytics.avro.EPViewPerformance;
 import sparqles.core.analytics.avro.IndexViewDiscoverability;
@@ -73,6 +76,13 @@ public class IndexViewAnalytics implements Task<Index>{
 		SimpleHistogram [] interStats = new SimpleHistogram[6];
 		Arrays.fill(interStats, new SimpleHistogram());
 
+		
+
+		Count [] discoStats = {	new Count<String>(),
+				new Count<String>()};
+
+		
+		
 		//iterate over all epviews and analyse them
 		for(EPView epv: epviews){
 			System.err.println(epv);
@@ -84,6 +94,9 @@ public class IndexViewAnalytics implements Task<Index>{
 
 			//analyse interoperability
 			analyseInteroperability(epv.getInteroperability(), interStats);
+			
+			//analyse interoperability
+			analyseDiscoverability(epv.getDiscoverability(), discoStats);
 		}
 
 		//update the index view
@@ -94,12 +107,53 @@ public class IndexViewAnalytics implements Task<Index>{
 
 		//update interoperability stats
 		updateInteroperability(idx, interStats);
+		
+		updateDiscoverability(idx, null);
 
 
 		log.info("Updated view {}", idx);
 		_dbm.update(idx);
 
 		return idx;
+	}
+
+	private void analyseDiscoverability(EPViewDiscoverability discoverability,
+			Count<String>[] discoStats) {
+		discoStats[1].add(discoverability.getServerName().toString());
+			
+		if(discoverability.getSDDescription().size()!=0){
+			discoStats[0].add("sd");
+		}
+		else if(discoverability.getVoIDDescription().size()!=0){
+			discoStats[0].add("void");
+		}else
+			discoStats[0].add("no");
+	}
+
+	private void updateDiscoverability(Index idx, Count[] object) {
+		
+		IndexViewDiscoverability iv = idx.getDiscoverability();
+		Count<String> server = object[1];
+		
+		List<IndexViewDiscoverabilityData> l = new ArrayList<IndexViewDiscoverabilityData>();
+		List<IndexViewDiscoverabilityDataValues> lv = new ArrayList<IndexViewDiscoverabilityDataValues>();
+		for(String k: server.keySet()){
+			lv.add(
+			new IndexViewDiscoverabilityDataValues(k, server.get(k)/(double)server.getTotal()));
+		}
+		l.add(new IndexViewDiscoverabilityData("Server Names", lv));
+		iv.setServerName(l);
+		
+		Count<String> stats = object[0];
+		int v =stats.get("no");
+		iv.setNoDescription(v/(double)stats.getTotal());
+		v =stats.get("sd");
+		iv.setSDDescription(v/(double)object[0].getTotal());
+		v =stats.get("void");
+		iv.setVoIDDescription(v/(double)object[0].getTotal());
+		
+		
+		
 	}
 
 	private void updateInteroperability(Index idx, SimpleHistogram[] interStats) {
@@ -178,6 +232,7 @@ public class IndexViewAnalytics implements Task<Index>{
 		boolean [] all  = new boolean[6];
 		Arrays.fill(all, true);
 
+	
 		for(EPViewInteroperabilityData d : interoperability.getSPARQL1Features()){
 			System.out.println("1:"+d.getLabel());
 			String l = d.getLabel().toString();
@@ -297,9 +352,17 @@ public class IndexViewAnalytics implements Task<Index>{
 				log.info("Could not match {}",l);
 			}
 		}
+		
+		boolean update = false;
 		for(int i=0; i < all.length;i++){
-			if(all[i]) interStats[i].add(1D);
-			else interStats[i].add(0D);
+			update= update || all[i];
+		}
+		
+		if(update){
+			for(int i=0; i < all.length;i++){
+				if(all[i]) interStats[i].add(1D);
+				else interStats[i].add(0D);
+			}
 		}
 
 	}
@@ -361,7 +424,9 @@ public class IndexViewAnalytics implements Task<Index>{
 				if(aidx.getKey().equals("]95;100]"))
 					value = sh.bin[3];
 
-				aidx.getValues().put(week.getKey(), value/(double)total);
+				
+				
+				aidx.getValues().add(new IndexAvailabilityDataPoint(week.getKey(), value/(double)total));
 			}
 		}
 	}
@@ -391,18 +456,18 @@ public class IndexViewAnalytics implements Task<Index>{
 
 
 
-		AvailabilityIndex aidx = new AvailabilityIndex("[0;5]",new HashMap<CharSequence, Double>());
+		AvailabilityIndex aidx = new AvailabilityIndex("[0;5]", new ArrayList<IndexAvailabilityDataPoint>());
 		List<AvailabilityIndex> aidxs = new ArrayList<AvailabilityIndex>();
 
 		aidxs.add(aidx);
 
-		aidx = new AvailabilityIndex("]5;90]",new HashMap<CharSequence, Double>());
+		aidx = new AvailabilityIndex("]5;90]",new ArrayList<IndexAvailabilityDataPoint>());
 		aidxs.add(aidx);
 
-		aidx = new AvailabilityIndex("]90;95]",new HashMap<CharSequence, Double>());
+		aidx = new AvailabilityIndex("]90;95]",new ArrayList<IndexAvailabilityDataPoint>());
 		aidxs.add(aidx);
 
-		aidx = new AvailabilityIndex("]95;100]",new HashMap<CharSequence, Double>());
+		aidx = new AvailabilityIndex("]95;100]",new ArrayList<IndexAvailabilityDataPoint>());
 		aidxs.add(aidx);
 
 		idx.setAvailability(aidxs);
@@ -463,8 +528,22 @@ public class IndexViewAnalytics implements Task<Index>{
 		}
 
 	}
+	
+	class Count<T> extends HashMap<T, Integer>{
+		int sampleSize=0;
+		
+		public void add(T t){
+			if(this.containsKey(t)){
+				this.put(t, this.get(t)+1);
+			}else
+				this.put(t, 1);
+			
+			sampleSize++;
+		}
 
-
-
-
+		public double getTotal() {
+			// TODO Auto-generated method stub
+			return sampleSize;
+		}
+	}
 }

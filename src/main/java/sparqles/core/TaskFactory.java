@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 
 import sparqles.analytics.AAnalyser;
 import sparqles.analytics.Analytics;
+import sparqles.analytics.DAnalyser;
+import sparqles.analytics.FAnalyser;
 import sparqles.analytics.IndexViewAnalytics;
 import sparqles.analytics.PAnalyser;
 import sparqles.core.availability.ATask;
@@ -41,8 +43,10 @@ public class TaskFactory {
 			a = new AAnalyser(dbm);
 		}else if(task.equalsIgnoreCase(FTASK)){
 			t= new FTask(ep, SpecificFTask.values());
+			a = new FAnalyser(dbm);
 		}else if(task.equalsIgnoreCase(DTASK)){
 			t= new DTask(ep);
+			a = new DAnalyser(dbm);
 		}else  if(task.equalsIgnoreCase(ITASK)){
 			t = new IndexViewAnalytics();
 		}

@@ -13,8 +13,19 @@
 				"type": "record",
 				"fields" : [
 					{ "name": "key", "type": "string"},
-					{ "name": "values", "type": {"type": "map", "values": "double"}}
-				]
+					{ "name": "values", "type": 
+      					{"type": "array", "items": 
+							{
+    						"namespace": "sparqles.analytics.avro",	
+ 						"name": "IndexAvailabilityDataPoint",
+      					"type": "record",
+        				"fields" : [
+        					{ "name": "x", "type": "string"},
+        					{ "name": "y", "type": "double"}
+        				]
+        			}
+        		}
+        	}	]
 			}
 		}
 	},{"name": "performance", "type":

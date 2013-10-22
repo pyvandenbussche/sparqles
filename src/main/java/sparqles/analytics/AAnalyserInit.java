@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import sparqles.core.Endpoint;
 import sparqles.core.availability.AResult;
+import sparqles.core.discovery.DResult;
 import sparqles.core.features.FResult;
 import sparqles.core.performance.PResult;
 import sparqles.utils.MongoDBManager;
@@ -41,20 +42,44 @@ public class AAnalyserInit {
 		List<Endpoint> eps =_db.get(Endpoint.class, Endpoint.SCHEMA$);
 		AAnalyser a = new AAnalyser(_db);
 		PAnalyser p = new PAnalyser(_db);
-		//		DAnalyser d = new DAnalyser(_db);
+		DAnalyser d = new DAnalyser(_db);
 		FAnalyser f = new FAnalyser(_db);
 
 		for (Endpoint ep: eps) {
 			log.info("[ANALYSE] {}",ep);
 
 			availability(ep,a);
-			//			discoverability(ep,d);
+			discoverability(ep,d);
 			interoperability(ep,f);
 			performance(ep,p);
 		}
 	}
 
 
+
+	private void discoverability(Endpoint ep, DAnalyser d) {
+		TreeSet<DResult> res = new TreeSet<DResult>(new Comparator<DResult>() {
+			public int compare(DResult o1, DResult o2) {
+				int diff =o1.getEndpointResult().getStart().compareTo(o2.getEndpointResult().getStart()); 
+				return diff;
+			}
+		});
+
+		List<DResult> epRes = _db.getResults(ep, DResult.class, DResult.SCHEMA$);
+		for(DResult epres: epRes){
+			res.add(epres);
+		}
+		log.info("Analyse {} Performance results", epRes.size());
+		if(_onlyLast &&epRes.size()!=0){
+			d.analyse(res.last());
+		}else{
+			for(DResult ares: res){
+				d.analyse(ares);
+			}
+		}
+		log.info("[ANALYSE] [DISCOVERABILITY] {} and {}",ep, epRes.size());
+		
+	}
 
 	private void performance(Endpoint ep, PAnalyser p) {
 		TreeSet<PResult> res = new TreeSet<PResult>(new Comparator<PResult>() {
