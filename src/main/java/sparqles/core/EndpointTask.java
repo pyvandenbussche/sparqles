@@ -50,6 +50,7 @@ public abstract class EndpointTask<V extends SpecificRecordBase> implements Task
 	public V call() throws Exception {
 		long start = System.currentTimeMillis();
 		_epr.setStart(start);
+		boolean i_succ=true, a_succ = true, f_succ= true;
 		V v = null;
 		try{
 			log.info("[EXEC] {}", _id);
@@ -59,7 +60,7 @@ public abstract class EndpointTask<V extends SpecificRecordBase> implements Task
 			_epr.setEnd(end);
 			
 			//insert into database
-			boolean i_succ=true, a_succ = true, f_succ= true;
+			
 			if(_dbm != null)
 				i_succ=_dbm.insert(v);
 			
@@ -74,7 +75,8 @@ public abstract class EndpointTask<V extends SpecificRecordBase> implements Task
 				
 			log.info("[EXECUTED] {} in {} ms (insert:{}, file:{}, analysed:{})", _id, end-start, i_succ, f_succ, a_succ);
 		}catch(Exception e){
-			log.warn("[FAILED] {} #> {}: {}", _id, e.getClass().getSimpleName(), e.getMessage());
+			e.printStackTrace();
+			log.warn("[FAILED] {} (insert:{}, file:{}, analysed:{}) #> {}: {}", _id, i_succ, f_succ, a_succ, e.getClass().getSimpleName(), e.getMessage());
 		}
 		return v;
 	}
