@@ -124,9 +124,11 @@ public class IndexViewAnalytics implements Task<Index>{
 		if(discoverability.getSDDescription().size()!=0){
 			discoStats[0].add("sd");
 		}
-		else if(discoverability.getVoIDDescription().size()!=0){
+		if(discoverability.getVoIDDescription().size()!=0){
 			discoStats[0].add("void");
-		}else
+		}
+		if( discoverability.getSDDescription().size()==0 &&
+			discoverability.getVoIDDescription().size()==0)
 			discoStats[0].add("no");
 	}
 
@@ -148,9 +150,9 @@ public class IndexViewAnalytics implements Task<Index>{
 		int v =stats.get("no");
 		iv.setNoDescription(v/(double)stats.getTotal());
 		v =stats.get("sd");
-		iv.setSDDescription(v/(double)object[0].getTotal());
-		v =stats.get("void");
-		iv.setVoIDDescription(v/(double)object[0].getTotal());
+		iv.setSDDescription(v/(double)stats.getTotal());
+		v = stats.get("void");
+		iv.setVoIDDescription(v/(double)stats.getTotal());
 		
 		
 		
