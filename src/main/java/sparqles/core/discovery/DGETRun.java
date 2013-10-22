@@ -63,31 +63,22 @@ public class DGETRun extends DRun<GetResult>{
 			HashMap<CharSequence, Object> spdsPred = new HashMap<CharSequence, Object>();
 			if(status.startsWith("2")){
 				String content = EntityUtils.toString(resp.getEntity());	
-
 				PipedRDFIterator<Triple> iter = new PipedRDFIterator<Triple>();
 				final PipedRDFStream<Triple> inputStream = new PipedTriplesStream(iter);
 				ByteArrayInputStream bais = new ByteArrayInputStream(content.getBytes());
 				RDFDataMgr.parse(inputStream, bais,_ep.getUri().toString(), getLangFromType(type));
 
-
-				
-
-
 				while(iter.hasNext()){
 					Triple t = iter.next();
 					String pred  = t.getPredicate().toString();
-					System.out.println(t);
 					if(pred.startsWith(sparqDescNS)){
 						update(pred.replace(sparqDescNS, ""), spdsPred );
 					}else if(pred.startsWith(voidNS)){
 						update( pred.replace(voidNS, ""), voidPred );
 					}
 				}
-
-
-				
-
-			}  
+			}
+			
 			res.setVOIDterms( voidPred.size());
 			res.setSPARQLDESCterms( spdsPred.size());
 			res.setSPARQLDESCpreds(spdsPred);
@@ -129,7 +120,9 @@ public class DGETRun extends DRun<GetResult>{
 	private void parseHeaders(GetResult res, Endpoint _ep, Header[] header) {
 		//		CallbackSet cbsetH= new CallbackSet();
 		res.setResponseLink("missing");
-
+		res.setResponseServer("missing");
+		res.setResponseType("missing");
+		
 		for (int i = 0; i < header.length; i++) {
 			String name = header[i].getName();
 			if(name.equals("Content-Type")){
