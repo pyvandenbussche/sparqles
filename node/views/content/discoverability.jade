@@ -14,16 +14,16 @@ block content
         article.wrp(style='padding-bottom: 1em;')
           .wrplInnerBox(style='height: 100%;')
             div
-              b #{parseFloat((epsDisco.nbEndpointsVoID/epsDisco.nbEndpointsTotal*100).toFixed(2))+ '%'} 
-              | (#{epsDisco.nbEndpointsVoID}/#{epsDisco.nbEndpointsTotal}) of the endpoints present a  
-              b VoID description
+              b #{parseFloat((nbEndpointsVoID/nbEndpointsTotal*100).toFixed(2))+ '%'} 
+              | (#{nbEndpointsVoID}/#{nbEndpointsTotal}) of the endpoints present a  
+              b VoID descriptions
             div
-              b #{parseFloat((epsDisco.nbEndpointsSD/epsDisco.nbEndpointsTotal*100).toFixed(2))+ '%'} 
-              | (#{epsDisco.nbEndpointsSD}/#{epsDisco.nbEndpointsTotal}) of the endpoints present a 
+              b #{parseFloat((nbEndpointsSD/nbEndpointsTotal*100).toFixed(2))+ '%'} 
+              | (#{nbEndpointsSD}/#{nbEndpointsTotal}) of the endpoints present a 
               b Service description
             div
-              b #{parseFloat((epsDisco.nbEndpointsServerName/epsDisco.nbEndpointsTotal*100).toFixed(2))+ '%'} 
-              | (#{epsDisco.nbEndpointsServerName}/#{epsDisco.nbEndpointsTotal}) of the endpoints have a 
+              b #{parseFloat((nbEndpointsServerName/nbEndpointsTotal*100).toFixed(2))+ '%'} 
+              | (#{nbEndpointsServerName}/#{nbEndpointsTotal}) of the endpoints have a 
               b meaningful server name 
               | in the HTTP Get answer
         article.wrp(style='padding-bottom: 1em;')
@@ -48,16 +48,25 @@ block content
                   th.tablehead(width='20%') 
                     span(onmouseover='tooltip.show(\'#{configDisco['Server Name']}\')', onmouseout='tooltip.hide();') Server name (HTTP GET)
               tbody
-                - each ep, i in epsDisco.endpoints
+                - each ep, i in dtasks_agg
                   tr(class=(i % 2 == 0) ? 'odd' : 'even')
                     //-Display Endpoint Label
-                    //-TODO: if more than one endpoint then display how many and their names 
-                    if ep.datasets.length>1
+                    if ep.endpoint.datasets.length>1
+                      - var generateTooltip = function(datasets){tooltipHtml='This endpoint includes <b>'+datasets.length+' datasets</b>:<ul>';
+                      -   for(var i in datasets){tooltipHtml+='<li>'+datasets[i].label+'</li>';}
+                      -   tooltipHtml+='</ul>';
+                      -   return tooltipHtml;
+                      - }
                       td
-                        a(href="/endpoint/#{encodeURIComponent(ep.uri)}") #{ep.uri}
+                        a(href="/endpoint/#{encodeURIComponent(ep.endpoint.uri)}")
+                          span(onmouseover='tooltip.show(\'#{generateTooltip(ep.endpoint.datasets)}\')', onmouseout='tooltip.hide();') #{ep.endpoint.uri} (#{ep.endpoint.datasets.length})
                     else
-                      td 
-                        a(href="/endpoint/#{encodeURIComponent(ep.uri)}") #{ep.datasets[0].label}
+                      if ep.endpoint.datasets.length>0
+                        td 
+                          a(href="/endpoint/#{encodeURIComponent(ep.endpoint.uri)}") #{ep.endpoint.datasets[0].label}
+                      else 
+                        td
+                          a(href="/endpoint/#{encodeURIComponent(ep.endpoint.uri)}") #{ep.endpoint.uri}
                     //-Display VoID Description
                     td.tdcenter
                       if ep.VoID

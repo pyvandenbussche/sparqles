@@ -151,11 +151,30 @@ app.get('/availability', function(req, res){
 
 app.get('/discoverability', function(req, res){
 		var epsDisco = JSON.parse(fs.readFileSync('./examples/discoverability.json'));
-        res.render('content/discoverability.jade',{
-			lastUpdate: 'Monday 02 September 2013, 22:22',
-			epsDisco: epsDisco,
-			configDisco: JSON.parse(fs.readFileSync('./texts/discoverability.json'))
-            });
+		mongoDBProvider.getDiscoView( function(error,docs){
+		    var lastUpdate=0;
+			var nbEndpointsVoID=0;
+			var nbEndpointsSD=0;
+			var nbEndpointsServerName=0;
+			var nbEndpointsTotal=0;
+			for (i in docs){
+				nbEndpointsTotal++;
+				if(docs[i].lastUpdate>lastUpdate) lastUpdate=docs[i].lastUpdate;
+				if(docs[i].VoID==true)nbEndpointsVoID++;
+				if(docs[i].SD==true)nbEndpointsSD++;
+				if(docs[i].serverName.length>0&&docs[i].serverName!="missing") nbEndpointsServerName++;
+			}
+			res.render('content/discoverability.jade',{
+				lastUpdate: new Date(lastUpdate).toUTCString(),
+				nbEndpointsVoID: nbEndpointsVoID,
+				nbEndpointsSD: nbEndpointsSD,
+				nbEndpointsServerName: nbEndpointsServerName,
+				nbEndpointsTotal: nbEndpointsTotal,
+				dtasks_agg: docs,
+				epsDisco: epsDisco,
+				configDisco: JSON.parse(fs.readFileSync('./texts/discoverability.json'))
+				});
+		});
 });
 
 app.get('/performance', function(req, res){
