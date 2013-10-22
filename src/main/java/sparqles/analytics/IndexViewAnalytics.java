@@ -108,7 +108,7 @@ public class IndexViewAnalytics implements Task<Index>{
 		//update interoperability stats
 		updateInteroperability(idx, interStats);
 		
-		updateDiscoverability(idx, null);
+		updateDiscoverability(idx, discoStats);
 
 
 		log.info("Updated view {}", idx);
