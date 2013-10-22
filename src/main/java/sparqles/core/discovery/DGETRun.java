@@ -67,7 +67,7 @@ public class DGETRun extends DRun<GetResult>{
 		res.setResponseServer("missing");
 		res.setResponseType("missing");
 		
-		log.info("[GET] ",request);
+		log.info("[GET] {}",request);
 		HttpResponse resp;
 		try {
 			resp = client.execute(request);
@@ -101,10 +101,7 @@ public class DGETRun extends DRun<GetResult>{
 			res.setVOIDterms( voidPred.size());
 			res.setSPARQLDESCterms( spdsPred.size());
 			
-		} catch (ClientProtocolException e) {
-			log.debug("Exception ",e);
-			res.setException(LogFormater.toString(e));
-		} catch (IOException e) {
+		} catch (Exception e) {
 			log.debug("Exception ",e);
 			res.setException(LogFormater.toString(e));
 		}

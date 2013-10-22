@@ -178,7 +178,7 @@ public class FileManager {
 			dfw.close();
 			log.debug("[STORED] {}", result);
 			return true;
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			log.warn("[STORE] {}", e);
 			return false;
