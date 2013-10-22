@@ -54,6 +54,14 @@ public class DGETRun extends DRun<GetResult>{
 		HttpGet request = new HttpGet(_ep.getUri().toString());
 		request.addHeader("accept", "application/rdf+xml, application/x-turtle, application/rdf+n3, application/xml, text/turtle, text/rdf, text/plain;q=0.1");
 
+		
+		HashMap<CharSequence, Object> voidPred = new HashMap<CharSequence, Object>();
+		HashMap<CharSequence, Object> spdsPred = new HashMap<CharSequence, Object>();
+		res.setVOIDterms( voidPred.size());
+		res.setSPARQLDESCterms( spdsPred.size());
+		res.setSPARQLDESCpreds( spdsPred );
+		res.setVoiDpreds( voidPred );
+		
 		res.setResponseCode("missing");
 		res.setResponseLink("missing");
 		res.setResponseServer("missing");
@@ -72,8 +80,6 @@ public class DGETRun extends DRun<GetResult>{
 			// 1) CHeck the header for information
 
 			parseHeaders(res, _ep, header);
-			HashMap<CharSequence, Object> voidPred = new HashMap<CharSequence, Object>();
-			HashMap<CharSequence, Object> spdsPred = new HashMap<CharSequence, Object>();
 			if(status.startsWith("2")){
 				String content = EntityUtils.toString(resp.getEntity());	
 				PipedRDFIterator<Triple> iter = new PipedRDFIterator<Triple>();
@@ -94,8 +100,7 @@ public class DGETRun extends DRun<GetResult>{
 			
 			res.setVOIDterms( voidPred.size());
 			res.setSPARQLDESCterms( spdsPred.size());
-			res.setSPARQLDESCpreds(spdsPred);
-			res.setVoiDpreds(voidPred);
+			
 		} catch (ClientProtocolException e) {
 			log.debug("Exception ",e);
 			res.setException(LogFormater.toString(e));
