@@ -168,6 +168,8 @@ public class DAnalyser extends Analytics<DResult> {
 			view.setEndpoint(ep);
 			view.setSD(false);
 			view.setVoID(false);
+			view.setServerName("missing");
+			view.setLastUpdate(-1L);
 			_db.insert(view);
 
 		}else{
