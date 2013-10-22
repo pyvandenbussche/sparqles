@@ -8,6 +8,7 @@ import java.util.HashSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import sparqles.utils.LogFormater;
 import sparqles.utils.QueryManager;
 
 import com.hp.hpl.jena.query.QueryExecution;
@@ -53,6 +54,9 @@ public class DGetVoidRun  extends DRun<VoidResult>{
 		VoidResult res = new VoidResult();
 		String queryString = query.replaceAll("%%s", "<"+_ep.getUri()+">");
 		
+		ArrayList<CharSequence> voidA = new ArrayList<CharSequence>();
+		res.setVoidFile(voidA);
+		
 		// initializing queryExecution factory with remote service.
 		// **this actually was the main problem I couldn't figure out.**
 		QueryExecution qexec = null;
@@ -69,32 +73,15 @@ public class DGetVoidRun  extends DRun<VoidResult>{
 
 			ResultSet resSet = qexec.execSelect();
 			ResultSetRewindable reswind = ResultSetFactory.makeRewindable(resSet);
-
 			
-			HashSet<CharSequence> voids = new HashSet<CharSequence>();
-			
-			//		    FileWriter fw = new FileWriter(new File("results",benchExperiment+".sparql.tsv"),true);
 			while(reswind.hasNext()){
 				RDFNode dataset = reswind.next().get("ds");
-				voids.add(dataset.toString());
-				//		    	fw.write(endpointURI+"\t"+dataset.toString()+"\n");
-
+				voidA.add(dataset.toString());
 			}
 			log.info("Found {} results",reswind.getRowNumber());
-			//		    fw.close();
-			ArrayList<CharSequence> voidA = new ArrayList<CharSequence>(voids);
-			res.setVoidFile(voidA);
-			//		    		    
-			//		    reswind.reset();
-			//		    FileOutputStream fos = new FileOutputStream(new File(getLogDir(), URLEncoder.encode(endpointURI, "UTF-8")+"-rdfxml.nq"));
-			//		    ResultSetFormatter.outputAsXML(fos, reswind);
-			//		    fos.close();
-
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			res.setException(LogFormater.toString(e1));
 		}
-
 		finally {
 			if(qexec!=null)qexec.close();
 		}
