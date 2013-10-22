@@ -154,7 +154,7 @@ block content
           chart.xAxis.tickFormat(function(d) { return d3.time.format('%Y-%m-%d')(new Date(d)) });
           chart.yAxis.tickFormat(d3.format('.2%'));
           d3.select('#chartAvail')
-            .datum(!{JSON.stringify(ep.availability.data)})
+            .datum(!{'['+JSON.stringify(epAvail.data)+']'})
             .call(chart);
           nv.utils.windowResize(chart.update);
           chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });

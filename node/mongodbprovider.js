@@ -122,4 +122,17 @@ MongoDBProvider.prototype.getLastUpdate = function(callback) {
     });
 };
 
+//Index
+MongoDBProvider.prototype.getIndex = function(callback) {
+    this.getCollection('index',function(error, collection) {
+      if( error ) callback(error)
+      else {
+        collection.findOne(function(error, results) {
+          if( error ) callback(error)
+          else callback(null, results)
+        });
+      }
+    });
+};
+
 exports.MongoDBProvider = MongoDBProvider;

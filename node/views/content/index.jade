@@ -171,7 +171,7 @@ block content
           chart.yAxis
               .tickFormat(d3.format('.0%'));
           d3.select('#interop')
-              .datum(!{JSON.stringify(eps.interoperability.data)})
+              .datum(!{JSON.stringify(indexInterop)})
               .transition().duration(500)
               .call(chart);
           var confInterop = !{JSON.stringify(configInterop)}
