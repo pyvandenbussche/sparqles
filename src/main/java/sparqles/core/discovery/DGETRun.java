@@ -18,9 +18,13 @@ import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.lang.PipedRDFIterator;
 import org.apache.jena.riot.lang.PipedRDFStream;
 import org.apache.jena.riot.lang.PipedTriplesStream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import sparqles.analytics.DAnalyser;
 import sparqles.core.Endpoint;
 import sparqles.utils.DateFormater;
+import sparqles.utils.LogFormater;
 
 import com.hp.hpl.jena.graph.Triple;
 
@@ -29,6 +33,8 @@ import com.hp.hpl.jena.graph.Triple;
 
 
 public class DGETRun extends DRun<GetResult>{
+	private static final Logger log = LoggerFactory.getLogger(DGETRun.class);
+
 	private final static String sparqDescNS = "http://www.w3.org/ns/sparql-service-description#";
 	private final static String voidNS = "http://rdfs.org/ns/void#";
 	public static final String header = "application/rdf+xml, text/rdf, text/rdf+xml, application/rdf";
@@ -48,6 +54,12 @@ public class DGETRun extends DRun<GetResult>{
 		HttpGet request = new HttpGet(_ep.getUri().toString());
 		request.addHeader("accept", "application/rdf+xml, application/x-turtle, application/rdf+n3, application/xml, text/turtle, text/rdf, text/plain;q=0.1");
 
+		res.setResponseCode("missing");
+		res.setResponseLink("missing");
+		res.setResponseServer("missing");
+		res.setResponseType("missing");
+		
+		log.info("[GET] ",request);
 		HttpResponse resp;
 		try {
 			resp = client.execute(request);
@@ -55,6 +67,7 @@ public class DGETRun extends DRun<GetResult>{
 
 			String status = ""+resp.getStatusLine().getStatusCode();
 			res.setResponseCode(status);
+			
 			Header [] header = resp.getAllHeaders();
 			// 1) CHeck the header for information
 
@@ -84,11 +97,11 @@ public class DGETRun extends DRun<GetResult>{
 			res.setSPARQLDESCpreds(spdsPred);
 			res.setVoiDpreds(voidPred);
 		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.debug("Exception ",e);
+			res.setException(LogFormater.toString(e));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.debug("Exception ",e);
+			res.setException(LogFormater.toString(e));
 		}
 
 		return res;
@@ -119,9 +132,6 @@ public class DGETRun extends DRun<GetResult>{
 
 	private void parseHeaders(GetResult res, Endpoint _ep, Header[] header) {
 		//		CallbackSet cbsetH= new CallbackSet();
-		res.setResponseLink("missing");
-		res.setResponseServer("missing");
-		res.setResponseType("missing");
 		
 		for (int i = 0; i < header.length; i++) {
 			String name = header[i].getName();
