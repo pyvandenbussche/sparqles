@@ -5,7 +5,7 @@ var BSON = require('mongodb').BSON;
 var ObjectID = require('mongodb').ObjectID;
 
 MongoDBProvider = function(host, port) {
-  this.db= new Db('sparqles', new Server(host, port, {auto_reconnect: true}, {}));
+  this.db= new Db('sparqles', new Server(host, port, {auto_reconnect: true}, {}),{safe:true});
   this.db.open(function(){});
 };
 
@@ -88,7 +88,33 @@ MongoDBProvider.prototype.autocomplete = function(query, callback) {
     this.getCollection('endpoints',function(error, collection) {
       if( error ) callback(error)
       else {
-		collection.find({ 'datasets.label': {$regex: '.*'+query+'.*', $options: 'i'}, 'datasets.uri': {$regex: '.*'+query+'.*', $options: 'i'}}).limit(10).toArray(function(error, results) {
+		collection.find({$or: [{ 'datasets.label': {$regex: '.*'+query+'.*', $options: 'i'}}, {'uri': {$regex: '.*'+query+'.*', $options: 'i'}}]}).sort({"datasets.0.label":1,"uri":1}).toArray(function(error, results) {
+          if( error ) callback(error)
+          else callback(null, results)
+        });
+      }
+    });
+};
+
+//endpoints count
+MongoDBProvider.prototype.endpointsCount = function(callback) {
+    this.getCollection('endpoints',function(error, collection) {
+      if( error ) callback(error)
+      else {
+		collection.count(function(err, count) {
+            if( error ) callback(error)
+          else callback(null, count)
+          });
+      }
+    });
+};
+
+//Last Update date
+MongoDBProvider.prototype.getLastUpdate = function(callback) {
+    this.getCollection('atasks_agg',function(error, collection) {
+      if( error ) callback(error)
+      else {
+        collection.find({},{"lastUpdate":1}).sort({"lastUpdate":-1}).limit(1).toArray(function(error, results) {
           if( error ) callback(error)
           else callback(null, results)
         });

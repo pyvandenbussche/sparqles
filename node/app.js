@@ -30,17 +30,65 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', function(req, res){
-		//mongoDBProvider.autocomplete('d', function(error,docs){
-		//	for(i in docs)console.log(docs[i].uri);
-		//});
 		var eps = JSON.parse(fs.readFileSync('./examples/index.json'));
-        res.render('content/index.jade',{
-            configInstanceTitle: configApp.get('configInstanceTitle'),
-            eps: eps,
-			configInterop: JSON.parse(fs.readFileSync('./texts/interoperability.json')),
-			configPerformance: JSON.parse(fs.readFileSync('./texts/performance.json')),
-			configDisco: JSON.parse(fs.readFileSync('./texts/discoverability.json'))
-            });
+		mongoDBProvider.endpointsCount(function(error,nbEndpoints){
+		//console.log(docs);
+			mongoDBProvider.getLastUpdate( function(error,lastUpdate){
+			console.log(lastUpdate);
+				//PERFORMANCE
+				mongoDBProvider.getPerfView( function(error,docs){
+				//TODO precompute the data?
+					var thresholds=[];
+					var avgASKCold=0;
+					var avgASKWarm=0;
+					var avgJOINCold=0;
+					var avgJOINWarm=0;
+					var nbEndpointsTotal=0;
+					for (i in docs){
+						if(docs[i].threshold>0 && docs[i].threshold%100==0){
+							if(thresholds[docs[i].threshold])thresholds[docs[i].threshold]++;
+							else thresholds[docs[i].threshold]=1;
+						}
+						if(docs[i].askMeanCold+docs[i].joinMeanCold>0) nbEndpointsTotal++;
+						avgASKCold+=docs[i].askMeanCold;
+						avgASKWarm+=docs[i].askMeanWarm;
+						avgJOINCold+=docs[i].joinMeanCold;
+						avgJOINWarm+=docs[i].joinMeanWarm;
+					}
+					avgASKCold=avgASKCold/nbEndpointsTotal;
+					avgASKWarm=avgASKWarm/nbEndpointsTotal;
+					avgJOINCold=avgJOINCold/nbEndpointsTotal;
+					avgJOINWarm=avgJOINWarm/nbEndpointsTotal;
+					var mostCommonThreshold = [0,0];
+					for (i in thresholds){
+						if(thresholds[i]>mostCommonThreshold[1]){
+							mostCommonThreshold[0]=i;
+							mostCommonThreshold[1]=thresholds[i];
+						}
+					}
+					res.render('content/index.jade',{
+						configInstanceTitle: configApp.get('configInstanceTitle'),
+						eps: eps,
+						nbEndpoints: nbEndpoints,
+						lastUpdate: lastUpdate[0].lastUpdate,
+						perf: {"threshold":mostCommonThreshold[0],"data":[{"key": "Cold Tests","color": "#1f77b4","values": [{"label" : "Average ASK" ,"value" : avgASKCold },{"label" : "Average JOIN" ,"value" : avgJOINCold}]},{"key": "Warm Tests","color": "#2ca02c","values": [{"label" : "Average ASK" ,"value" : avgASKWarm} ,{"label" : "Average JOIN" ,"value" : avgJOINWarm}]}]},
+						configInterop: JSON.parse(fs.readFileSync('./texts/interoperability.json')),
+						configPerformance: JSON.parse(fs.readFileSync('./texts/performance.json')),
+						configDisco: JSON.parse(fs.readFileSync('./texts/discoverability.json'))
+						});
+				});
+			});
+		});
+});
+
+app.get('/api/endpointsAutoComplete', function(req, res){
+		mongoDBProvider.autocomplete(req.param('q'), function(error,docs){
+			//for(i in docs)console.log(docs[i].uri);
+			if(docs){
+				res.json(docs);
+			}
+			else res.end();
+		});
 });
 
 app.get('/endpoint/:uri*', function(req, res){
@@ -113,7 +161,7 @@ app.get('/performance', function(req, res){
 					if(thresholds[docs[i].threshold])thresholds[docs[i].threshold]++;
 					else thresholds[docs[i].threshold]=1;
 				}
-				if(docs[i].askMeanCold+docs[i].askMeanWarm>0) nbEndpointsTotal++;
+				if(docs[i].askMeanCold+docs[i].joinMeanCold>0) nbEndpointsTotal++;
 			}
 			var mostCommonThreshold = [0,0];
 			for (i in thresholds){
