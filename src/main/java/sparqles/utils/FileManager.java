@@ -179,7 +179,7 @@ public class FileManager {
 			log.debug("[STORED] {}", result);
 			return true;
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			log.warn("[STORE] {}", e);
 			return false;
 		}
