@@ -125,7 +125,8 @@ app.get('/endpoint/:uri*', function(req, res){
 				epDetails: docs[0].endpoint,
 				epPerf: perfParsed,
 				epAvail: docs[0].availability,
-				epInterop: docs[0].interoperability
+				epInterop: docs[0].interoperability,
+				epDisco: docs[0].discoverability
             });
 		});
 });

@@ -104,8 +104,8 @@ block content
                         tr
                           td
                             span "
-                              b #{ep.discoverability.serverName}
-                              " server name has been detected in the HTTP GET response
+                              b #{epDisco.serverName}
+                              " server name has been detected in the HTTP Get response header
                   td(valign='top', style='width:33%;; padding: 0em 2em;')
                     table#table_current(cellspacing='0', cellpadding='0', border='0', style='margin-left:1em;')
                       thead
@@ -114,7 +114,7 @@ block content
                             span(onmouseover='tooltip.show(\'#{configDisco['VoID Description']}\')', onmouseout='tooltip.hide();') VoID Description
                           th.tablehead 
                       tbody
-                        - each feature, i in ep.discoverability.VoIDDescription
+                        - each feature, i in epDisco.VoIDDescription
                           tr(class=(i % 2 == 0) ? 'odd' : 'even')
                             td
                               span(onmouseover='tooltip.show(\'#{configDisco[feature.label]}\')', onmouseout='tooltip.hide();') #{feature.label}
@@ -131,7 +131,7 @@ block content
                             span(onmouseover='tooltip.show(\'#{configDisco['Service Description']}\')', onmouseout='tooltip.hide();') Service Description
                           th.tablehead 
                       tbody
-                        - each feature, i in ep.discoverability.SDDescription
+                        - each feature, i in epDisco.SDDescription
                           tr(class=(i % 2 == 0) ? 'odd' : 'even')
                             td 
                               span(onmouseover='tooltip.show(\'#{configDisco[feature.label]}\')', onmouseout='tooltip.hide();') #{feature.label}
@@ -151,7 +151,7 @@ block content
             .showControls(false)
             .showLegend(false)
             .yDomain([0,1]);
-          chart.xAxis.tickFormat(function(d) { return d3.time.format('%Y-%m-%d')(new Date(d)) });
+          chart.xAxis.tickFormat(function(d) { return d3.time.format('%Y-%m-%d %Hh')(new Date(d)) });
           chart.yAxis.tickFormat(d3.format('.2%'));
           d3.select('#chartAvail')
             .datum(!{'['+JSON.stringify(epAvail.data)+']'})
