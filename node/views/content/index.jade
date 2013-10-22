@@ -49,15 +49,15 @@ block content
               a(title='', href='./discoverability')
                 h2 Discoverability
               div
-                b #{parseFloat((eps.discoverability.VoIDDescription*100).toFixed(2))+ '%'} 
+                b #{parseFloat((index.discoverability.VoIDDescription*100).toFixed(2))+ '%'} 
                 | of the endpoints provide a 
                 span(onmouseover='tooltip.show(\'#{configDisco['VoID Description']}\')', onmouseout='tooltip.hide();') VoID description
               div
-                b #{parseFloat((eps.discoverability.SDDescription*100).toFixed(2))+ '%'} 
+                b #{parseFloat((index.discoverability.SDDescription*100).toFixed(2))+ '%'} 
                 | of the endpoints provide a 
                 span(onmouseover='tooltip.show(\'#{configDisco['Service Description']}\')', onmouseout='tooltip.hide();') SD description
               div
-                b #{parseFloat((eps.discoverability.NoDescription*100).toFixed(2))+ '%'} 
+                b #{parseFloat((index.discoverability.NoDescription*100).toFixed(2))+ '%'} 
                 | of the endpoints have 
                 b no 
                 | description
@@ -185,7 +185,8 @@ block content
         });
         nv.addGraph(function() {
           var chart = nv.models.pieChart()
-            .x(function(d) { return d.key })
+            .x(function(d) { return d.label })
+            .y(function(d) { return d.value })
             .values(function(d) { return d })
             .valueFormat(d3.format('.2%'))
             .showLegend(false)
@@ -197,7 +198,7 @@ block content
             .startAngle(function(d) { return d.startAngle/2 -Math.PI/2 })
             .endAngle(function(d) { return d.endAngle/2 -Math.PI/2 });          
           d3.select("#disco")
-            .datum([!{JSON.stringify(eps.discoverability.serverName[0].values)}])
+            .datum([!{JSON.stringify(index.discoverability.serverName[0].values)}])
             .transition().duration(500)
             .call(chart);
           nv.utils.windowResize(chart.update);
