@@ -52,7 +52,7 @@ public class DAnalyser extends Analytics<DResult> {
 		
 		dview.setServerName(pres.getGetResult().getResponseServer());
 		dview.setSD(pres.getGetResult().getSPARQLDESCterms()!=0);
-		dview.setVoID(pres.getGetResult().getVOIDterms()!=0);
+		dview.setVoID(pres.getGetResult().getVOIDterms()!=0 || pres.getVoidResult().getVoidFile().size()!=0);
 		
 		
 		EPViewDiscoverability depview = epview.getDiscoverability();
@@ -79,7 +79,7 @@ public class DAnalyser extends Analytics<DResult> {
 		
 		dview.setLastUpdate(pres.getEndpointResult().getEnd());
 		
-		_db.update(depview);
+		_db.update(dview);
 		_db.update(epview);
 		return true;
 		
@@ -171,7 +171,6 @@ public class DAnalyser extends Analytics<DResult> {
 			view.setServerName("missing");
 			view.setLastUpdate(-1L);
 			_db.insert(view);
-
 		}else{
 			view = views.get(0);
 		}

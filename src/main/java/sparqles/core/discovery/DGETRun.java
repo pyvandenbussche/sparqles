@@ -180,6 +180,9 @@ public class DGETRun extends DRun<GetResult>{
 		if(server.contains("/"))
 			server = server.substring(0,server.indexOf("/"));
 
+		if(server.contains("("))
+			server = server.substring(0,server.indexOf("("));
+
 		return new Utf8(server);
 	}
 

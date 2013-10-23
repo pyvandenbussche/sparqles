@@ -10,9 +10,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -29,18 +27,18 @@ import org.apache.avro.specific.SpecificRecordBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.hp.hpl.jena.graph.Triple;
-import com.hp.hpl.jena.query.QuerySolution;
-import com.hp.hpl.jena.query.ResultSet;
-import com.hp.hpl.jena.sparql.util.FmtUtils;
-
-import sparqles.core.SPARQLESProperties;
 import sparqles.core.Endpoint;
 import sparqles.core.EndpointFactory;
+import sparqles.core.SPARQLESProperties;
 import sparqles.core.availability.AResult;
 import sparqles.core.discovery.DResult;
 import sparqles.core.features.FResult;
 import sparqles.core.performance.PResult;
+
+import com.hp.hpl.jena.graph.Triple;
+import com.hp.hpl.jena.query.QuerySolution;
+import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.sparql.util.FmtUtils;
 
 
 /**
@@ -139,9 +137,10 @@ public class FileManager {
 	
 	public <V extends SpecificRecordBase> boolean writeResult(V res) {
 		if(res instanceof DResult) return writeResult((DResult)res);
-		if(res instanceof AResult) return writeResult((AResult)res);
-		if(res instanceof PResult) return writeResult((PResult)res);
-		if(res instanceof FResult) return writeResult((FResult)res);
+		else if(res instanceof AResult) return writeResult((AResult)res);
+		else if(res instanceof PResult) return writeResult((PResult)res);
+		else if(res instanceof FResult) return writeResult((FResult)res);
+		
 		return true;
 	}
 

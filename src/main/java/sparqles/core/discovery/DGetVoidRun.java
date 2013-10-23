@@ -54,6 +54,7 @@ public class DGetVoidRun  extends DRun<VoidResult>{
 		VoidResult res = new VoidResult();
 		String queryString = query.replaceAll("%%s", "<"+_ep.getUri()+">");
 		
+		HashSet<String> voidAset= new HashSet<String>();
 		ArrayList<CharSequence> voidA = new ArrayList<CharSequence>();
 		res.setVoidFile(voidA);
 		
@@ -76,8 +77,10 @@ public class DGetVoidRun  extends DRun<VoidResult>{
 			
 			while(reswind.hasNext()){
 				RDFNode dataset = reswind.next().get("ds");
-				voidA.add(dataset.toString());
+				voidAset.add(dataset.toString());
 			}
+			
+			voidA.addAll(voidAset);
 			log.info("Found {} results",reswind.getRowNumber());
 		} catch (Exception e1) {
 			res.setException(LogFormater.toString(e1));
