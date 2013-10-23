@@ -80,4 +80,8 @@ block content
                       else
                         img(src='/images/gray.png')
                     //-Display VoID Description
-                    td.tdcenter #{ep.serverName}
+                    td.tdcenter
+                      if ep.serverName=='missing'
+                        .textDisabled missing
+                      else
+                        | #{ep.serverName}
