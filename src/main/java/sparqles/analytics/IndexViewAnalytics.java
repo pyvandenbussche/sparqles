@@ -551,6 +551,10 @@ public class IndexViewAnalytics implements Task<Index>{
 
 			sampleSize++;
 		}
+		@Override
+		public String toString() {
+			return Arrays.toString(bin)+":"+sampleSize;
+		}
 
 	}
 	
