@@ -162,7 +162,7 @@ public class IndexViewAnalytics implements Task<Index>{
 			new IndexViewDiscoverabilityDataValues(k, server.get(k)/(double)server.getTotal()));
 		}
 		
-		for(IndexViewDiscoverabilityDataValues d: set){
+		for(IndexViewDiscoverabilityDataValues d: set.descendingSet()){
 			lv.add(d);
 		}
 		l.add(new IndexViewDiscoverabilityData("Server Names", lv));
