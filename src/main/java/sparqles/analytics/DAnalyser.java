@@ -52,7 +52,7 @@ public class DAnalyser extends Analytics<DResult> {
 		
 		dview.setServerName(pres.getGetResult().getResponseServer());
 		dview.setSD(pres.getGetResult().getSPARQLDESCterms()!=0);
-		dview.setVoID(pres.getGetResult().getVOIDterms()!=0);
+		dview.setVoID(pres.getGetResult().getVOIDterms()!=0 || pres.getVoidResult().getVoidFile().size()!=0);
 		
 		
 		EPViewDiscoverability depview = epview.getDiscoverability();
