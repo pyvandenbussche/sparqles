@@ -19,6 +19,7 @@ import sparqles.analytics.avro.AvailabilityIndex;
 import sparqles.analytics.avro.EPView;
 import sparqles.analytics.avro.EPViewAvailability;
 import sparqles.analytics.avro.EPViewAvailabilityDataPoint;
+import sparqles.analytics.avro.EPViewDiscoverabilityData;
 import sparqles.analytics.avro.EPViewInteroperabilityData;
 import sparqles.analytics.avro.EPViewPerformanceData;
 import sparqles.analytics.avro.EPViewPerformanceDataValues;
@@ -130,15 +131,29 @@ public class IndexViewAnalytics implements Task<Index>{
 			Count<String>[] discoStats) {
 		discoStats[1].add(discoverability.getServerName().toString());
 			
-		if(discoverability.getSDDescription().size()!=0){
-			discoStats[0].add("sd");
+		boolean sd=false, voidd=false;
+		if(discoverability.getSDDescription().size()!=0 ){
+			for(EPViewDiscoverabilityData d : discoverability.getSDDescription()){
+				if(d.getValue()){
+					discoStats[0].add("sd");
+					sd=true;
+					break;
+				}
+			}
+		
 		}
 		if(discoverability.getVoIDDescription().size()!=0){
-			discoStats[0].add("void");
+			for(EPViewDiscoverabilityData d : discoverability.getVoIDDescription()){
+				if(d.getValue()){
+					discoStats[0].add("void");
+					voidd=true;
+					break;
+				}
+			}
 		}
-		if( discoverability.getSDDescription().size()==0 &&
-			discoverability.getVoIDDescription().size()==0)
+		if(!voidd && !sd){
 			discoStats[0].add("no");
+		}
 		
 		discoStats[0].add("total");
 	}
@@ -177,12 +192,14 @@ public class IndexViewAnalytics implements Task<Index>{
 		Count<String> stats = object[0];
 		int v=0;
 		if(stats.containsKey("no")){
-		v =stats.get("no");
+			v =stats.get("no");
 			iv.setNoDescription(v/(double)stats.get("total"));
 		}else
 			iv.setNoDescription(0D);
+		
 		v =stats.get("sd");
 		iv.setSDDescription(v/(double)stats.get("total"));
+		
 		v = stats.get("void");
 		iv.setVoIDDescription(v/(double)stats.get("total"));
 	}
