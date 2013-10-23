@@ -76,9 +76,15 @@ public class IndexViewAnalytics implements Task<Index>{
 				new SummaryStatistics(), new SummaryStatistics(),
 				new SummaryStatistics()};
 
-		SimpleHistogram [] interStats = new SimpleHistogram[6];
-		Arrays.fill(interStats, new SimpleHistogram());
-
+		SimpleHistogram [] interStats = {
+				new SimpleHistogram(),
+				new SimpleHistogram(),
+				new SimpleHistogram(),
+				new SimpleHistogram(),
+				new SimpleHistogram(),
+				new SimpleHistogram()
+		};
+		
 		
 
 		Count [] discoStats = {	new Count<String>(),
