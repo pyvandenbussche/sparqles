@@ -79,7 +79,7 @@ public class DAnalyser extends Analytics<DResult> {
 		
 		dview.setLastUpdate(pres.getEndpointResult().getEnd());
 		
-		_db.update(depview);
+		_db.update(dview);
 		_db.update(epview);
 		return true;
 		
@@ -171,7 +171,6 @@ public class DAnalyser extends Analytics<DResult> {
 			view.setServerName("missing");
 			view.setLastUpdate(-1L);
 			_db.insert(view);
-
 		}else{
 			view = views.get(0);
 		}

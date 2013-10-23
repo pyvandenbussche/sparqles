@@ -3,10 +3,13 @@ package sparqles.analytics;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 import org.slf4j.Logger;
@@ -130,6 +133,8 @@ public class IndexViewAnalytics implements Task<Index>{
 		if( discoverability.getSDDescription().size()==0 &&
 			discoverability.getVoIDDescription().size()==0)
 			discoStats[0].add("no");
+		
+		discoStats[0].add("total");
 	}
 
 	private void updateDiscoverability(Index idx, Count[] object) {
@@ -139,23 +144,41 @@ public class IndexViewAnalytics implements Task<Index>{
 		
 		List<IndexViewDiscoverabilityData> l = new ArrayList<IndexViewDiscoverabilityData>();
 		List<IndexViewDiscoverabilityDataValues> lv = new ArrayList<IndexViewDiscoverabilityDataValues>();
+		
+		TreeSet<IndexViewDiscoverabilityDataValues> set = new TreeSet<IndexViewDiscoverabilityDataValues>(new Comparator<IndexViewDiscoverabilityDataValues>() {
+
+			@Override
+			public int compare(IndexViewDiscoverabilityDataValues o1,
+					IndexViewDiscoverabilityDataValues o2) {
+				int diff = o1.getValue().compareTo(o2.getValue());
+				if(diff==0)
+					diff= -1;
+				return diff;
+			}
+		});
+		
 		for(String k: server.keySet()){
-			lv.add(
+			set.add(
 			new IndexViewDiscoverabilityDataValues(k, server.get(k)/(double)server.getTotal()));
+		}
+		
+		for(IndexViewDiscoverabilityDataValues d: set){
+			lv.add(d);
 		}
 		l.add(new IndexViewDiscoverabilityData("Server Names", lv));
 		iv.setServerName(l);
 		
 		Count<String> stats = object[0];
-		int v =stats.get("no");
-		iv.setNoDescription(v/(double)stats.getTotal());
+		int v=0;
+		if(stats.containsKey("no")){
+		v =stats.get("no");
+			iv.setNoDescription(v/(double)stats.get("total"));
+		}else
+			iv.setNoDescription(0D);
 		v =stats.get("sd");
-		iv.setSDDescription(v/(double)stats.getTotal());
+		iv.setSDDescription(v/(double)stats.get("total"));
 		v = stats.get("void");
-		iv.setVoIDDescription(v/(double)stats.getTotal());
-		
-		
-		
+		iv.setVoIDDescription(v/(double)stats.get("total"));
 	}
 
 	private void updateInteroperability(Index idx, SimpleHistogram[] interStats) {
@@ -236,7 +259,7 @@ public class IndexViewAnalytics implements Task<Index>{
 
 	
 		for(EPViewInteroperabilityData d : interoperability.getSPARQL1Features()){
-			System.out.println("1:"+d.getLabel());
+			
 			String l = d.getLabel().toString();
 
 			boolean bv= d.getValue();
@@ -251,7 +274,7 @@ public class IndexViewAnalytics implements Task<Index>{
 			if( l.contains("orderby") || l.contains("distinct") ||
 					l.contains("reduced") )
 			{
-				all[sparql1_solMods] =all[sparql1_solMods] && bv;	
+				all[sparql1_solMods] = all[sparql1_solMods] && bv;	
 			}		
 
 			/*
@@ -300,7 +323,6 @@ public class IndexViewAnalytics implements Task<Index>{
 			}
 		}
 		for(EPViewInteroperabilityData d : interoperability.getSPARQL11Features()){
-			System.out.println("11"+ d.getLabel());
 			String l = d.getLabel().toString();
 			boolean bv = d.getValue();
 			/*
@@ -366,6 +388,7 @@ public class IndexViewAnalytics implements Task<Index>{
 				else interStats[i].add(0D);
 			}
 		}
+		System.out.println(Arrays.toString(interStats));
 
 	}
 
@@ -531,7 +554,7 @@ public class IndexViewAnalytics implements Task<Index>{
 
 	}
 	
-	class Count<T> extends HashMap<T, Integer>{
+	class Count<T> extends TreeMap<T, Integer>{
 		int sampleSize=0;
 		
 		public void add(T t){
