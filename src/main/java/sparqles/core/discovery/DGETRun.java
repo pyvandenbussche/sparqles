@@ -2,6 +2,7 @@ package sparqles.core.discovery;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
@@ -22,6 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import sparqles.analytics.DAnalyser;
+import sparqles.core.CONSTANTS;
 import sparqles.core.Endpoint;
 import sparqles.utils.DateFormater;
 import sparqles.utils.LogFormater;
@@ -51,9 +54,10 @@ public class DGETRun extends DRun<GetResult>{
 
 
 		HttpClient client = new DefaultHttpClient();
+		
 		HttpGet request = new HttpGet(_ep.getUri().toString());
 		request.addHeader("accept", "application/rdf+xml, application/x-turtle, application/rdf+n3, application/xml, text/turtle, text/rdf, text/plain;q=0.1");
-
+		request.addHeader("User-Agent", CONSTANTS.USER_AGENT);
 		
 		HashMap<CharSequence, Object> voidPred = new HashMap<CharSequence, Object>();
 		HashMap<CharSequence, Object> spdsPred = new HashMap<CharSequence, Object>();

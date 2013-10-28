@@ -4,18 +4,19 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import org.apache.jena.riot.web.HttpOp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
 
+import sparqles.core.CONSTANTS;
 import sparqles.core.Endpoint;
 
 public class QueryManager {
 
 	private static final Logger log = LoggerFactory.getLogger(QueryManager.class);
-	
 	
 	
 	
@@ -46,6 +47,8 @@ public class QueryManager {
 
 	public static QueryExecution getExecution(Endpoint ep, String query) throws Exception {
 		try {
+
+			HttpOp.setUserAgent(CONSTANTS.USER_AGENT);
 			log.debug("[INIT] QueryExecution for {} with query  {}",ep.getUri(),query.replaceAll("\n", ""));
 			return QueryExecutionFactory.sparqlService(ep.getUri().toString(), query);
 		}

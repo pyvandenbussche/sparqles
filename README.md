@@ -20,9 +20,7 @@ The SPARQL Endpoint Status project is divided in several components:
 
 ## Building
 
-Get the code from GitHub: https://github.com/pyvandenbussche/ends
+Get the code from GitHub: https://github.com/pyvandenbussche/sparqles
 
-Build using ant:
-	
-	ant clean all
+Build using maven
 
