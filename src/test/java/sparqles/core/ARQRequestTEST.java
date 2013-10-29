@@ -26,7 +26,7 @@ public class ARQRequestTEST {
 		
 		
 		QueryExecution ex = QueryExecutionFactory.sparqlService("http://localhost:8000/sparql", "SELECT * WHERE { ?s ?p ?o . }");
-//		HttpOp.setUserAgent("test");
+		HttpOp.setUserAgent(CONSTANTS.USER_AGENT);
 		ResultSet res = ex.execSelect();
 		while (res.hasNext()){
 			System.out.println("nextS");

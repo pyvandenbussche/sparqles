@@ -300,7 +300,7 @@ public class MongoDBManager {
 
 			DBObject q =
 					QueryBuilder.start().and(
-							QueryBuilder.start("endpointResult.endpoint.uri").is(ep.getUri().toString()).get(),
+							QueryBuilder.start(RESULT_KEY).is(ep.getUri().toString()).get(),
 							QueryBuilder.start("endpointResult.start").greaterThan(since).get()).get();
 			log.info("[EXEC] {}",q);
 			curs = c.find(q);
@@ -339,7 +339,7 @@ public class MongoDBManager {
 
 			DBObject q =
 					QueryBuilder.start().and(
-							QueryBuilder.start("endpointResult.endpoint.uri").is(ep.getUri().toString()).get(),
+							QueryBuilder.start(RESULT_KEY).is(ep.getUri().toString()).get(),
 							QueryBuilder.start("endpointResult.start").greaterThan(from).get(),
 							QueryBuilder.start("endpointResult.start").lessThanEquals(to).get()).get();
 			log.info("[EXEC] {}",q);
@@ -363,5 +363,14 @@ public class MongoDBManager {
 				curs.close();
 		}
 		return reslist;
+	}
+
+	public Endpoint getEndpoint(Endpoint ep) {
+		List<Endpoint> res = scan(ep, COLL_ENDS, Endpoint.class, Endpoint.SCHEMA$, VIEW_KEY);
+		if(res.size()!=0){
+			log.error("Received {} results for {}; expected one result ", res.size(), ep);
+		}
+		if(res.size()==0) return null;
+		return res.get(0);
 	}
 }

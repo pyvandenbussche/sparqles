@@ -19,7 +19,7 @@ import sparqles.utils.MongoDBManager;
 public abstract class EndpointTask<V extends SpecificRecordBase> implements Task<V>{
 	private static final Logger log = LoggerFactory.getLogger(EndpointTask.class);
 		
-	private final EndpointResult _epr;
+	
 	private final String _id;
 
 	private MongoDBManager _dbm;
@@ -29,16 +29,27 @@ public abstract class EndpointTask<V extends SpecificRecordBase> implements Task
 
 	protected final String _task;
 
-	protected final String _epURI;
+	protected String _epURI;
+
+	private Endpoint _ep;
 	
 	public EndpointTask(Endpoint ep) {
-		_epr = new EndpointResult();
-		_epr.setEndpoint(ep);
 		_epURI = ep.getUri().toString();
+		setEndpoint(ep);
+		
 		_task = this.getClass().getSimpleName();
-		_id = this.getClass().getSimpleName()+"("+_epr.getEndpoint().getUri()+")";
+		_id = this.getClass().getSimpleName()+"("+_epURI+")";
 	}
 	
+	public Endpoint getEndpoint() {
+		return _ep;
+	}
+	public void setEndpoint(Endpoint ep) {
+		if(!_epURI.equals(ep.getUri().toString()))
+			log.error("Endpoint URIs do not match (was:{} is:{}", _epURI, ep.getUri());
+		_ep = ep;
+	}
+
 	public void setDBManager(MongoDBManager dbm){
 		_dbm = dbm;
 	}
@@ -48,16 +59,19 @@ public abstract class EndpointTask<V extends SpecificRecordBase> implements Task
 	
 	@Override
 	public V call() throws Exception {
+		
 		long start = System.currentTimeMillis();
-		_epr.setStart(start);
+		EndpointResult epr = new EndpointResult();
+		epr.setEndpoint(_ep);
+		epr.setStart(start);
 		boolean i_succ=true, a_succ = true, f_succ= true;
 		V v = null;
 		try{
 			log.info("[EXEC] {}", _id);
 			
-			v = process(_epr);
+			v = process(epr);
 			long end = System.currentTimeMillis();	
-			_epr.setEnd(end);
+			epr.setEnd(end);
 			
 			//insert into database
 			

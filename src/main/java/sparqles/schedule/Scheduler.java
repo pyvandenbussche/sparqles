@@ -18,6 +18,7 @@ import sparqles.schedule.iter.CronBasedIterator;
 import sparqles.schedule.iter.ScheduleIterator;
 import sparqles.utils.FileManager;
 import sparqles.utils.MongoDBManager;
+import sparqles.core.EndpointTask;
 import sparqles.core.SPARQLESProperties;
 import sparqles.core.Endpoint;
 import sparqles.core.Task;
@@ -49,7 +50,7 @@ public class Scheduler {
 		taskSchedule.put(PTASK, CRON_EVERY_ONETEN);
 		taskSchedule.put(FTASK, CRON_EVERY_SUN_AT_310);
 		taskSchedule.put(DTASK, CRON_EVERY_SAT_AT_310);
-		taskSchedule.put(ITASK, CRON_EVERY_SUN_AT_2330);
+		taskSchedule.put(ITASK, CRON_EVERY_DAY_AT_715);
 	}
 
 	private final ScheduledExecutorService SERVICE;
@@ -145,7 +146,13 @@ public class Scheduler {
 			log.warn("[PAST] stop scheduling task, next date is in the past!");
 			return;
 		}
-
+		
+		if(task instanceof EndpointTask){
+			EndpointTask t = (EndpointTask) task;
+			
+			Endpoint ep = _dbm.getEndpoint(t.getEndpoint());
+			t.setEndpoint(ep);
+		}
 		long startTime = time.getTime() - System.currentTimeMillis();
 		SchedulerTimerTask t = new SchedulerTimerTask(task,iter);
 		SERVICE.schedule(t, startTime, TimeUnit.MILLISECONDS);
