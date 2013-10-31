@@ -5,6 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import sparqles.analytics.Analytics;
+import sparqles.avro.Endpoint;
+import sparqles.avro.EndpointResult;
 import sparqles.utils.FileManager;
 import sparqles.utils.MongoDBManager;
 
@@ -22,7 +24,7 @@ public abstract class EndpointTask<V extends SpecificRecordBase> implements Task
 	
 	private final String _id;
 
-	private MongoDBManager _dbm;
+	protected MongoDBManager _dbm;
 	protected FileManager _fm;
 
 	private Analytics<V> _analytics;
@@ -31,7 +33,7 @@ public abstract class EndpointTask<V extends SpecificRecordBase> implements Task
 
 	protected String _epURI;
 
-	private Endpoint _ep;
+	protected Endpoint _ep;
 	
 	public EndpointTask(Endpoint ep) {
 		_epURI = ep.getUri().toString();
@@ -89,7 +91,7 @@ public abstract class EndpointTask<V extends SpecificRecordBase> implements Task
 				
 			log.info("[EXECUTED] {} in {} ms (insert:{}, file:{}, analysed:{})", _id, end-start, i_succ, f_succ, a_succ);
 		}catch(Exception e){
-			e.printStackTrace();
+			log.debug("[FAILED]",e);
 			log.warn("[FAILED] {} (insert:{}, file:{}, analysed:{}) #> {}: {}", _id, i_succ, f_succ, a_succ, e.getClass().getSimpleName(), e.getMessage());
 		}
 		return v;

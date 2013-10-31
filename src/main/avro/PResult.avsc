@@ -1,9 +1,9 @@
 {
-	"namespace": "sparqles.core.performance",
+	"namespace": "sparqles.avro.performance",
  	"type": "record",
  	"name": "PResult",
  	"fields": [
- 		{"name": "endpointResult", "type": "sparqles.core.EndpointResult"},
+ 		{"name": "endpointResult", "type": "sparqles.avro.EndpointResult"},
  		{"name": "results", "type": { "type":"map","values": 
  		  	{
      		"name": "PSingleResult",
@@ -11,7 +11,7 @@
         	"fields" : [
         	{ "name": "query", "type": "string"},
         		{ "name": "cold", "type": 
-{"type":"record","name":"Run","namespace":"sparqles.core.performance",
+{"type":"record","name":"Run","namespace":"sparqles.avro.performance",
         		"fields":[
         	 	{"name": "frestout", "type": "long"},
      			{"name": "solutions", "type": "int"},
@@ -21,7 +21,7 @@
      			{"name": "Exception", "type": ["string", "null"]},
      			{"name": "exectout", "type": "long"}
      			]}},
-        		{ "name": "warm", "type": "sparqles.core.performance.Run"}
+        		{ "name": "warm", "type": "sparqles.avro.performance.Run"}
       		]}
     		} 
  		}

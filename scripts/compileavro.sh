@@ -18,7 +18,8 @@ IDX=$AVRO_DIR/Index.avsc
 PVIEW=$AVRO_DIR/PerformanceView.avsc
 FVIEW=$AVRO_DIR/FeatureView.avsc
 DVIEW=$AVRO_DIR/DiscoverabilityView.avsc
+ROBOTS=$AVRO_DIR/Robots.avsc
 
 SRC=src/main/java
 
-java -jar $LIB/$AVRO_JAR compile schema $EP $EPR $PR $AR $DR $FR $S $FVIEW  $EPVIEW $AVIEW $PVIEW $IDX $DVIEW  $SRC  
+java -jar $LIB/$AVRO_JAR compile schema $EP $EPR $PR $AR $DR $FR $S $FVIEW  $EPVIEW $AVIEW $PVIEW $IDX $DVIEW $ROBOTS  $SRC  

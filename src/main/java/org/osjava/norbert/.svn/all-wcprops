@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/242/trunk/src/org/osjava/norbert
+END
+RulesEngine.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/230/trunk/src/org/osjava/norbert/RulesEngine.java
+END
+NoRobotException.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/65/trunk/src/org/osjava/norbert/NoRobotException.java
+END
+NoRobotClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/242/trunk/src/org/osjava/norbert/NoRobotClient.java
+END
+Rule.java
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/65/trunk/src/org/osjava/norbert/Rule.java
+END
+AbstractRule.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/65/trunk/src/org/osjava/norbert/AbstractRule.java
+END
+AllowedRule.java
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/65/trunk/src/org/osjava/norbert/AllowedRule.java
+END
+DisallowedRule.java
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/65/trunk/src/org/osjava/norbert/DisallowedRule.java
+END

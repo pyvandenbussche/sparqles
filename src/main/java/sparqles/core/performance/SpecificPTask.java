@@ -3,7 +3,7 @@ package sparqles.core.performance;
 import java.util.ArrayList;
 import java.util.List;
 
-import sparqles.core.Endpoint;
+import sparqles.avro.Endpoint;
 
 public enum  SpecificPTask {
 /*

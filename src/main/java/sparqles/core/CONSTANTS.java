@@ -2,6 +2,8 @@ package sparqles.core;
 
 import java.net.URISyntaxException;
 
+import sparqles.avro.Endpoint;
+
 public class CONSTANTS {
 
 	
@@ -12,6 +14,8 @@ public class CONSTANTS {
 	public static final String ITASK="ITask";
 	public static final String USER_AGENT = "SPARQLES client using HTTPClient/4.2.3 (https://github.com/pyvandenbussche/sparqles)";
 	public static final String ARQ_USER_AGENT = "SPARQLES client using Apache-Jena-ARQ/2.11.1 (https://github.com/pyvandenbussche/sparqles)";
+	public static final int SOCKET_TIMEOUT = 16*1000;
+	public static final int CONNECTION_TIMEOUT = 16*1000;
 	
 	
 	public static Endpoint SPARQLES =null;

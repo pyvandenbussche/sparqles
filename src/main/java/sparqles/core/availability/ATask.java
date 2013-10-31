@@ -8,8 +8,9 @@ import sparqles.utils.QueryManager;
 
 import com.hp.hpl.jena.query.QueryExecution;
 
-import sparqles.core.Endpoint;
-import sparqles.core.EndpointResult;
+import sparqles.avro.Endpoint;
+import sparqles.avro.EndpointResult;
+import sparqles.avro.availability.AResult;
 import sparqles.core.EndpointTask;
 
 /**

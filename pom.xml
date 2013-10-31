@@ -43,21 +43,20 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>appassembler-maven-plugin</artifactId>
 				<version>1.5</version>
+				
+
 				<configuration>
-					<!-- Set the target configuration directory to be used in the bin scripts 
-						<configurationDirectory>conf</configurationDirectory> -->
-					<!-- Copy the contents from "/src/main/config" to the target configuration 
-						directory in the assembled application <copyConfigurationDirectory>true</copyConfigurationDirectory> -->
-					<!-- Include the target configuration directory in the beginning of 
-						the classpath declaration in the bin scripts -->
-					<includeConfigurationDirectoryInClasspath>true</includeConfigurationDirectoryInClasspath>
+					<configurationDirectory>conf</configurationDirectory>
+ 				 	<configurationSourceDirectory>src/main/config</configurationSourceDirectory>
+  					<copyConfigurationDirectory>true</copyConfigurationDirectory>
 					<!-- set alternative assemble directory -->
 					<assembleDirectory>${basedir}</assembleDirectory>
-					<!-- Extra JVM arguments that will be included in the bin scripts -->
-					<extraJvmArguments>-Xms2G</extraJvmArguments>
+
+					<extraJvmArguments>-Xmx1024m</extraJvmArguments>
+
 					<!-- Generate bin scripts for windows and unix pr default -->
 					<platforms>
-						<platform>windows</platform>
+						<!-- <platform>windows</platform> -->
 						<platform>unix</platform>
 					</platforms>
 
@@ -84,10 +83,12 @@
 								<commandLineArgument>SPARQLES</commandLineArgument>
 							</commandLineArguments>
 							<name>sparqles</name>
+							<!-- <jvmSettings> <extraArguments> <extraArgument>-Dlog4j.configuration=../conf/log4j.properties</extraArgument> 
+								</extraArguments> </jvmSettings> -->
 						</program>
 					</programs>
 				</configuration>
-				<executions>
+				<!-- <executions>
 					<execution>
 						<id>generate-jsw-scripts</id>
 						<phase>package</phase>
@@ -96,15 +97,24 @@
 						</goals>
 					</execution>
 				</executions>
+				 -->
 			</plugin>
 		</plugins>
 	</build>
 	<dependencies>
 		<dependency>
-			<groupId>org.apache.avro</groupId>
-			<artifactId>avro</artifactId>
-			<version>${avro.version}</version>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+			<!-- <type>jar</type> <scope>runtime</scope> <exclusions> <exclusion> 
+				<groupId>javax.mail</groupId> <artifactId>mail</artifactId> </exclusion> 
+				<exclusion> <groupId>javax.jms</groupId> <artifactId>jms</artifactId> </exclusion> 
+				<exclusion> <groupId>com.sun.jdmk</groupId> <artifactId>jmxtools</artifactId> 
+				</exclusion> <exclusion> <groupId>com.sun.jmx</groupId> <artifactId>jmxri</artifactId> 
+				</exclusion> </exclusions> -->
 		</dependency>
+
+
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
@@ -117,18 +127,34 @@
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.7.5</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.7.5</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>log4j</artifactId>
+					<groupId>log4j</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.avro</groupId>
 			<artifactId>avro-tools</artifactId>
 			<version>${avro.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>log4j</groupId>
+					<artifactId>log4j</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
+				</exclusion>
+
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.mongodb</groupId>
@@ -140,6 +166,21 @@
 			<artifactId>jena-arq</artifactId>
 			<!-- <version>2.11.1</version> -->
 			<version>2.11.1-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<groupId>log4j</groupId>
+					<artifactId>log4j</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+			</exclusions>
+
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>

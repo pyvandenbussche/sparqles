@@ -31,8 +31,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import sparqles.core.CONSTANTS;
-import sparqles.core.Dataset;
-import sparqles.core.Endpoint;
+import sparqles.avro.Dataset;
+import sparqles.avro.Endpoint;
 import sparqles.core.EndpointFactory;
 
 //http://datahub.io/api/2/search/resource?format=api/sparql&all_fields=1&limit=1000

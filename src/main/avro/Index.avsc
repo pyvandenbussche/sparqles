@@ -1,14 +1,14 @@
 {
-"namespace": "sparqles.analytics.avro",
+"namespace": "sparqles.avro.analytics",
 "type": "record",
 "name": "Index",
 "fields": [
-	{"name": "endpoint", "type": "sparqles.core.Endpoint"},
+	{"name": "endpoint", "type": "sparqles.avro.Endpoint"},
 	{"name": "lastUpdate", "type": "long" },
 	{"name": "availability", "type":
 		{"type": "array", "items": 
 			{	
-				"namespace": "sparqles.analytics.avro",	
+				"namespace": "sparqles.avro.analytics",	
 				"name": "AvailabilityIndex",
 				"type": "record",
 				"fields" : [
@@ -16,7 +16,7 @@
 					{ "name": "values", "type": 
       					{"type": "array", "items": 
 							{
-    						"namespace": "sparqles.analytics.avro",	
+    						"namespace": "sparqles.avro.analytics",	
  						"name": "IndexAvailabilityDataPoint",
       					"type": "record",
         				"fields" : [
@@ -30,7 +30,7 @@
 		}
 	},{"name": "performance", "type":
 		{
-			"namespace":"sparqles.core.analytics.avro",
+			"namespace":"sparqles.avro.analytics",
 			"type":"record",
 			"name":"IndexViewPerformance",
 			"fields":[
@@ -38,7 +38,7 @@
    	 			{"name": "data" , "type":
    	 				{"type": "array", "items": 
 						{	
-    						"namespace": "sparqles.analytics.avro",	
+    						"namespace": "sparqles.avro.analytics",	
  							"name": "IndexViewPerformanceData",
       						"type": "record",
         					"fields" : [
@@ -47,7 +47,7 @@
         						{ "name": "data" , "type":
    	 								{ "type": "array", "items": 
     									{	
-    										"namespace": "sparqles.analytics.avro",	
+    										"namespace": "sparqles.avro.analytics",	
  											"name": "IndexViewPerformanceDataValues",
       										"type": "record",
         									"fields" : [
@@ -66,14 +66,14 @@
  	},
  	{"name": "interoperability", "type":
 		{
-			"namespace":"sparqles.core.analytics.avro",
+			"namespace":"sparqles.avro.analytics",
 			"type":"record",
 			"name":"IndexViewInteroperability",
 			"fields":[
 				{"name": "data" , "type":
    	 				{"type": "array", "items": 
 						{	
-    						"namespace": "sparqles.analytics.avro",	
+    						"namespace": "sparqles.avro.analytics",	
  							"name": "IndexViewInterData",
       						"type": "record",
         					"fields" : [
@@ -82,7 +82,7 @@
         						{ "name": "data" , "type":
    	 								{ "type": "array", "items": 
     									{	
-    										"namespace": "sparqles.analytics.avro",	
+    										"namespace": "sparqles.avro.analytics",	
  											"name": "IndexViewInterDataValues",
       										"type": "record",
         									"fields" : [
@@ -102,14 +102,14 @@
  	
  	{"name": "discoverability", "type":
 		{
-			"namespace":"sparqles.core.analytics.avro",
+			"namespace":"sparqles.avro.analytics",
 			"type":"record",
 			"name":"IndexViewDiscoverability",
 			"fields":[
 				{"name": "serverName" , "type":
    	 				{"type": "array", "items": 
 						{	
-    						"namespace": "sparqles.analytics.avro",	
+    						"namespace": "sparqles.avro.analytics",	
  							"name": "IndexViewDiscoverabilityData",
       						"type": "record",
         					"fields" : [
@@ -117,7 +117,7 @@
         						{ "name": "values" , "type":
    	 								{ "type": "array", "items": 
     									{	
-    										"namespace": "sparqles.analytics.avro",	
+    										"namespace": "sparqles.avro.analytics",	
  											"name": "IndexViewDiscoverabilityDataValues",
       										"type": "record",
         									"fields" : [

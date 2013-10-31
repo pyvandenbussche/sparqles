@@ -1,8 +1,8 @@
-{"namespace": "sparqles.core.availability",
+{"namespace": "sparqles.avro.availability",
  "type": "record",
  "name": "AResult",
  "fields": [
-     {"name": "endpointResult", "type": "sparqles.core.EndpointResult"},
+     {"name": "endpointResult", "type": "sparqles.avro.EndpointResult"},
      {"name": "responseTime", "type": "long"},
      {"name": "isAvailable", "type": "boolean"},
      {"name": "isPrivate", "type": "boolean"},

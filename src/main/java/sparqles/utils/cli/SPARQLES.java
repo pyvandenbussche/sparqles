@@ -8,16 +8,17 @@ import org.apache.commons.cli.Options;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import sparqles.analytics.AAnalyserInit;
+import sparqles.analytics.AnalyserInit;
 import sparqles.analytics.IndexViewAnalytics;
 import sparqles.core.CONSTANTS;
-import sparqles.core.Endpoint;
+import sparqles.avro.Endpoint;
 import sparqles.core.SPARQLESProperties;
-import sparqles.core.availability.AResult;
-import sparqles.core.discovery.DResult;
-import sparqles.core.features.FResult;
-import sparqles.core.performance.PResult;
-import sparqles.schedule.Schedule;
+import sparqles.avro.availability.AResult;
+import sparqles.avro.discovery.DResult;
+import sparqles.avro.features.FResult;
+
+import sparqles.avro.performance.PResult;
+import sparqles.avro.schedule.Schedule;
 import sparqles.schedule.Scheduler;
 import sparqles.utils.DatahubAccess;
 import sparqles.utils.DateFormater;
@@ -131,7 +132,7 @@ public class SPARQLES extends CLIObject{
 	private void recomputeAnalytics(boolean onlyLast) {
 		dbm.initAggregateCollections();
 		
-		AAnalyserInit a = new AAnalyserInit(dbm, onlyLast);
+		AnalyserInit a = new AnalyserInit(dbm, onlyLast);
 		a.run();
 	}
 

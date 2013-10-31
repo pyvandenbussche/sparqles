@@ -1,9 +1,9 @@
 {
-"namespace": "sparqles.analytics.avro",
+"namespace": "sparqles.avro.analytics",
 "type": "record",
 "name": "InteroperabilityView",
 "fields": [ 
-	{"name": "endpoint", "type": "sparqles.core.Endpoint"},
+	{"name": "endpoint", "type": "sparqles.avro.Endpoint"},
 	{"name": "nbCompliantSPARQL1Features", "type": "int"},
 	{"name": "nbCompliantSPARQL11Features", "type": "int"},
 	{"name": "lastUpdate", "type": "long"}

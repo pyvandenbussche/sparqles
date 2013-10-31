@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.avro.Schema;
 import org.apache.avro.io.DecoderFactory;
@@ -18,19 +20,21 @@ import org.apache.avro.specific.SpecificRecordBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import sparqles.analytics.avro.AvailabilityView;
-import sparqles.analytics.avro.DiscoverabilityView;
-import sparqles.analytics.avro.EPView;
-import sparqles.analytics.avro.Index;
-import sparqles.analytics.avro.InteroperabilityView;
-import sparqles.analytics.avro.PerformanceView;
-import sparqles.core.Endpoint;
+import sparqles.avro.analytics.AvailabilityView;
+import sparqles.avro.analytics.DiscoverabilityView;
+import sparqles.avro.analytics.EPView;
+import sparqles.avro.analytics.Index;
+import sparqles.avro.analytics.InteroperabilityView;
+import sparqles.avro.analytics.PerformanceView;
+import sparqles.avro.Endpoint;
+
 import sparqles.core.SPARQLESProperties;
-import sparqles.core.availability.AResult;
-import sparqles.core.discovery.DResult;
-import sparqles.core.features.FResult;
-import sparqles.core.performance.PResult;
-import sparqles.schedule.Schedule;
+import sparqles.avro.availability.AResult;
+import sparqles.avro.core.Robots;
+import sparqles.avro.discovery.DResult;
+import sparqles.avro.features.FResult;
+import sparqles.avro.performance.PResult;
+import sparqles.avro.schedule.Schedule;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -56,8 +60,10 @@ public class MongoDBManager {
 
 	private final static String RESULT_KEY="endpointResult.endpoint.uri";
 	private final static String VIEW_KEY="endpoint.uri";
+	
 	private final static String COLL_SCHED="schedule";
 
+	private final static String COLL_ROBOTS="robots";
 	private final static String COLL_AVAIL="atasks";
 	private final static String COLL_PERF="ptasks";
 	private final static String COLL_DISC="dtasks";
@@ -71,6 +77,25 @@ public class MongoDBManager {
 	private final static String COLL_FEAT_AGG="ftasks_agg";
 	private final static String COLL_EP_VIEW="epview";
 
+	private static Map<Class, String[]> obj2col = new HashMap<Class, String[]>();
+	static {
+		obj2col.put(DResult.class, new String[]{COLL_DISC, RESULT_KEY});
+		obj2col.put(AResult.class, new String[]{COLL_AVAIL, RESULT_KEY});
+		obj2col.put(PResult.class, new String[]{COLL_PERF, RESULT_KEY});
+		obj2col.put(FResult.class, new String[]{COLL_FEAT, RESULT_KEY});
+		obj2col.put(Endpoint.class, new String[]{COLL_ENDS, RESULT_KEY});
+		obj2col.put(Robots.class, new String[]{COLL_ROBOTS, VIEW_KEY});
+		obj2col.put(Schedule.class, new String[]{COLL_SCHED, RESULT_KEY});
+
+		obj2col.put(AvailabilityView.class, new String[]{COLL_AVAIL_AGG, VIEW_KEY});
+		obj2col.put(EPView.class, new String[]{COLL_EP_VIEW, VIEW_KEY});
+		obj2col.put(Index.class, new String[]{COLL_INDEX, VIEW_KEY});
+		obj2col.put(PerformanceView.class, new String[]{COLL_PERF_AGG, VIEW_KEY});
+		obj2col.put(InteroperabilityView.class, new String[]{COLL_FEAT_AGG, VIEW_KEY});
+		obj2col.put(DiscoverabilityView.class, new String[]{COLL_DISC_AGG, VIEW_KEY} );
+	}
+	
+	
 	public MongoDBManager()  {
 		setup();
 	}
@@ -120,27 +145,26 @@ public class MongoDBManager {
 		}
 		return res;
 	}
-
+	
 
 	public <V extends SpecificRecordBase> boolean insert(V res) {
-		if(res instanceof DResult) return insert(COLL_DISC, res, res.getSchema() );
-		if(res instanceof AResult) return insert(COLL_AVAIL, res, res.getSchema() );
-		if(res instanceof PResult) return insert(COLL_PERF, res, res.getSchema() );
-		if(res instanceof FResult) return insert(COLL_FEAT, res, res.getSchema() );
-		if(res instanceof Endpoint) return insert(COLL_ENDS, res, res.getSchema() );
-		if(res instanceof Schedule) return insert(COLL_SCHED, res, res.getSchema() );
-
-		if(res instanceof AvailabilityView) return insert(COLL_AVAIL_AGG, res, res.getSchema() );
-		if(res instanceof EPView) return insert(COLL_EP_VIEW, res, res.getSchema() );
-		if(res instanceof Index) return insert(COLL_INDEX, res, res.getSchema() );
-		if(res instanceof PerformanceView) return insert(COLL_PERF_AGG, res, res.getSchema() );
-		if(res instanceof InteroperabilityView) return insert(COLL_FEAT_AGG, res, res.getSchema() );
-		if(res instanceof DiscoverabilityView) return insert(COLL_DISC_AGG, res, res.getSchema() );
-
-
+		String[] v = obj2col.get(res.getClass());
+		if(v != null && v[0] != null)
+			return insert(v[0], res, res.getSchema() );
+		else{
+			log.warn("Collection for {} unknown", res.getClass());
+		}
 		return false;
 	}
 
+	public Endpoint getEndpoint(Endpoint ep) {
+		List<Endpoint> res = scan(ep, COLL_ENDS, Endpoint.class, Endpoint.SCHEMA$, VIEW_KEY);
+		if(res.size()!=0){
+			log.error("Received {} results for {}; expected one result ", res.size(), ep);
+		}
+		if(res.size()==0) return null;
+		return res.get(0);
+	}
 
 
 	private boolean insert(String collName, Object e, Schema schema){
@@ -169,6 +193,8 @@ public class MongoDBManager {
 
 
 	public <V extends SpecificRecordBase> boolean update(V res){
+		
+		
 		if(res instanceof AvailabilityView) return update(COLL_AVAIL_AGG, ((AvailabilityView) res).getEndpoint(),res, res.getSchema(),VIEW_KEY );
 		if(res instanceof PerformanceView) return update(COLL_PERF_AGG, ((PerformanceView) res).getEndpoint(),res, res.getSchema(),VIEW_KEY );
 		if(res instanceof InteroperabilityView) return update(COLL_FEAT_AGG, ((InteroperabilityView) res).getEndpoint(),res, res.getSchema(),VIEW_KEY );
@@ -214,20 +240,14 @@ public class MongoDBManager {
 
 
 	public <T> List<T> getResults(Endpoint ep, Class<T> cls, Schema schema) {
-		if(cls.getName().equals(DResult.class.getName())) return scan(ep,COLL_DISC, cls,schema, RESULT_KEY);
-		if(cls.getName().equals(AResult.class.getName())) return scan(ep,COLL_AVAIL,cls, schema, RESULT_KEY);
-		if(cls.getName().equals(PResult.class.getName())) return scan(ep,COLL_PERF, cls,schema, RESULT_KEY);
-		if(cls.getName().equals(FResult.class.getName())) return scan(ep,COLL_FEAT, cls,schema, RESULT_KEY);
-		if(cls.getName().equals(Endpoint.class.getName())) return scan(ep,COLL_ENDS, cls,schema, VIEW_KEY);
-		if(cls.getName().equals(Schedule.class.getName())) return scan(ep,COLL_SCHED, cls,schema, VIEW_KEY);
-
-		if(cls.getName().equals(AvailabilityView.class.getName())) return scan(ep,COLL_AVAIL_AGG, cls,schema, VIEW_KEY);
-		if(cls.getName().equals(PerformanceView.class.getName())) return scan(ep,COLL_PERF_AGG, cls,schema, VIEW_KEY);
-		if(cls.getName().equals(InteroperabilityView.class.getName())) return scan(ep,COLL_FEAT_AGG, cls,schema, VIEW_KEY);
-		if(cls.getName().equals(DiscoverabilityView.class.getName())) return scan(ep,COLL_DISC_AGG, cls,schema, VIEW_KEY);
-		if(cls.getName().equals(EPView.class.getName())) return scan(ep,COLL_EP_VIEW, cls,schema, VIEW_KEY); 
-		if(cls.getName().equals(Index.class.getName())) return scan(ep,COLL_INDEX, cls,schema, VIEW_KEY);
-		return null;
+		String[] v = obj2col.get(cls);
+		
+		if(v != null && v[0] != null&& v[1] != null)
+			return scan(ep,v[0], cls,schema, v[1]);
+		else{
+			log.warn("Collection for {} unknown", cls);
+		}
+		return new ArrayList<T>();
 	}
 
 	public boolean close(){
@@ -365,12 +385,5 @@ public class MongoDBManager {
 		return reslist;
 	}
 
-	public Endpoint getEndpoint(Endpoint ep) {
-		List<Endpoint> res = scan(ep, COLL_ENDS, Endpoint.class, Endpoint.SCHEMA$, VIEW_KEY);
-		if(res.size()!=0){
-			log.error("Received {} results for {}; expected one result ", res.size(), ep);
-		}
-		if(res.size()==0) return null;
-		return res.get(0);
-	}
+
 }

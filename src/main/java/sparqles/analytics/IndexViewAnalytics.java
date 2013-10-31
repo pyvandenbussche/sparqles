@@ -15,30 +15,31 @@ import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import sparqles.analytics.avro.AvailabilityIndex;
-import sparqles.analytics.avro.EPView;
-import sparqles.analytics.avro.EPViewAvailability;
-import sparqles.analytics.avro.EPViewAvailabilityDataPoint;
-import sparqles.analytics.avro.EPViewDiscoverabilityData;
-import sparqles.analytics.avro.EPViewInteroperabilityData;
-import sparqles.analytics.avro.EPViewPerformanceData;
-import sparqles.analytics.avro.EPViewPerformanceDataValues;
-import sparqles.analytics.avro.Index;
-import sparqles.analytics.avro.IndexAvailabilityDataPoint;
-import sparqles.analytics.avro.IndexViewDiscoverabilityData;
-import sparqles.analytics.avro.IndexViewDiscoverabilityDataValues;
-import sparqles.analytics.avro.IndexViewInterData;
-import sparqles.analytics.avro.IndexViewInterDataValues;
-import sparqles.analytics.avro.IndexViewPerformanceData;
-import sparqles.analytics.avro.IndexViewPerformanceDataValues;
+
+import sparqles.avro.analytics.AvailabilityIndex;
+import sparqles.avro.analytics.EPView;
+import sparqles.avro.analytics.EPViewAvailability;
+import sparqles.avro.analytics.EPViewAvailabilityDataPoint;
+import sparqles.avro.analytics.EPViewDiscoverability;
+import sparqles.avro.analytics.EPViewDiscoverabilityData;
+import sparqles.avro.analytics.EPViewInteroperability;
+import sparqles.avro.analytics.EPViewInteroperabilityData;
+import sparqles.avro.analytics.EPViewPerformance;
+import sparqles.avro.analytics.EPViewPerformanceData;
+import sparqles.avro.analytics.EPViewPerformanceDataValues;
+import sparqles.avro.analytics.Index;
+import sparqles.avro.analytics.IndexAvailabilityDataPoint;
+import sparqles.avro.analytics.IndexViewDiscoverability;
+import sparqles.avro.analytics.IndexViewDiscoverabilityData;
+import sparqles.avro.analytics.IndexViewDiscoverabilityDataValues;
+import sparqles.avro.analytics.IndexViewInterData;
+import sparqles.avro.analytics.IndexViewInterDataValues;
+import sparqles.avro.analytics.IndexViewInteroperability;
+import sparqles.avro.analytics.IndexViewPerformance;
+import sparqles.avro.analytics.IndexViewPerformanceData;
+import sparqles.avro.analytics.IndexViewPerformanceDataValues;
 import sparqles.core.CONSTANTS;
 import sparqles.core.Task;
-import sparqles.core.analytics.avro.EPViewDiscoverability;
-import sparqles.core.analytics.avro.EPViewInteroperability;
-import sparqles.core.analytics.avro.EPViewPerformance;
-import sparqles.core.analytics.avro.IndexViewDiscoverability;
-import sparqles.core.analytics.avro.IndexViewInteroperability;
-import sparqles.core.analytics.avro.IndexViewPerformance;
 import sparqles.utils.MongoDBManager;
 
 public class IndexViewAnalytics implements Task<Index>{
@@ -197,10 +198,16 @@ public class IndexViewAnalytics implements Task<Index>{
 		}else
 			iv.setNoDescription(0D);
 		
-		v =stats.get("sd");
+		if(stats.containsKey("sd"))
+			v =stats.get("sd");
+		else v=0;
+		
 		iv.setSDDescription(v/(double)stats.get("total"));
 		
-		v = stats.get("void");
+		if(stats.containsKey("void"))
+			v = stats.get("void");
+		else v=0;
+	
 		iv.setVoIDDescription(v/(double)stats.get("total"));
 	}
 

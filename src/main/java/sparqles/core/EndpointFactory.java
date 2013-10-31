@@ -4,6 +4,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
+import sparqles.avro.Dataset;
+import sparqles.avro.Endpoint;
+
 public class EndpointFactory {
 
 	public static Endpoint newEndpoint(URI uri) {

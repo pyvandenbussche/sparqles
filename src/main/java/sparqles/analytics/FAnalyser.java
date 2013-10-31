@@ -10,21 +10,21 @@ import org.mortbay.log.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import sparqles.analytics.avro.EPView;
-import sparqles.analytics.avro.EPViewInteroperabilityData;
-import sparqles.analytics.avro.EPViewPerformanceData;
-import sparqles.analytics.avro.EPViewPerformanceDataValues;
-import sparqles.analytics.avro.InteroperabilityView;
-import sparqles.analytics.avro.PerformanceView;
-import sparqles.core.Endpoint;
-import sparqles.core.analytics.avro.EPViewPerformance;
-import sparqles.core.features.FResult;
-import sparqles.core.features.FRun;
-import sparqles.core.features.FSingleResult;
-import sparqles.core.features.SpecificFTask;
-import sparqles.core.performance.PResult;
-import sparqles.core.performance.PSingleResult;
-import sparqles.core.performance.Run;
+import sparqles.avro.analytics.EPView;
+import sparqles.avro.analytics.EPViewInteroperabilityData;
+import sparqles.avro.analytics.EPViewPerformanceData;
+import sparqles.avro.analytics.EPViewPerformanceDataValues;
+import sparqles.avro.analytics.InteroperabilityView;
+import sparqles.avro.analytics.PerformanceView;
+import sparqles.avro.Endpoint;
+import sparqles.avro.analytics.EPViewPerformance;
+import sparqles.avro.features.FResult;
+import sparqles.avro.features.FSingleResult;
+
+import sparqles.avro.performance.PResult;
+import sparqles.avro.performance.PSingleResult;
+import sparqles.avro.performance.Run;
+import sparqles.core.interoperability.SpecificFTask;
 import sparqles.utils.MongoDBManager;
 
 public class FAnalyser extends Analytics<FResult> {

@@ -20,9 +20,11 @@ import sparqles.utils.FileManager;
 import sparqles.utils.MongoDBManager;
 import sparqles.core.EndpointTask;
 import sparqles.core.SPARQLESProperties;
-import sparqles.core.Endpoint;
+import sparqles.avro.Endpoint;
+import sparqles.avro.schedule.Schedule;
 import sparqles.core.Task;
 import sparqles.core.TaskFactory;
+import sparqles.core.availability.ATask;
 import static sparqles.core.CONSTANTS.*;
 
 public class Scheduler {
@@ -32,7 +34,7 @@ public class Scheduler {
 	private final static String CRON_EVERY_HOUR="0 0 0/1 1/1 * ? *";
 	private final static String CRON_EVERY_ONETEN="0 30 1/12 1/1 * ? *";
 	private final static String CRON_EVERY_DAY_AT_715="0 15 7 1/1 * ? *";
-	private final static String CRON_EVERY_WED_THU_AT_410="0 10 4 ? * WED,THU *";
+	private final static String CRON_EVERY_MON_WED_FRI_SUN_THU_AT_410="0 10 4 ? * WED,THU *";
 
 	private final static String CRON_EVERY_SUN_AT_310="0 10 3 ? * SUN *";
 	private final static String CRON_EVERY_SUN_AT_2330="0 30 23 ? * SUN *";
@@ -43,6 +45,7 @@ public class Scheduler {
 
 	/**
 	 * The default schedules for various tasks
+	 * http://www.cronmaker.com/
 	 */
 	private final static Map<String,String> taskSchedule = new HashMap<String,String>();
 	static{
@@ -53,7 +56,7 @@ public class Scheduler {
 		taskSchedule.put(ITASK, CRON_EVERY_DAY_AT_715);
 	}
 
-	private final ScheduledExecutorService SERVICE;
+	private final ScheduledExecutorService SERVICE, ASERVICE;
 	private FileManager _fm;
 	private MongoDBManager _dbm;
 
@@ -62,8 +65,11 @@ public class Scheduler {
 	}
 
 	public Scheduler(int threads){
-		SERVICE = Executors.newScheduledThreadPool(threads);
-		log.info("[INIT] Scheduler with {} threads",threads);
+		int athreads = (int)( threads * 0.3);
+		
+		SERVICE = Executors.newScheduledThreadPool(threads - athreads);
+		ASERVICE = Executors.newScheduledThreadPool(athreads);
+		log.info("[INIT] Scheduler with {} athreads and {} threads",athreads, athreads);
 	}
 
 	/**
@@ -128,7 +134,10 @@ public class Scheduler {
 
 		SchedulerTimerTask t = new SchedulerTimerTask(task,iter);
 
-		SERVICE.schedule(t, startTime, TimeUnit.MILLISECONDS);
+		if(task instanceof ATask)
+			ASERVICE.schedule(t, startTime, TimeUnit.MILLISECONDS);
+		else 
+			SERVICE.schedule(t, startTime, TimeUnit.MILLISECONDS);
 		Object [] s = {task, time, iter};
 		log.info("[SCHEDULED] {} next:'{}' policy:'{}'",s);
 	}
@@ -141,21 +150,20 @@ public class Scheduler {
 	private void reschedule(Task task,
 			ScheduleIterator iter) {
 		Date time = iter.next();
-
 		if(time.getTime() <  System.currentTimeMillis()){
 			log.warn("[PAST] stop scheduling task, next date is in the past!");
 			return;
 		}
-		
 		if(task instanceof EndpointTask){
 			EndpointTask t = (EndpointTask) task;
-			
 			Endpoint ep = _dbm.getEndpoint(t.getEndpoint());
 			t.setEndpoint(ep);
 		}
-		long startTime = time.getTime() - System.currentTimeMillis();
-		SchedulerTimerTask t = new SchedulerTimerTask(task,iter);
-		SERVICE.schedule(t, startTime, TimeUnit.MILLISECONDS);
+		schedule(task, iter);
+		
+//		long startTime = time.getTime() - System.currentTimeMillis();
+//		SchedulerTimerTask t = new SchedulerTimerTask(task,iter);
+//		SERVICE.schedule(t, startTime, TimeUnit.MILLISECONDS);
 		Object [] s = {task, time, iter};
 		log.info("[RESCHEDULED] {} next:'{}' policy:'{}'",s);
 	}

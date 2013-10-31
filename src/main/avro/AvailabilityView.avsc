@@ -1,9 +1,9 @@
 {
-"namespace": "sparqles.analytics.avro",
+"namespace": "sparqles.avro.analytics",
 "type": "record",
 "name": "AvailabilityView",
 "fields": [ 
-	{"name": "endpoint", "type": "sparqles.core.Endpoint"},
+	{"name": "endpoint", "type": "sparqles.avro.Endpoint"},
 	{"name": "upNow", "type": "boolean"},
 	{"name": "uptimeLast24h", "type": "double"},
 	{"name": "uptimeLast7d", "type": "double"},

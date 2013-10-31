@@ -14,7 +14,7 @@ import org.junit.Test;
 import sparqles.core.SPARQLESProperties;
 import sparqles.core.Endpoint;
 import sparqles.core.EndpointFactory;
-import sparqles.core.features.FResult;
+import sparqles.core.interoperability.FResult;
 import sparqles.core.performance.PResult;
 import sparqles.utils.MongoDBManager;
 

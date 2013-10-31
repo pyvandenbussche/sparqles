@@ -27,13 +27,14 @@ import org.apache.avro.specific.SpecificRecordBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import sparqles.core.Endpoint;
+import sparqles.avro.Endpoint;
+import sparqles.avro.availability.AResult;
+import sparqles.avro.discovery.DResult;
+import sparqles.avro.features.FResult;
+import sparqles.avro.performance.PResult;
 import sparqles.core.EndpointFactory;
 import sparqles.core.SPARQLESProperties;
-import sparqles.core.availability.AResult;
-import sparqles.core.discovery.DResult;
-import sparqles.core.features.FResult;
-import sparqles.core.performance.PResult;
+
 
 import com.hp.hpl.jena.graph.Triple;
 import com.hp.hpl.jena.query.QuerySolution;

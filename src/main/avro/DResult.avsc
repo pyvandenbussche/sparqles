@@ -1,38 +1,61 @@
 {
-	"namespace": "sparqles.core.discovery",
+	"namespace": "sparqles.avro.discovery",
  	"type": "record",
  	"name": "DResult",
  	"fields": [
-    	{"name": "endpointResult", "type": "sparqles.core.EndpointResult"},
-    	{"name": "GetResult", "type": {
+    	{"name": "endpointResult", "type": "sparqles.avro.EndpointResult"},
+    	{"name": "RobotsTXT", "type": {
     		"type": "record",
-    		"name": "GetResult",
+    		"name": "RobotsTXT",
       		
         	"fields" : [
-        		{"name": "ResponseType", "type": "string" },
-        		{"name": "ResponseCode", "type": "string" },
-        		{"name": "ResponseServer", "type": "string" },
-        		{"name": "ResponseLink", "type": "string" },
-        		{"name": "SPARQLDESCterms", "type": "int" },
-        		{"name": "Exception", "type": ["string", "null"] },
-    			{"name": "VOIDterms", "type": "int" },
-      			{"name":"SPARQLDESCpreds",
-      			"type":{"type":"map","values":["int"]}
-		      	},
-       			{"name":"voiDpreds",
-      			"type":{"type":"map","values":["int"]}
-      			}
-        	]}
-    	},
-    	{"name": "VoidResult", "type": {
-    		"type": "record",
-    		"name": "VoidResult",
-    		"namespace":"sparqles.core.discovery",
-      		"fields" : [
-        		{"name": "voidFile", "type": {"type": "array", "items": "string"} },
+        		{"name": "hasRobotsTXT", "type": "boolean" ,"default" : false},
+        		{"name": "allowedByRobotsTXT", "type": "boolean" ,"default" : true },
+        		{"name": "sitemapXML", "type": "boolean" ,"default" : false },
+        		{"name": "sitemapXMLSPARQL", "type": "boolean" ,"default" : false },
+        		{"name": "sitemapXMLSPARQLMatch", "type": "boolean" ,"default" : false },
+        		{"name": "sitemapXMLVoiD", "type": "boolean" ,"default" : false },
         		{"name": "Exception", "type": ["string", "null"] }
         	]}
-    	},
-    	{"name": "VoidStoreResult", "type": "sparqles.core.discovery.VoidResult"}
+        },
+        {"name": "descriptionFiles", "type":  
+        	{"type": "array", "items": 
+				{
+    			"namespace": "sparqles.avro.discovery",	
+ 				"name": "DGETInfo",
+      			"type": "record",
+        		"fields" : [
+        			{ "name": "allowedByRobotsTXT", "type": "boolean" ,"default" : true },
+        			{ "name": "Operation", "type": "string"},
+        			{ "name": "URL", "type": "string"},
+        			{ "name": "Exception", "type": ["string", "null"] },
+        			{ "name": "ResponseType", "type": ["string","null"] },
+        			{ "name": "ResponseCode", "type": ["string","null"] },
+        			{ "name": "ResponseServer", "type": ["string","null"] },
+        			{ "name": "ResponseLink", "type": ["string","null"] },
+        			{ "name": "Content", "type": "string" },
+        			{ "name":"SPARQLDESCpreds",
+      					"type":{"type":"map","values":["int"]}
+		      		},
+       				{ "name":"voiDpreds",
+      					"type":{"type":"map","values":["int"]}
+      				}
+        		]}
+        	}
+        },
+        {"name": "queryInfo", "type":  
+        	{"type": "array", "items": 
+				{
+    			"namespace": "sparqles.avro.discovery",	
+ 				"name": "QueryInfo",
+      			"type": "record",
+        		"fields" : [
+        			{ "name": "URL", "type": "string"},
+        			{ "name": "Exception", "type": ["string", "null"] },
+        			{ "name": "Results", "type": "string" },
+        			{"name": "descriptionFiles", "type": {"type": "array", "items": "string"}} 
+        		]}
+        	}
+        }
  	]
 }

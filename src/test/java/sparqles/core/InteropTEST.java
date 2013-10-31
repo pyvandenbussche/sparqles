@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import sparqles.core.availability.AResult;
 import sparqles.core.availability.ATask;
-import sparqles.core.features.FResult;
+import sparqles.core.interoperability.FResult;
 import sparqles.core.performance.PResult;
 import sparqles.schedule.Schedule;
 import sparqles.schedule.Scheduler;

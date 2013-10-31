@@ -7,8 +7,10 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import sparqles.core.Endpoint;
-import sparqles.core.EndpointResult;
+import sparqles.avro.Endpoint;
+import sparqles.avro.EndpointResult;
+import sparqles.avro.performance.PResult;
+import sparqles.avro.performance.PSingleResult;
 import sparqles.core.EndpointTask;
 import sparqles.core.SPARQLESProperties;
 

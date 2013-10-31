@@ -2,33 +2,16 @@ package sparqles.analytics;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
-import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 import org.mortbay.log.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import sparqles.analytics.avro.DiscoverabilityView;
-import sparqles.analytics.avro.EPView;
-import sparqles.analytics.avro.EPViewDiscoverabilityData;
-import sparqles.analytics.avro.EPViewInteroperabilityData;
-import sparqles.analytics.avro.EPViewPerformanceData;
-import sparqles.analytics.avro.EPViewPerformanceDataValues;
-import sparqles.analytics.avro.InteroperabilityView;
-import sparqles.analytics.avro.PerformanceView;
-import sparqles.core.Endpoint;
-import sparqles.core.analytics.avro.EPViewDiscoverability;
-import sparqles.core.analytics.avro.EPViewPerformance;
-import sparqles.core.discovery.DResult;
-import sparqles.core.features.FResult;
-import sparqles.core.features.FRun;
-import sparqles.core.features.FSingleResult;
-import sparqles.core.features.SpecificFTask;
-import sparqles.core.performance.PResult;
-import sparqles.core.performance.PSingleResult;
-import sparqles.core.performance.Run;
+import sparqles.avro.Endpoint;
+import sparqles.avro.analytics.DiscoverabilityView;
+import sparqles.avro.analytics.EPView;
+import sparqles.avro.analytics.EPViewDiscoverabilityData;
+import sparqles.avro.discovery.DResult;
 import sparqles.utils.MongoDBManager;
 
 public class DAnalyser extends Analytics<DResult> {
@@ -49,33 +32,33 @@ public class DAnalyser extends Analytics<DResult> {
 		
 		DiscoverabilityView dview= getView(ep);
 		EPView epview=getEPView(ep);
-		
-		dview.setServerName(pres.getGetResult().getResponseServer());
-		dview.setSD(pres.getGetResult().getSPARQLDESCterms()!=0);
-		dview.setVoID(pres.getGetResult().getVOIDterms()!=0 || pres.getVoidResult().getVoidFile().size()!=0);
-		
-		
-		EPViewDiscoverability depview = epview.getDiscoverability();
-		depview.setServerName(pres.getGetResult().getResponseServer());
-//		depview.set
+//		
+//		dview.setServerName(pres.getGetResult().getResponseServer());
+//		dview.setSD(pres.getGetResult().getSPARQLDESCterms()!=0);
+//		dview.setVoID(pres.getGetResult().getVOIDterms()!=0 || pres.getVoidResult().getVoidFile().size()!=0);
+//		
+//		
+//		EPViewDiscoverability depview = epview.getDiscoverability();
+//		depview.setServerName(pres.getGetResult().getResponseServer());
+////		depview.set
 		
 		List<EPViewDiscoverabilityData> l = new ArrayList<EPViewDiscoverabilityData>();
 		
-		EPViewDiscoverabilityData d = new EPViewDiscoverabilityData("HTTP Get", pres.getGetResult().getVOIDterms()!=0);
-		l.add(d);
-		d = new EPViewDiscoverabilityData("SPARQL Endpoint content", pres.getVoidResult().getVoidFile().size()!=0);
-		l.add(d);
+//		EPViewDiscoverabilityData d = new EPViewDiscoverabilityData("HTTP Get", pres.getGetResult().getVOIDterms()!=0);
+//		l.add(d);
+//		d = new EPViewDiscoverabilityData("SPARQL Endpoint content", pres.getVoidResult().getVoidFile().size()!=0);
+//		l.add(d);
 		
-		depview.setVoIDDescription(l);
+//		depview.setVoIDDescription(l);
 		
 		l = new ArrayList<EPViewDiscoverabilityData>();
-		d = new EPViewDiscoverabilityData("HTTP Get", pres.getGetResult().getSPARQLDESCterms()!=0);
-		l.add(d);
+//		d = new EPViewDiscoverabilityData("HTTP Get", pres.getGetResult().getSPARQLDESCterms()!=0);
+//		l.add(d);
 //		d = new EPViewDiscoverabilityData("SPARQL Endpoint content", pres.getVoidResult().getSPARQLFile().size()!=0);
 //		l.add(d);
 		
 		
-		depview.setSDDescription(l);
+//		depview.setSDDescription(l);
 		
 		dview.setLastUpdate(pres.getEndpointResult().getEnd());
 		

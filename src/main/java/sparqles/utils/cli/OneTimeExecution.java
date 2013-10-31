@@ -17,7 +17,7 @@ import org.apache.avro.specific.SpecificRecordBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import sparqles.core.Endpoint;
+import sparqles.avro.Endpoint;
 import sparqles.core.Task;
 import sparqles.core.TaskFactory;
 import sparqles.utils.FileManager;

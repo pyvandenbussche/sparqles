@@ -8,12 +8,12 @@ import org.mortbay.log.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import sparqles.analytics.avro.AvailabilityView;
-import sparqles.analytics.avro.EPView;
-import sparqles.analytics.avro.EPViewAvailability;
-import sparqles.analytics.avro.EPViewAvailabilityDataPoint;
-import sparqles.core.Endpoint;
-import sparqles.core.availability.AResult;
+import sparqles.avro.analytics.AvailabilityView;
+import sparqles.avro.analytics.EPView;
+import sparqles.avro.analytics.EPViewAvailability;
+import sparqles.avro.analytics.EPViewAvailabilityDataPoint;
+import sparqles.avro.Endpoint;
+import sparqles.avro.availability.AResult;
 import sparqles.utils.MongoDBManager;
 
 public class AAnalyser extends Analytics<AResult> {

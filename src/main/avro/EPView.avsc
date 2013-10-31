@@ -1,11 +1,11 @@
 {
-"namespace": "sparqles.analytics.avro",
+"namespace": "sparqles.avro.analytics",
 "type": "record",
 "name": "EPView",
 "fields": [ 
-	{"name": "endpoint", "type": "sparqles.core.Endpoint"},
+	{"name": "endpoint", "type": "sparqles.avro.Endpoint"},
 	{"name": "availability", "type": { 
-		"namespace": "sparqles.analytics.avro",	
+		"namespace": "sparqles.avro.analytics",	
 		"name": "EPViewAvailability",
       	"type": "record",
       	"fields" : [
@@ -16,7 +16,7 @@
       		{ "name": "uptimeLast31d", "type": "double"},
       		{ "name": "uptimeOverall", "type": "double"},
       		{ "name": "data", "type": {
-      			"namespace": "sparqles.analytics.avro",	
+      			"namespace": "sparqles.avro.analytics",	
 				"name": "EPViewAvailabilityData",
       			"type": "record",
       			"fields" : [
@@ -24,7 +24,7 @@
       				{ "name": "values", "type": 
       					{"type": "array", "items": 
 							{
-    							"namespace": "sparqles.analytics.avro",	
+    							"namespace": "sparqles.avro.analytics",	
  								"name": "EPViewAvailabilityDataPoint",
       							"type": "record",
         						"fields" : [
@@ -41,7 +41,7 @@
 	},
 	{"name": "performance", "type":
 		{
-			"namespace":"sparqles.core.analytics.avro",
+			"namespace":"sparqles.avro.analytics",
 			"type":"record",
 			"name":"EPViewPerformance",
 			"fields":[
@@ -49,7 +49,7 @@
 				{"name": "ask" , "type": 
 					{"type": "array", "items": 
 						{
-    						"namespace": "sparqles.analytics.avro",	
+    						"namespace": "sparqles.avro.analytics",	
  							"name": "EPViewPerformanceData",
       						"type": "record",
         					"fields" : [
@@ -58,7 +58,7 @@
         						{ "name": "data" , "type":
    	 								{ "type": "array", "items": 
     									{	
-    										"namespace": "sparqles.analytics.avro",	
+    										"namespace": "sparqles.avro.analytics",	
  											"name": "EPViewPerformanceDataValues",
      										"type": "record",
         									"fields" : [
@@ -73,20 +73,20 @@
       					}	
       				}
 				},
-				{"name": "join" , "type": {"type": "array", "items": "array", "items" : "sparqles.analytics.avro.EPViewPerformanceData"}}
+				{"name": "join" , "type": {"type": "array", "items": "array", "items" : "sparqles.avro.analytics.EPViewPerformanceData"}}
    	 		]
    	 	}
  	},
  	{"name": "interoperability", "type":
 		{
-			"namespace":"sparqles.core.analytics.avro",
+			"namespace":"sparqles.avro.analytics",
 			"type":"record",
 			"name":"EPViewInteroperability",
 			"fields":[
 				{"name": "SPARQL1Features" , "type": 
 					{"type": "array", "items": 
 						{
-    						"namespace": "sparqles.analytics.avro",	
+    						"namespace": "sparqles.avro.analytics",	
  							"name": "EPViewInteroperabilityData",
       						"type": "record",
         					"fields" : [
@@ -97,13 +97,13 @@
       					}	
       				}
 				},
-				{"name": "SPARQL11Features" , "type": {"type": "array", "items": "array", "items" : "sparqles.analytics.avro.EPViewInteroperabilityData"}}
+				{"name": "SPARQL11Features" , "type": {"type": "array", "items": "array", "items" : "sparqles.avro.analytics.EPViewInteroperabilityData"}}
    	 		]
    	 	}
  	},
  	{"name": "discoverability", "type":
 		{
-			"namespace":"sparqles.core.analytics.avro",
+			"namespace":"sparqles.avro.analytics",
 			"type":"record",
 			"name":"EPViewDiscoverability",
 			"fields":[
@@ -111,7 +111,7 @@
 				{"name": "VoIDDescription" , "type": 
 					{"type": "array", "items": 
 						{
-    						"namespace": "sparqles.analytics.avro",	
+    						"namespace": "sparqles.avro.analytics",	
  							"name": "EPViewDiscoverabilityData",
       						"type": "record",
         					"fields" : [
@@ -121,7 +121,7 @@
       					}	
       				}
 				},
-				{"name": "SDDescription" , "type": {"type": "array", "items": "array", "items" : "sparqles.analytics.avro.EPViewDiscoverabilityData"}}
+				{"name": "SDDescription" , "type": {"type": "array", "items": "array", "items" : "sparqles.avro.analytics.EPViewDiscoverabilityData"}}
    	 		]
    	 	}
  	}

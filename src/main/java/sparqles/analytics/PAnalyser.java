@@ -10,14 +10,14 @@ import org.mortbay.log.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import sparqles.analytics.avro.EPView;
-import sparqles.analytics.avro.EPViewPerformanceData;
-import sparqles.analytics.avro.EPViewPerformanceDataValues;
-import sparqles.analytics.avro.PerformanceView;
-import sparqles.core.Endpoint;
-import sparqles.core.analytics.avro.EPViewPerformance;
-import sparqles.core.performance.PResult;
-import sparqles.core.performance.PSingleResult;
+import sparqles.avro.analytics.EPView;
+import sparqles.avro.analytics.EPViewPerformanceData;
+import sparqles.avro.analytics.EPViewPerformanceDataValues;
+import sparqles.avro.analytics.PerformanceView;
+import sparqles.avro.Endpoint;
+import sparqles.avro.analytics.EPViewPerformance;
+import sparqles.avro.performance.PResult;
+import sparqles.avro.performance.PSingleResult;
 import sparqles.utils.MongoDBManager;
 
 public class PAnalyser extends Analytics<PResult> {

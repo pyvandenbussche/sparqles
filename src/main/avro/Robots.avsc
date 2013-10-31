@@ -1,0 +1,12 @@
+{
+"namespace": "sparqles.avro.core",
+ "type": "record",
+ "name": "Robots",
+ "fields": [
+    	{"name": "endpoint", "type": "sparqles.avro.Endpoint"},
+     	{"name": "content", "type": ["string", "null"]},
+     	{"name": "exception", "type": "string"},
+     	{"name": "respCode", "type": "int"},
+     	{"name": "timestamp", "type": "long"} 
+ 	]
+}

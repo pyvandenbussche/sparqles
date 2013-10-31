@@ -3,9 +3,10 @@ package sparqles.core.performance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import sparqles.core.Endpoint;
+import sparqles.avro.Endpoint;
+import sparqles.avro.performance.PSingleResult;
 import sparqles.core.SPARQLESProperties;
-import sparqles.core.features.TaskRun;
+import sparqles.core.interoperability.TaskRun;
 
 public class PRun extends TaskRun{
 

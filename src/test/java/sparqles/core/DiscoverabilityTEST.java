@@ -7,7 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import sparqles.core.discovery.DResult;
+import sparqles.core.discovery.avro.DResult;
 import sparqles.core.performance.PResult;
 import sparqles.utils.MongoDBManager;
 
@@ -46,16 +46,13 @@ public class DiscoverabilityTEST {
 		DResult res = t.call();
 		System.out.println(res);
 		m.insert(res);
-		
 	}
 
 	@Test
 	public void testGroup() throws Exception {
-		
 		Endpoint [] eps = {Endpoints.DBPEDIA,Endpoints.AEMET};
 		for(Endpoint ep: eps){
 			test(ep);
 		}
-	
 	}
 }

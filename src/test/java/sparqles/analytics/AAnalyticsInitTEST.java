@@ -32,7 +32,7 @@ public class AAnalyticsInitTEST {
 	public void test() {
 		m.initAggregateCollections();
 		
-		AAnalyserInit a = new AAnalyserInit(m);
+		AnalyserInit a = new AnalyserInit(m);
 		a.run();
 	}
 

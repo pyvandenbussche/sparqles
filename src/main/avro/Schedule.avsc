@@ -1,9 +1,9 @@
 {
-"namespace": "sparqles.schedule",
+"namespace": "sparqles.avro.schedule",
  "type": "record",
  "name": "Schedule",
  "fields": [
-    {"name": "endpoint", "type": "sparqles.core.Endpoint"},
+    {"name": "endpoint", "type": "sparqles.avro.Endpoint"},
     {"name": "ATask", "type": ["string", "null"]},
     {"name": "FTask", "type": ["string", "null"]},
     {"name": "PTask", "type": ["string", "null"]},

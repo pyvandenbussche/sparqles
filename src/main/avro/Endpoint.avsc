@@ -1,5 +1,5 @@
 {
-"namespace": "sparqles.core",
+"namespace": "sparqles.avro",
  "type": "record",
  "name": "Endpoint",
  "fields": [
@@ -7,7 +7,7 @@
     {"name": "datasets", "type":
     	{"type": "array", "items": 
     		{	
-    			"namespace": "sparqles.core",	
+    			"namespace": "sparqles.avro",	
  				"name": "Dataset",
       			"type": "record",
         		"fields" : [

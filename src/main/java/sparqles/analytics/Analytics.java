@@ -7,17 +7,17 @@ import java.util.List;
 import org.apache.avro.specific.SpecificRecordBase;
 import org.mortbay.log.Log;
 
-import sparqles.analytics.avro.EPView;
-import sparqles.analytics.avro.EPViewAvailability;
-import sparqles.analytics.avro.EPViewAvailabilityData;
-import sparqles.analytics.avro.EPViewAvailabilityDataPoint;
-import sparqles.analytics.avro.EPViewDiscoverabilityData;
-import sparqles.analytics.avro.EPViewInteroperabilityData;
-import sparqles.analytics.avro.EPViewPerformanceData;
-import sparqles.core.Endpoint;
-import sparqles.core.analytics.avro.EPViewDiscoverability;
-import sparqles.core.analytics.avro.EPViewInteroperability;
-import sparqles.core.analytics.avro.EPViewPerformance;
+import sparqles.avro.analytics.EPView;
+import sparqles.avro.analytics.EPViewAvailability;
+import sparqles.avro.analytics.EPViewAvailabilityData;
+import sparqles.avro.analytics.EPViewAvailabilityDataPoint;
+import sparqles.avro.analytics.EPViewDiscoverabilityData;
+import sparqles.avro.analytics.EPViewInteroperabilityData;
+import sparqles.avro.analytics.EPViewPerformanceData;
+import sparqles.avro.Endpoint;
+import sparqles.avro.analytics.EPViewDiscoverability;
+import sparqles.avro.analytics.EPViewInteroperability;
+import sparqles.avro.analytics.EPViewPerformance;
 import sparqles.utils.MongoDBManager;
 
 

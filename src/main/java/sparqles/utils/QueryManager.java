@@ -12,7 +12,7 @@ import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
 
 import sparqles.core.CONSTANTS;
-import sparqles.core.Endpoint;
+import sparqles.avro.Endpoint;
 
 public class QueryManager {
 
@@ -46,11 +46,14 @@ public class QueryManager {
 	}
 
 	public static QueryExecution getExecution(Endpoint ep, String query) throws Exception {
+		return getExecution(ep.getUri().toString(), query);
+	}
+		public static QueryExecution getExecution(String epURL, String query) throws Exception {
 		try {
 
 			HttpOp.setUserAgent(CONSTANTS.USER_AGENT);
-			log.debug("[INIT] QueryExecution for {} with query  {}",ep.getUri(),query.replaceAll("\n", ""));
-			return QueryExecutionFactory.sparqlService(ep.getUri().toString(), query);
+			log.debug("[INIT] QueryExecution for {} with query  {}",epURL,query.replaceAll("\n", ""));
+			return QueryExecutionFactory.sparqlService(epURL, query);
 		}
 		catch (Exception e) {  
 			throw new Exception(e.getMessage());

@@ -1,9 +1,9 @@
-{"namespace": "sparqles.core",
+{"namespace": "sparqles.avro",
  "type": "record",
  "import" : "Endpoint.avsc",
  "name": "EndpointResult",
   "fields": [
-     {"name": "endpoint", "type": "sparqles.core.Endpoint"},
+     {"name": "endpoint", "type": "sparqles.avro.Endpoint"},
      {"name": "start", "type": "long"},
      {"name": "end", "type": "long"}
  ]

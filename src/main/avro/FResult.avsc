@@ -1,16 +1,16 @@
 {
-	"namespace": "sparqles.core.features",
+	"namespace": "sparqles.avro.features",
  	"type": "record",
  	"name": "FResult",
  	"fields": [
- 		{"name": "endpointResult", "type": "sparqles.core.EndpointResult"},
+ 		{"name": "endpointResult", "type": "sparqles.avro.EndpointResult"},
  		{"name": "results", "type": { "type":"map","values": 
  		  	{
      		"name": "FSingleResult",
       		"type": "record",
         	"fields" : [
 	        	{ "name": "query", "type": "string"},
-    	    	{ "name": "run", "type": "sparqles.core.performance.Run"}
+    	    	{ "name": "run", "type": "sparqles.avro.performance.Run"}
       		]}
     		} 
  		}
