@@ -7,6 +7,54 @@ head
     link(rel='stylesheet', type='text/css', media='all', href='/styles/style.css')
     link(rel='stylesheet', type='text/css', media='screen', href='/styles/style_ext.css')
     link(href='/styles/nv.d3.css', rel='stylesheet', type='text/css')
+    link(href='/styles/jquery/jquery.ui.all.css', rel='stylesheet', type='text/css')
+    script(src='/lib/jquery-1.10.2.min.js')
+    script(src='/lib/jquery.ui.core.min.js')
+    script(src='/lib/jquery.ui.widget.min.js')
+    script(src='/lib/jquery.ui.menu.min.js')
+    script(src='/lib/jquery.ui.position.min.js')
+    script(src='/lib/jquery.ui.autocomplete.min.js')
+    script.
+      $(document).ready(function() {
+        $( "#footer-search" ).autocomplete({
+            minLength: 1,
+            source: function (request, response) {
+             $.ajax({
+               url: "/api/endpointsAutoComplete",
+               data: { q: request.term },
+               dataType: "json",
+               success: response,
+               error: function () {
+                   response([]);
+               }
+            });
+           },
+            position: {
+              my : "right top",
+              at: "right bottom"
+            },
+            messages: {
+              noResults: '',
+              results: function() {}
+            },
+            select : function(event, ui) {
+                location.href = '/endpoint/' + encodeURIComponent(ui.item.uri);
+            },
+           open: function(event, ui) {
+             $(".ui-autocomplete").css("z-index", 1000);
+           }
+        }).data( "uiAutocomplete" )._renderItem = function( ul, item ) {
+          var datasetsLabel="";
+          for(i in item.datasets){
+            if(datasetsLabel.length>0)datasetsLabel+="; ";
+            datasetsLabel+=item.datasets[i].label;
+          }
+         return $( "<li></li>" )
+           .data( "item.uri", item )
+           .append( "<a><b>" + item.uri + "</b><br>" + datasetsLabel  +"</a>")
+           .appendTo( ul );
+        };
+      });
     script(src='/lib/d3.v3.min.js', charset='utf-8')
     script(src='/lib/nv.d3.js')
     script(src='/javascripts/tooltip/script.js')
