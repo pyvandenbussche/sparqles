@@ -46,6 +46,7 @@ public abstract class EndpointTask<V extends SpecificRecordBase> implements Task
 	public Endpoint getEndpoint() {
 		return _ep;
 	}
+	
 	public void setEndpoint(Endpoint ep) {
 		if(!_epURI.equals(ep.getUri().toString()))
 			log.error("Endpoint URIs do not match (was:{} is:{}", _epURI, ep.getUri());

@@ -11,6 +11,7 @@ import sparqles.analytics.DAnalyser;
 import sparqles.analytics.FAnalyser;
 import sparqles.analytics.IndexViewAnalytics;
 import sparqles.analytics.PAnalyser;
+import sparqles.analytics.RefreshDataHubTask;
 import sparqles.avro.Endpoint;
 import sparqles.core.availability.ATask;
 import sparqles.core.discovery.DTask;
@@ -50,6 +51,9 @@ public class TaskFactory {
 			a = new DAnalyser(dbm);
 		}else  if(task.equalsIgnoreCase(ITASK)){
 			t = new IndexViewAnalytics();
+		}
+		else  if(task.equalsIgnoreCase(ETASK)){
+			t = new RefreshDataHubTask();
 		}
 		else{
 			log.warn("Task {} not supported or known", task);

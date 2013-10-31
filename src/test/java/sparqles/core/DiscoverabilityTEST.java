@@ -7,8 +7,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import sparqles.core.discovery.avro.DResult;
-import sparqles.core.performance.PResult;
+import sparqles.avro.Endpoint;
+import sparqles.avro.discovery.DResult;
+import sparqles.avro.performance.PResult;
 import sparqles.utils.MongoDBManager;
 
 public class DiscoverabilityTEST {

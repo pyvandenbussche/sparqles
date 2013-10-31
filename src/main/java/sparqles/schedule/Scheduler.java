@@ -34,6 +34,7 @@ public class Scheduler {
 	private final static String CRON_EVERY_HOUR="0 0 0/1 1/1 * ? *";
 	private final static String CRON_EVERY_ONETEN="0 30 1/12 1/1 * ? *";
 	private final static String CRON_EVERY_DAY_AT_715="0 15 7 1/1 * ? *";
+	private final static String CRON_EVERY_DAY_AT_215="0 15 2 1/1 * ? *";
 	private final static String CRON_EVERY_MON_WED_FRI_SUN_THU_AT_410="0 10 4 ? * WED,THU *";
 
 	private final static String CRON_EVERY_SUN_AT_310="0 10 3 ? * SUN *";
@@ -54,6 +55,7 @@ public class Scheduler {
 		taskSchedule.put(FTASK, CRON_EVERY_SUN_AT_310);
 		taskSchedule.put(DTASK, CRON_EVERY_SAT_AT_310);
 		taskSchedule.put(ITASK, CRON_EVERY_DAY_AT_715);
+		taskSchedule.put(ETASK, CRON_EVERY_DAY_AT_215);
 	}
 
 	private final ScheduledExecutorService SERVICE, ASERVICE;
@@ -161,9 +163,6 @@ public class Scheduler {
 		}
 		schedule(task, iter);
 		
-//		long startTime = time.getTime() - System.currentTimeMillis();
-//		SchedulerTimerTask t = new SchedulerTimerTask(task,iter);
-//		SERVICE.schedule(t, startTime, TimeUnit.MILLISECONDS);
 		Object [] s = {task, time, iter};
 		log.info("[RESCHEDULED] {} next:'{}' policy:'{}'",s);
 	}
@@ -187,8 +186,9 @@ public class Scheduler {
 		Schedule s = new Schedule();
 		s.setEndpoint(SPARQLES);
 		s.setITask(taskSchedule.get(ITASK));
+		s.setETask(taskSchedule.get(ETASK));
 		l.add(s);
-
+		
 		return l;
 	}
 

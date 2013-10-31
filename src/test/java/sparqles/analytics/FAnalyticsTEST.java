@@ -12,10 +12,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import sparqles.core.SPARQLESProperties;
-import sparqles.core.Endpoint;
+import sparqles.avro.Endpoint;
 import sparqles.core.EndpointFactory;
-import sparqles.core.interoperability.FResult;
-import sparqles.core.performance.PResult;
+
+import sparqles.avro.features.FResult;
+import sparqles.avro.performance.PResult;
 import sparqles.utils.MongoDBManager;
 
 

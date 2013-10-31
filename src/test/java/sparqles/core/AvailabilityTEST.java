@@ -9,9 +9,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import sparqles.core.availability.AResult;
+import sparqles.avro.Endpoint;
+import sparqles.avro.availability.AResult;
+
+import sparqles.avro.schedule.Schedule;
 import sparqles.core.availability.ATask;
-import sparqles.schedule.Schedule;
 import sparqles.schedule.Scheduler;
 import sparqles.utils.MongoDBManager;
 
@@ -22,7 +24,7 @@ public class AvailabilityTEST {
 
 	@Before
 	public void setUp() throws Exception {
-		SPARQLESProperties.init(new File("src/test/resources/ends.properties"));
+		SPARQLESProperties.init(new File("src/test/resources/sparqles.properties"));
 		m = new MongoDBManager();
 		
 		
@@ -33,6 +35,16 @@ public class AvailabilityTEST {
 		m.close();
 	}
 	
+	
+
+	@Test
+	public void testSingle() throws Exception {
+		
+		ATask a = new ATask(Endpoints.DBPEDIA);
+		a.setDBManager(m);
+		
+		a.call();
+	}
 	
 	@Test
 	public void test() {

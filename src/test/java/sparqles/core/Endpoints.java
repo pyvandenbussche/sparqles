@@ -4,7 +4,7 @@ package sparqles.core;
 
 import java.net.URI;
 
-import sparqles.core.Endpoint;
+import sparqles.avro.Endpoint;
 import sparqles.core.EndpointFactory;
 
 public class Endpoints {

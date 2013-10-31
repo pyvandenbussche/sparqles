@@ -62,11 +62,13 @@ public class SPARQLES extends CLIObject{
 			//check the endpoint list
 			Collection<Endpoint> eps = DatahubAccess.checkEndpointList();
 			dbm.initEndpointCollection();
+			dbm.setup();
 			dbm.insert(eps);			 
 		}
 		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_FLAG_RESCHEDULE)){
 			Collection<Schedule> epss = Scheduler.createDefaultSchedule(dbm);
 			dbm.initScheduleCollection();
+			dbm.setup();
 			dbm.insert(epss);
 		}
 		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_FLAG_RECOMPUTE)){

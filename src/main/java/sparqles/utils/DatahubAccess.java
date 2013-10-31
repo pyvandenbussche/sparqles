@@ -14,15 +14,8 @@ import java.util.Set;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-//import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.conn.ClientConnectionManager;
-//import org.apache.http.conn.HttpClientConnectionManager;
-//import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
-//import org.apache.http.impl.client.HttpClients;
-//import org.apache.http.impl.conn.BasicHttpClientConnectionManager;
-import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.util.EntityUtils;
 import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonNode;
@@ -48,18 +41,8 @@ public class DatahubAccess {
 	 **/
 	public static Collection<Endpoint> checkEndpointList(){
 		Map<String, Endpoint> results = new HashMap<String, Endpoint>();
-		/* LOAD PROPERTIES */
 		try {
-			
-			
-			
-			
 			HttpClient httpclient = new DefaultHttpClient();
-//			HttpClientConnectionManager connMrg = new BasicHttpClientConnectionManager();
-//			CloseableHttpClient httpClient = HttpClients.custom()
-//			        .setConnectionManager(connMrg)
-//			        .build();
-			
 			HttpGet getRequest = new HttpGet("http://datahub.io/api/2/search/resource?format=api/sparql&all_fields=1&limit=1000");
 			getRequest.addHeader("User-Agent", CONSTANTS.USER_AGENT);
 			
@@ -70,7 +53,6 @@ public class DatahubAccess {
 						+ response.getStatusLine().getStatusCode());
 			}
 			String respString = EntityUtils.toString(response.getEntity());
-//			response.close();
 			
 			JsonFactory factory = new JsonFactory();
 			ObjectMapper mapper = new ObjectMapper(factory);

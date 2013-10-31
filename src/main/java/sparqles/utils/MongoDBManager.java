@@ -60,6 +60,7 @@ public class MongoDBManager {
 
 	private final static String RESULT_KEY="endpointResult.endpoint.uri";
 	private final static String VIEW_KEY="endpoint.uri";
+	private final static String EP_KEY="uri";
 	
 	private final static String COLL_SCHED="schedule";
 
@@ -105,27 +106,38 @@ public class MongoDBManager {
 		return true;
 	}
 
-	private void setup()  {
+	public void setup()  {
 		try {
 			client = new MongoClient( SPARQLESProperties.getDB_HOST() , SPARQLESProperties.getDB_PORT() );
 			log.info("[INIT] MongoDB {} ", client);
 			db = client.getDB(SPARQLESProperties.getDB_NAME() );
+			
+			
+			String []cols = {COLL_AVAIL_AGG, COLL_PERF_AGG, COLL_DISC_AGG, COLL_FEAT_AGG, COLL_FEAT_AGG, COLL_EP_VIEW, COLL_INDEX,COLL_SCHED};
+			for(String col: cols){
+				DBCollection c = db.getCollection(col);
+				if(c.getIndexInfo().size()==0)
+					c.ensureIndex(new BasicDBObject("endpoint.uri", 1), new BasicDBObject("unique", true));	
+			}
+//			
+			DBCollection c = db.getCollection(COLL_ENDS);
+			DBObject d = new BasicDBObject("uri", 1);
+			if(c.getIndexInfo().size()==0)
+				c.ensureIndex(d, new BasicDBObject("unique", true));
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
 	}
-
+	
+	
 	public void initEndpointCollection() {
 		DBCollection c = db.getCollection(COLL_ENDS);
 		c.drop();
-		DBObject d = new BasicDBObject("uri", 1);
-		c.ensureIndex(d, new BasicDBObject("unique", true));
 	}
 
 	public void initScheduleCollection() {
 		DBCollection c = db.getCollection(COLL_SCHED);
 		c.drop();
-		c.ensureIndex(new BasicDBObject("endpoint.uri", 1), new BasicDBObject("unique", true));
 	}
 
 	public void initAggregateCollections() {
@@ -158,8 +170,8 @@ public class MongoDBManager {
 	}
 
 	public Endpoint getEndpoint(Endpoint ep) {
-		List<Endpoint> res = scan(ep, COLL_ENDS, Endpoint.class, Endpoint.SCHEMA$, VIEW_KEY);
-		if(res.size()!=0){
+		List<Endpoint> res = scan(ep, COLL_ENDS, Endpoint.class, Endpoint.SCHEMA$, EP_KEY);
+		if(res.size()!=1){
 			log.error("Received {} results for {}; expected one result ", res.size(), ep);
 		}
 		if(res.size()==0) return null;
@@ -197,10 +209,9 @@ public class MongoDBManager {
 		
 		if(res instanceof AvailabilityView) return update(COLL_AVAIL_AGG, ((AvailabilityView) res).getEndpoint(),res, res.getSchema(),VIEW_KEY );
 		if(res instanceof PerformanceView) return update(COLL_PERF_AGG, ((PerformanceView) res).getEndpoint(),res, res.getSchema(),VIEW_KEY );
-		if(res instanceof InteroperabilityView) return update(COLL_FEAT_AGG, ((InteroperabilityView) res).getEndpoint(),res, res.getSchema(),VIEW_KEY );
+		if(res instanceof InteroperabilityView) return update(COLL_FEAT_AGG, ((InteroperabilityView) res).getEndpoint(),res, res.getSchema(),VIEW_KEY );		if(res instanceof DiscoverabilityView) return update(COLL_DISC_AGG, ((DiscoverabilityView) res).getEndpoint(),res, res.getSchema(),VIEW_KEY );
 
-		if(res instanceof DiscoverabilityView) return update(COLL_DISC_AGG, ((DiscoverabilityView) res).getEndpoint(),res, res.getSchema(),VIEW_KEY );
-
+		if(res instanceof Endpoint) return update(COLL_ENDS, ((Endpoint) res), res, res.getSchema(),EP_KEY );
 		if(res instanceof EPView) return update(COLL_EP_VIEW, ((EPView) res).getEndpoint(), res, res.getSchema(),VIEW_KEY );
 		if(res instanceof Index) return update(COLL_INDEX, ((Index) res).getEndpoint(), res, res.getSchema(),VIEW_KEY );
 		return false;
