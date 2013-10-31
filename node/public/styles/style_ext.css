@@ -418,9 +418,9 @@ article p {
   text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.5);
 }
 #footer-search {
-  color: #888888;
+  color: #CFCFCF;
   border: none;
-  background-color: #525252;
+  background-color: #636363;
   border-radius: 6px;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
@@ -449,8 +449,13 @@ article p {
   transition-timing-function: ease-in-out;
   padding-left: 42px;
 }
+#footer-search::-webkit-input-placeholder { /* WebKit browsers */color:#CFCFCF;}
+#footer-search:-moz-placeholder { /* Mozilla Firefox 4 to 18 */color:#CFCFCF;}
+#footer-search::-moz-placeholder { /* Mozilla Firefox 19+ */color:#CFCFCF;}
+#footer-search:-ms-input-placeholder { /* Internet Explorer 10+ */color:#CFCFCF;}
+
 #footer-search:hover, #footer-search:focus {
-  color: #d0d7da;
+  color: #E7E7E7;
   text-shadow: none;
 }
 .features {

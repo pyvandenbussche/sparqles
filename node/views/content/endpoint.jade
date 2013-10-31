@@ -23,7 +23,7 @@ block content
       section#posts.default-area
           article.wrpl(style='min-width: 400px; width:100%;')
             div(style="height:400px;", class='wrplInnerBox')
-              a(title='', href='./availability')
+              a(title='', href='/availability')
                 h2(style="float:left;") Availability
                 span(style="float:right;") Last Day (
                   b #{parseFloat((epAvail.uptimeLast24h*100).toFixed(2))+ '%'}
@@ -38,7 +38,7 @@ block content
           article.wrpl(style='min-width: 400px; width:100%;')
             - function numberWithCommas(x) {if (x) return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");}
             div(style="height:400px;", class="wrplInnerBox")
-              a(title='', href='./performance')
+              a(title='', href='/performance')
                 h2(style="float:left;") Performance
                 if epPerf.threshold>0  && epPerf.threshold%100==0
                   span(style='float:right;', onmouseover='tooltip.show(\'#{configPerf['Result-size thresholds']}\')', onmouseout='tooltip.hide();') Suspected Result size threshold: 
@@ -51,7 +51,7 @@ block content
                     svg#chartPerformanceJoin(style='float:left; height: 370px;')
           article.wrpl(style='min-width: 400px; width:100%;')
             div(class="wrplInnerBoxNoHeight")
-              a(title='', href='./interoperability')
+              a(title='', href='/interoperability')
                 h2(style="float:left;") Interoperability
               table#table_current.psp-table(cellspacing='0', cellpadding='0', border='0', width='100%')
                 tr
@@ -89,7 +89,7 @@ block content
                                 img(src='/images/red.png', onmouseover='tooltip.show(\' #{JSON.stringify(feature.exception.string)} \')', onmouseout='tooltip.hide();')
           article.wrpl(style='min-width: 400px; width:100%;')
             div.wrplInnerBoxNoHeight
-              a(title='', href='./discoverability')
+              a(title='', href='/discoverability')
                 h2 Discoverability
               div 
                table#table_current.psp-table(cellspacing='0', cellpadding='0', border='0', width='100%')
