@@ -133,24 +133,25 @@ public class DTask extends EndpointTask<DResult> {
 //		System.out.println("HERER");
 		//inspect HTTP Get
 		//ok we checked the robots.txt, now we do a http get on the sparql URL
-		URI epURL;
+		
 		try {
-			epURL = new URI(_ep.getUri().toString());
+			URI epURL = new URI(_ep.getUri().toString());
 			DGETInfo info = checkForVoid(epURL.toString(), "EPURL");
 			result.getDescriptionFiles().add(info);
 		
 			//well-known location
-			
+		} catch (Exception e) {
+			log.debug("[EXEC] HTTP GET "+_epURI, e);
+		}
+		try{
+			URI epURL = new URI(_ep.getUri().toString());
 			URL wellknown = new URI(epURL.getScheme(), epURL
 					.getAuthority(), "/.well-known/void", null, null)
 					.toURL();
-			info = checkForVoid(wellknown.toString(), "wellknown");
+			DGETInfo info = checkForVoid(wellknown.toString(), "wellknown");
 			result.getDescriptionFiles().add(info);
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (Exception e) {
+			log.debug("[EXEC] HTTP well known "+_epURI, e);
 		}
 		
 		//maybe the endpoint has data about itself
@@ -215,6 +216,7 @@ public class DTask extends EndpointTask<DResult> {
 			log.info("Found {} results",reswind.getRowNumber());
 		} catch (Exception e1) {
 			info.setException(LogFormater.toString(e1));
+			log.debug("[EXEC] SPARQL query to "+epURL+" for "+_epURI, e1);
 		}
 		finally {
 			if(qexec!=null)qexec.close();
@@ -282,16 +284,9 @@ public class DTask extends EndpointTask<DResult> {
 					DGETInfo info = checkForVoid(nNode.getTextContent(), "sitemap.xml_link");
 					result.getDescriptionFiles().add(info);
 				}
-			} catch (URISyntaxException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (SAXException e) {
-				e.printStackTrace();
-			} catch (ParserConfigurationException e) {
-				e.printStackTrace();
+			} catch (Exception e) {
+				log.debug("[EXEC] Sitemap for "+_epURI, e);
+				rtxt.setException(LogFormater.toString(e));
 			}
 		}
 	}
@@ -342,6 +337,7 @@ public class DTask extends EndpointTask<DResult> {
 				}
 			}
 		}catch(Exception e ){
+			log.debug("[EXEC] VOID "+url+" for "+_epURI, e);
 			info.setException(LogFormater.toString(e));
 		}
 		return info;
@@ -358,7 +354,7 @@ public class DTask extends EndpointTask<DResult> {
 			host = new URI(_ep.getUri().toString());
 			robotsOnHost = new URI(host.getScheme(), host.getAuthority(), "/robots.txt", null, null);
 		} catch (URISyntaxException e) {
-			log.debug(e.getMessage() + " " + host);
+			log.debug("[EXEC] ROBOTS for "+ _epURI,e);
 			rob.setException(LogFormater.toString(e));
 			return rob;
 		}
@@ -380,7 +376,8 @@ public class DTask extends EndpointTask<DResult> {
 			}	
 			hget.abort();
 		} catch (Exception e1) {
-			e1.printStackTrace();
+			log.debug("[EXEC] ROBOTS for "+ _epURI,e1);
+			rob.setException(LogFormater.toString(e1));
 		}
 		return rob;
 	}
@@ -412,7 +409,7 @@ public class DTask extends EndpointTask<DResult> {
 			return _nrc.isUrlAllowed(host.toURL());
 
 		} catch (Exception e1) {
-			e1.printStackTrace();
+			log.debug("[EXEC] ROBOTS PARSE for "+ _epURI,e1);
 		}
 		return true;
 	}

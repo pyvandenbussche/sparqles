@@ -64,7 +64,7 @@ public class ATask extends EndpointTask<AResult>{
 			}
 		} catch (InterruptedException e) {
 			result.setException(LogFormater.toString(e));
-			LogFormater.warn(log, "[ASK] query and "+epr.getEndpoint().getUri().toString(), e);
+			log.warn("[EXEC] ASK query for {}", epr.getEndpoint().getUri(), e);
 			return result;        
 		}catch (Exception e) {
 			return testSelect(epr);
@@ -99,7 +99,6 @@ public class ATask extends EndpointTask<AResult>{
 			}
 		}catch (Exception e1) {
 			result.setIsAvailable(false);
-			//				result.setResponseTime(""+(System.currentTimeMillis()-start));
 			String failureExplanation="";
 			failureExplanation=e1.getMessage().replaceAll("rethrew: ", "");
 			failureExplanation=failureExplanation.replaceAll("Failed when initializing the StAX parsing engine", "SPARQL protocol not respected");
@@ -108,9 +107,8 @@ public class ATask extends EndpointTask<AResult>{
 			if(failureExplanation.contains("401 Authorization Required"))result.setIsPrivate(true);
 			result.setException(LogFormater.toString(e1));
 			result.setExplaination("SPARQL Endpoint is unavailable. "+failureExplanation);
-			//	    		System.out.println("Thread: " + result.getPackageId()+"\tFALSE"+"\t"+(System.currentTimeMillis()-start));
-			LogFormater.warn(log, "[ASK] query and "+epr.getEndpoint().getUri().toString(), e1);
-//			log.error("[RUN] {}: {}", epr.getEndpoint().getUri().toString(), "SPARQL Endpoint is unavailable. "+failureExplanation);
+
+			log.warn("[EXEC] SELECT query for {}", epr.getEndpoint().getUri(), e1);
 			return result;
 		}
 	}
