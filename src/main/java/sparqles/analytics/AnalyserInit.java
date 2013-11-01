@@ -47,6 +47,7 @@ public class AnalyserInit {
 //		DAnalyser d = new DAnalyser(_db);
 		FAnalyser f = new FAnalyser(_db);
 
+		log.info("Analysing {} endpoints",eps.size());
 		for (Endpoint ep: eps) {
 			log.info("[ANALYSE] {}",ep);
 
