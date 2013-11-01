@@ -101,9 +101,6 @@ public class DatahubAccess {
 				}else{
 					System.err.println("This should not happend for ep"+ep);
 				}
-				if(c==49){
-					System.out.println("ASDASD");
-				}
 				log.info("[GET] [{}] {}",c++,ep);
 			}
 //			httpClient.getConnectionManager().shutdown();
@@ -156,7 +153,7 @@ public class DatahubAccess {
 			return ep;
 
 		} catch (Exception e) {
-			log.warn("[EXEC] {}",e);
+			log.warn("[EXEC] "+ep,e);
 		} 
 		return ep;
 	}

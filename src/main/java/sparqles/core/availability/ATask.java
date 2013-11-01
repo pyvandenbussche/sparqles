@@ -50,12 +50,13 @@ public class ATask extends EndpointTask<AResult>{
 				result.setResponseTime((System.currentTimeMillis()-start));
 				if((System.currentTimeMillis()-start)>20000){
 					result.setIsAvailable(false);
-					result.setExplaination("SPARQL Endpoint is timeout");
+					result.setExplanation("SPARQL Endpoint is timeout");
 				}
 				else{
 					result.setIsAvailable(response);
-					result.setExplaination("Endpoint is operating normally");
+					result.setExplanation("Endpoint is operating normally");
 				}
+				log.debug("[executed] ask {}", epr.getEndpoint().getUri().toString());
 				return result;
 			}
 			else{
@@ -63,7 +64,7 @@ public class ATask extends EndpointTask<AResult>{
 			}
 		} catch (InterruptedException e) {
 			result.setException(LogFormater.toString(e));
-			log.warn("[exec] ASK query for {}", epr.getEndpoint().getUri(), e);
+			log.warn("[executed] ASK query for {}", epr.getEndpoint().getUri(), e);
 			return result;        
 		}catch (Exception e) {
 			return testSelect(epr);
@@ -82,16 +83,18 @@ public class ATask extends EndpointTask<AResult>{
 				result.setResponseTime((System.currentTimeMillis()-start));
 				if((System.currentTimeMillis()-start)>20000){
 					result.setIsAvailable(false);
-					result.setExplaination("SPARQL Endpoint is timeout");
+					result.setExplanation("SPARQL Endpoint is timeout");
 				}
 				else{
 					result.setIsAvailable(response);
-					result.setExplaination("Endpoint is operating normally");
+					result.setExplanation("Endpoint is operating normally");
 				}
+				log.debug("[executed] select {}", epr.getEndpoint().getUri().toString());
 				return result;
 			}
 			else{
 				result.setIsAvailable(response);
+				log.debug("[executed] no response {}", epr.getEndpoint().getUri().toString());
 				//	        		System.out.println("Thread: " + result.getPackageId()+"\tFALSE"+"\t"+responseTime);
 				return result;
 			}
@@ -104,9 +107,9 @@ public class ATask extends EndpointTask<AResult>{
 			failureExplanation=failureExplanation.replaceAll("HttpException:", "HTTP error");
 			if(failureExplanation.contains("401 Authorization Required"))result.setIsPrivate(true);
 			result.setException(LogFormater.toString(e1));
-			result.setExplaination("SPARQL Endpoint is unavailable. "+failureExplanation);
+			result.setExplanation("SPARQL Endpoint is unavailable. "+failureExplanation);
 
-			log.warn("[exec] SELECT query for {}", epr.getEndpoint().getUri(), e1);
+			log.warn("[executed] SELECT query for {}", epr.getEndpoint().getUri(), e1);
 			return result;
 		}
 	}

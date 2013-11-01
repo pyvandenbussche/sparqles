@@ -189,16 +189,18 @@ public class MongoDBManager {
 				log.debug("[INSERT] [ERROR] {}:{} #>{}",collName,e.toString(), wr.getError());
 				return false;
 			}else{
-				log.debug("[INSERT] [SUCC] {}:{}",collName,e.toString());
+				log.debug("[INSERT] [SUCC] {}:{}", collName, e.toString());
 			}
 			return true;
 		}catch(DuplicateKey ex){
 			log.debug("[INSERT] [DUPLICATE] uri key for {}",e);
 			return true;
 		}catch(MongoException ex){
-			log.warn("[INSERT] [EXEC] {}",ex);
+			log.error("MongoDB Exception {} {}, {} , {}", e.getClass(),ex.getClass().getSimpleName(), ex.getMessage(), ex.getCause());
+			log.debug("[INSERT] [EXC] "+e.getClass(),ex);
 		}catch(Exception exx){
-			log.warn("[INSERT] [EXEC] {}",exx);
+			log.error("Exception {} {}, {} , {}", e.getClass(), exx.getClass().getSimpleName(), exx.getMessage(), exx.getCause());
+			log.debug("[INSERT] [EXC] "+e.getClass(),exx);
 		}
 		return false;
 	}

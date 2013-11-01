@@ -10,6 +10,7 @@ import org.junit.Test;
 import sparqles.avro.Endpoint;
 
 
+import sparqles.avro.availability.AResult;
 import sparqles.avro.schedule.Schedule;
 import sparqles.core.availability.ATask;
 import sparqles.schedule.Scheduler;
@@ -38,10 +39,12 @@ public class AvailabilityTEST {
 	@Test
 	public void testSingle() throws Exception {
 		
-		ATask a = new ATask(Endpoints.DBPEDIA);
+		ATask a = new ATask(Endpoints.NDB);
 		a.setDBManager(m);
 		
-		a.call();
+		AResult ar = a.call();
+		
+		m.insert(ar);
 	}
 	
 	@Test

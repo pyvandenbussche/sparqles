@@ -206,7 +206,7 @@ public class Scheduler {
 		Schedule s = new Schedule();
 		s.setEndpoint(SPARQLES);
 		s.setITask(taskSchedule.get(ITASK));
-		s.setETask(taskSchedule.get(ETASK));
+//		s.setETask(taskSchedule.get(ETASK));
 		l.add(s);
 		
 		return l;
@@ -222,9 +222,9 @@ public class Scheduler {
 		s.setEndpoint(ep);
 
 		s.setATask(taskSchedule.get(ATASK));
-		s.setPTask(taskSchedule.get(PTASK));
-		s.setFTask(taskSchedule.get(FTASK));
-		s.setDTask(taskSchedule.get(DTASK));
+//		s.setPTask(taskSchedule.get(PTASK));
+//		s.setFTask(taskSchedule.get(FTASK));
+//		s.setDTask(taskSchedule.get(DTASK));
 //		s.setITask(taskSchedule.get(ITASK));
 
 		return s;

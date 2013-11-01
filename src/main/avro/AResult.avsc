@@ -4,9 +4,9 @@
  "fields": [
      {"name": "endpointResult", "type": "sparqles.avro.EndpointResult"},
      {"name": "responseTime", "type": "long"},
-     {"name": "isAvailable", "type": "boolean"},
-     {"name": "isPrivate", "type": "boolean"},
+     {"name": "isAvailable", "type": "boolean", "default": false},
+     {"name": "isPrivate", "type": "boolean", "default": false},
      {"name": "Exception", "type": ["string", "null"] },
-     {"name": "explaination", "type": "string"}
+     {"name": "explanation", "type": ["string", "null"]}
   ]
 }

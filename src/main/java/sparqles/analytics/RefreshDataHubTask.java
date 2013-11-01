@@ -58,34 +58,40 @@ public class RefreshDataHubTask implements Task<Index>{
 		log.info("[EXECUTE] updating ckan catalog" );
 				
 		Collection<Endpoint> datahub = DatahubAccess.checkEndpointList();
+		
+		if(datahub.size() == 0) return null;
 		Collection<Endpoint>  db = _dbm.get(Endpoint.class, Endpoint.SCHEMA$);
 		
-//		TreeSet<Endpoint> ckan = new TreeSet<Endpoint>(new EndpointComparator());
-//		
-//		
-//		
-//		
-//		int newEPs = 0, upEPs=0;
-//		for(Endpoint ep: list){
-//			
-//			Endpoint epDB = _dbm.getEndpoint(ep);
-//			if(epDB==null){
-//				//new endpoint, 
-//				//add it to the db, create store and register the schedule
-//				newEPs++;
-//				_dbm.insert(ep);
-//				Schedule sch = _s.defaultSchedule(ep);
-//				_dbm.insert(sch);
-//				_s.initSchedule(sch);
-//				
-//			}else{
-//				if(ep.getDatasets().size() != epDB.getDatasets().size()){
-//					_dbm.update(ep);
-//					upEPs++;
-//				}
-//			}
-//		}
-//		log.info("[CKAN] received {} endpoints, new inserts {}, updates {}",list.size(), newEPs, upEPs);
+		
+		TreeSet<Endpoint> ckan = new TreeSet<Endpoint>(new EndpointComparator());
+		TreeSet<Endpoint> sparqles = new TreeSet<Endpoint>(new EndpointComparator());
+		ckan.addAll(datahub);
+		sparqles.addAll(db);
+		
+		int newEPs = 0, upEPs=0;
+		for(Endpoint ep : ckan){
+			if(! sparqles.contains(ep)){
+				log.info("New endpoint {}",ep);
+				//new
+				newEPs++;
+				_dbm.insert(ep);
+				Schedule sch = _s.defaultSchedule(ep);
+				_dbm.insert(sch);
+				_s.initSchedule(sch);
+			}else{
+				//update
+				log.info("Update endpoint {}",ep);
+				_dbm.update(ep);
+			}
+		}
+		
+		for(Endpoint ep : sparqles){
+			if(! ckan.contains(ep)){
+				//remove
+				log.info("Remove endpoint {}",ep);
+				_dbm.update(ep);	
+			}
+		}
 		return null;
 	}
 

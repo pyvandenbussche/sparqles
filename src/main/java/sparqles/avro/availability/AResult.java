@@ -7,14 +7,14 @@ package sparqles.avro.availability;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class AResult extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"AResult\",\"namespace\":\"sparqles.avro.availability\",\"fields\":[{\"name\":\"endpointResult\",\"type\":{\"type\":\"record\",\"name\":\"EndpointResult\",\"namespace\":\"sparqles.avro\",\"fields\":[{\"name\":\"endpoint\",\"type\":{\"type\":\"record\",\"name\":\"Endpoint\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"},{\"name\":\"datasets\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Dataset\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"},{\"name\":\"label\",\"type\":\"string\"}]}}}]}},{\"name\":\"start\",\"type\":\"long\"},{\"name\":\"end\",\"type\":\"long\"}],\"import\":\"Endpoint.avsc\"}},{\"name\":\"responseTime\",\"type\":\"long\"},{\"name\":\"isAvailable\",\"type\":\"boolean\"},{\"name\":\"isPrivate\",\"type\":\"boolean\"},{\"name\":\"Exception\",\"type\":[\"string\",\"null\"]},{\"name\":\"explaination\",\"type\":\"string\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"AResult\",\"namespace\":\"sparqles.avro.availability\",\"fields\":[{\"name\":\"endpointResult\",\"type\":{\"type\":\"record\",\"name\":\"EndpointResult\",\"namespace\":\"sparqles.avro\",\"fields\":[{\"name\":\"endpoint\",\"type\":{\"type\":\"record\",\"name\":\"Endpoint\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"},{\"name\":\"datasets\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Dataset\",\"fields\":[{\"name\":\"uri\",\"type\":\"string\"},{\"name\":\"label\",\"type\":\"string\"}]}}}]}},{\"name\":\"start\",\"type\":\"long\"},{\"name\":\"end\",\"type\":\"long\"}],\"import\":\"Endpoint.avsc\"}},{\"name\":\"responseTime\",\"type\":\"long\"},{\"name\":\"isAvailable\",\"type\":\"boolean\",\"default\":false},{\"name\":\"isPrivate\",\"type\":\"boolean\",\"default\":false},{\"name\":\"Exception\",\"type\":[\"string\",\"null\"]},{\"name\":\"explanation\",\"type\":[\"string\",\"null\"]}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public sparqles.avro.EndpointResult endpointResult;
   @Deprecated public long responseTime;
   @Deprecated public boolean isAvailable;
   @Deprecated public boolean isPrivate;
   @Deprecated public java.lang.CharSequence Exception;
-  @Deprecated public java.lang.CharSequence explaination;
+  @Deprecated public java.lang.CharSequence explanation;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -26,13 +26,13 @@ public class AResult extends org.apache.avro.specific.SpecificRecordBase impleme
   /**
    * All-args constructor.
    */
-  public AResult(sparqles.avro.EndpointResult endpointResult, java.lang.Long responseTime, java.lang.Boolean isAvailable, java.lang.Boolean isPrivate, java.lang.CharSequence Exception, java.lang.CharSequence explaination) {
+  public AResult(sparqles.avro.EndpointResult endpointResult, java.lang.Long responseTime, java.lang.Boolean isAvailable, java.lang.Boolean isPrivate, java.lang.CharSequence Exception, java.lang.CharSequence explanation) {
     this.endpointResult = endpointResult;
     this.responseTime = responseTime;
     this.isAvailable = isAvailable;
     this.isPrivate = isPrivate;
     this.Exception = Exception;
-    this.explaination = explaination;
+    this.explanation = explanation;
   }
 
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
@@ -44,7 +44,7 @@ public class AResult extends org.apache.avro.specific.SpecificRecordBase impleme
     case 2: return isAvailable;
     case 3: return isPrivate;
     case 4: return Exception;
-    case 5: return explaination;
+    case 5: return explanation;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -57,7 +57,7 @@ public class AResult extends org.apache.avro.specific.SpecificRecordBase impleme
     case 2: isAvailable = (java.lang.Boolean)value$; break;
     case 3: isPrivate = (java.lang.Boolean)value$; break;
     case 4: Exception = (java.lang.CharSequence)value$; break;
-    case 5: explaination = (java.lang.CharSequence)value$; break;
+    case 5: explanation = (java.lang.CharSequence)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -138,18 +138,18 @@ public class AResult extends org.apache.avro.specific.SpecificRecordBase impleme
   }
 
   /**
-   * Gets the value of the 'explaination' field.
+   * Gets the value of the 'explanation' field.
    */
-  public java.lang.CharSequence getExplaination() {
-    return explaination;
+  public java.lang.CharSequence getExplanation() {
+    return explanation;
   }
 
   /**
-   * Sets the value of the 'explaination' field.
+   * Sets the value of the 'explanation' field.
    * @param value the value to set.
    */
-  public void setExplaination(java.lang.CharSequence value) {
-    this.explaination = value;
+  public void setExplanation(java.lang.CharSequence value) {
+    this.explanation = value;
   }
 
   /** Creates a new AResult RecordBuilder */
@@ -178,7 +178,7 @@ public class AResult extends org.apache.avro.specific.SpecificRecordBase impleme
     private boolean isAvailable;
     private boolean isPrivate;
     private java.lang.CharSequence Exception;
-    private java.lang.CharSequence explaination;
+    private java.lang.CharSequence explanation;
 
     /** Creates a new Builder */
     private Builder() {
@@ -208,8 +208,8 @@ public class AResult extends org.apache.avro.specific.SpecificRecordBase impleme
         this.Exception = data().deepCopy(fields()[4].schema(), other.Exception);
         fieldSetFlags()[4] = true;
       }
-      if (isValidValue(fields()[5], other.explaination)) {
-        this.explaination = data().deepCopy(fields()[5].schema(), other.explaination);
+      if (isValidValue(fields()[5], other.explanation)) {
+        this.explanation = data().deepCopy(fields()[5].schema(), other.explanation);
         fieldSetFlags()[5] = true;
       }
     }
@@ -237,8 +237,8 @@ public class AResult extends org.apache.avro.specific.SpecificRecordBase impleme
         this.Exception = data().deepCopy(fields()[4].schema(), other.Exception);
         fieldSetFlags()[4] = true;
       }
-      if (isValidValue(fields()[5], other.explaination)) {
-        this.explaination = data().deepCopy(fields()[5].schema(), other.explaination);
+      if (isValidValue(fields()[5], other.explanation)) {
+        this.explanation = data().deepCopy(fields()[5].schema(), other.explanation);
         fieldSetFlags()[5] = true;
       }
     }
@@ -365,27 +365,27 @@ public class AResult extends org.apache.avro.specific.SpecificRecordBase impleme
       return this;
     }
 
-    /** Gets the value of the 'explaination' field */
-    public java.lang.CharSequence getExplaination() {
-      return explaination;
+    /** Gets the value of the 'explanation' field */
+    public java.lang.CharSequence getExplanation() {
+      return explanation;
     }
     
-    /** Sets the value of the 'explaination' field */
-    public sparqles.avro.availability.AResult.Builder setExplaination(java.lang.CharSequence value) {
+    /** Sets the value of the 'explanation' field */
+    public sparqles.avro.availability.AResult.Builder setExplanation(java.lang.CharSequence value) {
       validate(fields()[5], value);
-      this.explaination = value;
+      this.explanation = value;
       fieldSetFlags()[5] = true;
       return this; 
     }
     
-    /** Checks whether the 'explaination' field has been set */
-    public boolean hasExplaination() {
+    /** Checks whether the 'explanation' field has been set */
+    public boolean hasExplanation() {
       return fieldSetFlags()[5];
     }
     
-    /** Clears the value of the 'explaination' field */
-    public sparqles.avro.availability.AResult.Builder clearExplaination() {
-      explaination = null;
+    /** Clears the value of the 'explanation' field */
+    public sparqles.avro.availability.AResult.Builder clearExplanation() {
+      explanation = null;
       fieldSetFlags()[5] = false;
       return this;
     }
@@ -399,7 +399,7 @@ public class AResult extends org.apache.avro.specific.SpecificRecordBase impleme
         record.isAvailable = fieldSetFlags()[2] ? this.isAvailable : (java.lang.Boolean) defaultValue(fields()[2]);
         record.isPrivate = fieldSetFlags()[3] ? this.isPrivate : (java.lang.Boolean) defaultValue(fields()[3]);
         record.Exception = fieldSetFlags()[4] ? this.Exception : (java.lang.CharSequence) defaultValue(fields()[4]);
-        record.explaination = fieldSetFlags()[5] ? this.explaination : (java.lang.CharSequence) defaultValue(fields()[5]);
+        record.explanation = fieldSetFlags()[5] ? this.explanation : (java.lang.CharSequence) defaultValue(fields()[5]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);
