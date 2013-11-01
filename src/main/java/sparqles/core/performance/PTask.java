@@ -38,6 +38,8 @@ public class PTask extends EndpointTask<PResult>{
 		
     	Map<CharSequence, PSingleResult> results = new HashMap<CharSequence, PSingleResult>(_tasks.length);
 		
+    	
+    	
 		int failures=0;
 		for(SpecificPTask sp: _tasks){
 			log.debug("[exec] {}:{}", this, sp.name());
@@ -45,6 +47,8 @@ public class PTask extends EndpointTask<PResult>{
 			PRun run = sp.get(epr.getEndpoint());
 			PSingleResult pres = run.execute();
 
+			
+			
 			results.put(sp.name(), pres);
 			
 			if(pres.getCold().getException()!=null ||pres.getWarm().getException()!=null){

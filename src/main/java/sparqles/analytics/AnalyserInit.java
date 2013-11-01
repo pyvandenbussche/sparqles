@@ -44,14 +44,14 @@ public class AnalyserInit {
 		List<Endpoint> eps =_db.get(Endpoint.class, Endpoint.SCHEMA$);
 		AAnalyser a = new AAnalyser(_db);
 		PAnalyser p = new PAnalyser(_db);
-		DAnalyser d = new DAnalyser(_db);
+//		DAnalyser d = new DAnalyser(_db);
 		FAnalyser f = new FAnalyser(_db);
 
 		for (Endpoint ep: eps) {
 			log.info("[ANALYSE] {}",ep);
 
 			availability(ep,a);
-			discoverability(ep,d);
+//			discoverability(ep,d);
 			interoperability(ep,f);
 			performance(ep,p);
 		}

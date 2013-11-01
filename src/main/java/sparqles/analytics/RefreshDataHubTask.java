@@ -57,29 +57,35 @@ public class RefreshDataHubTask implements Task<Index>{
 	public Index call() throws Exception {
 		log.info("[EXECUTE] updating ckan catalog" );
 				
-		Collection<Endpoint> list = DatahubAccess.checkEndpointList();
+		Collection<Endpoint> datahub = DatahubAccess.checkEndpointList();
+		Collection<Endpoint>  db = _dbm.get(Endpoint.class, Endpoint.SCHEMA$);
 		
-		int newEPs = 0, upEPs=0;
-		for(Endpoint ep: list){
-			
-			Endpoint epDB = _dbm.getEndpoint(ep);
-			if(epDB==null){
-				//new endpoint, 
-				//add it to the db, create store and register the schedule
-				newEPs++;
-				_dbm.insert(ep);
-				Schedule sch = _s.defaultSchedule(ep);
-				_dbm.insert(sch);
-				_s.initSchedule(sch);
-				
-			}else{
-				if(ep.getDatasets().size() != epDB.getDatasets().size()){
-					_dbm.update(ep);
-					upEPs++;
-				}
-			}
-		}
-		log.info("[CKAN] received {} endpoints, new inserts {}, updates {}",list.size(), newEPs, upEPs);
+//		TreeSet<Endpoint> ckan = new TreeSet<Endpoint>(new EndpointComparator());
+//		
+//		
+//		
+//		
+//		int newEPs = 0, upEPs=0;
+//		for(Endpoint ep: list){
+//			
+//			Endpoint epDB = _dbm.getEndpoint(ep);
+//			if(epDB==null){
+//				//new endpoint, 
+//				//add it to the db, create store and register the schedule
+//				newEPs++;
+//				_dbm.insert(ep);
+//				Schedule sch = _s.defaultSchedule(ep);
+//				_dbm.insert(sch);
+//				_s.initSchedule(sch);
+//				
+//			}else{
+//				if(ep.getDatasets().size() != epDB.getDatasets().size()){
+//					_dbm.update(ep);
+//					upEPs++;
+//				}
+//			}
+//		}
+//		log.info("[CKAN] received {} endpoints, new inserts {}, updates {}",list.size(), newEPs, upEPs);
 		return null;
 	}
 
