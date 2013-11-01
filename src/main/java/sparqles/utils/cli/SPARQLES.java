@@ -162,7 +162,7 @@ public class SPARQLES extends CLIObject{
 				log.warn("Specified property file ({}) does not exist", propFile);
 			}
 		}
-		setup(true,true);
+		setup(true,false);
 	}
 
 	public void init(String[] arguments) {
