@@ -141,7 +141,7 @@ public class MongoDBManager {
 	}
 
 	public void initAggregateCollections() {
-		String []cols = {COLL_AVAIL_AGG, COLL_PERF_AGG, COLL_DISC_AGG, COLL_FEAT_AGG, COLL_FEAT_AGG, COLL_EP_VIEW, COLL_INDEX};
+		String []cols = {COLL_AVAIL_AGG, COLL_PERF_AGG, COLL_DISC_AGG, COLL_FEAT_AGG, COLL_FEAT_AGG};
 		for(String col: cols){
 			DBCollection c = db.getCollection(col);
 			c.drop();

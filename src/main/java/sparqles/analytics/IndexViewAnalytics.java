@@ -107,7 +107,7 @@ public class IndexViewAnalytics implements Task<Index>{
 			analyseInteroperability(epv.getInteroperability(), interStats);
 			
 			//analyse interoperability
-			analyseDiscoverability(epv.getDiscoverability(), discoStats);
+//			analyseDiscoverability(epv.getDiscoverability(), discoStats);
 		}
 
 		//update the index view
@@ -119,7 +119,7 @@ public class IndexViewAnalytics implements Task<Index>{
 		//update interoperability stats
 		updateInteroperability(idx, interStats);
 		
-		updateDiscoverability(idx, discoStats);
+//		updateDiscoverability(idx, discoStats);
 
 
 		log.info("Updated view {}", idx);
