@@ -41,6 +41,7 @@ public class ATask extends EndpointTask<AResult>{
 	public AResult process(EndpointResult epr) {
 		AResult result = new AResult();
 		result.setEndpointResult(epr);
+		result.setExplanation("Endpoint is operating normally");
 		log.debug("[exec] {}", epr.getEndpoint().getUri().toString());
 		
 		long start = System.currentTimeMillis();
@@ -65,6 +66,7 @@ public class ATask extends EndpointTask<AResult>{
 			}
 		} catch (InterruptedException e) {
 			result.setException(LogFormater.toString(e));
+			result.setExplanation(LogFormater.toString(e));
 			log.warn("[executed] ASK query for {}", epr.getEndpoint().getUri(), e);
 			return result;        
 		}catch (Exception e) {
@@ -75,6 +77,7 @@ public class ATask extends EndpointTask<AResult>{
 	private AResult testSelect(EndpointResult epr){
 		AResult result = new AResult();
 		result.setEndpointResult(epr);
+		result.setExplanation("Endpoint is operating normally");
 		long start = System.currentTimeMillis();
 		try{
 			QueryExecution qe = QueryManager.getExecution(epr.getEndpoint(), SELECTQUERY);
@@ -102,9 +105,11 @@ public class ATask extends EndpointTask<AResult>{
 		}catch(HttpException he){
 			result.setIsAvailable(false);
 			result.setException(LogFormater.toString(he));
+			result.setExplanation(LogFormater.toString(he));
 		}catch (Exception e1) {
 			result.setIsAvailable(false);
 			result.setException(LogFormater.toString(e1));
+			result.setExplanation(LogFormater.toString(e1));
 			if(e1.getMessage()!=null)
 				if(e1.getMessage().contains("401 Authorization Required"))result.setIsPrivate(true);
 //			i
