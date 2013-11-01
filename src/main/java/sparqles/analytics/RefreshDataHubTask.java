@@ -89,11 +89,14 @@ public class RefreshDataHubTask implements Task<Index>{
 			if(! ckan.contains(ep)){
 				//remove
 				log.info("Remove endpoint {}",ep);
-				_dbm.update(ep);	
+				_dbm.cleanup(ep);
+				
 			}
 		}
 		return null;
 	}
+
+
 
 
 	@Override

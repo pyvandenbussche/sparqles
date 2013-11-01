@@ -63,11 +63,15 @@ public class MongoDBTest {
 	
 		Endpoint e = Endpoints.DBPEDIA;
 		
+//		assertTrue(m.insert(e));
+//		assertEquals(1, m.get(Endpoint.class, Endpoint.SCHEMA$).size());
+//		
 		assertTrue(m.insert(e));
 		assertEquals(1, m.get(Endpoint.class, Endpoint.SCHEMA$).size());
 		
-		assertTrue(m.insert(e));
-		assertEquals(1, m.get(Endpoint.class, Endpoint.SCHEMA$).size());
+		assertTrue(m.remove(e, Endpoint.class));
+		assertEquals(0, m.get(Endpoint.class, Endpoint.SCHEMA$).size());
+		
 	}
 	
 	@Test

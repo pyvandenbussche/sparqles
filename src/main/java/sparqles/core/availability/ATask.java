@@ -100,14 +100,17 @@ public class ATask extends EndpointTask<AResult>{
 			}
 		}catch (Exception e1) {
 			result.setIsAvailable(false);
-			String failureExplanation="";
-			failureExplanation=e1.getMessage().replaceAll("rethrew: ", "");
-			failureExplanation=failureExplanation.replaceAll("Failed when initializing the StAX parsing engine", "SPARQL protocol not respected");
-			failureExplanation=failureExplanation.replaceAll("java.net.UnknownHostException:", "Unknown host:");
-			failureExplanation=failureExplanation.replaceAll("HttpException:", "HTTP error");
-			if(failureExplanation.contains("401 Authorization Required"))result.setIsPrivate(true);
 			result.setException(LogFormater.toString(e1));
-			result.setExplanation("SPARQL Endpoint is unavailable. "+failureExplanation);
+			if(e1.getMessage().contains("401 Authorization Required"))result.setIsPrivate(true);
+//			i
+//			String failureExplanation="";
+//			failureExplanation=e1.getMessage().replaceAll("rethrew: ", "");
+//			failureExplanation=failureExplanation.replaceAll("Failed when initializing the StAX parsing engine", "SPARQL protocol not respected");
+//			failureExplanation=failureExplanation.replaceAll("java.net.UnknownHostException:", "Unknown host:");
+//			failureExplanation=failureExplanation.replaceAll("HttpException:", "HTTP error");
+//			if(failureExplanation.contains("401 Authorization Required"))result.setIsPrivate(true);
+//			result.setException(LogFormater.toString(e1));
+//			result.setExplanation("SPARQL Endpoint is unavailable. "+failureExplanation);
 
 			log.warn("[executed] SELECT query for {}", epr.getEndpoint().getUri(), e1);
 			return result;

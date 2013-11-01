@@ -84,7 +84,7 @@ public class MongoDBManager {
 		obj2col.put(AResult.class, new String[]{COLL_AVAIL, RESULT_KEY});
 		obj2col.put(PResult.class, new String[]{COLL_PERF, RESULT_KEY});
 		obj2col.put(FResult.class, new String[]{COLL_FEAT, RESULT_KEY});
-		obj2col.put(Endpoint.class, new String[]{COLL_ENDS, RESULT_KEY});
+		obj2col.put(Endpoint.class, new String[]{COLL_ENDS, EP_KEY});
 		obj2col.put(Robots.class, new String[]{COLL_ROBOTS, VIEW_KEY});
 		obj2col.put(Schedule.class, new String[]{COLL_SCHED, RESULT_KEY});
 
@@ -396,6 +396,45 @@ public class MongoDBManager {
 				curs.close();
 		}
 		return reslist;
+	}
+
+	public void cleanup(Endpoint ep) {
+		//remove endpoint
+		remove(ep, Endpoint.class);
+		remove(ep, AvailabilityView.class);
+		remove(ep, InteroperabilityView.class);
+		remove(ep, DiscoverabilityView.class);
+		remove(ep, PerformanceView.class);
+	}
+	
+	
+	
+	public boolean remove(Endpoint ep, Class cls) {
+		String[] v = obj2col.get(cls);
+
+		DBCollection c  = db.getCollection(v[0]);
+		try{
+			BasicDBObject q = new BasicDBObject();
+			q.append(v[1], ep.getUri().toString());
+			
+			
+			WriteResult wr = c.remove(q,WriteConcern.ACKNOWLEDGED);
+			if(wr.getError()!=null){
+				System.out.println("error");
+			}else{
+				log.debug("[REMOVE] [SUCC] {}:{}",v[0],ep.toString());
+			}
+
+			return true;
+		}catch(DuplicateKey ex){
+			log.info("[UPDATE] [DUPLICATE] uri key");
+			return true;
+		}catch(MongoException ex){
+			log.warn("[EXEC] {}",ex);
+		}catch(Exception exx){
+			log.warn("[EXEC] {}",exx);
+		}
+		return false;
 	}
 
 
