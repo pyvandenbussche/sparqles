@@ -1,5 +1,6 @@
 package sparqles.core.availability;
 
+import org.apache.http.HttpException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -98,10 +99,14 @@ public class ATask extends EndpointTask<AResult>{
 				//	        		System.out.println("Thread: " + result.getPackageId()+"\tFALSE"+"\t"+responseTime);
 				return result;
 			}
+		}catch(HttpException he){
+			result.setIsAvailable(false);
+			result.setException(LogFormater.toString(he));
 		}catch (Exception e1) {
 			result.setIsAvailable(false);
 			result.setException(LogFormater.toString(e1));
-			if(e1.getMessage().contains("401 Authorization Required"))result.setIsPrivate(true);
+			if(e1.getMessage()!=null)
+				if(e1.getMessage().contains("401 Authorization Required"))result.setIsPrivate(true);
 //			i
 //			String failureExplanation="";
 //			failureExplanation=e1.getMessage().replaceAll("rethrew: ", "");
@@ -113,7 +118,7 @@ public class ATask extends EndpointTask<AResult>{
 //			result.setExplanation("SPARQL Endpoint is unavailable. "+failureExplanation);
 
 			log.warn("[executed] SELECT query for {}", epr.getEndpoint().getUri(), e1);
-			return result;
 		}
+		return result;
 	}
 }
