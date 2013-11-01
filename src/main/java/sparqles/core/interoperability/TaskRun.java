@@ -25,8 +25,11 @@ public abstract class TaskRun {
 	protected String _queryFile;
 	protected Endpoint _ep;
 
-	private static final long FIRST_RESULT_TIMEOUT = 60 * 1000;
-	private static final long EXECUTION_TIMEOUT = 15 * 60 * 1000;
+	public static final long FIRST_RESULT_TIMEOUT = 60 * 1000;
+	public static final long EXECUTION_TIMEOUT = 15 * 60 * 1000;
+	
+	public static final long A_FIRST_RESULT_TIMEOUT = 30 * 1000;
+	public static final long A_EXECUTION_TIMEOUT = 60 * 1000;
 
 	
 	private Long _start;

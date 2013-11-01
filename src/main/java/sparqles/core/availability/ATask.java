@@ -13,6 +13,7 @@ import sparqles.avro.Endpoint;
 import sparqles.avro.EndpointResult;
 import sparqles.avro.availability.AResult;
 import sparqles.core.EndpointTask;
+import sparqles.core.interoperability.TaskRun;
 
 /**
  * This class performs the required task to study the availability of an endpoint. 
@@ -81,11 +82,12 @@ public class ATask extends EndpointTask<AResult>{
 		long start = System.currentTimeMillis();
 		try{
 			QueryExecution qe = QueryManager.getExecution(epr.getEndpoint(), SELECTQUERY);
+			qe.setTimeout(TaskRun.A_FIRST_RESULT_TIMEOUT, TaskRun.A_FIRST_RESULT_TIMEOUT);
 			boolean response = qe.execSelect().hasNext();
 			
 			if(response) {
 				result.setResponseTime((System.currentTimeMillis()-start));
-				if((System.currentTimeMillis()-start)>20000){
+				if((System.currentTimeMillis()-start)>TaskRun.A_FIRST_RESULT_TIMEOUT){
 					result.setIsAvailable(false);
 					result.setExplanation("SPARQL Endpoint is timeout");
 				}
