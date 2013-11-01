@@ -31,16 +31,10 @@ public class FRun extends TaskRun {
 		
 		result.setQuery(_query);
     	
-		log.debug("[RUN] {} over {}", _queryFile, _ep.getUri());
+		log.debug("[run] {} over {}", _queryFile, _ep.getUri());
 
 		result.setRun(run());
         
         return result;
 	}
-
-
-
-
-
-	
 }

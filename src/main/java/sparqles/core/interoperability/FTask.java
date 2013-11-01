@@ -42,7 +42,7 @@ public class FTask extends EndpointTask<FResult>{
 		
 		int failures=0;
 		for(SpecificFTask sp: _tasks){
-			log.debug("[EXEC] {}:{}", this, sp.name());
+			log.debug("[exec] {}:{}", this, sp.name());
 			
 			FRun run = sp.get(epr);
 			run.setFileManager(_fm);
@@ -55,7 +55,7 @@ public class FTask extends EndpointTask<FResult>{
 				
 				String exec = fres.getRun().getException().toString();
 				
-				log.debug("[FAILED] {} exec: {}", this, exec);
+				log.debug("[failed] {} exec: {}", this, exec);
 			}
 			try {
 				Thread.sleep(SPARQLESProperties.getFTASK_WAITTIME());
@@ -64,7 +64,7 @@ public class FTask extends EndpointTask<FResult>{
 			}
 		}
 		res.setResults(results);
-		log.info("[EXECUTED] {} {}/{} tasks without error", this, _task.length()-failures, _task.length());
+		log.info("[executed] {} {}/{} tasks without error", this, _tasks.length-failures, _tasks.length);
 		
 		return res;
     }

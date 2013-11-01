@@ -40,7 +40,7 @@ public class ATask extends EndpointTask<AResult>{
 	public AResult process(EndpointResult epr) {
 		AResult result = new AResult();
 		result.setEndpointResult(epr);
-		LogFormater.run(log, "{}", epr.getEndpoint().getUri().toString());
+		log.debug("[exec] {}", epr.getEndpoint().getUri().toString());
 		
 		long start = System.currentTimeMillis();
 		try {
@@ -56,7 +56,6 @@ public class ATask extends EndpointTask<AResult>{
 					result.setIsAvailable(response);
 					result.setExplaination("Endpoint is operating normally");
 				}
-				LogFormater.debugSuccess(log,"[ASK] {}", epr.getEndpoint().getUri().toString());
 				return result;
 			}
 			else{
@@ -64,7 +63,7 @@ public class ATask extends EndpointTask<AResult>{
 			}
 		} catch (InterruptedException e) {
 			result.setException(LogFormater.toString(e));
-			log.warn("[EXEC] ASK query for {}", epr.getEndpoint().getUri(), e);
+			log.warn("[exec] ASK query for {}", epr.getEndpoint().getUri(), e);
 			return result;        
 		}catch (Exception e) {
 			return testSelect(epr);
@@ -89,7 +88,6 @@ public class ATask extends EndpointTask<AResult>{
 					result.setIsAvailable(response);
 					result.setExplaination("Endpoint is operating normally");
 				}
-				LogFormater.debugSuccess(log,"[SELECT] {}", epr.getEndpoint().getUri().toString());
 				return result;
 			}
 			else{
@@ -108,7 +106,7 @@ public class ATask extends EndpointTask<AResult>{
 			result.setException(LogFormater.toString(e1));
 			result.setExplaination("SPARQL Endpoint is unavailable. "+failureExplanation);
 
-			log.warn("[EXEC] SELECT query for {}", epr.getEndpoint().getUri(), e1);
+			log.warn("[exec] SELECT query for {}", epr.getEndpoint().getUri(), e1);
 			return result;
 		}
 	}

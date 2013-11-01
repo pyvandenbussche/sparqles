@@ -1,16 +1,14 @@
 package sparqles.core;
 
-import static org.junit.Assert.*;
 
 import java.io.File;
-import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import sparqles.avro.Endpoint;
-import sparqles.avro.availability.AResult;
+
 
 import sparqles.avro.schedule.Schedule;
 import sparqles.core.availability.ATask;

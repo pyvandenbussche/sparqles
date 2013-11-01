@@ -20,6 +20,7 @@ import sparqles.utils.FileManager;
 import sparqles.utils.MongoDBManager;
 import sparqles.core.EndpointTask;
 import sparqles.core.SPARQLESProperties;
+import sparqles.analytics.RefreshDataHubTask;
 import sparqles.avro.Endpoint;
 import sparqles.avro.schedule.Schedule;
 import sparqles.core.Task;
@@ -31,8 +32,8 @@ public class Scheduler {
 
 	private static final Logger log = LoggerFactory.getLogger(Scheduler.class);
 
-	private final static String CRON_EVERY_HOUR="0 0 0/1 1/1 * ? *";
-	private final static String CRON_EVERY_ONETEN="0 30 1/12 1/1 * ? *";
+	public final static String CRON_EVERY_HOUR="0 0 0/1 1/1 * ? *";
+	public final static String CRON_EVERY_ONETEN="0 30 1 1/1 * ? *";
 	private final static String CRON_EVERY_DAY_AT_715="0 15 7 1/1 * ? *";
 	private final static String CRON_EVERY_DAY_AT_215="0 15 2 1/1 * ? *";
 	private final static String CRON_EVERY_MON_WED_FRI_SUN_THU_AT_410="0 10 4 ? * WED,THU *";
@@ -62,16 +63,21 @@ public class Scheduler {
 	private FileManager _fm;
 	private MongoDBManager _dbm;
 
+	private SchedulerMonitor _monitor;
+
 	public Scheduler(){
 		this(SPARQLESProperties.getTASK_THREADS());
 	}
 
 	public Scheduler(int threads){
 		int athreads = (int)( threads * 0.3);
-		
-		SERVICE = Executors.newScheduledThreadPool(threads - athreads);
+		int tthreads= threads - athreads;
+		SERVICE = Executors.newScheduledThreadPool(tthreads);
 		ASERVICE = Executors.newScheduledThreadPool(athreads);
-		log.info("[INIT] Scheduler with {} athreads and {} threads",athreads, athreads);
+				
+		_monitor = new SchedulerMonitor();
+		_monitor.start();
+		log.info("[INIT] Scheduler with {} athreads and {} threads",athreads, tthreads);
 	}
 
 	/**
@@ -81,30 +87,44 @@ public class Scheduler {
 	public void init(MongoDBManager db) {
 
 		Collection<Schedule> schedules = db.get(Schedule.class, Schedule.SCHEMA$);
-		sparqles.utils.LogFormater.init(log," [Scheduling tasks for {} endpoints", schedules.size());
+		log.info("[Scheduling] tasks for {} endpoints", schedules.size());
 
 		for(Schedule sd: schedules){
-			Endpoint ep = sd.getEndpoint();
-			try {
-				if(sd.getATask()!=null){
-					schedule(TaskFactory.create(ATASK,ep, _dbm, _fm ), new CronBasedIterator(sd.getATask().toString()));
-				}
-				if(sd.getPTask()!=null){
-					schedule(TaskFactory.create(PTASK,ep, _dbm, _fm ), new CronBasedIterator(sd.getPTask().toString()));
-				}				
-				if(sd.getFTask()!=null){
-					schedule(TaskFactory.create(FTASK,ep, _dbm, _fm ), new CronBasedIterator(sd.getFTask().toString()));
-				}			
-				if(sd.getDTask()!=null){
-					schedule(TaskFactory.create(DTASK,ep, _dbm, _fm ), new CronBasedIterator(sd.getDTask().toString()));
-				}
-				if(sd.getITask()!=null){
-					schedule(TaskFactory.create(ITASK,ep, _dbm, _fm ), new CronBasedIterator(sd.getITask().toString()));
-				}
-			} catch (ParseException e) {
-				log.warn("[EXEC] ParseException: {} for {}",e.getMessage(), ep.uri);
-			}
+			initSchedule(sd);
+			
+			
 		}
+	}
+
+	public void initSchedule(Schedule sd) {
+		Endpoint ep = sd.getEndpoint();
+		
+		
+		try {
+			if(sd.getATask()!=null){
+				schedule(TaskFactory.create(ATASK,ep, _dbm, _fm ), new CronBasedIterator(sd.getATask().toString()));
+			}
+			if(sd.getPTask()!=null){
+				schedule(TaskFactory.create(PTASK,ep, _dbm, _fm ), new CronBasedIterator(sd.getPTask().toString()));
+			}				
+			if(sd.getFTask()!=null){
+				schedule(TaskFactory.create(FTASK,ep, _dbm, _fm ), new CronBasedIterator(sd.getFTask().toString()));
+			}			
+			if(sd.getDTask()!=null){
+				schedule(TaskFactory.create(DTASK,ep, _dbm, _fm ), new CronBasedIterator(sd.getDTask().toString()));
+			}
+			if(sd.getITask()!=null){
+				schedule(TaskFactory.create(ITASK,ep, _dbm, _fm ), new CronBasedIterator(sd.getITask().toString()));
+			}
+			if(sd.getETask()!=null){
+				RefreshDataHubTask task = (RefreshDataHubTask) TaskFactory.create(ETASK,ep, _dbm, _fm );
+				task.setScheduler(this);
+				schedule(task, new CronBasedIterator(sd.getITask().toString()));
+			}
+		} catch (ParseException e) {
+			log.warn("[EXEC] ParseException: {} for {}",e.getMessage(), ep.uri);
+		}
+		
 	}
 
 	/**
@@ -137,11 +157,11 @@ public class Scheduler {
 		SchedulerTimerTask t = new SchedulerTimerTask(task,iter);
 
 		if(task instanceof ATask)
-			ASERVICE.schedule(t, startTime, TimeUnit.MILLISECONDS);
+			_monitor.submitA(ASERVICE.schedule(t, startTime, TimeUnit.MILLISECONDS));
 		else 
-			SERVICE.schedule(t, startTime, TimeUnit.MILLISECONDS);
-		Object [] s = {task, time, iter};
-		log.info("[SCHEDULED] {} next:'{}' policy:'{}'",s);
+			_monitor.submit(SERVICE.schedule(t, startTime, TimeUnit.MILLISECONDS));
+		
+		log.info("[SCHEDULED] {} next:'{}' policy:'{}'",task, time, iter);
 	}
 
 
@@ -193,11 +213,11 @@ public class Scheduler {
 	}
 
 	/**
-	 *  Returns the default schedule element
+	 *  Returns the default schedule element for the endpoints
 	 * @param ep
 	 * @return
 	 */
-	private static Schedule defaultSchedule(Endpoint ep) {
+	public static Schedule defaultSchedule(Endpoint ep) {
 		Schedule s = new Schedule();
 		s.setEndpoint(ep);
 
@@ -205,7 +225,7 @@ public class Scheduler {
 		s.setPTask(taskSchedule.get(PTASK));
 		s.setFTask(taskSchedule.get(FTASK));
 		s.setDTask(taskSchedule.get(DTASK));
-		s.setITask(taskSchedule.get(ITASK));
+//		s.setITask(taskSchedule.get(ITASK));
 
 		return s;
 	}
@@ -214,7 +234,7 @@ public class Scheduler {
 		log.info("Shutting down scheduler service");
 		List<Runnable> tasks = SERVICE.shutdownNow();
 		log.info("{} Tasks were scheduled after the shutdown command", tasks.size());
-
+		_monitor.halt();
 		if(_dbm != null){
 			_dbm.close();
 		}

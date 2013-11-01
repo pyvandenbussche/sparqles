@@ -70,7 +70,7 @@ public abstract class EndpointTask<V extends SpecificRecordBase> implements Task
 		boolean i_succ=true, a_succ = true, f_succ= true;
 		V v = null;
 		try{
-			log.info("[EXEC] {}", _id);
+			log.info("[EXECUTE] {}", _id);
 			
 			v = process(epr);
 			long end = System.currentTimeMillis();	

@@ -39,8 +39,10 @@ import sparqles.avro.analytics.IndexViewInteroperability;
 import sparqles.avro.analytics.IndexViewPerformance;
 import sparqles.avro.analytics.IndexViewPerformanceData;
 import sparqles.avro.analytics.IndexViewPerformanceDataValues;
+import sparqles.avro.schedule.Schedule;
 import sparqles.core.CONSTANTS;
 import sparqles.core.Task;
+import sparqles.schedule.Scheduler;
 import sparqles.utils.DatahubAccess;
 import sparqles.utils.MongoDBManager;
 
@@ -48,10 +50,13 @@ public class RefreshDataHubTask implements Task<Index>{
 
 	private static final Logger log = LoggerFactory.getLogger(RefreshDataHubTask.class);
 	private MongoDBManager _dbm;
+	private Scheduler _s;
 	
 
 	@Override
 	public Index call() throws Exception {
+		log.info("[EXECUTE] updating ckan catalog" );
+				
 		Collection<Endpoint> list = DatahubAccess.checkEndpointList();
 		
 		int newEPs = 0, upEPs=0;
@@ -59,8 +64,14 @@ public class RefreshDataHubTask implements Task<Index>{
 			
 			Endpoint epDB = _dbm.getEndpoint(ep);
 			if(epDB==null){
+				//new endpoint, 
+				//add it to the db, create store and register the schedule
 				newEPs++;
 				_dbm.insert(ep);
+				Schedule sch = _s.defaultSchedule(ep);
+				_dbm.insert(sch);
+				_s.initSchedule(sch);
+				
 			}else{
 				if(ep.getDatasets().size() != epDB.getDatasets().size()){
 					_dbm.update(ep);
@@ -76,6 +87,12 @@ public class RefreshDataHubTask implements Task<Index>{
 	@Override
 	public void setDBManager(MongoDBManager dbm) {
 		_dbm = dbm;
+		
+	}
+
+
+	public void setScheduler(Scheduler scheduler) {
+		_s = scheduler;
 		
 	}
 }

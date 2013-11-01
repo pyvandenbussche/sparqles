@@ -22,7 +22,7 @@ public class PerformanceTEST {
 
 	@Before
 	public void setUp() throws Exception {
-		SPARQLESProperties.init(new File("src/test/resources/ends.properties"));
+		SPARQLESProperties.init(new File("src/test/resources/sparqles.properties"));
 		m = new MongoDBManager();
 		
 		
@@ -36,7 +36,7 @@ public class PerformanceTEST {
 	
 	@Test
 	public void testSingle() throws Exception {
-		Endpoint ep = Endpoints.DBPEDIA;
+		Endpoint ep = Endpoints.TEST1;
 	
 		Task<PResult> t = TaskFactory.create(CONSTANTS.PTASK, ep, m, null);
 		PResult res = t.call();

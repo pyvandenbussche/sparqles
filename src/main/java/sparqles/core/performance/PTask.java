@@ -40,7 +40,7 @@ public class PTask extends EndpointTask<PResult>{
 		
 		int failures=0;
 		for(SpecificPTask sp: _tasks){
-			log.debug("[EXEC] {}:{}", this, sp.name());
+			log.debug("[exec] {}:{}", this, sp.name());
 			
 			PRun run = sp.get(epr.getEndpoint());
 			PSingleResult pres = run.execute();
@@ -52,7 +52,7 @@ public class PTask extends EndpointTask<PResult>{
 				String cold = pres.getCold().getException().toString();
 				String warm = pres.getWarm().getException().toString();
 				
-				log.debug("[FAILED] {} (cold: {}, warm: {})", this, cold,warm); 
+				log.debug("[failed] {} (cold: {}, warm: {})", this, cold, warm); 
 			}
 			try {
 				Thread.sleep(SPARQLESProperties.getPTASK_WAITTIME());
@@ -62,7 +62,7 @@ public class PTask extends EndpointTask<PResult>{
 		}
 		res.setResults(results);
 		
-		log.info("[EXECUTED] {} {}/{} tasks without error", this, _task.length()-failures, _task.length());
+		log.info("[executed] {} {}/{} tasks without error", this, _tasks.length-failures, _tasks.length);
 		
 		return res;
     }

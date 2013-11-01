@@ -95,12 +95,14 @@ public class DTask extends EndpointTask<DResult> {
 	public DResult process(EndpointResult epr) {
 		DResult result = new DResult();
 		result.setEndpointResult(epr);
+		log.debug("[exec] {}", _epURI);
 		
 		result.setDescriptionFiles((List)new ArrayList<DGETInfo>());
 
 		int failures=0;
 
 		//RobotsTXT run
+		log.debug("[exec] {} {}","robots", _epURI);
 		RobotsTXT rtxt = new RobotsTXT();
 
 		//get list of existing robots.txt
@@ -126,6 +128,7 @@ public class DTask extends EndpointTask<DResult> {
 		boolean isRobotsAllowed = checkRobotsTxt(rob);
 		rtxt.setAllowedByRobotsTXT(isRobotsAllowed);
 
+		log.debug("[exec] {} {}","sitemap", _epURI);
 		//discovery void and sparqles via semantic sitemap.xml
 		//http://vocab.deri.ie/void/guide#sec_5_2_Discovery_via_sitemaps
 		parseSitemapXML(rob,rtxt,result);
@@ -133,7 +136,7 @@ public class DTask extends EndpointTask<DResult> {
 //		System.out.println("HERER");
 		//inspect HTTP Get
 		//ok we checked the robots.txt, now we do a http get on the sparql URL
-		
+		log.debug("[exec] {} {}","httpget", _epURI);
 		try {
 			URI epURL = new URI(_ep.getUri().toString());
 			DGETInfo info = checkForVoid(epURL.toString(), "EPURL");
@@ -141,8 +144,9 @@ public class DTask extends EndpointTask<DResult> {
 		
 			//well-known location
 		} catch (Exception e) {
-			log.debug("[EXEC] HTTP GET "+_epURI, e);
+			log.debug("[EXC] HTTP GET "+_epURI, e);
 		}
+		log.debug("[exec] {} {}","well-known", _epURI);
 		try{
 			URI epURL = new URI(_ep.getUri().toString());
 			URL wellknown = new URI(epURL.getScheme(), epURL
@@ -151,9 +155,10 @@ public class DTask extends EndpointTask<DResult> {
 			DGETInfo info = checkForVoid(wellknown.toString(), "wellknown");
 			result.getDescriptionFiles().add(info);
 		} catch (Exception e) {
-			log.debug("[EXEC] HTTP well known "+_epURI, e);
+			log.debug("[EXC] HTTP well known "+_epURI, e);
 		}
 		
+		log.debug("[exec] {} {}","query-self", _epURI);
 		//maybe the endpoint has data about itself
 		QueryInfo qInfo = query(_ep.getUri().toString());
 		
@@ -181,7 +186,7 @@ public class DTask extends EndpointTask<DResult> {
 //		if(vres.getException()!=null)failures++;
 //		if(vsres.getException()!=null)failures++;
 
-		log.info("[EXECUTED] {} {}/3 tasks without error", this, 3-failures);
+		log.info("[executed] {}", this);
 
 		return result;
 	}
