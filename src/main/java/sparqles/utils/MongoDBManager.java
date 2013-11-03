@@ -111,8 +111,10 @@ public class MongoDBManager {
 			client = new MongoClient( SPARQLESProperties.getDB_HOST() , SPARQLESProperties.getDB_PORT() );
 			log.info("[INIT] MongoDB {} ", client);
 			db = client.getDB(SPARQLESProperties.getDB_NAME() );
-			
-			
+		} catch (UnknownHostException e) {
+			log.error("Coulld not connect to MongoDB instance, {}", ExceptionHandler.toString(e));
+		}	
+		try{	
 			String []cols = {COLL_AVAIL_AGG, COLL_PERF_AGG, COLL_DISC_AGG, COLL_FEAT_AGG, COLL_FEAT_AGG, COLL_EP_VIEW, COLL_INDEX,COLL_SCHED};
 			for(String col: cols){
 				DBCollection c = db.getCollection(col);
@@ -124,9 +126,9 @@ public class MongoDBManager {
 			DBObject d = new BasicDBObject("uri", 1);
 			if(c.getIndexInfo().size()==0)
 				c.ensureIndex(d, new BasicDBObject("unique", true));
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		}
+		} catch (Exception e) {
+			log.error("Exception while creating indices for MongoDB collections, {}", ExceptionHandler.toString(e));
+		}	
 	}
 	
 	
@@ -164,47 +166,39 @@ public class MongoDBManager {
 		if(v != null && v[0] != null)
 			return insert(v[0], res, res.getSchema() );
 		else{
-			log.warn("Collection for {} unknown", res.getClass());
+			log.error("Collection for {} unknown", res.getClass());
 		}
 		return false;
 	}
-
-	public Endpoint getEndpoint(Endpoint ep) {
-		List<Endpoint> res = scan(ep, COLL_ENDS, Endpoint.class, Endpoint.SCHEMA$, EP_KEY);
-		if(res.size()!=1){
-			log.error("Received {} results for {}; expected one result ", res.size(), ep);
-		}
-		if(res.size()==0) return null;
-		return res.get(0);
-	}
-
 
 	private boolean insert(String collName, Object e, Schema schema){
 		DBCollection c = db.getCollection(collName);
+		String s = e.toString();
+		if(s.contains("uri") && s.contains("datasets"))
+			s=s.substring(s.indexOf("uri"), s.indexOf("datasets")).replaceAll("\"", "").trim().replaceAll("\\\\/", "/");
 		try{
-
+	
 			DBObject dbObject = getObject(e, schema);
 			WriteResult wr = c.insert(dbObject,WriteConcern.ACKNOWLEDGED);
 			if(wr.getError()!=null){
-				log.debug("[INSERT] [ERROR] {}:{} #>{}",collName,e.toString(), wr.getError());
+				log.info("INSERT ERROR {}:{} #>{}",collName, s, wr.getError());
+				log.debug("INSERT ERROR {}:{} #>{}",collName,e.toString(), wr.getError());
 				return false;
 			}else{
-				log.debug("[INSERT] [SUCC] {}:{}", collName, e.toString());
+				log.info("INSERT SUCCESS {}:{}", collName, s);
+				log.debug("INSERT SUCCESS {}:{}", collName, e.toString());
 			}
 			return true;
 		}catch(DuplicateKey ex){
-			log.debug("[INSERT] [DUPLICATE] uri key for {}",e);
+			log.error("INSERT DUPLICATE uri key for {} ({})",e,ExceptionHandler.toString(ex));
 			return true;
 		}catch(MongoException ex){
-			log.error("MongoDB Exception {} {}, {} , {}", e.getClass(),ex.getClass().getSimpleName(), ex.getMessage(), ex.getCause());
-			log.debug("[INSERT] [EXC] "+e.getClass(),ex);
-		}catch(Exception exx){
-			log.error("Exception {} {}, {} , {}", e.getClass(), exx.getClass().getSimpleName(), exx.getMessage(), exx.getCause());
-			log.debug("[INSERT] [EXC] "+e.getClass(),exx);
+			log.error("INSERT MongoDB Exception: {}: {}", e, ExceptionHandler.toString(ex));
+		}catch(Exception ex){
+			log.error("INSERT Exception: {} {}", e, ExceptionHandler.toString(ex));
 		}
 		return false;
 	}
-
 
 	public <V extends SpecificRecordBase> boolean update(V res){
 		
@@ -228,19 +222,22 @@ public class MongoDBManager {
 
 			WriteResult wr = c.update(q, dbObject);
 			if(wr.getError()!=null){
-				System.out.println("error");
+				log.info("UPDATE ERROR {}:{} #>{}",collName, ep.getUri(), wr.getError());
+				log.debug("UPDATE ERROR {}:{} #>{}",collName,e.toString(), wr.getError());
+				return false;
 			}else{
-				log.info("[UPDATE] [SUCC] {}:{}",collName,e.toString());
+				log.info("UPDATE SUCCESS {}:{}", collName, ep.getUri());
+				log.debug("UPDATE SUCCESS {}:{}", collName, e.toString());
 			}
 
 			return true;
 		}catch(DuplicateKey ex){
-			log.info("[UPDATE] [DUPLICATE] uri key");
+			log.error("INSERT DUPLICATE uri key for {} ({})",ep.getUri(), ExceptionHandler.toString(ex));
 			return true;
 		}catch(MongoException ex){
-			log.warn("[EXEC] {}",ex);
-		}catch(Exception exx){
-			log.warn("[EXEC] {}",exx);
+			log.error("INSERT MongoDB Exception: {}: {}", ep.getUri(), ExceptionHandler.toString(ex));
+		}catch(Exception ex){
+			log.error("INSERT Exception: {} {}", ep.getUri(), ExceptionHandler.toString(ex));
 		}
 		return false;
 	}
@@ -251,6 +248,15 @@ public class MongoDBManager {
 		return getResults(null, cls, schema);
 	}
 
+
+	public Endpoint getEndpoint(Endpoint ep) {
+		List<Endpoint> res = scan(ep, COLL_ENDS, Endpoint.class, Endpoint.SCHEMA$, EP_KEY);
+		if(res.size()!=1){
+			log.error("Received {} results for {}; expected one result ", res.size(), ep.getUri());
+		}
+		if(res.size()==0) return null;
+		return res.get(0);
+	}
 
 	public <T> List<T> getResults(Endpoint ep, Class<T> cls, Schema schema) {
 		String[] v = obj2col.get(cls);
@@ -263,9 +269,83 @@ public class MongoDBManager {
 		return new ArrayList<T>();
 	}
 
-	public boolean close(){
-		client.close();
-		return true;
+	public <T extends SpecificRecordBase> List<T> getResultsSince(Endpoint ep, Class<T> cls,
+			Schema schema, long since) {
+	
+		ArrayList<T> reslist = new ArrayList<T>();	
+	
+		DBCollection c  = db.getCollection(COLL_AVAIL);
+		DBCursor curs = null;
+		try{
+		if(ep==null){
+			curs = c.find();
+		}else{
+	
+			DBObject q =
+					QueryBuilder.start().and(
+							QueryBuilder.start(RESULT_KEY).is(ep.getUri().toString()).get(),
+							QueryBuilder.start("endpointResult.start").greaterThan(since).get()).get();
+			log.info("[EXEC] {}",q);
+			curs = c.find(q);
+		}
+	
+		while(curs.hasNext()){
+			DBObject o = curs.next();
+			SpecificDatumReader r = new SpecificDatumReader<T>(cls);
+			JsonDecoder d;
+			try {
+				d = DecoderFactory.get().jsonDecoder(schema, o.toString());
+				T t =(T) r.read(null, d);
+				reslist.add(t);
+			} catch (IOException e) {
+				log.error("GET RESULT Exception: {} {}", ep.getUri(), ExceptionHandler.toString(e));
+			}
+		}
+		}finally{
+			if(curs!=null)
+				curs.close();
+		}
+		return reslist;
+	
+	}
+
+	public <T extends SpecificRecordBase> List<T> getResultsSince(Endpoint ep, Class<T> cls,
+			Schema schema, long from, long to) {
+		ArrayList<T> reslist = new ArrayList<T>();	
+	
+		DBCollection c  = db.getCollection(COLL_AVAIL);
+		DBCursor curs = null;
+		try{
+		if(ep==null){
+			curs = c.find();
+		}else{
+	
+			DBObject q =
+					QueryBuilder.start().and(
+							QueryBuilder.start(RESULT_KEY).is(ep.getUri().toString()).get(),
+							QueryBuilder.start("endpointResult.start").greaterThan(from).get(),
+							QueryBuilder.start("endpointResult.start").lessThanEquals(to).get()).get();
+			log.info("[EXEC] {}",q);
+			curs = c.find(q);
+		}
+	
+		while(curs.hasNext()){
+			DBObject o = curs.next();
+			SpecificDatumReader r = new SpecificDatumReader<T>(cls);
+			JsonDecoder d;
+			try {
+				d = DecoderFactory.get().jsonDecoder(schema, o.toString());
+				T t =(T) r.read(null, d);
+				reslist.add(t);
+			} catch (IOException e) {
+				log.error("GET RESULT SINCE Exception: {} {}", ep.getUri(), ExceptionHandler.toString(e));
+			}
+		}
+		}finally{
+			if(curs!=null)
+				curs.close();
+		}
+		return reslist;
 	}
 
 	private DBObject getObject(Object o, Schema s){
@@ -280,7 +360,7 @@ public class MongoDBManager {
 			return dbObject;
 
 		} catch (IOException e1) {
-			e1.printStackTrace();
+			log.error("GET OBJECT Exception: {} {}", o.getClass(), ExceptionHandler.toString(e1));
 		}
 		return null;
 	}
@@ -308,7 +388,7 @@ public class MongoDBManager {
 					T t =(T) r.read(null, d);
 					reslist.add(t);
 				} catch (IOException e) {
-					e.printStackTrace();
+					log.error("SCAN Exception: {}:{}:{} {}", ep.getUri(),colName, cls, ExceptionHandler.toString(e));
 				}
 			}
 		}finally{
@@ -316,85 +396,6 @@ public class MongoDBManager {
 				curs.close();
 		}
 
-		return reslist;
-	}
-
-	public <T extends SpecificRecordBase> List<T> getResultsSince(Endpoint ep, Class<T> cls,
-			Schema schema, long since) {
-
-		ArrayList<T> reslist = new ArrayList<T>();	
-
-		DBCollection c  = db.getCollection(COLL_AVAIL);
-		DBCursor curs = null;
-		try{
-		if(ep==null){
-			curs = c.find();
-		}else{
-
-			DBObject q =
-					QueryBuilder.start().and(
-							QueryBuilder.start(RESULT_KEY).is(ep.getUri().toString()).get(),
-							QueryBuilder.start("endpointResult.start").greaterThan(since).get()).get();
-			log.info("[EXEC] {}",q);
-			curs = c.find(q);
-		}
-
-		while(curs.hasNext()){
-			DBObject o = curs.next();
-			SpecificDatumReader r = new SpecificDatumReader<T>(cls);
-			JsonDecoder d;
-			try {
-				d = DecoderFactory.get().jsonDecoder(schema, o.toString());
-				T t =(T) r.read(null, d);
-				reslist.add(t);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		}finally{
-			if(curs!=null)
-				curs.close();
-		}
-		return reslist;
-
-	}
-
-	public <T extends SpecificRecordBase> List<T> getResultsSince(Endpoint ep, Class<T> cls,
-			Schema schema, long from, long to) {
-		ArrayList<T> reslist = new ArrayList<T>();	
-
-		DBCollection c  = db.getCollection(COLL_AVAIL);
-		DBCursor curs = null;
-		try{
-		if(ep==null){
-			curs = c.find();
-		}else{
-
-			DBObject q =
-					QueryBuilder.start().and(
-							QueryBuilder.start(RESULT_KEY).is(ep.getUri().toString()).get(),
-							QueryBuilder.start("endpointResult.start").greaterThan(from).get(),
-							QueryBuilder.start("endpointResult.start").lessThanEquals(to).get()).get();
-			log.info("[EXEC] {}",q);
-			curs = c.find(q);
-		}
-
-		while(curs.hasNext()){
-			DBObject o = curs.next();
-			SpecificDatumReader r = new SpecificDatumReader<T>(cls);
-			JsonDecoder d;
-			try {
-				d = DecoderFactory.get().jsonDecoder(schema, o.toString());
-				T t =(T) r.read(null, d);
-				reslist.add(t);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		}finally{
-			if(curs!=null)
-				curs.close();
-		}
 		return reslist;
 	}
 
@@ -420,21 +421,26 @@ public class MongoDBManager {
 			
 			WriteResult wr = c.remove(q,WriteConcern.ACKNOWLEDGED);
 			if(wr.getError()!=null){
-				System.out.println("error");
+				log.info("REMOVE ERROR {}:{} #>{}",v[0], ep.getUri(), wr.getError());
+				return false;
 			}else{
-				log.debug("[REMOVE] [SUCC] {}:{}",v[0],ep.toString());
+				log.info("REMOVE SUCCESS {}:{}", v[0], ep.getUri());
 			}
-
 			return true;
 		}catch(DuplicateKey ex){
-			log.info("[UPDATE] [DUPLICATE] uri key");
+			log.error("REMOVE DUPLICATE uri key for {} ({})",ep.getUri(), ExceptionHandler.toString(ex));
 			return true;
 		}catch(MongoException ex){
-			log.warn("[EXEC] {}",ex);
-		}catch(Exception exx){
-			log.warn("[EXEC] {}",exx);
+			log.error("REMOVE MongoDB Exception: {}: {}", ep.getUri(), ExceptionHandler.toString(ex));
+		}catch(Exception ex){
+			log.error("REMOVE Exception: {} {}", ep.getUri(), ExceptionHandler.toString(ex));
 		}
 		return false;
+	}
+
+	public boolean close(){
+		client.close();
+		return true;
 	}
 
 

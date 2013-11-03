@@ -1,19 +1,17 @@
 package sparqles.core.availability;
 
-import org.apache.http.HttpException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import sparqles.utils.LogFormater;
-import sparqles.utils.QueryManager;
-
-import com.hp.hpl.jena.query.QueryExecution;
 
 import sparqles.avro.Endpoint;
 import sparqles.avro.EndpointResult;
 import sparqles.avro.availability.AResult;
 import sparqles.core.EndpointTask;
 import sparqles.core.interoperability.TaskRun;
+import sparqles.utils.ExceptionHandler;
+import sparqles.utils.QueryManager;
+
+import com.hp.hpl.jena.query.QueryExecution;
 
 /**
  * This class performs the required task to study the availability of an endpoint. 
@@ -43,7 +41,6 @@ public class ATask extends EndpointTask<AResult>{
 		AResult result = new AResult();
 		result.setEndpointResult(epr);
 		result.setExplanation("Endpoint is operating normally");
-		log.debug("[exec] {}", epr.getEndpoint().getUri().toString());
 		
 		long start = System.currentTimeMillis();
 		try {
@@ -59,16 +56,17 @@ public class ATask extends EndpointTask<AResult>{
 					result.setIsAvailable(response);
 					result.setExplanation("Endpoint is operating normally");
 				}
-				log.debug("[executed] ask {}", epr.getEndpoint().getUri().toString());
+				log.debug("executed ask {}", epr.getEndpoint().getUri().toString());
 				return result;
 			}
 			else{
 				return testSelect(epr);
 			}
 		} catch (InterruptedException e) {
-			result.setException(LogFormater.toString(e));
-			result.setExplanation(LogFormater.toString(e));
-			log.warn("[executed] ASK query for {}", epr.getEndpoint().getUri(), e);
+			result.setException(ExceptionHandler.toString(e));
+			result.setExplanation(ExceptionHandler.toString(e));
+			
+			log.warn("failed ASK query for {}, {}", _epURI, ExceptionHandler.toString(e));
 			return result;        
 		}catch (Exception e) {
 			return testSelect(epr);
@@ -95,36 +93,22 @@ public class ATask extends EndpointTask<AResult>{
 					result.setIsAvailable(response);
 					result.setExplanation("Endpoint is operating normally");
 				}
-				log.debug("[executed] select {}", epr.getEndpoint().getUri().toString());
+				log.debug("executed select {}", epr.getEndpoint().getUri().toString());
 				return result;
 			}
 			else{
 				result.setIsAvailable(response);
-				log.debug("[executed] no response {}", epr.getEndpoint().getUri().toString());
-				//	        		System.out.println("Thread: " + result.getPackageId()+"\tFALSE"+"\t"+responseTime);
+				log.debug("executed no response {}", epr.getEndpoint().getUri().toString());
 				return result;
 			}
-		}catch(HttpException he){
-			result.setIsAvailable(false);
-			result.setException(LogFormater.toString(he));
-			result.setExplanation(LogFormater.toString(he));
 		}catch (Exception e1) {
 			result.setIsAvailable(false);
-			result.setException(LogFormater.toString(e1));
-			result.setExplanation(LogFormater.toString(e1));
+			result.setException(ExceptionHandler.toString(e1));
+			result.setExplanation(ExceptionHandler.toString(e1));
 			if(e1.getMessage()!=null)
 				if(e1.getMessage().contains("401 Authorization Required"))result.setIsPrivate(true);
-//			i
-//			String failureExplanation="";
-//			failureExplanation=e1.getMessage().replaceAll("rethrew: ", "");
-//			failureExplanation=failureExplanation.replaceAll("Failed when initializing the StAX parsing engine", "SPARQL protocol not respected");
-//			failureExplanation=failureExplanation.replaceAll("java.net.UnknownHostException:", "Unknown host:");
-//			failureExplanation=failureExplanation.replaceAll("HttpException:", "HTTP error");
-//			if(failureExplanation.contains("401 Authorization Required"))result.setIsPrivate(true);
-//			result.setException(LogFormater.toString(e1));
-//			result.setExplanation("SPARQL Endpoint is unavailable. "+failureExplanation);
-
-			log.warn("[executed] SELECT query for {}", epr.getEndpoint().getUri(), e1);
+			
+			log.warn("failed SELECT query for {}, {}", _epURI, ExceptionHandler.toString(e1));
 		}
 		return result;
 	}

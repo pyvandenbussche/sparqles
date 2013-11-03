@@ -57,7 +57,7 @@ import sparqles.avro.discovery.RobotsTXT;
 import sparqles.core.CONSTANTS;
 import sparqles.core.EndpointTask;
 import sparqles.utils.ConnectionManager;
-import sparqles.utils.LogFormater;
+import sparqles.utils.ExceptionHandler;
 import sparqles.utils.QueryManager;
 
 /**
@@ -220,7 +220,7 @@ public class DTask extends EndpointTask<DResult> {
 			voidA.addAll(voidAset);
 			log.info("Found {} results",reswind.getRowNumber());
 		} catch (Exception e1) {
-			info.setException(LogFormater.toString(e1));
+			info.setException(ExceptionHandler.toString(e1));
 			log.debug("[EXEC] SPARQL query to "+epURL+" for "+_epURI, e1);
 		}
 		finally {
@@ -291,7 +291,7 @@ public class DTask extends EndpointTask<DResult> {
 				}
 			} catch (Exception e) {
 				log.debug("[EXEC] Sitemap for "+_epURI, e);
-				rtxt.setException(LogFormater.toString(e));
+				rtxt.setException(ExceptionHandler.toString(e));
 			}
 		}
 	}
@@ -343,7 +343,7 @@ public class DTask extends EndpointTask<DResult> {
 			}
 		}catch(Exception e ){
 			log.debug("[EXEC] VOID "+url+" for "+_epURI, e);
-			info.setException(LogFormater.toString(e));
+			info.setException(ExceptionHandler.toString(e));
 		}
 		return info;
 	}
@@ -360,7 +360,7 @@ public class DTask extends EndpointTask<DResult> {
 			robotsOnHost = new URI(host.getScheme(), host.getAuthority(), "/robots.txt", null, null);
 		} catch (URISyntaxException e) {
 			log.debug("[EXEC] ROBOTS for "+ _epURI,e);
-			rob.setException(LogFormater.toString(e));
+			rob.setException(ExceptionHandler.toString(e));
 			return rob;
 		}
 
@@ -382,7 +382,7 @@ public class DTask extends EndpointTask<DResult> {
 			hget.abort();
 		} catch (Exception e1) {
 			log.debug("[EXEC] ROBOTS for "+ _epURI,e1);
-			rob.setException(LogFormater.toString(e1));
+			rob.setException(ExceptionHandler.toString(e1));
 		}
 		return rob;
 	}

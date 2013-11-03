@@ -44,7 +44,7 @@ public class AvailabilityTEST {
 		
 		AResult ar = a.call();
 		
-		m.insert(ar);
+//		m.insert(ar);
 	}
 	
 	@Test

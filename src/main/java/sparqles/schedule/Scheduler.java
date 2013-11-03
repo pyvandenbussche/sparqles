@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import sparqles.schedule.iter.CronBasedIterator;
 import sparqles.schedule.iter.ScheduleIterator;
+import sparqles.utils.ExceptionHandler;
 import sparqles.utils.FileManager;
 import sparqles.utils.MongoDBManager;
 import sparqles.core.EndpointTask;
@@ -77,7 +78,7 @@ public class Scheduler {
 				
 		_monitor = new SchedulerMonitor();
 		_monitor.start();
-		log.info("[INIT] Scheduler with {} athreads and {} threads",athreads, tthreads);
+		log.info("INIT Scheduler with {} athreads and {} threads",athreads, tthreads);
 	}
 
 	/**
@@ -87,7 +88,7 @@ public class Scheduler {
 	public void init(MongoDBManager db) {
 
 		Collection<Schedule> schedules = db.get(Schedule.class, Schedule.SCHEMA$);
-		log.info("[Scheduling] tasks for {} endpoints", schedules.size());
+		log.info("Scheduling tasks for {} endpoints", schedules.size());
 
 		for(Schedule sd: schedules){
 			initSchedule(sd);
@@ -122,9 +123,8 @@ public class Scheduler {
 				schedule(task, new CronBasedIterator(sd.getITask().toString()));
 			}
 		} catch (ParseException e) {
-			log.warn("[EXEC] ParseException: {} for {}",e.getMessage(), ep.uri);
+			log.warn("EXEC ParseException: {} for {}", ep.getUri(),ExceptionHandler.toString(e));
 		}
-		
 	}
 
 	/**
@@ -145,7 +145,7 @@ public class Scheduler {
 				schedulerTask.call();
 				reschedule(schedulerTask, iterator);
 			} catch (Exception e) {
-				e.printStackTrace();
+				log.error("Exception: {} {}", schedulerTask, ExceptionHandler.toString(e));
 			}
 		}
 	}
@@ -161,7 +161,8 @@ public class Scheduler {
 		else 
 			_monitor.submit(SERVICE.schedule(t, startTime, TimeUnit.MILLISECONDS));
 		
-		log.info("[SCHEDULED] {} next:'{}' policy:'{}'",task, time, iter);
+		log.info("SCHEDULED {} next:'{}' ",task, time);
+		log.debug("SCHEDULED {} next:'{}' policy:'{}'",task, time, iter);
 	}
 
 
@@ -173,7 +174,7 @@ public class Scheduler {
 			ScheduleIterator iter) {
 		Date time = iter.next();
 		if(time.getTime() <  System.currentTimeMillis()){
-			log.warn("[PAST] stop scheduling task, next date is in the past!");
+			log.error("PAST stop scheduling task, next date is in the past!");
 			return;
 		}
 		if(task instanceof EndpointTask){
@@ -184,7 +185,7 @@ public class Scheduler {
 		schedule(task, iter);
 		
 		Object [] s = {task, time, iter};
-		log.info("[RESCHEDULED] {} next:'{}' policy:'{}'",s);
+		log.info("RESCHEDULED {} next:'{}' policy:'{}'",s);
 	}
 
 

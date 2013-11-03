@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import sparqles.avro.Endpoint;
 import sparqles.avro.performance.Run;
 import sparqles.utils.FileManager;
-import sparqles.utils.LogFormater;
+import sparqles.utils.ExceptionHandler;
 import sparqles.utils.QueryManager;
 
 import com.hp.hpl.jena.graph.Triple;
@@ -128,7 +128,7 @@ public abstract class TaskRun {
         catch (Exception e)
         {
         	log.debug("[EXC] {} over {}; {}:{}:", _queryFile, _ep.getUri().toString(), e.getClass().getSimpleName(), e.getMessage(),e.getCause());
-        	r.setException(LogFormater.toString(e));
+        	r.setException(ExceptionHandler.toString(e));
         }
         
         return r;

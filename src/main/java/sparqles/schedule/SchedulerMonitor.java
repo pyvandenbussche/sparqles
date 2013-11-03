@@ -6,6 +6,8 @@ import java.util.concurrent.ScheduledFuture;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import sparqles.utils.ExceptionHandler;
+
 public class SchedulerMonitor extends Thread {
 
 	private static final Logger log = LoggerFactory.getLogger(SchedulerMonitor.class);
@@ -20,7 +22,7 @@ public class SchedulerMonitor extends Thread {
 	public void run() {
 	
 		while(run){
-			log.info("[CHECK] queue: {} availability, {} others", afuture.size(), future.size());
+			log.info("CHECK queue: {} availability, {} others", afuture.size(), future.size());
 			int tasks = future.size(), atasks = future.size();
 			
 			int tasksDone = 0, atasksDone = 0;
@@ -38,11 +40,12 @@ public class SchedulerMonitor extends Thread {
 				}
 			}
 			
-			log.info("[STATS] availability: {} done, {} scheduled; other: {} done, {} scheduled", atasksDone, afuture.size(), tasksDone, future.size());
+			log.info("STATS availability: {} done, {} scheduled; other: {} done, {} scheduled", atasksDone, afuture.size(), tasksDone, future.size());
 			try {
 				Thread.sleep(SLEEP_TIME);
 			} catch (InterruptedException e) {
-				log.error("[EXEC] ", e);
+				log.error("{}", ExceptionHandler.toString(e));
+				
 			}
 		}
 	}

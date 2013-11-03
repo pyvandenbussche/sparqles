@@ -8,6 +8,7 @@ import sparqles.analytics.Analytics;
 import sparqles.avro.Endpoint;
 import sparqles.avro.EndpointResult;
 import sparqles.utils.FileManager;
+import sparqles.utils.ExceptionHandler;
 import sparqles.utils.MongoDBManager;
 
 /**
@@ -40,7 +41,7 @@ public abstract class EndpointTask<V extends SpecificRecordBase> implements Task
 		setEndpoint(ep);
 		
 		_task = this.getClass().getSimpleName();
-		_id = this.getClass().getSimpleName()+"("+_epURI+")";
+		_id = _task+"("+_epURI+")";
 	}
 	
 	public Endpoint getEndpoint() {
@@ -62,6 +63,7 @@ public abstract class EndpointTask<V extends SpecificRecordBase> implements Task
 	
 	@Override
 	public V call() throws Exception {
+		log.info("EXECUTE {}", this);
 		
 		long start = System.currentTimeMillis();
 		EndpointResult epr = new EndpointResult();
@@ -70,14 +72,12 @@ public abstract class EndpointTask<V extends SpecificRecordBase> implements Task
 		boolean i_succ=true, a_succ = true, f_succ= true;
 		V v = null;
 		try{
-			log.info("[EXECUTE] {}", _id);
 			
 			v = process(epr);
 			long end = System.currentTimeMillis();	
 			epr.setEnd(end);
 			
 			//insert into database
-			
 			if(_dbm != null)
 				i_succ=_dbm.insert(v);
 			
@@ -90,10 +90,9 @@ public abstract class EndpointTask<V extends SpecificRecordBase> implements Task
 				a_succ=  _analytics.analyse(v);
 
 				
-			log.info("[EXECUTED] {} in {} ms (insert:{}, file:{}, analysed:{})", _id, end-start, i_succ, f_succ, a_succ);
+			log.info("EXECUTED {} in {} ms (idx:{}, disk:{}, analysed:{})", _id, end-start, i_succ, f_succ, a_succ);
 		}catch(Exception e){
-			log.debug("[FAILED]",e);
-			log.warn("[FAILED] {} (insert:{}, file:{}, analysed:{}) #> {}: {}", _id, i_succ, f_succ, a_succ, e.getClass().getSimpleName(), e.getMessage());
+			log.error("FAILED {} (idx:{}, disk:{}, analysed:{}) {}" , this, i_succ, f_succ, a_succ, ExceptionHandler.toString(e));
 		}
 		return v;
 	}
@@ -106,7 +105,11 @@ public abstract class EndpointTask<V extends SpecificRecordBase> implements Task
 		return _id; 
 	}
 
-	public void setAnalytics(Analytics a) {
+	/**
+	 * 
+	 * @param a - the analytics program for this task
+	 */
+	public void setAnalytics(Analytics<V> a) {
 		_analytics = a;
 	}
 }
