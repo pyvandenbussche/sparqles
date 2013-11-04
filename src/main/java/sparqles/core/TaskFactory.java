@@ -57,7 +57,7 @@ public class TaskFactory {
 		}
 		else{
 			log.warn("Task {} not supported or known", task);
-			return null;	
+			t= null;	
 		}
 		if(dbm!=null && t!=null)
 			t.setDBManager(dbm);
@@ -66,6 +66,8 @@ public class TaskFactory {
 		if(t instanceof EndpointTask)
 			((EndpointTask)t).setAnalytics(a);
 		
+		if(t != null)
+			log.info("Successfully create {} task for {}", task, ep.getUri());
 		return t;
 	}
 }
