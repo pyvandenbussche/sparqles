@@ -207,7 +207,7 @@ public class Scheduler {
 		Schedule s = new Schedule();
 		s.setEndpoint(SPARQLES);
 		s.setITask(taskSchedule.get(ITASK));
-//		s.setETask(taskSchedule.get(ETASK));
+		s.setETask(taskSchedule.get(ETASK));
 		l.add(s);
 		
 		return l;

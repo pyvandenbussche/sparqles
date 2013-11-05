@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import sparqles.analytics.AnalyserInit;
 import sparqles.analytics.IndexViewAnalytics;
+import sparqles.analytics.RefreshDataHubTask;
 import sparqles.core.CONSTANTS;
 import sparqles.avro.Endpoint;
 import sparqles.core.SPARQLESProperties;
@@ -45,10 +46,12 @@ public class SPARQLES extends CLIObject{
 	protected void addOptions(Options opts) {
 		opts.addOption(ARGUMENTS.OPTION_PROP_FILE);
 		opts.addOption(ARGUMENTS.OPTION_INIT);
+		opts.addOption(ARGUMENTS.OPTION_UPDATE_EPS);
 		opts.addOption(ARGUMENTS.OPTION_START);
 		opts.addOption(ARGUMENTS.OPTION_RECOMPUTE);
 		opts.addOption(ARGUMENTS.OPTION_RECOMPUTELAST);
 		opts.addOption(ARGUMENTS.OPTION_RESCHEDULE);
+		
 		opts.addOption(ARGUMENTS.OPTION_RUN);
 		opts.addOption(ARGUMENTS.OPTION_INDEX);
 	}
@@ -64,6 +67,18 @@ public class SPARQLES extends CLIObject{
 			dbm.initEndpointCollection();
 			dbm.setup();
 			dbm.insert(eps);			 
+		}
+		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_FLAG_UPDATE_EPS)){
+			//check the endpoint list
+			RefreshDataHubTask t = new RefreshDataHubTask();
+			t.setDBManager(dbm);
+			t.setScheduler(scheduler);
+			
+			try {
+				t.call();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_FLAG_RESCHEDULE)){
 			Collection<Schedule> epss = Scheduler.createDefaultSchedule(dbm);

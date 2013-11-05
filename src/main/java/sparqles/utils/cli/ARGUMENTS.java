@@ -34,6 +34,7 @@ public class ARGUMENTS {
 	public static final String [] PARAM_PROP_FILE = 	createParam("p","prop");
 	public static final String [] PARAM_FLAG_DEBUG = 	createParam("d","verbose");
 	public static final String [] PARAM_FLAG_INIT = 	createParam("i","init");
+	public static final String[] PARAM_FLAG_UPDATE_EPS = createParam("u","update");
 	public static final String [] PARAM_FLAG_START = 	createParam("s","start");
 	public static final String [] PARAM_FLAG_RECOMPUTE = createParam("r","recompute");
 	public static final String [] PARAM_FLAG_RESCHEDULE = createParam("rs","reschedule");
@@ -61,6 +62,10 @@ public class ARGUMENTS {
 	
 	public static final Option OPTION_RECOMPUTELAST  = createOption("flag",0,"recompute the last analytics",
 			PARAM_FLAG_RECOMPUTELAST[SHORT_ARG],PARAM_FLAG_RECOMPUTELAST[LONG_ARG],false);
+	
+	public static final Option OPTION_UPDATE_EPS= createOption("flag",0,"update datahub list",
+			PARAM_FLAG_UPDATE_EPS[SHORT_ARG],PARAM_FLAG_UPDATE_EPS[LONG_ARG],false);
+	
 	
 
 	/**

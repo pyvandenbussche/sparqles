@@ -63,7 +63,7 @@ public class TaskFactory {
 			t.setDBManager(dbm);
 		if(fm != null && t!=null && t instanceof EndpointTask)
 			((EndpointTask)t).setFileManager(fm);
-		if(t instanceof EndpointTask)
+		if(t instanceof EndpointTask)		
 			((EndpointTask)t).setAnalytics(a);
 		
 		if(t != null)
