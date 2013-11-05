@@ -399,13 +399,15 @@ public class MongoDBManager {
 		return reslist;
 	}
 
-	public void cleanup(Endpoint ep) {
+	public boolean cleanup(Endpoint ep) {
 		//remove endpoint
-		remove(ep, Endpoint.class);
-		remove(ep, AvailabilityView.class);
-		remove(ep, InteroperabilityView.class);
-		remove(ep, DiscoverabilityView.class);
-		remove(ep, PerformanceView.class);
+		boolean res = true;
+		res = res && remove(ep, Endpoint.class);
+		res = res && remove(ep, AvailabilityView.class);
+		res = res && remove(ep, InteroperabilityView.class);
+		res = res && remove(ep, DiscoverabilityView.class);
+		res = res && remove(ep, PerformanceView.class);
+		return res;
 	}
 	
 	

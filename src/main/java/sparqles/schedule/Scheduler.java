@@ -180,6 +180,10 @@ public class Scheduler {
 		if(task instanceof EndpointTask){
 			EndpointTask t = (EndpointTask) task;
 			Endpoint ep = _dbm.getEndpoint(t.getEndpoint());
+			if(ep == null){
+				log.warn("Endpoint {} was removed from DB, stop schedulingl", ep);
+				return;
+			}
 			t.setEndpoint(ep);
 		}
 		schedule(task, iter);
@@ -247,5 +251,10 @@ public class Scheduler {
 
 	public void useFileManager(FileManager fm) {
 		_fm = fm;
+	}
+
+	public void delSchedule(Endpoint ep) {
+		// TODO Auto-generated method stub
+		
 	}
 }

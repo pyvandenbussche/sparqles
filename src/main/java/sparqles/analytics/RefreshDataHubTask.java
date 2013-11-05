@@ -55,7 +55,7 @@ public class RefreshDataHubTask implements Task<Index>{
 
 	@Override
 	public Index call() throws Exception {
-		log.info("[EXECUTE] updating ckan catalog" );
+		log.info("execute updating ckan catalog" );
 				
 		Collection<Endpoint> datahub = DatahubAccess.checkEndpointList();
 		
@@ -68,31 +68,42 @@ public class RefreshDataHubTask implements Task<Index>{
 		ckan.addAll(datahub);
 		sparqles.addAll(db);
 		
-		int newEPs = 0, upEPs=0;
+		int newEPs = 0, upEPs=0, remEPs=0;
 		for(Endpoint ep : ckan){
 			if(! sparqles.contains(ep)){
 				log.info("New endpoint {}",ep);
 				//new
-				newEPs++;
-				_dbm.insert(ep);
-				Schedule sch = _s.defaultSchedule(ep);
-				_dbm.insert(sch);
-				_s.initSchedule(sch);
+				
+				if(_dbm.insert(ep)){
+					newEPs++;
+					Schedule sch = _s.defaultSchedule(ep);
+					_dbm.insert(sch);
+					_s.initSchedule(sch);
+				}
+				
+				
 			}else{
 				//update
 				log.info("Update endpoint {}",ep);
-				_dbm.update(ep);
+				if( _dbm.update(ep))
+					upEPs++;
+				
 			}
 		}
 		
 		for(Endpoint ep : sparqles){
+			if(ep.getUri().equals(CONSTANTS.SPARQLES.getUri())) continue;
 			if(! ckan.contains(ep)){
 				//remove
 				log.info("Remove endpoint {}",ep);
-				_dbm.cleanup(ep);
+				if( _dbm.cleanup(ep)){
+					remEPs++;
+					
+				}
 				
 			}
 		}
+		log.info("executed updating ckan catalog, {} total, {} updates, {} new, {} removals",ckan.size(),upEPs, newEPs,remEPs);
 		return null;
 	}
 
