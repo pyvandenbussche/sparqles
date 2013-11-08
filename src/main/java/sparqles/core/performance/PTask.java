@@ -51,10 +51,14 @@ public class PTask extends EndpointTask<PResult>{
 			
 			results.put(sp.name(), pres);
 			
-			if(pres.getCold().getException()!=null ||pres.getWarm().getException()!=null){
+			
+			if(pres.getCold().getException()!=null || pres.getWarm().getException()!=null){
 				failures++;
-				String cold = pres.getCold().getException().toString();
-				String warm = pres.getWarm().getException().toString();
+				String cold = "", warm ="";
+				if(pres.getCold().getException()!=null)
+					cold = pres.getCold().getException().toString();
+				if(pres.getWarm().getException()!=null)
+					warm = pres.getWarm().getException().toString();
 				
 				log.debug("[failed] {} (cold: {}, warm: {})", this, cold, warm); 
 			}
