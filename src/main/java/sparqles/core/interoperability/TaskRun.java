@@ -161,7 +161,7 @@ public abstract class TaskRun {
 			while (results.hasNext())
 	        {
 	            QuerySolution qs = results.nextSolution();
-	            toString(qs, sols == 0);
+//	            toString(qs, sols == 0);
 	            sols++;
 	        }
 			

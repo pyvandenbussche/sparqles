@@ -49,7 +49,7 @@ public class AnalyserInit {
 
 		log.info("Analysing {} endpoints",eps.size());
 		for (Endpoint ep: eps) {
-			log.info("[ANALYSE] {}",ep);
+			log.info("ANALYSE {}",ep);
 
 			availability(ep,a);
 //			discoverability(ep,d);
@@ -57,8 +57,6 @@ public class AnalyserInit {
 			performance(ep,p);
 		}
 	}
-
-
 
 	private void discoverability(Endpoint ep, DAnalyser d) {
 		TreeSet<DResult> res = new TreeSet<DResult>(new Comparator<DResult>() {
@@ -80,7 +78,7 @@ public class AnalyserInit {
 				d.analyse(ares);
 			}
 		}
-		log.info("[ANALYSE] [DISCOVERABILITY] {} and {}",ep, epRes.size());
+		log.info("ANALYSE DISCOVERABILITY {} and {}",ep, epRes.size());
 		
 	}
 
@@ -104,7 +102,7 @@ public class AnalyserInit {
 				p.analyse(ares);
 			}
 		}
-		log.info("[ANALYSE] [PERFORMANCE] {} and {}",ep, epRes.size());
+		log.info("ANALYSE PERFORMANCE {} and {}",ep, epRes.size());
 	}
 
 	private void interoperability(Endpoint ep, FAnalyser f) {
@@ -127,7 +125,7 @@ public class AnalyserInit {
 				f.analyse(ares);
 			}
 		}
-		log.info("[ANALYSE] [INTEROPERABILITY] {} and {}",ep, epRes.size());
+		log.info("ANALYSE INTEROPERABILITY {} and {}",ep, epRes.size());
 
 	}
 
@@ -151,7 +149,7 @@ public class AnalyserInit {
 				a.analyse(ares);
 			}
 		}
-		log.info("[ANALYSE] [AVAILABILITY] {} and {}",ep, epRes.size());
+		log.info("ANALYSE AVAILABILITY {} and {}",ep, epRes.size());
 
 	}
 }

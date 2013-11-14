@@ -227,7 +227,7 @@ public class Scheduler {
 		s.setEndpoint(ep);
 
 		s.setATask(taskSchedule.get(ATASK));
-//		s.setPTask(taskSchedule.get(PTASK));
+		s.setPTask(taskSchedule.get(PTASK));
 //		s.setFTask(taskSchedule.get(FTASK));
 //		s.setDTask(taskSchedule.get(DTASK));
 //		s.setITask(taskSchedule.get(ITASK));
