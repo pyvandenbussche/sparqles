@@ -23,18 +23,16 @@ import sparqles.utils.MongoDBManager;
 public class PAnalyser extends Analytics<PResult> {
 	private static final Logger log = LoggerFactory.getLogger(PAnalyser.class);
 
-	
-	
 	public PAnalyser(MongoDBManager db) {
 		super(db);
 	}
 
-
 	@Override
 	public boolean analyse(PResult pres) {
-		log.info("[Analytics] {}",pres);
+		log.info("Analyse {}",pres);
 		
 		Endpoint ep = pres.getEndpointResult().getEndpoint();
+		
 		
 		PerformanceView pview=getView(ep);
 		EPView epview=getEPView(ep);

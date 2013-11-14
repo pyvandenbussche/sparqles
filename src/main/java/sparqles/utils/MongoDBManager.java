@@ -112,7 +112,7 @@ public class MongoDBManager {
 			log.info("[INIT] MongoDB {} ", client);
 			db = client.getDB(SPARQLESProperties.getDB_NAME() );
 		} catch (UnknownHostException e) {
-			log.error("Coulld not connect to MongoDB instance, {}", ExceptionHandler.toString(e));
+			log.error("Coulld not connect to MongoDB instance, {}", ExceptionHandler.logAndtoString(e));
 		}	
 		try{	
 			String []cols = {COLL_AVAIL_AGG, COLL_PERF_AGG, COLL_DISC_AGG, COLL_FEAT_AGG, COLL_FEAT_AGG, COLL_EP_VIEW, COLL_INDEX,COLL_SCHED};
@@ -127,7 +127,7 @@ public class MongoDBManager {
 			if(c.getIndexInfo().size()==0)
 				c.ensureIndex(d, new BasicDBObject("unique", true));
 		} catch (Exception e) {
-			log.error("Exception while creating indices for MongoDB collections, {}", ExceptionHandler.toString(e));
+			log.error("Exception while creating indices for MongoDB collections, {}", ExceptionHandler.logAndtoString(e));
 		}	
 	}
 	
@@ -190,12 +190,12 @@ public class MongoDBManager {
 			}
 			return true;
 		}catch(DuplicateKey ex){
-			log.error("INSERT DUPLICATE uri key for {} ({})",e,ExceptionHandler.toString(ex));
+			log.error("INSERT DUPLICATE uri key for {} ({})",e,ExceptionHandler.logAndtoString(ex));
 			return true;
 		}catch(MongoException ex){
-			log.error("INSERT MongoDB Exception: {}: {}", e, ExceptionHandler.toString(ex));
+			log.error("INSERT MongoDB Exception: {}: {}", e, ExceptionHandler.logAndtoString(ex));
 		}catch(Exception ex){
-			log.error("INSERT Exception: {} {}", e, ExceptionHandler.toString(ex));
+			log.error("INSERT Exception: {} {}", e, ExceptionHandler.logAndtoString(ex));
 		}
 		return false;
 	}
@@ -232,12 +232,12 @@ public class MongoDBManager {
 
 			return true;
 		}catch(DuplicateKey ex){
-			log.error("INSERT DUPLICATE uri key for {} ({})",ep.getUri(), ExceptionHandler.toString(ex));
+			log.error("INSERT DUPLICATE uri key for {} ({})",ep.getUri(), ExceptionHandler.logAndtoString(ex));
 			return true;
 		}catch(MongoException ex){
-			log.error("INSERT MongoDB Exception: {}: {}", ep.getUri(), ExceptionHandler.toString(ex));
+			log.error("INSERT MongoDB Exception: {}: {}", ep.getUri(), ExceptionHandler.logAndtoString(ex));
 		}catch(Exception ex){
-			log.error("INSERT Exception: {} {}", ep.getUri(), ExceptionHandler.toString(ex));
+			log.error("INSERT Exception: {} {}", ep.getUri(), ExceptionHandler.logAndtoString(ex));
 		}
 		return false;
 	}
@@ -298,7 +298,7 @@ public class MongoDBManager {
 				T t =(T) r.read(null, d);
 				reslist.add(t);
 			} catch (IOException e) {
-				log.error("GET RESULT Exception: {} {}", ep.getUri(), ExceptionHandler.toString(e));
+				log.error("GET RESULT Exception: {} {}", ep.getUri(), ExceptionHandler.logAndtoString(e));
 			}
 		}
 		}finally{
@@ -338,7 +338,7 @@ public class MongoDBManager {
 				T t =(T) r.read(null, d);
 				reslist.add(t);
 			} catch (IOException e) {
-				log.error("GET RESULT SINCE Exception: {} {}", ep.getUri(), ExceptionHandler.toString(e));
+				log.error("GET RESULT SINCE Exception: {} {}", ep.getUri(), ExceptionHandler.logAndtoString(e));
 			}
 		}
 		}finally{
@@ -360,7 +360,7 @@ public class MongoDBManager {
 			return dbObject;
 
 		} catch (IOException e1) {
-			log.error("GET OBJECT Exception: {} {}", o.getClass(), ExceptionHandler.toString(e1));
+			log.error("GET OBJECT Exception: {} {}", o.getClass(), ExceptionHandler.logAndtoString(e1));
 		}
 		return null;
 	}
@@ -388,7 +388,7 @@ public class MongoDBManager {
 					T t =(T) r.read(null, d);
 					reslist.add(t);
 				} catch (IOException e) {
-					log.error("SCAN Exception: {}:{}:{} {}", ep.getUri(),colName, cls, ExceptionHandler.toString(e));
+					log.error("SCAN Exception: {}:{}:{} {}", ep.getUri(),colName, cls, ExceptionHandler.logAndtoString(e));
 				}
 			}
 		}finally{
@@ -430,12 +430,12 @@ public class MongoDBManager {
 			}
 			return true;
 		}catch(DuplicateKey ex){
-			log.error("REMOVE DUPLICATE uri key for {} ({})",ep.getUri(), ExceptionHandler.toString(ex));
+			log.error("REMOVE DUPLICATE uri key for {} ({})",ep.getUri(), ExceptionHandler.logAndtoString(ex));
 			return true;
 		}catch(MongoException ex){
-			log.error("REMOVE MongoDB Exception: {}: {}", ep.getUri(), ExceptionHandler.toString(ex));
+			log.error("REMOVE MongoDB Exception: {}: {}", ep.getUri(), ExceptionHandler.logAndtoString(ex));
 		}catch(Exception ex){
-			log.error("REMOVE Exception: {} {}", ep.getUri(), ExceptionHandler.toString(ex));
+			log.error("REMOVE Exception: {} {}", ep.getUri(), ExceptionHandler.logAndtoString(ex));
 		}
 		return false;
 	}

@@ -29,7 +29,7 @@ public class PRun extends TaskRun{
 		
 		result.setQuery(_query);
     	
-		log.debug("[RUN] [COLD] {} over {}", _queryFile, _ep.getUri());
+		log.debug("RUN COLD {} over {}", _queryFile, _ep.getUri());
         result.setCold(run());
         
         try {
@@ -37,7 +37,7 @@ public class PRun extends TaskRun{
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-        log.debug("[RUN] [WARM] {} over {}", _queryFile, _ep.getUri());
+        log.debug("RUN WARM {} over {}", _queryFile, _ep.getUri());
         result.setWarm(run());
 		
         return result;

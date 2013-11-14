@@ -45,6 +45,10 @@ public abstract class TaskRun {
 		_start =start;
 	}
 
+	public String getQuery(){
+		return _query;
+	}
+	
 	protected Run run() {
 		
 		
@@ -128,7 +132,7 @@ public abstract class TaskRun {
         catch (Exception e)
         {
         	log.debug("[EXC] {} over {}; {}:{}:", _queryFile, _ep.getUri().toString(), e.getClass().getSimpleName(), e.getMessage(),e.getCause());
-        	r.setException(ExceptionHandler.toString(e));
+        	r.setException(ExceptionHandler.logAndtoString(e));
         }
         
         return r;

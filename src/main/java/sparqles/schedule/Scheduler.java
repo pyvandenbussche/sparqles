@@ -123,7 +123,7 @@ public class Scheduler {
 				schedule(task, new CronBasedIterator(sd.getITask().toString()));
 			}
 		} catch (ParseException e) {
-			log.warn("EXEC ParseException: {} for {}", ep.getUri(),ExceptionHandler.toString(e));
+			log.warn("EXEC ParseException: {} for {}", ep.getUri(),ExceptionHandler.logAndtoString(e));
 		}
 	}
 
@@ -145,7 +145,7 @@ public class Scheduler {
 				schedulerTask.call();
 				reschedule(schedulerTask, iterator);
 			} catch (Exception e) {
-				log.error("Exception: {} {}", schedulerTask, ExceptionHandler.toString(e));
+				log.error("Exception: {} {}", schedulerTask, ExceptionHandler.logAndtoString(e));
 			}
 		}
 	}

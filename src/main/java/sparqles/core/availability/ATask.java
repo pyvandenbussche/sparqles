@@ -63,10 +63,10 @@ public class ATask extends EndpointTask<AResult>{
 				return testSelect(epr);
 			}
 		} catch (InterruptedException e) {
-			result.setException(ExceptionHandler.toString(e));
-			result.setExplanation(ExceptionHandler.toString(e));
+			result.setException(ExceptionHandler.logAndtoString(e));
+			result.setExplanation(ExceptionHandler.logAndtoString(e));
 			
-			log.warn("failed ASK query for {}, {}", _epURI, ExceptionHandler.toString(e));
+			log.warn("failed ASK query for {}, {}", _epURI, ExceptionHandler.logAndtoString(e));
 			return result;        
 		}catch (Exception e) {
 			return testSelect(epr);
@@ -103,12 +103,12 @@ public class ATask extends EndpointTask<AResult>{
 			}
 		}catch (Exception e1) {
 			result.setIsAvailable(false);
-			result.setException(ExceptionHandler.toString(e1));
-			result.setExplanation(ExceptionHandler.toString(e1));
+			result.setException(ExceptionHandler.logAndtoString(e1));
+			result.setExplanation(ExceptionHandler.logAndtoString(e1));
 			if(e1.getMessage()!=null)
 				if(e1.getMessage().contains("401 Authorization Required"))result.setIsPrivate(true);
 			
-			log.warn("failed SELECT query for {}, {}", _epURI, ExceptionHandler.toString(e1));
+			log.warn("failed SELECT query for {}, {}", _epURI, ExceptionHandler.logAndtoString(e1));
 		}
 		return result;
 	}

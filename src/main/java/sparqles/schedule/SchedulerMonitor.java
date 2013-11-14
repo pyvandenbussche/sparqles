@@ -44,7 +44,7 @@ public class SchedulerMonitor extends Thread {
 			try {
 				Thread.sleep(SLEEP_TIME);
 			} catch (InterruptedException e) {
-				log.error("{}", ExceptionHandler.toString(e));
+				log.error("{}", ExceptionHandler.logAndtoString(e));
 				
 			}
 		}

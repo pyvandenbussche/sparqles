@@ -19,7 +19,7 @@ public class ExceptionHandler {
 	
 	
 	
-	public static String toString(Exception e){
+	public static String logAndtoString(Exception e){
 		String id = ExceptionHandler.getExceptionID(e);
 		ExceptionHandler.log(id,e);
 		
