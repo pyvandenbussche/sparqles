@@ -23,8 +23,7 @@ public class ExceptionHandler {
 		String id = ExceptionHandler.getExceptionID(e);
 		ExceptionHandler.log(id,e);
 		
-		return new StringBuilder(id)
-		.append(" ").append(e.getClass().getSimpleName())
+		return new StringBuilder(e.getClass().getSimpleName())
 		.append(" msg:").append(e.getMessage())
 		.append(" cause:").append(e.getCause()).toString();
 	}
@@ -36,8 +35,8 @@ public class ExceptionHandler {
 		return sw.toString();
 	}
 
-	public static String getExceptionID(Exception e) {
-		System.out.println(exceptionID);
+	private static String getExceptionID(Exception e) {
+//		System.out.println(exceptionID);
 		
 		Integer id = exceptionID.get(e.getClass());
 		if(id ==null){
@@ -48,7 +47,7 @@ public class ExceptionHandler {
 		return "EXC@"+id+"#"+excCounter.getAndIncrement();
 	}
 
-	public static void log(String id, Exception e) {
+	private static void log(String id, Exception e) {
 		log.info(id,e);
 	}
 }

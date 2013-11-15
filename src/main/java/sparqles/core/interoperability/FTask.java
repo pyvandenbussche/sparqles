@@ -7,12 +7,17 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.hp.hpl.jena.sparql.engine.http.QueryExceptionHTTP;
+
 import sparqles.avro.Endpoint;
 import sparqles.avro.EndpointResult;
 import sparqles.avro.features.FResult;
 import sparqles.avro.features.FSingleResult;
+import sparqles.avro.performance.PSingleResult;
+import sparqles.avro.performance.Run;
 import sparqles.core.EndpointTask;
 import sparqles.core.SPARQLESProperties;
+import sparqles.core.performance.PRun;
 
 
 public class FTask extends EndpointTask<FResult>{
@@ -40,13 +45,25 @@ public class FTask extends EndpointTask<FResult>{
 		
 		Map<CharSequence, FSingleResult> results = new HashMap<CharSequence, FSingleResult>(_tasks.length);
 		
-		int failures=0;
+		int failures=0, consequExcept=0;
 		for(SpecificFTask sp: _tasks){
 			log.debug("execute {}:{}", this, sp.name());
 			
 			FRun run = sp.get(epr);
-			run.setFileManager(_fm);
-			FSingleResult fres = run.execute();
+			FSingleResult fres = null;
+			if(consequExcept >= _tasks.length){
+				log.debug("skipping {}:{} due to {} consecutive ex ", this, sp.name());
+				fres = new FSingleResult();
+				
+				Run r = new Run(PRun.A_FIRST_RESULT_TIMEOUT, -1, 0L, 0L, 0L, (CharSequence)("Test Aborted due to "+consequExcept+" consecutive exceptions"), PRun.EXECUTION_TIMEOUT);
+				fres.setRun(r);
+				fres.setQuery(run.getQuery());
+			}else{
+				log.debug("executing {}:{}", this, sp.name());
+				fres = run.execute();
+			}
+			
+			
 
 			results.put(sp.name(), fres);
 			
@@ -54,6 +71,11 @@ public class FTask extends EndpointTask<FResult>{
 				failures++;
 				
 				String exec = fres.getRun().getException().toString();
+				if(exec.contains("QueryExceptionHTTP")){
+					consequExcept++;
+				}else{
+					consequExcept=0;
+				}
 				
 				log.debug("failed {} exec: {}", this, exec);
 			}
