@@ -478,8 +478,6 @@ public class IndexViewAnalytics implements Task<Index>{
 					value = sh.bin[2];
 				if(aidx.getKey().equals("]95;100]"))
 					value = sh.bin[3];
-
-				
 				
 				aidx.getValues().add(new IndexAvailabilityDataPoint(week.getKey(), value/(double)total));
 			}
@@ -494,7 +492,7 @@ public class IndexViewAnalytics implements Task<Index>{
 					cold.addValue(v.getValue());
 				}
 			}
-			if(pdata.getKey().toString().contains("WARM")){
+			if(pdata.getKey().toString().contains("Warm")){
 				for(EPViewPerformanceDataValues v : pdata.getData()){
 					warm.addValue(v.getValue());
 				}
@@ -502,14 +500,9 @@ public class IndexViewAnalytics implements Task<Index>{
 		}
 	}
 
-
-
 	private Index createIndex() {
 		Index idx = new Index();
 		idx.setEndpoint(CONSTANTS.SPARQLES);
-
-
-
 
 		AvailabilityIndex aidx = new AvailabilityIndex("[0;5]", new ArrayList<IndexAvailabilityDataPoint>());
 		List<AvailabilityIndex> aidxs = new ArrayList<AvailabilityIndex>();

@@ -45,7 +45,7 @@ public class PAnalyser extends Analytics<PResult> {
 		//prepare eppview data
 		EPViewPerformance eppview = epview.getPerformance();
 		EPViewPerformanceData askCold = new EPViewPerformanceData("Cold ASK Tests","#1f77b4", new ArrayList<EPViewPerformanceDataValues>());
-		EPViewPerformanceData askWarm = new EPViewPerformanceData("WARM ASK Tests","#2ca02c", new ArrayList<EPViewPerformanceDataValues>());
+		EPViewPerformanceData askWarm = new EPViewPerformanceData("Warm ASK Tests","#2ca02c", new ArrayList<EPViewPerformanceDataValues>());
 		EPViewPerformanceData joinCold = new EPViewPerformanceData("Cold JOIN Tests","#1f77b4", new ArrayList<EPViewPerformanceDataValues>());
 		EPViewPerformanceData joinWarm = new EPViewPerformanceData("Warm JOIN Tests","#2ca02c", new ArrayList<EPViewPerformanceDataValues>());
 		

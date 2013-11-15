@@ -17,16 +17,31 @@ public class ExceptionHandler {
 	
 	private static final HashMap<Class, Integer> exceptionID = new HashMap<Class, Integer>();
 	
-	
-	
+
 	public static String logAndtoString(Exception e){
+		return logAndtoString(e, false);
+	}
+	
+	
+	public static String logAndtoString(Exception e, boolean withExceptionID) {
+
+		
 		String id = ExceptionHandler.getExceptionID(e);
 		ExceptionHandler.log(id,e);
-		
-		return new StringBuilder(e.getClass().getSimpleName())
+
+		StringBuilder sb = new StringBuilder();
+		if(withExceptionID){
+			sb.append(id).append("> ");
+		}
+		sb.append(e.getClass().getSimpleName())
 		.append(" msg:").append(e.getMessage())
 		.append(" cause:").append(e.getCause()).toString();
+		
+		return sb.toString();
+
 	}
+	
+	
 	
 	public static String toFullString(Exception e){
 		StringWriter sw = new StringWriter();
@@ -50,4 +65,5 @@ public class ExceptionHandler {
 	private static void log(String id, Exception e) {
 		log.info(id,e);
 	}
+
 }

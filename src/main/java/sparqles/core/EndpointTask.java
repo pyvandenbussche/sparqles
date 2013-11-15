@@ -92,7 +92,7 @@ public abstract class EndpointTask<V extends SpecificRecordBase> implements Task
 				
 			log.info("EXECUTED {} in {} ms (idx:{}, disk:{}, analysed:{})", _id, end-start, i_succ, f_succ, a_succ);
 		}catch(Exception e){
-			log.error("FAILED {} (idx:{}, disk:{}, analysed:{}) {}" , this, i_succ, f_succ, a_succ, ExceptionHandler.logAndtoString(e));
+			log.error("FAILED {} (idx:{}, disk:{}, analysed:{}) {}" , this, i_succ, f_succ, a_succ, ExceptionHandler.logAndtoString(e, true));
 		}
 		return v;
 	}
