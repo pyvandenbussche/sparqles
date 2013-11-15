@@ -34,13 +34,13 @@ public class QueryManager {
 			scanner = new Scanner(QueryManager.class.getClassLoader().getSystemResourceAsStream(folder+qFile));
 		}
 		if(scanner == null){
-			log.warn("[FAILED] Could not load query file {} from {}", qFile, folder);
+			log.warn("FAILED Could not load query file {} from {}", qFile, folder);
 			return null;
 		}
 
 
 		content = scanner.useDelimiter("\\Z").next();
-		log.debug("[PARSED] input:{},output:{}", qFile, content);
+		log.debug("PARSED input:{},output:{}", qFile, content);
 		scanner.close();
 		return content;
 	}
@@ -52,7 +52,7 @@ public class QueryManager {
 		try {
 
 			HttpOp.setUserAgent(CONSTANTS.USER_AGENT);
-			log.debug("[INIT] QueryExecution for {} with query  {}",epURL,query.replaceAll("\n", ""));
+			log.debug("INIT QueryExecution for {} with query  {}",epURL,query.replaceAll("\n", ""));
 			return QueryExecutionFactory.sparqlService(epURL, query);
 		}
 		catch (Exception e) {  

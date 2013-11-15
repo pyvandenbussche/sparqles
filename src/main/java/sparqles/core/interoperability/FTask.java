@@ -30,7 +30,7 @@ public class FTask extends EndpointTask<FResult>{
 		super(ep);
 		_tasks = tasks;
 		Object [] s = {ep.getUri().toString(), tasks.length, SPARQLESProperties.getFTASK_WAITTIME()};
-		log.info("[INIT] {} with {} tasks and {} ms wait time", this, tasks.length, SPARQLESProperties.getPTASK_WAITTIME());
+		log.info("INIT {} with {} tasks and {} ms wait time", this, tasks.length, SPARQLESProperties.getPTASK_WAITTIME());
     }
 
     @Override
@@ -42,7 +42,7 @@ public class FTask extends EndpointTask<FResult>{
 		
 		int failures=0;
 		for(SpecificFTask sp: _tasks){
-			log.debug("[exec] {}:{}", this, sp.name());
+			log.debug("execute {}:{}", this, sp.name());
 			
 			FRun run = sp.get(epr);
 			run.setFileManager(_fm);
@@ -55,7 +55,7 @@ public class FTask extends EndpointTask<FResult>{
 				
 				String exec = fres.getRun().getException().toString();
 				
-				log.debug("[failed] {} exec: {}", this, exec);
+				log.debug("failed {} exec: {}", this, exec);
 			}
 			try {
 				Thread.sleep(SPARQLESProperties.getFTASK_WAITTIME());
@@ -64,7 +64,7 @@ public class FTask extends EndpointTask<FResult>{
 			}
 		}
 		res.setResults(results);
-		log.info("[executed] {} {}/{} tasks without error", this, _tasks.length-failures, _tasks.length);
+		log.info("executed {} {}/{} tasks without error", this, _tasks.length-failures, _tasks.length);
 		
 		return res;
     }

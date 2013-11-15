@@ -64,7 +64,9 @@ public class PAnalyser extends Analytics<PResult> {
 		
 		for(Entry<CharSequence, PSingleResult> ent: map.entrySet()){
 			PSingleResult res = ent.getValue();
+			
 			if(ent.getKey().toString().startsWith("ASK")){
+				
 				askStatsCold.addValue(res.getCold().getClosetime()/(double)1000);
 				askStatsWarm.addValue(res.getWarm().getClosetime()/(double)1000);
 				
