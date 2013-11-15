@@ -418,7 +418,7 @@ public class IndexViewAnalytics implements Task<Index>{
 				else interStats[i].add(0D);
 			}
 		}
-		System.out.println(Arrays.toString(interStats));
+//		System.out.println(Arrays.toString(interStats));
 
 	}
 

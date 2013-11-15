@@ -78,6 +78,7 @@ public class RefreshDataHubTask implements Task<Index>{
 					newEPs++;
 					Schedule sch = _s.defaultSchedule(ep);
 					_dbm.insert(sch);
+					
 					_s.initSchedule(sch);
 				}
 				
