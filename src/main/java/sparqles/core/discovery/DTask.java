@@ -95,14 +95,14 @@ public class DTask extends EndpointTask<DResult> {
 	public DResult process(EndpointResult epr) {
 		DResult result = new DResult();
 		result.setEndpointResult(epr);
-		log.debug("[exec] {}", _epURI);
+		log.debug("execute {}", _epURI);
 		
 		result.setDescriptionFiles((List)new ArrayList<DGETInfo>());
 
 		int failures=0;
 
 		//RobotsTXT run
-		log.debug("[exec] {} {}","robots", _epURI);
+		log.debug("execute {} {}","robots", _epURI);
 		RobotsTXT rtxt = new RobotsTXT();
 
 		//get list of existing robots.txt
@@ -128,7 +128,7 @@ public class DTask extends EndpointTask<DResult> {
 		boolean isRobotsAllowed = checkRobotsTxt(rob);
 		rtxt.setAllowedByRobotsTXT(isRobotsAllowed);
 
-		log.debug("[exec] {} {}","sitemap", _epURI);
+		log.debug("execute {} {}","sitemap", _epURI);
 		//discovery void and sparqles via semantic sitemap.xml
 		//http://vocab.deri.ie/void/guide#sec_5_2_Discovery_via_sitemaps
 		parseSitemapXML(rob,rtxt,result);
@@ -136,7 +136,7 @@ public class DTask extends EndpointTask<DResult> {
 //		System.out.println("HERER");
 		//inspect HTTP Get
 		//ok we checked the robots.txt, now we do a http get on the sparql URL
-		log.debug("[exec] {} {}","httpget", _epURI);
+		log.debug("execute {} {}","httpget", _epURI);
 		try {
 			URI epURL = new URI(_ep.getUri().toString());
 			DGETInfo info = checkForVoid(epURL.toString(), "EPURL");
@@ -144,9 +144,9 @@ public class DTask extends EndpointTask<DResult> {
 		
 			//well-known location
 		} catch (Exception e) {
-			log.debug("[EXC] HTTP GET "+_epURI, e);
+			log.debug("[EXC] HTTP GET "+_epURI, ExceptionHandler.logAndtoString(e, true));
 		}
-		log.debug("[exec] {} {}","well-known", _epURI);
+		log.debug("execute {} {}","well-known", _epURI);
 		try{
 			URI epURL = new URI(_ep.getUri().toString());
 			URL wellknown = new URI(epURL.getScheme(), epURL
@@ -158,35 +158,11 @@ public class DTask extends EndpointTask<DResult> {
 			log.debug("[EXC] HTTP well known "+_epURI, e);
 		}
 		
-		log.debug("[exec] {} {}","query-self", _epURI);
+		log.debug("execute {} {}","query-self", _epURI);
 		//maybe the endpoint has data about itself
 		QueryInfo qInfo = query(_ep.getUri().toString());
 		
-		
-
-
-
-
-
-		//		DRun<GetResult> run = SpecificDTask.newGetRun(epr.getEndpoint());
-		//		run.setMongoDBManeger(_dbm);
-		//		GetResult res = run.execute();
-		//		result.setGetResult(res);
-
-
-//
-//		VoidResult vsres= SpecificDTask.newVoidStoreRun(epr.getEndpoint()).execute();
-//		result.setVoidStoreResult(vsres);
-//
-//		VoidResult vres= SpecificDTask.newSelfVoidRun(epr.getEndpoint()).execute();
-//		result.setVoidResult(vres);
-
-
-		//		if(res.getException()!=null)failures++;
-//		if(vres.getException()!=null)failures++;
-//		if(vsres.getException()!=null)failures++;
-
-		log.info("[executed] {}", this);
+		log.info("executed {}", this);
 
 		return result;
 	}
@@ -309,7 +285,7 @@ public class DTask extends EndpointTask<DResult> {
 		HttpGet request = new HttpGet(url);
 		request.addHeader("accept", "application/rdf+xml, application/x-turtle, application/rdf+n3, application/xml, text/turtle, text/rdf, text/plain;q=0.1");
 		request.addHeader("User-Agent", CONSTANTS.USER_AGENT);
-		log.info("[GET] {}",request);
+		log.info("GET {}",request);
 		HttpResponse resp;
 		try {
 			resp = cm.connect(request);
@@ -342,7 +318,7 @@ public class DTask extends EndpointTask<DResult> {
 				}
 			}
 		}catch(Exception e ){
-			log.debug("[EXEC] VOID "+url+" for "+_epURI, e);
+			log.warn("failed checking for VOID "+url+" for "+_epURI, ExceptionHandler.logAndtoString(e,true));
 			info.setException(ExceptionHandler.logAndtoString(e));
 		}
 		return info;
@@ -414,7 +390,7 @@ public class DTask extends EndpointTask<DResult> {
 			return _nrc.isUrlAllowed(host.toURL());
 
 		} catch (Exception e1) {
-			log.debug("[EXEC] ROBOTS PARSE for "+ _epURI,e1);
+			log.warn("failed checking for ROBOTS PARSE for "+ _epURI,ExceptionHandler.logAndtoString(e1, true));
 		}
 		return true;
 	}
