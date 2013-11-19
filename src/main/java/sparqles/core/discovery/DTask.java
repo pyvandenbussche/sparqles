@@ -103,7 +103,7 @@ public class DTask extends EndpointTask<DResult> {
 
 		//RobotsTXT run
 		log.debug("execute {} {}","robots", _epURI);
-		RobotsTXT rtxt = new RobotsTXT();
+		RobotsTXT rtxt = new RobotsTXT(false,false,false,false,false,false,"");
 
 		//get list of existing robots.txt
 		List<Robots> r = _dbm.getResults(_ep, Robots.class, Robots.SCHEMA$);
