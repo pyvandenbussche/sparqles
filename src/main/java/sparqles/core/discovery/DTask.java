@@ -105,6 +105,8 @@ public class DTask extends EndpointTask<DResult> {
 		log.debug("execute {} {}","robots", _epURI);
 		RobotsTXT rtxt = new RobotsTXT(false,false,false,false,false,false,"");
 
+		result.setRobotsTXT(rtxt);
+		
 		//get list of existing robots.txt
 		List<Robots> r = _dbm.getResults(_ep, Robots.class, Robots.SCHEMA$);
 		//check everytime for updated robots.txts
@@ -158,9 +160,12 @@ public class DTask extends EndpointTask<DResult> {
 			log.debug("[EXC] HTTP well known "+_epURI, e);
 		}
 		
+		List<QueryInfo> queryInfos = new ArrayList<QueryInfo>();
+		result.setQueryInfo(queryInfos);
+		
 		log.debug("execute {} {}","query-self", _epURI);
 		//maybe the endpoint has data about itself
-		QueryInfo qInfo = query(_ep.getUri().toString());
+		queryInfos.add(query(_ep.getUri().toString()));
 		
 		log.info("executed {}", this);
 
