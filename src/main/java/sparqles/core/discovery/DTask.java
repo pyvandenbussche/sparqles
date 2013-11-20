@@ -135,7 +135,6 @@ public class DTask extends EndpointTask<DResult> {
 		//http://vocab.deri.ie/void/guide#sec_5_2_Discovery_via_sitemaps
 		parseSitemapXML(rob,rtxt,result);
 
-//		System.out.println("HERER");
 		//inspect HTTP Get
 		//ok we checked the robots.txt, now we do a http get on the sparql URL
 		log.debug("execute {} {}","httpget", _epURI);
@@ -143,13 +142,12 @@ public class DTask extends EndpointTask<DResult> {
 			URI epURL = new URI(_ep.getUri().toString());
 			DGETInfo info = checkForVoid(epURL.toString(), "EPURL");
 			result.getDescriptionFiles().add(info);
-		
-			//well-known location
 		} catch (Exception e) {
 			log.debug("[EXC] HTTP GET "+_epURI, ExceptionHandler.logAndtoString(e, true));
 		}
 		log.debug("execute {} {}","well-known", _epURI);
 		try{
+			//well-known location
 			URI epURL = new URI(_ep.getUri().toString());
 			URL wellknown = new URI(epURL.getScheme(), epURL
 					.getAuthority(), "/.well-known/void", null, null)

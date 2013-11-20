@@ -33,7 +33,7 @@
         			{ "name": "ResponseCode", "type": ["string","null"] },
         			{ "name": "ResponseServer", "type": ["string","null"] },
         			{ "name": "ResponseLink", "type": ["string","null"] },
-        			{ "name": "Content", "type": "string" },
+        			{ "name": "Content", "type": ["string","null"] },
         			{ "name":"SPARQLDESCpreds",
       					"type":{"type":"map","values":["int"]}
 		      		},
