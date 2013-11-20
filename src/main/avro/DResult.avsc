@@ -52,9 +52,8 @@
         		"fields" : [
         			{ "name": "URL", "type": "string"},
         			{ "name": "Exception", "type": ["string", "null"] },
-        			{ "name": "Results", "type": {"type": "array","items": "string"} },
-        			{"name": "descriptionFiles", "type": {"type": "array", "items": "string"}} 
-        		]}
+        			{ "name": "Results", "type": {"type": "array","items": "string"} }
+           		]}
         	}
         }
  	]

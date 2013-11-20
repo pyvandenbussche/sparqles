@@ -7,12 +7,11 @@ package sparqles.avro.discovery;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class QueryInfo extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"QueryInfo\",\"namespace\":\"sparqles.avro.discovery\",\"fields\":[{\"name\":\"URL\",\"type\":\"string\"},{\"name\":\"Exception\",\"type\":[\"string\",\"null\"]},{\"name\":\"Results\",\"type\":{\"type\":\"array\",\"items\":\"string\"}},{\"name\":\"descriptionFiles\",\"type\":{\"type\":\"array\",\"items\":\"string\"}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"QueryInfo\",\"namespace\":\"sparqles.avro.discovery\",\"fields\":[{\"name\":\"URL\",\"type\":\"string\"},{\"name\":\"Exception\",\"type\":[\"string\",\"null\"]},{\"name\":\"Results\",\"type\":{\"type\":\"array\",\"items\":\"string\"}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
   @Deprecated public java.lang.CharSequence URL;
   @Deprecated public java.lang.CharSequence Exception;
   @Deprecated public java.util.List<java.lang.CharSequence> Results;
-  @Deprecated public java.util.List<java.lang.CharSequence> descriptionFiles;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -24,11 +23,10 @@ public class QueryInfo extends org.apache.avro.specific.SpecificRecordBase imple
   /**
    * All-args constructor.
    */
-  public QueryInfo(java.lang.CharSequence URL, java.lang.CharSequence Exception, java.util.List<java.lang.CharSequence> Results, java.util.List<java.lang.CharSequence> descriptionFiles) {
+  public QueryInfo(java.lang.CharSequence URL, java.lang.CharSequence Exception, java.util.List<java.lang.CharSequence> Results) {
     this.URL = URL;
     this.Exception = Exception;
     this.Results = Results;
-    this.descriptionFiles = descriptionFiles;
   }
 
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
@@ -38,7 +36,6 @@ public class QueryInfo extends org.apache.avro.specific.SpecificRecordBase imple
     case 0: return URL;
     case 1: return Exception;
     case 2: return Results;
-    case 3: return descriptionFiles;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -49,7 +46,6 @@ public class QueryInfo extends org.apache.avro.specific.SpecificRecordBase imple
     case 0: URL = (java.lang.CharSequence)value$; break;
     case 1: Exception = (java.lang.CharSequence)value$; break;
     case 2: Results = (java.util.List<java.lang.CharSequence>)value$; break;
-    case 3: descriptionFiles = (java.util.List<java.lang.CharSequence>)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -99,21 +95,6 @@ public class QueryInfo extends org.apache.avro.specific.SpecificRecordBase imple
     this.Results = value;
   }
 
-  /**
-   * Gets the value of the 'descriptionFiles' field.
-   */
-  public java.util.List<java.lang.CharSequence> getDescriptionFiles() {
-    return descriptionFiles;
-  }
-
-  /**
-   * Sets the value of the 'descriptionFiles' field.
-   * @param value the value to set.
-   */
-  public void setDescriptionFiles(java.util.List<java.lang.CharSequence> value) {
-    this.descriptionFiles = value;
-  }
-
   /** Creates a new QueryInfo RecordBuilder */
   public static sparqles.avro.discovery.QueryInfo.Builder newBuilder() {
     return new sparqles.avro.discovery.QueryInfo.Builder();
@@ -138,7 +119,6 @@ public class QueryInfo extends org.apache.avro.specific.SpecificRecordBase imple
     private java.lang.CharSequence URL;
     private java.lang.CharSequence Exception;
     private java.util.List<java.lang.CharSequence> Results;
-    private java.util.List<java.lang.CharSequence> descriptionFiles;
 
     /** Creates a new Builder */
     private Builder() {
@@ -160,10 +140,6 @@ public class QueryInfo extends org.apache.avro.specific.SpecificRecordBase imple
         this.Results = data().deepCopy(fields()[2].schema(), other.Results);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.descriptionFiles)) {
-        this.descriptionFiles = data().deepCopy(fields()[3].schema(), other.descriptionFiles);
-        fieldSetFlags()[3] = true;
-      }
     }
     
     /** Creates a Builder by copying an existing QueryInfo instance */
@@ -180,10 +156,6 @@ public class QueryInfo extends org.apache.avro.specific.SpecificRecordBase imple
       if (isValidValue(fields()[2], other.Results)) {
         this.Results = data().deepCopy(fields()[2].schema(), other.Results);
         fieldSetFlags()[2] = true;
-      }
-      if (isValidValue(fields()[3], other.descriptionFiles)) {
-        this.descriptionFiles = data().deepCopy(fields()[3].schema(), other.descriptionFiles);
-        fieldSetFlags()[3] = true;
       }
     }
 
@@ -262,31 +234,6 @@ public class QueryInfo extends org.apache.avro.specific.SpecificRecordBase imple
       return this;
     }
 
-    /** Gets the value of the 'descriptionFiles' field */
-    public java.util.List<java.lang.CharSequence> getDescriptionFiles() {
-      return descriptionFiles;
-    }
-    
-    /** Sets the value of the 'descriptionFiles' field */
-    public sparqles.avro.discovery.QueryInfo.Builder setDescriptionFiles(java.util.List<java.lang.CharSequence> value) {
-      validate(fields()[3], value);
-      this.descriptionFiles = value;
-      fieldSetFlags()[3] = true;
-      return this; 
-    }
-    
-    /** Checks whether the 'descriptionFiles' field has been set */
-    public boolean hasDescriptionFiles() {
-      return fieldSetFlags()[3];
-    }
-    
-    /** Clears the value of the 'descriptionFiles' field */
-    public sparqles.avro.discovery.QueryInfo.Builder clearDescriptionFiles() {
-      descriptionFiles = null;
-      fieldSetFlags()[3] = false;
-      return this;
-    }
-
     @Override
     public QueryInfo build() {
       try {
@@ -294,7 +241,6 @@ public class QueryInfo extends org.apache.avro.specific.SpecificRecordBase imple
         record.URL = fieldSetFlags()[0] ? this.URL : (java.lang.CharSequence) defaultValue(fields()[0]);
         record.Exception = fieldSetFlags()[1] ? this.Exception : (java.lang.CharSequence) defaultValue(fields()[1]);
         record.Results = fieldSetFlags()[2] ? this.Results : (java.util.List<java.lang.CharSequence>) defaultValue(fields()[2]);
-        record.descriptionFiles = fieldSetFlags()[3] ? this.descriptionFiles : (java.util.List<java.lang.CharSequence>) defaultValue(fields()[3]);
         return record;
       } catch (Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);
