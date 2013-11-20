@@ -5,7 +5,7 @@
  "fields": [
     	{"name": "endpoint", "type": "sparqles.avro.Endpoint"},
      	{"name": "content", "type": ["string", "null"]},
-     	{"name": "exception", "type": "string"},
+     	{"name": "exception", "type": ["string", "null"]},
      	{"name": "respCode", "type": "int"},
      	{"name": "timestamp", "type": "long"} 
  	]
