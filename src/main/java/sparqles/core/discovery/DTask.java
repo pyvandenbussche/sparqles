@@ -72,7 +72,7 @@ import sparqles.utils.QueryManager;
  */
 public class DTask extends EndpointTask<DResult> {
 	private static final Logger log = LoggerFactory.getLogger(DTask.class);
-	private static ConnectionManager cm = new ConnectionManager(null, 0, null, null, 50);
+	private final static ConnectionManager cm = new ConnectionManager(null, 0, null, null, 50);
 	private final static String sparqDescNS = "http://www.w3.org/ns/sparql-service-description#";
 	private final static String voidNS = "http://rdfs.org/ns/void#";
 	public static final String header = "application/rdf+xml, text/rdf, text/rdf+xml, application/rdf";
@@ -240,8 +240,9 @@ public class DTask extends EndpointTask<DResult> {
 		}
 		if(sitemapURL!=null){
 			rtxt.setSitemapXML(true);
+			HttpGet get=null;
 			try{    
-				HttpGet get = new HttpGet(sitemapURL.toURI());
+				get = new HttpGet(sitemapURL.toURI());
 				HttpResponse resp = cm.connect(get);
 
 				DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -271,6 +272,10 @@ public class DTask extends EndpointTask<DResult> {
 			} catch (Exception e) {
 				log.debug("[EXEC] Sitemap for "+_epURI, e);
 				rtxt.setException(ExceptionHandler.logAndtoString(e));
+			}finally{
+				if(get != null){
+					get.releaseConnection();
+				}
 			}
 		}
 	}
@@ -323,6 +328,8 @@ public class DTask extends EndpointTask<DResult> {
 		}catch(Exception e ){
 			log.warn("failed checking for VOID "+url+" for "+_epURI, ExceptionHandler.logAndtoString(e,true));
 			info.setException(ExceptionHandler.logAndtoString(e));
+		}finally{
+			request.releaseConnection();
 		}
 		return info;
 	}
@@ -362,6 +369,8 @@ public class DTask extends EndpointTask<DResult> {
 		} catch (Exception e1) {
 			log.debug("[EXEC] ROBOTS for "+ _epURI,e1);
 			rob.setException(ExceptionHandler.logAndtoString(e1));
+		}finally{
+			hget.releaseConnection();
 		}
 		return rob;
 	}
