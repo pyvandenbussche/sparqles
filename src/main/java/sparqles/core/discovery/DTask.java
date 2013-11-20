@@ -177,11 +177,11 @@ public class DTask extends EndpointTask<DResult> {
 		String queryString = query.replaceAll("%%s", "<"+_ep.getUri()+">");
 		
 		HashSet<String> voidAset= new HashSet<String>();
+		
 		ArrayList<CharSequence> voidA = new ArrayList<CharSequence>();
-//		res.setVoidFile(voidA);
+		info.setResults(voidA);
 		
 		// initializing queryExecution factory with remote service.
-		// **this actually was the main problem I couldn't figure out.**
 		QueryExecution qexec = null;
 		try {
 			qexec = QueryManager.getExecution(epURL, queryString);
