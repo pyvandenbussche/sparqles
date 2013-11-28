@@ -51,7 +51,9 @@
       			"type": "record",
         		"fields" : [
         			{ "name": "URL", "type": "string"},
+        			{ "name": "Operation", "type": "string"},
         			{ "name": "Exception", "type": ["string", "null"] },
+        			{ "name": "allowedByRobotsTXT", "type": "boolean" ,"default" : true },
         			{ "name": "Results", "type": {"type": "array","items": "string"} }
            		]}
         	}

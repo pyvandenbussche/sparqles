@@ -104,14 +104,13 @@ public class DTask extends EndpointTask<DResult> {
 		//RobotsTXT run
 		log.debug("execute {} {}","robots", _epURI);
 		RobotsTXT rtxt = new RobotsTXT(false,false,false,false,false,false,"");
-
 		result.setRobotsTXT(rtxt);
 		
-		//get list of existing robots.txt
-		List<Robots> r = _dbm.getResults(_ep, Robots.class, Robots.SCHEMA$);
 		//check everytime for updated robots.txts
 		Robots rob = fetchRobotsTXT();
 
+		//get list of existing robots.txt
+		List<Robots> r = _dbm.getResults(_ep, Robots.class, Robots.SCHEMA$);
 		if(r.size()==0){
 			//first robots.txt test, insert into DB
 			_dbm.insert(rob);
@@ -127,7 +126,7 @@ public class DTask extends EndpointTask<DResult> {
 		if(rob.getRespCode()==200)
 			rtxt.setHasRobotsTXT(true);
 
-		boolean isRobotsAllowed = checkRobotsTxt(rob);
+		boolean isRobotsAllowed = checkRobotsTxt(rob, rob.getEndpoint().getUri().toString());
 		rtxt.setAllowedByRobotsTXT(isRobotsAllowed);
 
 		log.debug("execute {} {}","sitemap", _epURI);
@@ -140,7 +139,7 @@ public class DTask extends EndpointTask<DResult> {
 		log.debug("execute {} {}","httpget", _epURI);
 		try {
 			URI epURL = new URI(_ep.getUri().toString());
-			DGETInfo info = checkForVoid(epURL.toString(), "EPURL");
+			DGETInfo info = checkForVoid(epURL.toString(), "EPURL", rob);
 			result.getDescriptionFiles().add(info);
 		} catch (Exception e) {
 			log.debug("[EXC] HTTP GET "+_epURI, ExceptionHandler.logAndtoString(e, true));
@@ -152,7 +151,7 @@ public class DTask extends EndpointTask<DResult> {
 			URL wellknown = new URI(epURL.getScheme(), epURL
 					.getAuthority(), "/.well-known/void", null, null)
 					.toURL();
-			DGETInfo info = checkForVoid(wellknown.toString(), "wellknown");
+			DGETInfo info = checkForVoid(wellknown.toString(), "wellknown",rob);
 			result.getDescriptionFiles().add(info);
 		} catch (Exception e) {
 			log.debug("[EXC] HTTP well known "+_epURI, e);
@@ -163,16 +162,17 @@ public class DTask extends EndpointTask<DResult> {
 		
 		log.debug("execute {} {}","query-self", _epURI);
 		//maybe the endpoint has data about itself
-		queryInfos.add(query(_ep.getUri().toString()));
+		queryInfos.add(query(_ep.getUri().toString(),"query-self"));
 		
 		log.info("executed {}", this);
 
 		return result;
 	}
 
-	private QueryInfo query(String epURL) {
+	private QueryInfo query(String epURL, String operation) {
 		QueryInfo info = new QueryInfo();
 		info.setURL(epURL);
+		info.setOperation(operation);
 		
 		String queryString = query.replaceAll("%%s", "<"+_ep.getUri()+">");
 		
@@ -266,7 +266,7 @@ public class DTask extends EndpointTask<DResult> {
 				nodeList = doc.getElementsByTagNameNS("http://sw.deri.org/2007/07/sitemapextension/scschema.xsd", "datasetURI");
 				for (int temp = 0; temp < nodeList.getLength(); temp++) {
 					Node nNode = nodeList.item(temp);
-					DGETInfo info = checkForVoid(nNode.getTextContent(), "sitemap.xml_link");
+					DGETInfo info = checkForVoid(nNode.getTextContent(), "sitemap.xml_link",rob);
 					result.getDescriptionFiles().add(info);
 				}
 			} catch (Exception e) {
@@ -280,10 +280,13 @@ public class DTask extends EndpointTask<DResult> {
 		}
 	}
 
-	private DGETInfo checkForVoid(String url, String operation) {
+	private DGETInfo checkForVoid(String url, String operation, Robots rob) {
 		DGETInfo info = new DGETInfo();
 		info.setOperation(operation);
 		info.setURL(url);
+		
+		boolean isRobotsAllowed = checkRobotsTxt(rob, url);
+		info.setAllowedByRobotsTXT(isRobotsAllowed);
 		
 		HashMap<CharSequence, Object> voidPred = new HashMap<CharSequence, Object>();
 		HashMap<CharSequence, Object> spdsPred = new HashMap<CharSequence, Object>();
@@ -375,11 +378,11 @@ public class DTask extends EndpointTask<DResult> {
 		return rob;
 	}
 
-	private boolean checkRobotsTxt(Robots rob) {
+	private boolean checkRobotsTxt(Robots rob, String uri) {
 		NoRobotClient _nrc = new NoRobotClient(CONSTANTS.USER_AGENT);
-		URI host;
+		
 		try {
-			host = new URI(rob.getEndpoint().getUri().toString());
+			URI host= new URI(uri);
 			try {
 				if (!((host.getPath() == null || host.getPath().equals(
 						""))
