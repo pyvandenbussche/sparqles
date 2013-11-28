@@ -284,6 +284,7 @@ public class DTask extends EndpointTask<DResult> {
 		DGETInfo info = new DGETInfo();
 		info.setOperation(operation);
 		info.setURL(url);
+		info.setResponseServer("missing");
 		
 		boolean isRobotsAllowed = checkRobotsTxt(rob, url);
 		info.setAllowedByRobotsTXT(isRobotsAllowed);
