@@ -15,6 +15,7 @@ import sparqles.avro.analytics.EPViewDiscoverabilityData;
 import sparqles.avro.discovery.DGETInfo;
 import sparqles.avro.discovery.DResult;
 import sparqles.avro.discovery.QueryInfo;
+import sparqles.core.discovery.DTask;
 import sparqles.utils.MongoDBManager;
 
 public class DAnalyser extends Analytics<DResult> {
@@ -40,9 +41,11 @@ public class DAnalyser extends Analytics<DResult> {
 		List<EPViewDiscoverabilityData> lvoid = new ArrayList<EPViewDiscoverabilityData>();
 		List<EPViewDiscoverabilityData> lsd = new ArrayList<EPViewDiscoverabilityData>();
 
+		String serverName = "missing";
 		for(DGETInfo info : pres.getDescriptionFiles()){
-			if(info.getOperation().equals("EPURL")){
-				dview.setServerName(info.getResponseServer());
+			if(info.getOperation().equals(DTask.EPURL)){
+				if(!info.getResponseServer().equals("missing"))
+					dview.setServerName(info.getResponseServer());
 
 				EPViewDiscoverabilityData d = new EPViewDiscoverabilityData("HTTP Get", info.getVoiDpreds().size()!=0);
 				lvoid.add(d);
@@ -51,7 +54,8 @@ public class DAnalyser extends Analytics<DResult> {
 				lsd.add(d);
 			}
 			if(info.getOperation().equals("wellknown")){
-				dview.setServerName(info.getResponseServer());
+				if(!info.getResponseServer().equals("missing"))
+					dview.setServerName(info.getResponseServer());
 
 				EPViewDiscoverabilityData d = new EPViewDiscoverabilityData("/.well-known/void", info.getVoiDpreds().size()!=0);
 				lvoid.add(d);

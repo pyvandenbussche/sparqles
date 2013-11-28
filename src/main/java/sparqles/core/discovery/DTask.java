@@ -76,6 +76,8 @@ public class DTask extends EndpointTask<DResult> {
 	private final static String sparqDescNS = "http://www.w3.org/ns/sparql-service-description#";
 	private final static String voidNS = "http://rdfs.org/ns/void#";
 	public static final String header = "application/rdf+xml, text/rdf, text/rdf+xml, application/rdf";
+	
+	public static final String EPURL="EPURL";
 
 	private final static String query = "" +
 			"PREFIX rdf:      <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"+
@@ -139,7 +141,7 @@ public class DTask extends EndpointTask<DResult> {
 		log.debug("execute {} {}","httpget", _epURI);
 		try {
 			URI epURL = new URI(_ep.getUri().toString());
-			DGETInfo info = checkForVoid(epURL.toString(), "EPURL", rob);
+			DGETInfo info = checkForVoid(epURL.toString(), EPURL, rob);
 			result.getDescriptionFiles().add(info);
 		} catch (Exception e) {
 			log.debug("[EXC] HTTP GET "+_epURI, ExceptionHandler.logAndtoString(e, true));
