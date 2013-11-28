@@ -43,9 +43,10 @@ public class DAnalyser extends Analytics<DResult> {
 
 		String serverName = "missing";
 		for(DGETInfo info : pres.getDescriptionFiles()){
-			if(info.getOperation().equals(DTask.EPURL)){
-				if(!info.getResponseServer().equals("missing"))
-					dview.setServerName(info.getResponseServer());
+			if(info.getOperation().toString().equals(DTask.EPURL)){
+				if(!info.getResponseServer().toString().equalsIgnoreCase("missing")){
+					serverName = info.getResponseServer().toString();
+				}
 
 				EPViewDiscoverabilityData d = new EPViewDiscoverabilityData("HTTP Get", info.getVoiDpreds().size()!=0);
 				lvoid.add(d);
@@ -53,10 +54,11 @@ public class DAnalyser extends Analytics<DResult> {
 				d = new EPViewDiscoverabilityData("HTTP Get", info.getSPARQLDESCpreds().size() != 0);
 				lsd.add(d);
 			}
-			if(info.getOperation().equals("wellknown")){
-				if(!info.getResponseServer().equals("missing"))
-					dview.setServerName(info.getResponseServer());
-
+			if(info.getOperation().toString().equalsIgnoreCase("wellknown")){
+				if(!info.getResponseServer().toString().equalsIgnoreCase("missing")){
+					serverName = info.getResponseServer().toString();
+				}
+				
 				EPViewDiscoverabilityData d = new EPViewDiscoverabilityData("/.well-known/void", info.getVoiDpreds().size()!=0);
 				lvoid.add(d);
 				
@@ -70,7 +72,10 @@ public class DAnalyser extends Analytics<DResult> {
 				dview.setVoID(true);
 			}
 		}
+		log.info("Setting server name to {}",serverName);
+		dview.setServerName(serverName);
 		EPViewDiscoverability depview = epview.getDiscoverability();
+		
 		depview.setServerName(dview.getServerName());
 		depview.setVoIDDescription(lvoid);
 		
