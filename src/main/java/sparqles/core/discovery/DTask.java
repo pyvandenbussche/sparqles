@@ -18,6 +18,8 @@ import java.util.Map;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
 import org.apache.avro.util.Utf8;
 import org.apache.http.Header;
@@ -30,6 +32,7 @@ import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.lang.PipedRDFIterator;
 import org.apache.jena.riot.lang.PipedRDFStream;
 import org.apache.jena.riot.lang.PipedTriplesStream;
+import org.apache.xerces.parsers.XMLParser;
 import org.osjava.norbert.NoRobotClient;
 import org.osjava.norbert.NoRobotException;
 import org.slf4j.Logger;
@@ -38,6 +41,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
 
 import com.hp.hpl.jena.graph.Triple;
 import com.hp.hpl.jena.query.QueryExecution;
@@ -45,7 +49,6 @@ import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.query.ResultSetFactory;
 import com.hp.hpl.jena.query.ResultSetRewindable;
 import com.hp.hpl.jena.rdf.model.RDFNode;
-
 
 import sparqles.avro.Endpoint;
 import sparqles.avro.EndpointResult;
@@ -244,34 +247,43 @@ public class DTask extends EndpointTask<DResult> {
 			rtxt.setSitemapXML(true);
 			HttpGet get=null;
 			try{    
-				DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-				dbFactory.setNamespaceAware(true);
-				DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 				
 				get = new HttpGet(sitemapURL.toURI());
 				HttpResponse resp = cm.connect(get);
 				log.debug("parseSitemapXML: Connected to {}", get);
 				String conent = EntityUtils.toString(resp.getEntity());
+				log.debug("parseSitemapXML: received content {}", conent.length());
 				
-				//	System.out.println(conent);
-				Document doc = dBuilder.parse(new ByteArrayInputStream(conent.getBytes()));
-				doc.getDocumentElement().normalize();
-
-				NodeList nodeList = doc.getElementsByTagNameNS("http://sw.deri.org/2007/07/sitemapextension/scschema.xsd", "sparqlEndpointLocation");
-				rtxt.setSitemapXMLSPARQL(nodeList.getLength()!=0);
-				for (int temp = 0; temp < nodeList.getLength(); temp++) {
-					Node nNode = nodeList.item(temp);
-//					System.out.println(nNode.getTextContent());
-					if(_ep.getUri().toString().equalsIgnoreCase(nNode.getTextContent())){
-						rtxt.setSitemapXMLSPARQLMatch(true);
-					}
-				}
-				nodeList = doc.getElementsByTagNameNS("http://sw.deri.org/2007/07/sitemapextension/scschema.xsd", "datasetURI");
-				for (int temp = 0; temp < nodeList.getLength(); temp++) {
-					Node nNode = nodeList.item(temp);
-					DGETInfo info = checkForVoid(nNode.getTextContent(), "sitemap.xml_link",rob);
-					result.getDescriptionFiles().add(info);
-				}
+				
+				SAXParserFactory factory = SAXParserFactory.newInstance();
+				SAXParser saxParser = factory.newSAXParser();
+				saxParser.getXMLReader().setFeature("http://xml.org/sax/features/namespaces", true);
+				InputStream is = new ByteArrayInputStream(conent.getBytes());
+				SitemapHandler handler = new SitemapHandler(rtxt, result, _ep.getUri().toString());
+				saxParser.parse(is, handler);
+//				
+//				//	System.out.println(conent);
+//				DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+//				dbFactory.setNamespaceAware(true);
+//				DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+//				Document doc = dBuilder.parse(new ByteArrayInputStream(conent.getBytes()));
+//				doc.getDocumentElement().normalize();
+//
+//				NodeList nodeList = doc.getElementsByTagNameNS("http://sw.deri.org/2007/07/sitemapextension/scschema.xsd", "sparqlEndpointLocation");
+//				rtxt.setSitemapXMLSPARQL(nodeList.getLength()!=0);
+//				for (int temp = 0; temp < nodeList.getLength(); temp++) {
+//					Node nNode = nodeList.item(temp);
+////					System.out.println(nNode.getTextContent());
+//					if(_ep.getUri().toString().equalsIgnoreCase(nNode.getTextContent())){
+//						rtxt.setSitemapXMLSPARQLMatch(true);
+//					}
+//				}
+//				nodeList = doc.getElementsByTagNameNS("http://sw.deri.org/2007/07/sitemapextension/scschema.xsd", "datasetURI");
+//				for (int temp = 0; temp < nodeList.getLength(); temp++) {
+//					Node nNode = nodeList.item(temp);
+//					DGETInfo info = checkForVoid(nNode.getTextContent(), "sitemap.xml_link",rob);
+//					result.getDescriptionFiles().add(info);
+//				}
 			} catch (Exception e) {
 				log.debug("[EXEC] Sitemap for "+_epURI, e);
 				rtxt.setException(ExceptionHandler.logAndtoString(e));
