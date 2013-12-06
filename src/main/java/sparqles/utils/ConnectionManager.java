@@ -1,6 +1,7 @@
 package sparqles.utils;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -31,6 +32,7 @@ import sparqles.core.CONSTANTS;
 public class ConnectionManager {
 
     private DefaultHttpClient _client;
+	private IdleConnectionMonitorThread _monitor;
 
 	
 
@@ -50,12 +52,11 @@ public class ConnectionManager {
     	HttpProtocolParams.setContentCharset(params, "UTF-8");
     	HttpProtocolParams.setUseExpectContinue(params, true);
     	
-    	// we deal with redirects ourselves
     	HttpClientParams.setRedirecting(params, true);
 
     	//connection params 
     	params.setParameter(CoreConnectionPNames.SO_TIMEOUT, CONSTANTS.SOCKET_TIMEOUT);
-    	params.setParameter(CoreConnectionPNames.TCP_NODELAY, true);
+//    	params.setParameter(CoreConnectionPNames.TCP_NODELAY, true);
     	params.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, CONSTANTS.CONNECTION_TIMEOUT);
 
     	ConnManagerParams.setMaxTotalConnections(params, connections);
@@ -75,6 +76,8 @@ public class ConnectionManager {
     					new UsernamePasswordCredentials(puser, new String(ppassword))); 
     		}
     	}
+    	_monitor = new IdleConnectionMonitorThread(cm);
+    	_monitor.start();
  	}
     
    
@@ -84,5 +87,42 @@ public class ConnectionManager {
 
     public HttpResponse connect(HttpGet get) throws ClientProtocolException, IOException {
     	return _client.execute(get);
+    }
+    
+    static class IdleConnectionMonitorThread extends Thread {
+        
+        private final ClientConnectionManager connMgr;
+        private volatile boolean shutdown;
+        
+        public IdleConnectionMonitorThread(ClientConnectionManager connMgr) {
+            super();
+            this.connMgr = connMgr;
+        }
+
+        @Override
+        public void run() {
+            try {
+                while (!shutdown) {
+                    synchronized (this) {
+                        wait(5000);
+                        // Close expired connections
+                        connMgr.closeExpiredConnections();
+                        // Optionally, close connections
+                        // that have been idle longer than 30 sec
+                        connMgr.closeIdleConnections(30, TimeUnit.SECONDS);
+                    }
+                }
+            } catch (InterruptedException ex) {
+                // terminate
+            }
+        }
+        
+        public void shutdown() {
+            shutdown = true;
+            synchronized (this) {
+                notifyAll();
+            }
+        }
+        
     }
 }

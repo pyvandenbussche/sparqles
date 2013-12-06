@@ -134,7 +134,7 @@ public class DTask extends EndpointTask<DResult> {
 		log.debug("execute {} {}","sitemap", _epURI);
 		//discovery void and sparqles via semantic sitemap.xml
 		//http://vocab.deri.ie/void/guide#sec_5_2_Discovery_via_sitemaps
-		parseSitemapXML(rob,rtxt,result);
+		parseSitemapXML(rob, rtxt, result);
 
 		//inspect HTTP Get
 		//ok we checked the robots.txt, now we do a http get on the sparql URL
@@ -244,14 +244,15 @@ public class DTask extends EndpointTask<DResult> {
 			rtxt.setSitemapXML(true);
 			HttpGet get=null;
 			try{    
-				get = new HttpGet(sitemapURL.toURI());
-				HttpResponse resp = cm.connect(get);
-
 				DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 				dbFactory.setNamespaceAware(true);
 				DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 				
+				get = new HttpGet(sitemapURL.toURI());
+				HttpResponse resp = cm.connect(get);
+				log.debug("parseSitemapXML: Connected to {}", get);
 				String conent = EntityUtils.toString(resp.getEntity());
+				
 				//	System.out.println(conent);
 				Document doc = dBuilder.parse(new ByteArrayInputStream(conent.getBytes()));
 				doc.getDocumentElement().normalize();
@@ -303,7 +304,7 @@ public class DTask extends EndpointTask<DResult> {
 		HttpResponse resp;
 		try {
 			resp = cm.connect(request);
-			
+			log.debug("checkForVoid: Connected to {}", request);
 			String type = getType(resp);
 
 			String status = ""+resp.getStatusLine().getStatusCode();
