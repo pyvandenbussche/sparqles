@@ -253,7 +253,7 @@ class DateCalculator{
 		
 
 		Calendar thisweek = Calendar.getInstance();
-		thisweek.add(Calendar.HOUR, -1);
+		thisweek.add(Calendar.DAY_OF_YEAR, -1);
 		
 		
 //		thisweek.set(Calendar.YEAR, now.get(Calendar.YEAR));
