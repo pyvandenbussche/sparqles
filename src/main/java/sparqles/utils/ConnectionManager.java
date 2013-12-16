@@ -105,13 +105,13 @@ public class ConnectionManager {
             try {
                 while (!shutdown) {
                     synchronized (this) {
-                        wait(5000);
+                        wait(60000);
                         // Close expired connections
                         connMgr.closeExpiredConnections();
                         // Optionally, close connections
                         // that have been idle longer than 30 sec
                         connMgr.closeIdleConnections(30, TimeUnit.SECONDS);
-                        Log.info("Cleaning up expired and idle connections");
+//                        Log.info("Cleaning up expired and idle connections");
                     }
                 }
             } catch (InterruptedException ex) {

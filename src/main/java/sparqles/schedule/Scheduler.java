@@ -152,6 +152,10 @@ public class Scheduler {
 
 	public void schedule(Task task, ScheduleIterator iter){
 		Date time = iter.next();
+		schedule(task, iter, time);
+	}
+	
+	public void schedule(Task task, ScheduleIterator iter, Date time){
 		long startTime = time.getTime() - System.currentTimeMillis();
 
 		SchedulerTimerTask t = new SchedulerTimerTask(task,iter);
@@ -161,8 +165,8 @@ public class Scheduler {
 		else 
 			_monitor.submit(SERVICE.schedule(t, startTime, TimeUnit.MILLISECONDS));
 		
-		log.info("SCHEDULED {} next:'{}' ",task, time);
-		log.debug("SCHEDULED {} next:'{}' policy:'{}'",task, time, iter);
+//		log.info("SCHEDULED {} next:'{}' ",task, time);
+		log.info("SCHEDULED {} next:'{}' policy:'{}'",task, time, iter);
 	}
 
 
@@ -186,7 +190,7 @@ public class Scheduler {
 			}
 			t.setEndpoint(ep);
 		}
-		schedule(task, iter);
+		schedule(task, iter, time);
 		
 		Object [] s = {task, time, iter};
 		log.info("RESCHEDULED {} next:'{}' policy:'{}'",s);
