@@ -24,6 +24,7 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.CoreConnectionPNames;
 import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
+import org.mortbay.log.Log;
 
 import sparqles.core.CONSTANTS;
 
@@ -110,6 +111,7 @@ public class ConnectionManager {
                         // Optionally, close connections
                         // that have been idle longer than 30 sec
                         connMgr.closeIdleConnections(30, TimeUnit.SECONDS);
+                        Log.info("Cleaning up expired and idle connections");
                     }
                 }
             } catch (InterruptedException ex) {
