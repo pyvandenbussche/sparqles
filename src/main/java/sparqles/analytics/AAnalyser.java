@@ -253,16 +253,16 @@ class DateCalculator{
 		
 
 		Calendar thisweek = Calendar.getInstance();
-		thisweek.add(Calendar.DAY_OF_YEAR, -1);
+//		thisweek.add(Calendar.DAY_OF_YEAR, -1);
 		
 		
-//		thisweek.set(Calendar.YEAR, now.get(Calendar.YEAR));
-//		thisweek.set(Calendar.WEEK_OF_YEAR, now.get(Calendar.WEEK_OF_YEAR));
-//		thisweek.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-//		thisweek.set(Calendar.HOUR_OF_DAY, 0);
-//		thisweek.set(Calendar.MINUTE, 0);
-//		thisweek.set(Calendar.SECOND, 0);
-//		thisweek.set(Calendar.MILLISECOND, 0);
+		thisweek.set(Calendar.YEAR, now.get(Calendar.YEAR));
+		thisweek.set(Calendar.WEEK_OF_YEAR, now.get(Calendar.WEEK_OF_YEAR));
+		thisweek.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+		thisweek.set(Calendar.HOUR_OF_DAY, 0);
+		thisweek.set(Calendar.MINUTE, 0);
+		thisweek.set(Calendar.SECOND, 0);
+		thisweek.set(Calendar.MILLISECOND, 0);
 //		
 
 		
