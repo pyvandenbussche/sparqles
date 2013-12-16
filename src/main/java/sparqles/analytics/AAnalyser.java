@@ -70,19 +70,19 @@ public class AAnalyser extends Analytics<AResult> {
 			
 			if(start > dates[LAST_24HOURS].getTimeInMillis()){
 				update(last24HoursStats,res);
-				log.debug("  {} -24h-> {}",next.getTime(), dates[LAST_24HOURS].getTime());
+				log.debug("  {} >24h {}",next.getTime(), dates[LAST_24HOURS].getTime());
 			}
 			if(start > dates[LAST_7DAYS].getTimeInMillis()){
 				update(last7DaysStats,res);
-				log.debug("  {} -7d-> {}",next.getTime(), dates[LAST_7DAYS].getTime());
+				log.debug("  {} >7d {}",next.getTime(), dates[LAST_7DAYS].getTime());
 			}
 			if(start > dates[LAST_31DAYS].getTimeInMillis()){
 				update(last31DaysStats,res);
-				log.debug("  {} -31d-> {}",next.getTime(), dates[LAST_31DAYS].getTime());
+				log.debug("  {} >31d {}",next.getTime(), dates[LAST_31DAYS].getTime());
 			}
 			if(start > dates[THIS_WEEK].getTimeInMillis()){
 				update(thisWeekStats,res);
-				log.debug("  {} -week-> {}",next.getTime(), dates[THIS_WEEK].getTime());
+				log.debug("  {} >week {}",next.getTime(), dates[THIS_WEEK].getTime());
 			}
 		}
 
@@ -111,11 +111,23 @@ public class AAnalyser extends Analytics<AResult> {
 		}
 		
 		Long key = dates[THIS_WEEK].getTimeInMillis();
-		epav.getData().getValues().add(new EPViewAvailabilityDataPoint(key, thisweek));
-		
-		if(thisweek<1D && thisweek>0D){
-			System.out.println("Hello");
+		boolean exists=false;
+		for(EPViewAvailabilityDataPoint dd: epav.getData().getValues()){
+//			System.out.println(dd.getX()+" =?= "+key);
+			if(dd.getX().equals(key)){
+				exists=true;
+				dd.setY(thisweek);
+			}
 		}
+//		System.out.println(exists);
+		if(!exists){
+			epav.getData().getValues().add(new EPViewAvailabilityDataPoint(key, thisweek));
+			log.debug("Add new week: "+key);
+		}
+		
+//		if(thisweek<1D && thisweek>0D){
+//			System.out.println("Hello");
+//		}
 		
 		double last31dayMean = 0;
 		if(!Double.isNaN(last31DaysStats.getMean()))

@@ -479,7 +479,15 @@ public class IndexViewAnalytics implements Task<Index>{
 				if(aidx.getKey().equals("]95;100]"))
 					value = sh.bin[3];
 				
-				aidx.getValues().add(new IndexAvailabilityDataPoint(week.getKey(), value/(double)total));
+				boolean exists= false;
+				for(IndexAvailabilityDataPoint i : aidx.getValues()){
+					if(i.getX().equals(week.getKey())){
+						exists = true;
+						i.setY(value/(double)total);
+					}
+				}
+				if(!exists)
+					aidx.getValues().add(new IndexAvailabilityDataPoint(week.getKey(), value/(double)total));
 			}
 		}
 	}
