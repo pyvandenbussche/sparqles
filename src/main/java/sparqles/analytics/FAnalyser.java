@@ -30,8 +30,6 @@ import sparqles.utils.MongoDBManager;
 public class FAnalyser extends Analytics<FResult> {
 	private static final Logger log = LoggerFactory.getLogger(FAnalyser.class);
 
-
-
 	public FAnalyser(MongoDBManager db) {
 		super(db);
 	}

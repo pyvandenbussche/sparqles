@@ -77,10 +77,14 @@ block content
                       td
                         a(href="/endpoint/#{encodeURIComponent(ep.endpoint.uri)}")
                           span(onmouseover='tooltip.show(\'#{generateTooltip(ep.endpoint.datasets)}\')', onmouseout='tooltip.hide();') #{ep.endpoint.uri} (#{ep.endpoint.datasets.length})
-                    else
-                      td 
-                        a(href="/endpoint/#{encodeURIComponent(ep.endpoint.uri)}") #{ep.endpoint.datasets[0].label}
-                    //-Display SPARQL 1.0 
+                  	else
+                      if ep.endpoint.datasets.length>0
+                        td 
+                          a(href="/endpoint/#{encodeURIComponent(ep.endpoint.uri)}") #{ep.endpoint.datasets[0].label}
+                      else 
+                        td
+                          a(href="/endpoint/#{encodeURIComponent(ep.endpoint.uri)}") #{ep.endpoint.uri}
+                     //-Display SPARQL 1.0 
                     td.tdcenter
                       if ep.nbCompliantSPARQL1Features==nbSPARQL1Features
                         img(src='/images/green.png')
