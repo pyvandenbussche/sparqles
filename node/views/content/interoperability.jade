@@ -77,7 +77,7 @@ block content
                       td
                         a(href="/endpoint/#{encodeURIComponent(ep.endpoint.uri)}")
                           span(onmouseover='tooltip.show(\'#{generateTooltip(ep.endpoint.datasets)}\')', onmouseout='tooltip.hide();') #{ep.endpoint.uri} (#{ep.endpoint.datasets.length})
-                  	else
+                    else
                       if ep.endpoint.datasets.length>0
                         td 
                           a(href="/endpoint/#{encodeURIComponent(ep.endpoint.uri)}") #{ep.endpoint.datasets[0].label}
