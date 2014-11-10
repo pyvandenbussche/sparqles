@@ -139,7 +139,7 @@ public class DatahubAccess {
 //				System.out.println(s);
 				if(!s.toString().contains("Linking Open"))
 					title = s.asText();
-				if (title.length() > 200){
+				if (title !=null && title.length() > 200){
 					title = title.substring(0,200);
 				}
 			}
