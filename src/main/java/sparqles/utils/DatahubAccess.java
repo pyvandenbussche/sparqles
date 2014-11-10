@@ -139,16 +139,16 @@ public class DatahubAccess {
 //				System.out.println(s);
 				if(!s.toString().contains("Linking Open"))
 					title = s.asText();
-				
+				if (title.length() > 200){
+					title = title.substring(0,200);
+				}
 			}
 					
-
 			Dataset d = new Dataset();
 			d.setLabel(title);
 			d.setUri(ckan_url);
 			List<Dataset> l =  ep.getDatasets();
 			l.add(d);
-//			ep.setDatasets(l);
 
 			return ep;
 
