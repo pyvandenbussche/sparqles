@@ -49,7 +49,7 @@ public class AnalyserInit {
 
 		log.info("Analysing {} endpoints",eps.size());
 		for (Endpoint ep: eps) {
-			log.info("ANALYSE {}",ep);
+			log.info("ANALYSE {}",ep.getUri());
 
 			availability(ep,a);
 			discoverability(ep,d);
@@ -149,7 +149,7 @@ public class AnalyserInit {
 				a.analyse(ares);
 			}
 		}
-		log.info("ANALYSE AVAILABILITY {} and {}",ep, epRes.size());
+		log.info("ANALYSE AVAILABILITY {} and {}",ep.getUri(), epRes.size());
 
 	}
 }
