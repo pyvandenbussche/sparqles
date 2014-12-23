@@ -1,2 +1,1 @@
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-select distinct * where {?c rdf:type _:bn} LIMIT 100
+select distinct * where {?c <http://example.org/type> _:bn} LIMIT 10

@@ -1,11 +1,7 @@
-PREFIX  rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-# SPARQL 1.1
 SELECT *
 WHERE
-{	?p rdf:type ?type .
+{	?s <http://example.org/type> <http://example.org/thing> .
 	FILTER NOT EXISTS {
-		?p owl:sameAs ?same
+		?s <http://example.org/sameAs> <http://nonsensical.com/1>
 	}
-} LIMIT 100
-
+} LIMIT 10

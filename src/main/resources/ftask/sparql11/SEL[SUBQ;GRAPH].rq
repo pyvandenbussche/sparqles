@@ -1,6 +1,5 @@
-PREFIX  rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-select  ?x ?p where {
-graph ?g {
-{select * where {?x rdf:type ?y}}
-}
-} LIMIT 100
+select ?y where {
+	graph ?g {
+		{ select * where {<http://nonsensical.com/1> <http://example.org/type>  ?y} }
+	}
+} LIMIT 10

@@ -1,7 +1,6 @@
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
-SELECT ?s (MIN(?o) AS ?min)
+SELECT ?o (MIN(?o) AS ?min)
 WHERE {
-	?s rdf:type ?o
+	<http://nonsensical.com/1> <http://example.org/type>  ?o
 } 
-GROUP BY ?s
-LIMIT 100
+GROUP BY ?o
+LIMIT 10

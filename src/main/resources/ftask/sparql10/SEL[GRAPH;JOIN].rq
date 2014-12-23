@@ -1,6 +1,5 @@
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 SELECT * { 
-  ?s rdf:type ?o .
-    GRAPH ?g { ?o ?p ?q }
-} LIMIT 100
+  <http://nonsensical.com/1> <http://example.org/type> ?o .
+    GRAPH ?g { ?o <http://example.org/type> ?q }
+} LIMIT 10
 

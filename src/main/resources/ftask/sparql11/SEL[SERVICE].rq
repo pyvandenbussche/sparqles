@@ -1,10 +1,7 @@
-# SERVICE join with pattern in the default graph
-PREFIX  rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-SELECT ?s ?o1 ?o2 
+SELECT ?o
 {
-  ?s owl:sameAs ?o1 .
+  <http://nonsensical.com/1> <http://example.org/type> ?o .
   SERVICE <http://dbpedia.org/sparql> {
-    ?o1 rdf:type ?o2
+    <http://nonsensical.com/2> <http://example.org/type> ?o
   }
-} LIMIT 100
+} LIMIT 10

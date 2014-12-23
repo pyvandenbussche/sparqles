@@ -1,6 +1,4 @@
-PREFIX : <http://www.example.org>
-
-SELECT ?P (COUNT(?O) AS ?C)
-WHERE { ?S ?P ?O } 
-GROUP BY ?P
-LIMIT 100
+SELECT ?p (COUNT(?o) AS ?c)
+WHERE { <http://nonsensical.com/1> ?p ?o } 
+GROUP BY ?p
+LIMIT 10

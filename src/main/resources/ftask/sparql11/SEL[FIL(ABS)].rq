@@ -1,6 +1,5 @@
 PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#> 
-PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 SELECT * WHERE {
-	?s rdf:type xsd:integer
+	?s <http://example.org/type> xsd:integer
 	FILTER(ABS(?num) >= 2)
-} LIMIT 100
+} LIMIT 10

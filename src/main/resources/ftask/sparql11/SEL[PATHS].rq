@@ -1,7 +1,3 @@
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 select * where {
-
-    ?p rdf:type* ?z
-
-}  LIMIT 100
-
+    <http://nonsensical.com/1> <http://example.org/type>* ?z
+}  LIMIT 10

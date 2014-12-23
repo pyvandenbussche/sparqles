@@ -1,5 +1,4 @@
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 SELECT (AVG(?o) AS ?avg)
 WHERE {
-	?s rdf:type ?o
-} LIMIT 100
+	<http://nonsensical.com/1> ?p ?o
+} LIMIT 10

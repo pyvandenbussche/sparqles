@@ -1,9 +1,7 @@
-PREFIX  rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-SELECT ?p
+SELECT ?o
 {
-   ?p rdf:type ?o 
+   <http://nonsensical.com/1> ?p  ?o 
 } 
 VALUES ?o {
- owl:Thing
+ <http://example.org/thing> 
 }
