@@ -5,7 +5,7 @@
 	<artifactId>sparqles</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
-		<jdkLevel>1.6</jdkLevel>
+		<jdkLevel>1.7</jdkLevel>
 		<requiredMavenVersion>[2.1,)</requiredMavenVersion>
 		<main.basedir>${project.basedir}</main.basedir>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -161,11 +161,16 @@
 			<artifactId>mongo-java-driver</artifactId>
 			<version>2.11.3</version>
 		</dependency>
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.3.1</version>
+    </dependency>
 		<dependency>
 			<groupId>org.apache.jena</groupId>
 			<artifactId>jena-arq</artifactId>
 			<!-- <version>2.11.1</version> -->
-			<version>2.11.1-SNAPSHOT</version>
+			<version>2.12.2-SNAPSHOT</version>
 			<exclusions>
 				<exclusion>
 					<groupId>log4j</groupId>
