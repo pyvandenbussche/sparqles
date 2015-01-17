@@ -1,5 +1,0 @@
-SELECT ?v
-WHERE { <http://nonsensical.com/1> <http://example.org/type> ?v }
-ORDER BY ?v
-LIMIT 10
-OFFSET 11

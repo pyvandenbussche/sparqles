@@ -1,7 +1,0 @@
-SELECT ?s (AVG(?o) AS ?avg)
-WHERE {
-	<http://nonsensical.com/1> ?p ?o
-} 
-GROUP BY ?s
-HAVING (AVG(?o) <= 2.0)
-LIMIT 10

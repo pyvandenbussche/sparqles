@@ -1,3 +1,0 @@
-SELECT *
-WHERE { <http://nonsensical.com/1> <http://example.org/type> ?o }
-ORDER BY ASC(?s) LIMIT 10

@@ -1,4 +1,0 @@
-SELECT ?p (COUNT(?o) AS ?c)
-WHERE { <http://nonsensical.com/1> ?p ?o } 
-GROUP BY ?p
-LIMIT 10
