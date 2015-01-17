@@ -15,3 +15,6 @@ build/
 /hsqldb-2.3.0.zip
 /jetty-distribution-9.0.4.v20130625.zip
 /target
+.classpath
+.project
+.settings/
