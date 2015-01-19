@@ -40,6 +40,16 @@ public class AvailEp {
 		}
 		
 	}
+	public List<String[]> getAvailPerMonth(){
+		List<String[]> availPerMonthList = new ArrayList<>();
+		for (int i = 0; i < records.size(); i++) {
+			AvailEpMonthRecord record = records.get(i);
+			String[] availPerMonth = new String[]{record.getDate(), df.format(record.getNbSuccessTest()/record.getNbTests())};
+			availPerMonthList.add(availPerMonth);
+		}
+		return availPerMonthList;
+	} 
+	
 	@Override
     public boolean equals(Object object)
     {

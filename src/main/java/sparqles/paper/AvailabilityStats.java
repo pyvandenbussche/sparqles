@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sparqles.paper.objects.AvailEp;
+import sparqles.paper.objects.AvailEvolMonthList;
 import sparqles.paper.objects.AvailJson;
 import arq.cmdline.CmdGeneral;
 
@@ -21,6 +22,7 @@ import com.google.gson.Gson;
 public class AvailabilityStats extends CmdGeneral  {
 	private String atasksPath=null;
 	private File outputFolderFile=null;
+	
 
 	/**
 	 * @param args
@@ -87,25 +89,31 @@ public class AvailabilityStats extends CmdGeneral  {
 		       cpt++;
 		    }
 		    StringBuilder sbListEPsAlive = new StringBuilder();
+		    AvailEvolMonthList availEvolMonthList = new AvailEvolMonthList();
+		    
 		    for (AvailEp availEp : eps) {
-		    	availEp.prettyPrint();
+		    	//availEp.prettyPrint();
 		    	if(availEp.isAlive(4))sbListEPsAlive.append(availEp.getEpURI()+System.getProperty("line.separator"));
+		    	for (String[] availPerMonth : availEp.getAvailPerMonth()) {
+		    		availEvolMonthList.addEp(availPerMonth[0], Float.parseFloat(availPerMonth[1]));
+				}
 			}
-		    writeListEPsAlive(sbListEPsAlive.toString());
+		    writeFile(sbListEPsAlive.toString(), "epsAlive.csv");
+		    writeFile(availEvolMonthList.csvPrint(), "availability-evo.csv");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
 	}
 	
-	private void writeListEPsAlive(String content){
+	private void writeFile(String content, String fileName){
 		if(!outputFolderFile.exists())outputFolderFile.mkdir();
 		FileOutputStream fop = null;
 		File file;
 	
 		try {
 	
-			file = new File(outputFolderFile.getAbsolutePath()+"/"+"epsAlive.csv");
+			file = new File(outputFolderFile.getAbsolutePath()+"/"+fileName);
 			if(file.exists())file.delete();
 			file.createNewFile();
 			
@@ -130,4 +138,5 @@ public class AvailabilityStats extends CmdGeneral  {
 			}
 		}
 	}
+	
 }
