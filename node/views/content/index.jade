@@ -32,7 +32,7 @@ block content
               span
                 b #{numberWithCommas(perf.threshold)} 
                 | is the most common 
-                span(onmouseover='tooltip.show(\'#{configPerformance['Result-size thresholds']}\')', onmouseout='tooltip.hide();') result-size threshold
+                span(onmouseover='tooltip.show(\'#{configPerformance["Result-size thresholds"]}\')', onmouseout='tooltip.hide();') result-size threshold
               svg#perf
           article.wrpl(style='min-width: 400px;')
             .wrplInnerBox(style='height: 380px;')
@@ -46,18 +46,18 @@ block content
               div
                 b #{parseFloat((index.discoverability.VoIDDescription*100).toFixed(2))+ '%'} 
                 | of the endpoints provide a 
-                span(onmouseover='tooltip.show(\'#{configDisco['VoID Description']}\')', onmouseout='tooltip.hide();') VoID description
+                span(onmouseover='tooltip.show(\'#{configDisco["VoID Description"]}\')', onmouseout='tooltip.hide();') VoID description
               div
                 b #{parseFloat((index.discoverability.SDDescription*100).toFixed(2))+ '%'} 
                 | of the endpoints provide a 
-                span(onmouseover='tooltip.show(\'#{configDisco['Service Description']}\')', onmouseout='tooltip.hide();') SD description
+                span(onmouseover='tooltip.show(\'#{configDisco["Service Description"]}\')', onmouseout='tooltip.hide();') SD description
               div
                 b #{parseFloat((index.discoverability.NoDescription*100).toFixed(2))+ '%'} 
                 | of the endpoints have 
                 b no 
                 | description
               br
-              span(onmouseover='tooltip.show(\'#{configDisco['Server Name']}\')', onmouseout='tooltip.hide();') Server name:
+              span(onmouseover='tooltip.show(\'#{configDisco["Server Name"]}\')', onmouseout='tooltip.hide();') Server name:
               svg#disco(style='height: 350px;margin-top:-50px;')
       script.
         var colors = d3.scale.category20();
@@ -143,7 +143,7 @@ block content
             .donut(true);
           chart.pie
             .startAngle(function(d) { return d.startAngle/2 -Math.PI/2 })
-            .endAngle(function(d) { return d.endAngle/2 -Math.PI/2 });          
+            .endAngle(function(d) { return d.endAngle/2 -Math.PI/2 });
           d3.select("#disco")
             .datum([!{JSON.stringify(index.discoverability.serverName[0].values)}])
             .transition().duration(500)

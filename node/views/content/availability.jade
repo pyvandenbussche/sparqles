@@ -68,15 +68,15 @@ block content
                       -   return tooltipHtml;
                       - }
                       td
-                        a(href="/endpoint/#{encodeURIComponent(ep.endpoint.uri)}")
+                        a(href="/endpoint?uri=#{encodeURIComponent(ep.endpoint.uri)}")
                           span(onmouseover='tooltip.show(\'#{generateTooltip(ep.endpoint.datasets)}\')', onmouseout='tooltip.hide();') #{ep.endpoint.uri} (#{ep.endpoint.datasets.length})
                     else
                       if ep.endpoint.datasets.length>0
                         td 
-                          a(href="/endpoint/#{encodeURIComponent(ep.endpoint.uri)}") #{ep.endpoint.datasets[0].label}
+                          a(href="/endpoint?uri=#{encodeURIComponent(ep.endpoint.uri)}") #{ep.endpoint.datasets[0].label}
                       else 
                         td
-                          a(href="/endpoint/#{encodeURIComponent(ep.endpoint.uri)}") #{ep.endpoint.uri}
+                          a(href="/endpoint?uri=#{encodeURIComponent(ep.endpoint.uri)}") #{ep.endpoint.uri}
                     //-Display uptime last 24h
                     td 
                       if ep.uptimeLast24h==0

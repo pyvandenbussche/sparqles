@@ -24,6 +24,8 @@ MongoDBProvider.prototype.getAvailView = function(callback) {
       if( error ) callback(error)
       else {
         collection.find().sort({"endpoint.datasets.0.label":1,"endpoint.uri":1}).toArray(function(error, results) {
+	//collection.find().toArray(function(error, results) {
+
           if( error ) callback(error)
           else callback(null, results)
         });
@@ -108,6 +110,20 @@ MongoDBProvider.prototype.endpointsCount = function(callback) {
       }
     });
 };
+
+//endpoints list
+MongoDBProvider.prototype.endpointsList = function(callback) {
+    this.getCollection('endpoints',function(error, collection) {
+      if( error ) callback(error)
+      else {
+         collection.find({},{"_id":0}).sort({"uri":1}).toArray(function(error, results) {
+          if( error ) callback(error)
+          else callback(null, results)
+        });
+      }
+    });
+};
+
 
 //Last Update date
 MongoDBProvider.prototype.getLastUpdate = function(callback) {

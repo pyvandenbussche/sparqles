@@ -7,7 +7,7 @@ block content
         article
           header.wrpl.w-3-4
             h1
-              a(href="/endpoint/#{encodeURIComponent(epUri)}") #{epUri}
+              a(href="/endpoint?uri=#{encodeURIComponent(epUri)}") #{epUri}
               
             time 
               if epDetails.datasets.length>1
@@ -27,21 +27,21 @@ block content
                 h2(style="float:left;") Availability
                 span(style="float:right;") Last Day (
                   b #{parseFloat((epAvail.uptimeLast24h*100).toFixed(2))+ '%'}
-                  ); last Week (
+                  span ); last Week (
                   b #{parseFloat((epAvail.uptimeLast7d*100).toFixed(2))+ '%'}
-                  ); last Month (
+                  span ); last Month (
                   b #{parseFloat((epAvail.uptimeLast31d*100).toFixed(2))+ '%'}
-                  ); overall (
+                  span ); overall (
                   b #{parseFloat((epAvail.uptimeOverall*100).toFixed(2))+ '%'}
-                  )
+                  span )
               svg#chartAvail(style='height: 370px; padding-right:10px;')
           article.wrpl(style='min-width: 400px; width:100%;')
-            - function numberWithCommas(x) {if (x) return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");}
+            - function numberWithCommas(x){return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");}
             div(style="height:400px;", class="wrplInnerBox")
               a(title='', href='/performance')
                 h2(style="float:left;") Performance
                 if epPerf.threshold>0  && epPerf.threshold%100==0
-                  span(style='float:right;', onmouseover='tooltip.show(\'#{configPerf['Result-size thresholds']}\')', onmouseout='tooltip.hide();') Suspected Result size threshold: 
+                  span(style='float:right;', onmouseover='tooltip.show(\'#{configPerf["Result-size thresholds"]}\')', onmouseout='tooltip.hide();') Suspected Result size threshold: 
                     b #{numberWithCommas(epPerf.threshold)}
               table(style='width:100%')
                 tr
@@ -60,7 +60,7 @@ block content
                       thead
                         tr
                           th.tablehead(colspan=2) 
-                            span(onmouseover='tooltip.show(\'#{configInterop['SPARQL 1.0']}\')', onmouseout='tooltip.hide();') SPARQL 1.0 features
+                            span(onmouseover='tooltip.show(\'#{configInterop["SPARQL 1.0"]}\')', onmouseout='tooltip.hide();') SPARQL 1.0 features
                       tbody
                         - each feature, i in epInterop.SPARQL1Features
                           tr(class=(i % 2 == 0) ? 'odd' : 'even')
@@ -76,7 +76,7 @@ block content
                       thead
                         tr
                           th.tablehead(colspan=2)
-                            span(onmouseover='tooltip.show(\'#{configInterop['SPARQL 1.1']}\')', onmouseout='tooltip.hide();') SPARQL 1.1 features
+                            span(onmouseover='tooltip.show(\'#{configInterop["SPARQL 1.1"]}\')', onmouseout='tooltip.hide();') SPARQL 1.1 features
                       tbody
                         - each feature, i in epInterop.SPARQL11Features
                           tr(class=(i % 2 == 0) ? 'odd' : 'even')
@@ -99,7 +99,7 @@ block content
                       thead
                         tr
                           th.tablehead 
-                            span(onmouseover='tooltip.show(\'#{configDisco['Server Name']}\')', onmouseout='tooltip.hide();') Server Name
+                            span(onmouseover='tooltip.show(\'#{configDisco["Server Name"]}\')', onmouseout='tooltip.hide();') Server Name
                       tbody
                         tr
                           td
@@ -111,7 +111,7 @@ block content
                       thead
                         tr
                           th.tablehead 
-                            span(onmouseover='tooltip.show(\'#{configDisco['VoID Description']}\')', onmouseout='tooltip.hide();') VoID Description
+                            span(onmouseover='tooltip.show(\'#{configDisco["VoID Description"]}\')', onmouseout='tooltip.hide();') VoID Description
                           th.tablehead 
                       tbody
                         - each feature, i in epDisco.VoIDDescription
@@ -128,7 +128,7 @@ block content
                       thead
                         tr
                           th.tablehead 
-                            span(onmouseover='tooltip.show(\'#{configDisco['Service Description']}\')', onmouseout='tooltip.hide();') Service Description
+                            span(onmouseover='tooltip.show(\'#{configDisco["Service Description"]}\')', onmouseout='tooltip.hide();') Service Description
                           th.tablehead 
                       tbody
                         - each feature, i in epDisco.SDDescription
@@ -151,10 +151,10 @@ block content
             .showControls(false)
             .showLegend(false)
             .yDomain([0,1]);
-          chart.xAxis.tickFormat(function(d) { return d3.time.format('%Y-%m-%d %Hh')(new Date(d)) });
+          chart.xAxis.tickFormat(function(d) { return d3.time.format('%Y-%m-%d')(new Date(d)) });
           chart.yAxis.tickFormat(d3.format('.2%'));
           d3.select('#chartAvail')
-            .datum(!{'['+JSON.stringify(epAvail.data)+']'})
+            .datum(!{'[{"key":"Availability","values":'+JSON.stringify(epAvail.data.values.sort(function(a,b){return parseFloat(a.x)-parseFloat(b.x)}))+'}]'})
             .call(chart);
           nv.utils.windowResize(chart.update);
           chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });

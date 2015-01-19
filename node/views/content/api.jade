@@ -1,0 +1,68 @@
+extends ../layout
+block content
+      section#post
+        article
+          header.wrpl
+            h1 SPARQLES APIs
+            time Everything you want to know about SPARQL Endpoints, one API away...
+            //details
+              summary Description:
+              p
+                | Code, queries and results described in the paper
+      .line
+      section#posts.default-area
+        article.wrp(style='padding-bottom: 1em;')
+          .wrplInnerBox(style='height: 100%;')
+            .apiGroupName Endpoint
+            ul.apiGroup
+              li.apiOperation#listEndpoints
+                .apiOperationHeading
+                  h2
+                    span.apiHttpMethod get
+                    span.apiPath /api/endpoint/list
+                  .apiLabel List All Endpoints API
+                .apiOperationContent
+                  .apiOperationContentContainer
+                    .apiDesc The endpoint list API allows a user to list all the endpoints, their URL, label and associated datasets.
+                    table.apiTable
+                      thead
+                        tr
+                          th Parameter
+                          th Type
+                          th Description
+                      tbody
+                        tr
+                          td -
+                          td -
+                          td -
+                    .apiExample For example, using the List All Endpoints API, your app can have access to the latest list of endpoints: 
+                      a(href="./api/endpoint/list", target="_blank") http://sparqles.okfn.org/api/endpoint/list
+              li.apiOperation#listEndpoints
+                .apiOperationHeading
+                  h2
+                    span.apiHttpMethod get
+                    span.apiPath /api/endpoint/autocomplete
+                  .apiLabel Endpoint Autocomplete API
+                .apiOperationContent
+                  .apiOperationContentContainer
+                    .apiDesc The endpoint autocomplete API allows a user to perform auto completion over the endpoints list based on it's URL, label or dataset label
+                    table.apiTable
+                      thead
+                        tr
+                          th Parameter
+                          th Type
+                          th Description
+                      tbody
+                        tr
+                          td q
+                          td string
+                          td URI or label to complete (from 1 character).
+                    .apiExample For example, using the Endpoint Autocomplete API, your app can perform autocompletion for the string "dbpedia":
+                      a(href="./api/endpoint/autocomplete?q=dbpedia", target="_blank") http://sparqles.okfn.org/api/endpoint/autocomplete?q=dbpedia
+       script.
+        $(".apiOperationContent").hide()
+        $( ".apiOperationHeading" ).click(function() {
+          $(this).parent().find( ".apiOperationContent" ).slideToggle( "slow", function() {
+            // Animation complete.
+          });
+        });

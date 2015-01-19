@@ -38,7 +38,7 @@ head
               results: function() {}
             },
             select : function(event, ui) {
-                location.href = '/endpoint/' + encodeURIComponent(ui.item.uri);
+                location.href = '/endpoint?uri=' + encodeURIComponent(ui.item.uri);
             },
            open: function(event, ui) {
              $(".ui-autocomplete").css("z-index", 1000);
