@@ -123,6 +123,49 @@ app.get('/api/endpoint/autocomplete', function(req, res){
                 });
 });
 
+app.get('/api/endpoint/info', function(req, res){
+  var uri = req.query.uri;
+               mongoDBProvider.getEndpointView(uri, function(error,docs){
+                        if(docs){
+                                res.json(docs);
+                        }
+                        else res.end();
+                });
+});
+
+app.get('/api/availability', function(req, res){
+               mongoDBProvider.getAvailView(function(error,docs){
+                        if(docs){
+                                res.json(docs);
+                        }
+                        else res.end();
+                });
+});
+app.get('/api/discoverability', function(req, res){
+               mongoDBProvider.getDiscoView(function(error,docs){
+                        if(docs){
+                                res.json(docs);
+                        }
+                        else res.end();
+                });
+});
+app.get('/api/performance', function(req, res){
+               mongoDBProvider.getPerfView(function(error,docs){
+                        if(docs){
+                                res.json(docs);
+                        }
+                        else res.end();
+                });
+});
+app.get('/api/interoperability', function(req, res){
+               mongoDBProvider.getInteropView(function(error,docs){
+                        if(docs){
+                                res.json(docs);
+                        }
+                        else res.end();
+                });
+});
+
 
 app.get('/endpoint', function(req, res){
 		var uri = req.query.uri;

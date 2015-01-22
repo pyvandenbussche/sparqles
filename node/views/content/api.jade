@@ -36,7 +36,7 @@ block content
                           td -
                           td -
                     .apiExample For example, using the List All Endpoints API, your app can have access to the latest list of endpoints: 
-                      a(href="./api/endpoint/list", target="_blank") http://sparqles.okfn.org/api/endpoint/list
+                      a(href="/api/endpoint/list", target="_blank") http://sparqles.okfn.org/api/endpoint/list
               li.apiOperation#listEndpoints
                 .apiOperationHeading
                   h2
@@ -58,7 +58,121 @@ block content
                           td string
                           td URI or label to complete (from 1 character).
                     .apiExample For example, using the Endpoint Autocomplete API, your app can perform autocompletion for the string "dbpedia":
-                      a(href="./api/endpoint/autocomplete?q=dbpedia", target="_blank") http://sparqles.okfn.org/api/endpoint/autocomplete?q=dbpedia
+                      a(href="/api/endpoint/autocomplete?q=dbpedia", target="_blank") http://sparqles.okfn.org/api/endpoint/autocomplete?q=dbpedia
+              li.apiOperation#infoEndpoint
+                .apiOperationHeading
+                  h2
+                    span.apiHttpMethod get
+                    span.apiPath /api/endpoint/info
+                  .apiLabel Endpoint Info API
+                .apiOperationContent
+                  .apiOperationContentContainer
+                    .apiDesc The endpoint info API allows a user to get a full information of an endpoint based on its URI. This includes its availability, performance, interoperability and discoverability.
+                    table.apiTable
+                      thead
+                        tr
+                          th Parameter
+                          th Type
+                          th Description
+                      tbody
+                        tr
+                          td uri
+                          td string
+                          td Endpoint URI.
+                    .apiExample For example, using the Endpoint Info API, your app can have the latest metrics for the endpoint http://dbpedia.org/sparql:
+                      a(href="/api/endpoint/info?uri=http://dbpedia.org/sparql", target="_blank") http://sparqles.okfn.org/api/endpoint/info?uri=http://dbpedia.org/sparql
+        article.wrp(style='padding-bottom: 1em;')
+          .wrplInnerBox(style='height: 100%;')
+            .apiGroupName Analytics
+            ul.apiGroup
+              li.apiOperation#availability
+                .apiOperationHeading
+                  h2
+                    span.apiHttpMethod get
+                    span.apiPath /api/availability
+                  .apiLabel Availability API
+                .apiOperationContent
+                  .apiOperationContentContainer
+                    .apiDesc List the endpoints and their availability uptime at the moment; the last 24 hours and the last 7 days
+                    table.apiTable
+                      thead
+                        tr
+                          th Parameter
+                          th Type
+                          th Description
+                      tbody
+                        tr
+                          td -
+                          td -
+                          td -
+                    .apiExample For example, using the Availability API, your app can have the latest list of endpoints and their availability: 
+                      a(href="/api/availability", target="_blank") http://sparqles.okfn.org/api/availability
+              li.apiOperation#discoverability
+                .apiOperationHeading
+                  h2
+                    span.apiHttpMethod get
+                    span.apiPath /api/discoverability
+                  .apiLabel Discoverability API
+                .apiOperationContent
+                  .apiOperationContentContainer
+                    .apiDesc List the endpoints and their discoverability information (VoID Description, Service Description and server name found in the HTTP get response)
+                    table.apiTable
+                      thead
+                        tr
+                          th Parameter
+                          th Type
+                          th Description
+                      tbody
+                        tr
+                          td -
+                          td -
+                          td -
+                    .apiExample For example, using the Discoverability API, your app can have the latest list of endpoints and their discoverability information: 
+                      a(href="/api/discoverability", target="_blank") http://sparqles.okfn.org/api/discoverability
+              li.apiOperation#interoperability
+                .apiOperationHeading
+                  h2
+                    span.apiHttpMethod get
+                    span.apiPath /api/interoperability
+                  .apiLabel Interoperability API
+                .apiOperationContent
+                  .apiOperationContentContainer
+                    .apiDesc List the endpoints and their interoperability (SPARQL 1.0 and 1.1 features compliance)
+                    table.apiTable
+                      thead
+                        tr
+                          th Parameter
+                          th Type
+                          th Description
+                      tbody
+                        tr
+                          td -
+                          td -
+                          td -
+                    .apiExample For example, using the Interoperability API, your app can have the latest list of endpoints and their interoperability information: 
+                      a(href="/api/interoperability", target="_blank") http://sparqles.okfn.org/api/interoperability
+              li.apiOperation#performance
+                .apiOperationHeading
+                  h2
+                    span.apiHttpMethod get
+                    span.apiPath /api/performance
+                  .apiLabel Performance API
+                .apiOperationContent
+                  .apiOperationContentContainer
+                    .apiDesc List the endpoints and their performance information (ASK queries mean runtime, JOIN queries mean runtie and result size threshold)
+                    table.apiTable
+                      thead
+                        tr
+                          th Parameter
+                          th Type
+                          th Description
+                      tbody
+                        tr
+                          td -
+                          td -
+                          td -
+                    .apiExample For example, using the Performance API, your app can have the latest list of endpoints and their performance information: 
+                      a(href="/api/performance", target="_blank") http://sparqles.okfn.org/api/performance
        script.
         $(".apiOperationContent").hide()
         $( ".apiOperationHeading" ).click(function() {

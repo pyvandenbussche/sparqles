@@ -23,7 +23,7 @@ MongoDBProvider.prototype.getAvailView = function(callback) {
     this.getCollection('atasks_agg',function(error, collection) {
       if( error ) callback(error)
       else {
-        collection.find().sort({"endpoint.datasets.0.label":1,"endpoint.uri":1}).toArray(function(error, results) {
+        collection.find({},{"_id":0}).sort({"endpoint.datasets.0.label":1,"endpoint.uri":1}).toArray(function(error, results) {
 	//collection.find().toArray(function(error, results) {
 
           if( error ) callback(error)
@@ -38,7 +38,7 @@ MongoDBProvider.prototype.getInteropView = function(callback) {
     this.getCollection('ftasks_agg',function(error, collection) {
       if( error ) callback(error)
       else {
-        collection.find().sort({"endpoint.datasets.0.label":1,"endpoint.uri":1}).toArray(function(error, results) {
+        collection.find({},{"_id":0}).sort({"endpoint.datasets.0.label":1,"endpoint.uri":1}).toArray(function(error, results) {
           if( error ) callback(error)
           else callback(null, results)
         });
@@ -51,7 +51,7 @@ MongoDBProvider.prototype.getPerfView = function(callback) {
     this.getCollection('ptasks_agg',function(error, collection) {
       if( error ) callback(error)
       else {
-        collection.find().sort({"endpoint.datasets.0.label":1,"endpoint.uri":1}).toArray(function(error, results) {
+        collection.find({},{"_id":0}).sort({"endpoint.datasets.0.label":1,"endpoint.uri":1}).toArray(function(error, results) {
           if( error ) callback(error)
           else callback(null, results)
         });
@@ -64,7 +64,7 @@ MongoDBProvider.prototype.getDiscoView = function(callback) {
     this.getCollection('dtasks_agg',function(error, collection) {
       if( error ) callback(error)
       else {
-        collection.find().sort({"endpoint.datasets.0.label":1,"endpoint.uri":1}).toArray(function(error, results) {
+        collection.find({},{"_id":0}).sort({"endpoint.datasets.0.label":1,"endpoint.uri":1}).toArray(function(error, results) {
           if( error ) callback(error)
           else callback(null, results)
         });
@@ -77,7 +77,7 @@ MongoDBProvider.prototype.getEndpointView = function(epUri, callback) {
     this.getCollection('epview',function(error, collection) {
       if( error ) callback(error)
       else {
-        collection.find({"endpoint.uri":epUri}).toArray(function(error, results) {
+        collection.find({"endpoint.uri":epUri},{"_id":0}).toArray(function(error, results) {
           if( error ) callback(error)
           else callback(null, results)
         });
@@ -90,7 +90,7 @@ MongoDBProvider.prototype.autocomplete = function(query, callback) {
     this.getCollection('endpoints',function(error, collection) {
       if( error ) callback(error)
       else {
-		collection.find({$or: [{ 'datasets.label': {$regex: '.*'+query+'.*', $options: 'i'}}, {'uri': {$regex: '.*'+query+'.*', $options: 'i'}}]}).sort({"datasets.0.label":1,"uri":1}).toArray(function(error, results) {
+		collection.find({$or: [{ 'datasets.label': {$regex: '.*'+query+'.*', $options: 'i'}}, {'uri': {$regex: '.*'+query+'.*', $options: 'i'}}]}, {"_id":0}).sort({"datasets.0.label":1,"uri":1}).toArray(function(error, results) {
           if( error ) callback(error)
           else callback(null, results)
         });
