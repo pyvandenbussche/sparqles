@@ -24,3 +24,5 @@ Get the code from GitHub: https://github.com/pyvandenbussche/sparqles
 
 Build using maven
 
+## License
+SPARQLES code and dataset are licensed under a [Creative Commons Attribution 4.0 International License]( https://creativecommons.org/licenses/by/4.0/).
