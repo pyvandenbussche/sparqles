@@ -1,0 +1,1 @@
+sudo forever start -l /usr/local/sparqles/node/forever.log -o out.log -e err.log -d -a app.js
