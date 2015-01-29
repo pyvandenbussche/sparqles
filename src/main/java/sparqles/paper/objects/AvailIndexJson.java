@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class AvailIndexJson {
 	List<AvailKeyValue> availability = new ArrayList<AvailKeyValue>();
@@ -24,7 +25,7 @@ public class AvailIndexJson {
 			if(parts.length>1){
 				int previousPart=0;
 				for (int i=1; i<parts.length; i++) {
-					SimpleDateFormat parserSDF=new SimpleDateFormat("MMM-yy");
+					SimpleDateFormat parserSDF=new SimpleDateFormat("MMM-yy",Locale.UK);
 					final Date date =parserSDF.parse(parts[0]);
 					final int currentPart = Integer.parseInt(parts[i]);
 					final int finalPreviousPart = previousPart;
