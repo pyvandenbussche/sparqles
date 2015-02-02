@@ -4,15 +4,18 @@ package sparqles.paper;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import sparqles.paper.objects.AvailEp;
+import sparqles.paper.objects.AvailEpFromList;
 import sparqles.paper.objects.AvailEvolMonthList;
 import sparqles.paper.objects.AvailJson;
 import arq.cmdline.CmdGeneral;
@@ -21,6 +24,7 @@ import com.google.gson.Gson;
 
 public class AvailabilityStats extends CmdGeneral  {
 	private String atasksPath=null;
+	private File listEndpointsFile=null;
 	private File outputFolderFile=null;
 	
 
@@ -50,12 +54,13 @@ public class AvailabilityStats extends CmdGeneral  {
 
 	@Override
 	protected void processModulesAndArgs() {
-		if (getPositional().size() < 2) {
+		if (getPositional().size() < 3) {
 			doHelp();
 		}
 		atasksPath = getPositionalArg(0);
 		try {
-			outputFolderFile = new File(getPositionalArg(1));
+			listEndpointsFile = new File(getPositionalArg(1));
+			outputFolderFile = new File(getPositionalArg(2));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -65,6 +70,15 @@ public class AvailabilityStats extends CmdGeneral  {
 	protected void exec() {
 		try {
 			Gson gson = new Gson();
+			
+			//read the list of endpoints
+			AvailEpFromList[] epArray = gson.fromJson(new FileReader(listEndpointsFile), AvailEpFromList[].class);
+			List<String> epList = new ArrayList<>();
+			for (int i = 0; i < epArray.length; i++) {
+				epList.add(epArray[i].getUri());
+//				System.out.println(epArray[i].getUri());
+			}
+			
 			List<AvailEp> eps = new ArrayList<AvailEp>();
 			BufferedReader br = Files.newBufferedReader(Paths.get(atasksPath), StandardCharsets.UTF_8); 
 			int cpt=0;
@@ -89,17 +103,30 @@ public class AvailabilityStats extends CmdGeneral  {
 		       cpt++;
 		    }
 		    StringBuilder sbListEPsAlive = new StringBuilder();
+		    StringBuilder sbListEPsExtraPresent = new StringBuilder();
+		    StringBuilder sbListEPsNotPresent = new StringBuilder();
 		    AvailEvolMonthList availEvolMonthList = new AvailEvolMonthList();
 		    
 		    for (AvailEp availEp : eps) {
-		    	//availEp.prettyPrint();
-		    	if(availEp.isAlive(4))sbListEPsAlive.append(availEp.getEpURI()+System.getProperty("line.separator"));
-		    	for (String[] availPerMonth : availEp.getAvailPerMonth()) {
-		    		availEvolMonthList.addEp(availPerMonth[0], Float.parseFloat(availPerMonth[1]));
-				}
+		    	if(epList.contains(availEp.getEpURI())){epList.remove(availEp.getEpURI());
+			    	availEp.prettyPrint();
+	//		    	availEp.uriPrint();
+			    	if(availEp.isAlive(4))sbListEPsAlive.append(availEp.getEpURI()+System.getProperty("line.separator"));
+			    	for (String[] availPerMonth : availEp.getAvailPerMonth()) {
+			    		availEvolMonthList.addEp(availPerMonth[0], Float.parseFloat(availPerMonth[1]));
+					}
+		    	}
+		    	else{sbListEPsExtraPresent.append(availEp.getEpURI()+System.getProperty("line.separator"));}
 			}
+		    for (String ep : epList) {
+		    	sbListEPsNotPresent.append(ep+System.getProperty("line.separator"));
+			}
+		    
+		    writeFile(sbListEPsExtraPresent.toString(), "epsExtra.csv");
+		    writeFile(sbListEPsNotPresent.toString(), "epsNotPresent.csv");
 		    writeFile(sbListEPsAlive.toString(), "epsAlive.csv");
-		    writeFile(availEvolMonthList.csvPrint(), "availability-evo.csv");
+		    writeFile(availEvolMonthList.csvPrintNb(), "availability-evo.csv");
+		    writeFile(availEvolMonthList.csvPrintPercent(), "availability-percent.csv");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

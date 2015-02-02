@@ -330,6 +330,27 @@ app.get('/interoperability', function(req, res){
 		});
 });
 
+app.get('/data', function(req, res){
+  mongoDBProvider.endpointsCount(function(error,nbEndpointsSearch){
+    var dir = '../dumps/'; // data dir
+    function bytesToSize(bytes) {
+       if(bytes == 0) return '0 Byte';
+       var k = 1000;
+       var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+       var i = Math.floor(Math.log(bytes) / Math.log(k));
+       return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
+    }
+    var files = fs.readdirSync(dir)
+                .map(function(v) { 
+                    return { name:v,
+                             time:fs.statSync(dir + v).mtime.getTime(),
+                             size:bytesToSize(fs.statSync(dir + v).size)
+                           }; 
+                 });
+    res.render('content/data.jade',{files:files, nbEndpointsSearch:nbEndpointsSearch});
+  });
+});
+
 app.get('/iswc2013', function(req, res){
 		mongoDBProvider.endpointsCount(function(error,nbEndpointsSearch){
 			mongoDBProvider.autocomplete(req.param('q'), function(error,docs){

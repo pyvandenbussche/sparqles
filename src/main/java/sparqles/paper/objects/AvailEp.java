@@ -63,6 +63,9 @@ public class AvailEp {
 			System.out.println("\t["+record.getDate()+"]\t"+df.format(record.getNbSuccessTest()/record.getNbTests()));
 		}		
 	}
+	public void uriPrint(){
+		System.out.println(epURI);
+	}
 	public boolean isAlive(int monthWindow){
 		int nbMonthAlive=0;
 		Date today = new Date();
