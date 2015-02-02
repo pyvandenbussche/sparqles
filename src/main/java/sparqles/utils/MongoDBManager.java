@@ -2,6 +2,7 @@ package sparqles.utils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,7 +28,6 @@ import sparqles.avro.analytics.Index;
 import sparqles.avro.analytics.InteroperabilityView;
 import sparqles.avro.analytics.PerformanceView;
 import sparqles.avro.Endpoint;
-
 import sparqles.core.SPARQLESProperties;
 import sparqles.avro.availability.AResult;
 import sparqles.avro.core.Robots;
@@ -109,8 +109,11 @@ public class MongoDBManager {
 	public void setup()  {
 		try {
 			client = new MongoClient( SPARQLESProperties.getDB_HOST() , SPARQLESProperties.getDB_PORT() );
+			
 			log.info("[INIT] MongoDB {} ", client);
 			db = client.getDB(SPARQLESProperties.getDB_NAME() );
+			
+			
 		} catch (UnknownHostException e) {
 			log.error("Coulld not connect to MongoDB instance, {}", ExceptionHandler.logAndtoString(e,true));
 		}	
@@ -237,6 +240,9 @@ public class MongoDBManager {
 		}catch(MongoException ex){
 			log.error("INSERT MongoDB Exception: {}: {}", ep.getUri(), ExceptionHandler.logAndtoString(ex,true));
 		}catch(Exception ex){
+			if(ex instanceof SocketTimeoutException){
+				
+			}
 			log.error("INSERT Exception: {} {}", ep.getUri(), ExceptionHandler.logAndtoString(ex,true));
 		}
 		return false;
@@ -368,15 +374,16 @@ public class MongoDBManager {
 	private <T> List<T> scan(Endpoint ep,String colName, Class<T> cls, Schema schema, String key) {
 		ArrayList<T> reslist = new ArrayList<T>();	
 
+		
 		DBCollection c  = db.getCollection(colName);
 		DBCursor curs = null;
 		try{
 			if(ep==null){
-				curs = c.find();
+				curs = c.find().batchSize(50).addOption(com.mongodb.Bytes.QUERYOPTION_NOTIMEOUT);
 			}else{
 				BasicDBObject q = new BasicDBObject();
 				q.append(key, ep.getUri().toString());
-				curs = c.find(q);
+				curs = c.find(q).batchSize(50).addOption(com.mongodb.Bytes.QUERYOPTION_NOTIMEOUT);
 			}
 
 			while(curs.hasNext()){

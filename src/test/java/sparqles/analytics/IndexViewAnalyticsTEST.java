@@ -16,7 +16,7 @@ public class IndexViewAnalyticsTEST {
 	private MongoDBManager m;
 	@Before
 	public void setUp() throws Exception {
-		SPARQLESProperties.init(new File("src/test/resources/ends.properties"));
+		SPARQLESProperties.init(new File("src/test/resources/sparqles.properties"));
 		m = new MongoDBManager();
 	}
 	@After

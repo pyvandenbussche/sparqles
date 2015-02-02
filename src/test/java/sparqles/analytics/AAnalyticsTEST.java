@@ -57,10 +57,11 @@ public class AAnalyticsTEST {
 		});
 
 		List<AResult> epRes = m.getResults(ep, AResult.class, AResult.SCHEMA$);
+		System.out.println(epRes.size());
 		System.out.println("Results: "+epRes.size());
 		for(AResult epres: epRes){
 			res.add(epres);
-			System.out.println(new Date(epres.getEndpointResult().getStart()));
+//			System.out.println(new Date(epres.getEndpointResult().getStart()));
 		}
 		
 //		if(_onlyLast&&epRes.size()!=0){
