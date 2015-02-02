@@ -1,0 +1,40 @@
+extends ../layout
+block content
+      section#post
+        article
+          header.wrpl
+            h1 SPARQLES Data
+            time SPARQLES data is available in the following table under Creative Commons 4.0 license (CC BY 4.0).
+      .line
+      section#posts.default-area
+        article.wrp(style='padding-bottom: 1em;')
+          .wrplInnerBox(style='height: 100%;')
+            section
+              b atasks 
+              | file contains the results for the availability tests
+            section
+              b dtasks 
+              | file contains the results for the discoverability tests
+            section
+              b ftasks 
+              | file contains the results for the interoperability features tests
+            section
+              b ptasks 
+              | file contains the results for the performance tests
+        article.wrp
+          .wrplInnerBox(style='height: 100%;')
+            table#table_current.psp-table(cellspacing='0', cellpadding='0', border='0', width='100%')
+              thead
+                tr
+                  th.tablehead(width='25%') File Name
+                  th.tablehead(width='50%') Last Modified
+                  th.tablehead(width='25%') Size
+              tbody
+                - each file in files
+                  - var date = new Date(file.time);
+                  - var dateString = date.toUTCString();
+                  tr
+                    td
+                      a(href='/dumps/#{file.name}', target='_blank') #{file.name}
+                    td.tdcenter #{dateString}
+                    td.tdcenter #{file.size}

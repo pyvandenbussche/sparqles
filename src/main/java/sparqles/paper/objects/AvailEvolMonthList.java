@@ -15,17 +15,16 @@ public class AvailEvolMonthList {
 		if(indexMonth>-1){//means it already exists
 			record = months.get(indexMonth);
 		}
+		else months.add(record);	//means it does not exist yet
+		
 		if(avail<=0.05)record.addZero_five();
 		else if(avail>0.05 && avail<=0.75)record.addFive_seventyFive();
 		else if(avail>0.75 && avail<=0.95)record.addSeventyFive_nintyFive();
 		else if(avail>0.95 && avail<=0.99)record.addNintyFive_nintyNine();
 		else if(avail>0.99)record.addNintyNine_hundred();
-		if(indexMonth<0){//means it does not exist yet
-			months.add(record);			
-		}
 	}
 	
-	public String csvPrint(){
+	public String csvPrintNb(){
 		StringBuilder sb = new StringBuilder();
 		sb.append("month\t0-5\t5-75\t75-95\t95-99\t99-100"+System.getProperty("line.separator"));
 		Collections.sort(months);
@@ -36,6 +35,21 @@ public class AvailEvolMonthList {
 					+"\t"+(month.getZero_five()+month.getFive_seventyFive()+month.getSeventyFive_nintyFive())
 					+"\t"+(month.getZero_five()+month.getFive_seventyFive()+month.getSeventyFive_nintyFive()+month.getNintyFive_nintyNine())
 					+"\t"+(month.getZero_five()+month.getFive_seventyFive()+month.getSeventyFive_nintyFive()+month.getNintyFive_nintyNine()+month.getNintyNine_hundred())		
+					+System.getProperty("line.separator"));
+		}
+		return sb.toString();
+	}
+	public String csvPrintPercent(){
+		StringBuilder sb = new StringBuilder();
+		sb.append("month\t0-5\t5-75\t75-95\t95-99\t99-100"+System.getProperty("line.separator"));
+		Collections.sort(months);
+		for (AvailEvolMonth month : months) {
+			sb.append(month.getDate()
+					+"\t"+(new Float(month.getZero_five())/new Float(month.getNbTotal()))*100
+					+"\t"+(new Float(month.getZero_five()+month.getFive_seventyFive())/new Float(month.getNbTotal()))*100
+					+"\t"+(new Float(month.getZero_five()+month.getFive_seventyFive()+month.getSeventyFive_nintyFive())/new Float(month.getNbTotal()))*100
+					+"\t"+(new Float(month.getZero_five()+month.getFive_seventyFive()+month.getSeventyFive_nintyFive()+month.getNintyFive_nintyNine())/new Float(month.getNbTotal()))*100
+					+"\t"+(new Float(month.getZero_five()+month.getFive_seventyFive()+month.getSeventyFive_nintyFive()+month.getNintyFive_nintyNine()+month.getNintyNine_hundred())	/new Float(month.getNbTotal()))*100		
 					+System.getProperty("line.separator"));
 		}
 		return sb.toString();
