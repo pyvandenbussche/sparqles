@@ -39,6 +39,7 @@ public class AvailabilityStats extends CmdGeneral  {
 		super(args);
 		getUsage().startCategory("Arguments");
 		getUsage().addUsage("atasks", "absolute path for the availability atasks.json file  (e.g. /home/...)");
+		getUsage().addUsage("listEndpointsFile", "absolute path for the list of endpoints file  (e.g. /home/...)");
 		getUsage().addUsage("outputFolderPath", "absolute path for the output folder where stats will be generated  (e.g. /home/...)");
 	}
 	
