@@ -19,9 +19,34 @@ SPARQL Endpoint Status project aims at monitoring SPARQL Endpoints based on 4 as
 
 ## Deploying the application
 
+### Prerequisite
+In order to run both backend and frontend of SPARQLES application you need to install the following programs:
+-Java (tested with version 1.7)
+-MongoDB (tested with version 2.4.9)
+-NodeJS (tested with version 0.12.4)
+-npm
+
 Get the code from GitHub: https://github.com/pyvandenbussche/sparqles
 
-Build using maven
+### Loading sample data
+For you to test the frontend, you can load the sample data provided in the **sampleData** folder. Use **mongorestore** command to load the unzipped data into a database named **sparqles**.
+
+### Running the frontend
+Make sure the **sparqles** database is present in MongoDB and populated. You can now run the frontend by executing the following command:
+```
+cd node
+npm install
+node ./app.js
+```
+
+You should see the following message:
+```
+Express server listening on port 3001
+```
+You can then access your application at the following URL: [http://localhost:3001/](http://localhost:3001/)
+
+## Running the backend
+
 
 ## License
 SPARQLES code and dataset are licensed under a [Creative Commons Attribution 4.0 International License]( https://creativecommons.org/licenses/by/4.0/).
