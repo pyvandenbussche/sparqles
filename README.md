@@ -21,10 +21,10 @@ SPARQL Endpoint Status project aims at monitoring SPARQL Endpoints based on 4 as
 
 ### Prerequisite
 In order to run both backend and frontend of SPARQLES application you need to install the following programs:
--Java (tested with version 1.7)
--MongoDB (tested with version 2.4.9)
--NodeJS (tested with version 0.12.4)
--npm
+- Java (tested with version 1.7)
+- MongoDB (tested with version 2.4.9)
+- NodeJS (tested with version 0.12.4)
+- npm
 
 Get the code from GitHub: https://github.com/pyvandenbussche/sparqles
 
