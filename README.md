@@ -9,20 +9,44 @@ SPARQL Endpoint Status project aims at monitoring SPARQL Endpoints based on 4 as
 * **Performance** measures generic performance aspects such as result-streaming, atomic lookups and simple-joins over a HTTP connection.
 * **Availability** monitors the uptimes of a SPARQL endpoint.
 
+## Directory structure
+```
+-node/ (frontend code based on NodeJS technology)
+-sampleData/ (sample data to populate MongoDB for setting up or testing purposes)
+-scripts/ (shell scripts used to run global operations such as dumping the data)
+-src/ (backend Java code used to monitor the SPARQL Endpoints)
+```
 
-## Details
+## Deploying the application
 
-The SPARQL Endpoint Status project is divided in several components:
- 
-* **Core component**: The core component contains all the code used to test the different status of a SPARQL endpoint. This component also contains a scheduler to take care of running tests periodically or on demand.
-* **UI Component**: The UI Component contains the code developped in GWT technology to generates a Web interface for either the SPARQL Endpoint Status website and the standalone tool
-* **Wrapper component**: This component generates a complete environment for the standalone version of the tool.
-
-## Building
+### Prerequisite
+In order to run both backend and frontend of SPARQLES application you need to install the following programs:
+- Java (tested with version 1.7)
+- MongoDB (tested with version 2.4.9)
+- NodeJS (tested with version 0.12.4)
+- npm
 
 Get the code from GitHub: https://github.com/pyvandenbussche/sparqles
 
-Build using maven
+### Loading sample data
+For you to test the frontend, you can load the sample data provided in the **sampleData** folder. Use **mongorestore** command to load the unzipped data into a database named **sparqles**.
+
+### Running the frontend
+Make sure the **sparqles** database is present in MongoDB and populated. You can now run the frontend by executing the following command:
+```
+cd node
+npm install
+node ./app.js
+```
+
+You should see the following message:
+```
+Express server listening on port 3001
+```
+You can then access your application at the following URL: [http://localhost:3001/](http://localhost:3001/)
+
+## Running the backend
+
 
 ## License
 SPARQLES code and dataset are licensed under a [Creative Commons Attribution 4.0 International License]( https://creativecommons.org/licenses/by/4.0/).
