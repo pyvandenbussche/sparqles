@@ -107,6 +107,7 @@ app.get('/api/endpoint/list', function(req, res){
                 mongoDBProvider.endpointsList(function(error,docs){
                         //for(i in docs)console.log(docs[i].uri);
                         if(docs){
+                                res.header("Content-Type", "application/json; charset=utf-8");
                                 res.json(docs);
                         }
                         else res.end();
@@ -175,33 +176,116 @@ app.get('/endpoint', function(req, res){
                 //TODO deal with no URI
                         console.log(uri);
                         mongoDBProvider.getEndpointView(uri, function(error,docs){
+				mongoDBProvider.getCollection('endpoints', function(error, collection) {
+					collection.find({ "uri": uri })
+					.toArray(function(err, results) {
+						var perfParsed = JSON.parse(JSON.stringify(docs[0].performance), function(k, v) {
+							if (k === "data")
+								this.values = v;
+							else
+								return v;
+						});
+						console.log(docs[0].availability);
+						res.render('content/endpoint.jade',{
+							ep: ep,
+							nbEndpointsSearch:nbEndpointsSearch,
+							lastUpdate: uri,
+							configInterop: JSON.parse(fs.readFileSync('./texts/interoperability.json')),
+							configPerf: JSON.parse(fs.readFileSync('./texts/performance.json')),
+							configDisco: JSON.parse(fs.readFileSync('./texts/discoverability.json')),
+							epUri: uri,
+							epDetails: /*docs[0].endpoint*/ results[0],
+							epPerf: perfParsed,
+							epAvail: docs[0].availability,
+							epInterop: docs[0].interoperability,
+							epDisco: docs[0].discoverability
+						});
 
-                                var perfParsed = JSON.parse(JSON.stringify(docs[0].performance), function(k, v) {
-                                        if (k === "data")
-                                                this.values = v;
-                                        else
-                                                return v;
-                                });
-                                console.log(docs[0].availability);
-                                res.render('content/endpoint.jade',{
-                                        ep: ep,
-                                        nbEndpointsSearch:nbEndpointsSearch,
-                                        lastUpdate: uri,
-                                        configInterop: JSON.parse(fs.readFileSync('./texts/interoperability.json')),
-                                        configPerf: JSON.parse(fs.readFileSync('./texts/performance.json')),
-                                        configDisco: JSON.parse(fs.readFileSync('./texts/discoverability.json')),
-                                        epUri: uri,
-                                        epDetails: docs[0].endpoint,
-                                        epPerf: perfParsed,
-                                        epAvail: docs[0].availability,
-                                        epInterop: docs[0].interoperability,
-                                        epDisco: docs[0].discoverability
-                                });
+					})
+				})
+
                         });
                 });
 });
 
+app.get('/endpoint-no-agg', function(req, res){
+		var uri = req.query.uri;
+                var ep = JSON.parse(fs.readFileSync('./examples/endpoint.json'));
+                //console.log(req.param('uri'))
+                mongoDBProvider.endpointsCount(function(error,nbEndpointsSearch){
+                //TODO deal with no URI
+			var docs = [];
+			var obj = { "endpoint" : { "uri" : "http://roma.rkbexplorer.com/sparql/", "datasets" : [ 	{ 	"uri" : "http://thedatahub.org/dataset/rkb-explorer-roma", 	"label" : "Universi degli studi di Roma \"La Sapienza\" (RKBExplorer)" } ] }, "availability" : { "upNow" : true, "testRuns" : 8127, "uptimeLast24h" : 1, "uptimeLast7d" : 1, "uptimeLast31d" : 0.9615384615384616, "uptimeOverall" : 0.9764980927771626, "data" : { "key" : "Availability", "values" : [] } }, "performance" : { "threshold" : 35587, "ask" : [ 	{ 	"key" : "Cold ASK Tests", 	"color" : "#1f77b4", 	"data" : [ 	{ 	"label" : "s", 	"value" : 162.337, 	"exception" : null }, 	{ 	"label" : "sp", 	"value" : 0.131, 	"exception" : null }, 	{ 	"label" : "so", 	"value" : 3.027, 	"exception" : null }, 	{ 	"label" : "p", 	"value" : 0.278, 	"exception" : null }, 	{ 	"label" : "o", 	"value" : 0.408, 	"exception" : null }, 	{ 	"label" : "po", 	"value" : 8.713, 	"exception" : null }, 	{ 	"label" : "spo", 	"value" : 0, 	"exception" : { 	"string" : "ResultSetException msg:Failed when initializing the StAX parsing engine cause:com.hp.hpl.jena.sparql.resultset.ResultSetException: Unknown XML element: error" } } ] }, 	{ 	"key" : "Warm ASK Tests", 	"color" : "#2ca02c", 	"data" : [ 	{ 	"label" : "s", 	"value" : 5.154, 	"exception" : null }, 	{ 	"label" : "sp", 	"value" : 8.171, 	"exception" : null }, 	{ 	"label" : "so", 	"value" : 2.525, 	"exception" : null }, 	{ 	"label" : "p", 	"value" : 2.865, 	"exception" : null }, 	{ 	"label" : "o", 	"value" : 0.386, 	"exception" : null }, 	{ 	"label" : "po", 	"value" : 9.784, 	"exception" : null }, 	{ 	"label" : "spo", 	"value" : 0, 	"exception" : { 	"string" : "ResultSetException msg:Failed when initializing the StAX parsing engine cause:com.hp.hpl.jena.sparql.resultset.ResultSetException: Unknown XML element: error" } } ] } ], "join" : [ 	{ 	"key" : "Cold JOIN Tests", 	"color" : "#1f77b4", 	"data" : [ 	{ 	"label" : "ss", 	"value" : 2.691, 	"exception" : null }, 	{ 	"label" : "so", 	"value" : 0.404, 	"exception" : null }, 	{ 	"label" : "oo", 	"value" : 0.567, 	"exception" : null } ] }, 	{ "key" : "Warm JOIN Tests", 	"color" : "#2ca02c", 	"data" : [ 	{ 	"label" : "ss", 	"value" : 5.584, 	"exception" : null }, 	{ "label" : "so", 	"value" : 2.214, 	"exception" : null }, 	{ 	"label" : "oo", 	"value" : 0.444, 	"exception" : null } ] } ] }, "interoperability" : { "SPARQL1Features" : [ 	{ 	"label" : "sel[graph]", 	"value" : true, 	"exception" : null }, 	{ 	"label" : "sel[.]*orderby-desc", 	"value" : false, 	"exception" : { 	"string" : "ResultSetException msg:Failed when initializing the StAX parsing engine cause:com.hp.hpl.jena.sparql.resultset.ResultSetException: Unknown XML element: error" } }, 	{ 	"label" : "sel-distinct[.]", 	"value" : true, 	"exception" : null }, 	{ 	"label" : "sel[.]*orderby", 	"value" : false, 	"exception" : { 	"string" : "ResultSetException msg:Failed when initializing the StAX parsing engine cause:com.hp.hpl.jena.sparql.resultset.ResultSetException: Unknown XML element: error" } }, 	{ 	"label" : "ask[.]", 	"value" : true, 	"exception" : null }, 	{ 	"label" : "con[join]", 	"value" : true, 	"exception" : null }, 	{ 	"label" : "sel[empty]", 	"value" : true, 	"exception" : null }, 	{ 	"label" : "sel[fil(str)]", 	"value" : false, 	"exception" : { 	"string" : "ResultSetException msg:Not a ResultSet result cause:null" } }, 	{ 	"label" : "sel[.]*orderby-asc", 	"value" : false, 	"exception" : { 	"string" : "ResultSetException msg:Failed when initializing the StAX parsing engine cause:com.hp.hpl.jena.sparql.resultset.ResultSetException: Unknown XML element: error" } }, 	{ 	"label" : "sel[fil(bool)]", 	"value" : false, 	"exception" : { 	"string" : "ResultSetException msg:Not a ResultSet result cause:null" } }, 	{ 	"label" : "sel[fil(!bound)]", 	"value" : true, 	"exception" : null }, 	{ 	"label" : "sel[fil(regex-i)]", 	"value" : true, 	"exception" : null }, 	{ 	"label" : "sel[.]", 	"value" : true, 	"exception" : null }, 	{ 	"label" : "sel[union]", 	"value" : true, 	"exception" : null }, 	{ 	"label" : "sel[opt]", 	"value" : true, 	"exception" : null }, 	{ 	"label" : "sel[from]", 	"value" : false, 	"exception" : { 	"string" : "ResultSetException msg:Failed when initializing the StAX parsing engine cause:com.hp.hpl.jena.sparql.resultset.ResultSetException: Unknown XML element: error" } }, 	{ 	"label" : "con[.]", 	"value" : true, 	"exception" : null }, 	{ 	"label" : "sel[fil(num)]", 	"value" : false, 	"exception" : { 	"string" : "ResultSetException msg:Not a ResultSet result cause:null" } }, 	{ 	"label" : "sel[.]*orderby*offset", 	"value" : false, 	"exception" : { 	"string" : "ResultSetException msg:Failed when initializing the StAX parsing engine cause:com.hp.hpl.jena.sparql.resultset.ResultSetException: Unknown XML element: error" } }, 	{ 	"label" : "sel[bnode]", 	"value" : true, 	"exception" : null }, 	{ 	"label" : "sel[graph;join]", 	"value" : true, 	"exception" : null }, 	{ 	"label" : "sel[fil(iri)]", 	"value" : true, 	"exception" : null }, 	{ 	"label" : "sel[graph;union]", 	"value" : true, 	"exception" : null }, 	{ 	"label" : "sel[fil(blank)]", 	"value" : true, 	"exception" : null }, 	{ 	"label" : "sel[join]", 	"value" : true, 	"exception" : null }, 	{ 	"label" : "sel-reduced[.]", 	"value" : true, 	"exception" : null }, 	{ 	"label" : "sel[fil(regex)]", 	"value" : true, 	"exception" : null }, 	{ 	"label" : "con[opt]", 	"value" : true, 	"exception" : null } ], "SPARQL11Features" : [ 	{ 	"label" : "sel[max]", 	"value" : false, 	"exception" : { 	"string" : "ResultSetException msg:Failed when initializing the StAX parsing engine cause:com.hp.hpl.jena.sparql.resultset.ResultSetException: Unknown XML element: error" } }, 	{ 	"label" : "sel[paths]", 	"value" : false, 	"exception" : { 	"string" : "ResultSetException msg:Failed when initializing the StAX parsing engine cause:com.hp.hpl.jena.sparql.resultset.ResultSetException: Unknown XML element: error" } }, 	{ 	"label" : "sel[subq;graph]", 	"value" : false, 	"exception" : { 	"string" : "ResultSetException msg:Failed when initializing the StAX parsing engine cause:com.hp.hpl.jena.sparql.resultset.ResultSetException: Unknown XML element: error" } }, 	{ 	"label" : "sel[fil(contains)]", 	"value" : false, 	"exception" : { 	"string" : "ResultSetException msg:Failed when initializing the StAX parsing engine cause:com.hp.hpl.jena.sparql.resultset.ResultSetException: Unknown XML element: error" } }, 	{ 	"label" : "sel[count]*groupby", 	"value" : false, 	"exception" : { 	"string" : "ResultSetException msg:Failed when initializing the StAX parsing engine cause:com.hp.hpl.jena.sparql.resultset.ResultSetException: Unknown XML element: error" } }, 	{ 	"label" : "sel[avg]*groupby", 	"value" : false, 	"exception" : { 	"string" : "ResultSetException msg:Failed when initializing the StAX parsing engine cause:com.hp.hpl.jena.sparql.resultset.ResultSetException: Unknown XML element: error" } }, 	{ 	"label" : "sel[subq]", 	"value" : false, 	"exception" : { 	"string" : "ResultSetException msg:Failed when initializing the StAX parsing engine cause:com.hp.hpl.jena.sparql.resultset.ResultSetException: Unknown XML element: error" } }, 	{ 	"label" : "ask[fil(!in)]", 	"value" : false, 	"exception" : { 	"string" : "ResultSetException msg:Failed when initializing the StAX parsing engine cause:com.hp.hpl.jena.sparql.resultset.ResultSetException: Unknown XML element: error" } }, 	{ 	"label" : "sel[bind]", 	"value" : false, 	"exception" : { 	"string" : "ResultSetException msg:Failed when initializing the StAX parsing engine cause:com.hp.hpl.jena.sparql.resultset.ResultSetException: Unknown XML element: error" } }, 	{ 	"label" : "sel[avg]", 	"value" : false, 	"exception" : { 	"string" : "ResultSetException msg:Failed when initializing the StAX parsing engine cause:com.hp.hpl.jena.sparql.resultset.ResultSetException: Unknown XML element: error" } }, 	{ 	"label" : "sel[fil(!exists)]", 	"value" : false, 	"exception" : { 	"string" : "ResultSetException msg:Failed when initializing the StAX parsing engine cause:com.hp.hpl.jena.sparql.resultset.ResultSetException: Unknown XML element: error" } }, 	{ 	"label" : "sel[sum]", 	"value" : false, 	"exception" : { 	"string" : "ResultSetException msg:Failed when initializing the StAX parsing engine cause:com.hp.hpl.jena.sparql.resultset.ResultSetException: Unknown XML element: error" } }, 	{ 	"label" : "sel[values]", 	"value" : false, 	"exception" : { 	"string" : "ResultSetException msg:Failed when initializing the StAX parsing engine cause:com.hp.hpl.jena.sparql.resultset.ResultSetException: Unknown XML element: error" } }, 	{ 	"label" : "sel[fil(abs)]", 	"value" : false, 	"exception" : { 	"string" : "ResultSetException msg:Failed when initializing the StAX parsing engine cause:com.hp.hpl.jena.sparql.resultset.ResultSetException: Unknown XML element: error" } }, 	{ 	"label" : "sel[min]", 	"value" : false, 	"exception" : { 	"string" : "ResultSetException msg:Failed when initializing the StAX parsing engine cause:com.hp.hpl.jena.sparql.resultset.ResultSetException: Unknown XML element: error" } }, 	{ 	"label" : "sel[minus]", 	"value" : false, 	"exception" : { 	"string" : "ResultSetException msg:Failed when initializing the StAX parsing engine cause:com.hp.hpl.jena.sparql.resultset.ResultSetException: Unknown XML element: error" } }, 	{ 	"label" : "sel[fil(exists)]", 	"value" : false, 	"exception" : { 	"string" : "ResultSetException msg:Failed when initializing the StAX parsing engine cause:com.hp.hpl.jena.sparql.resultset.ResultSetException: Unknown XML element: error" } }, 	{ 	"label" : "sel[service]", 	"value" : false, 	"exception" : { 	"string" : "ResultSetException msg:Failed when initializing the StAX parsing engine cause:com.hp.hpl.jena.sparql.resultset.ResultSetException: Unknown XML element: error" } }, 	{ "label" : "con-[.]", 	"value" : true, 	"exception" : null }, 	{ 	"label" : "sel[fil(start)]", 	"value" : false, 	"exception" : { 	"string" : "ResultSetException msg:Failed when initializing the StAX parsing engine cause:com.hp.hpl.jena.sparql.resultset.ResultSetException: Unknown XML element: error" } } ] }, "discoverability" : { "serverName" : "Apache", "VoIDDescription" : [ 	{ 	"label" : "HTTP Get", 	"value" : false }, 	{ "label" : "/.well-known/void", 	"value" : true } ], "SDDescription" : [ ] } };
 
+			mongoDBProvider.getCollection('atasks', function(error, collection) {
+				collection.find({ "endpointResult.endpoint.uri": uri })
+					.toArray(function(err, results) {
+
+					//obj.endpoint.uri = r;
+					var arr = []
+					for(var i in results) {
+						var res = results[i];
+					}
+					obj.availability.data.values = [
+						{ 	"x" : 1436133600000, 	"y" : 0.9583333333333334 }
+					];
+					docs.push(obj);
+					var perfParsed = JSON.parse(JSON.stringify(docs[0].performance), function(k, v) {
+						if (k === "data")
+							this.values = v;
+						else
+							return v;
+					});
+					res.render('content/endpoint.jade',{
+						ep: ep,
+						nbEndpointsSearch:nbEndpointsSearch,
+						lastUpdate: uri,
+						configInterop: JSON.parse(fs.readFileSync('./texts/interoperability.json')),
+						configPerf: JSON.parse(fs.readFileSync('./texts/performance.json')),
+						configDisco: JSON.parse(fs.readFileSync('./texts/discoverability.json')),
+						epUri: /*uri*/ results.length,
+						epDetails: docs[0].endpoint,
+						epPerf: perfParsed,
+						epAvail: docs[0].availability,
+						epInterop: docs[0].interoperability,
+						epDisco: docs[0].discoverability
+					});
+				})
+				
+			})
+                });
+});
+
+
+app.get('/fix-encoding', function(req, res){
+	mongoDBProvider.getCollection('endpoints', function(error, coll) {
+		coll.find({}).toArray(function(err, endpoints) {
+			mongoDBProvider.getCollection('atasks_agg', function(error, taskColl) {
+				for(var i in endpoints) {
+					var endpoint = endpoints[i];
+					taskColl.update({ "endpoint.uri": endpoint.uri }, { $set :  { "endpoint.datasets" : endpoint.datasets } }, function(err, result) {
+					})
+				}
+			})
+
+			mongoDBProvider.getCollection('dtasks_agg', function(error, taskColl) {
+				for(var i in endpoints) {
+					var endpoint = endpoints[i];
+					taskColl.update({ "endpoint.uri": endpoint.uri }, { $set :  { "endpoint.datasets" : endpoint.datasets } }, function(err, result) {
+					})
+				}
+			})
+
+			mongoDBProvider.getCollection('ptasks_agg', function(error, taskColl) {
+				for(var i in endpoints) {
+					var endpoint = endpoints[i];
+					taskColl.update({ "endpoint.uri": endpoint.uri }, { $set :  { "endpoint.datasets" : endpoint.datasets } }, function(err, result) {
+					})
+				}
+			})
+		})
+	})
+})
 app.get('/availability', function(req, res){
 		mongoDBProvider.endpointsCount(function(error,nbEndpointsSearch){
 			mongoDBProvider.getAvailView( function(error,docs){

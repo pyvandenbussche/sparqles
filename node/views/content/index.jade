@@ -63,6 +63,7 @@ block content
         var colors = d3.scale.category20();
         keyColor = function(d, i) {return colors(d.key)};
         
+        // Availability
         nv.addGraph(function() {
           var chart = nv.models.stackedAreaChart()
             .x(function(d) { return d[0] })
@@ -83,6 +84,8 @@ block content
           chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
           return chart;
         });
+        
+        // Performance
         nv.addGraph(function() {
           var chart = nv.models.multiBarHorizontalChart()
               .x(function(d) { return d.label })
@@ -91,8 +94,9 @@ block content
               .showValues(true)
               .showControls(false)
               .barColor(d3.scale.category20().range());
-          chart.yAxis
-              .tickFormat(d3.format(',.2f'));
+          chart.yAxis.tickFormat(function (d) {
+                  return d3.format(',.2f')(d) + ' s';
+                });
           d3.select('#perf')
               .datum(!{JSON.stringify(perf.data)})
               .transition().duration(500)
