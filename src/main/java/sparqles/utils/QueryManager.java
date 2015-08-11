@@ -23,7 +23,7 @@ public class QueryManager {
 	
 	public static String getQuery(String folder, String qFile) {
 		log.info("getQuery {}, {}", folder, qFile);
-		String content;
+		String content = null;
 		Scanner scanner=null;
 		if(folder.startsWith("file:")){
 			File fold = new File(folder.replace("file:", ""));
@@ -42,8 +42,9 @@ public class QueryManager {
 			return null;
 		}
 
-
-		content = scanner.useDelimiter("\\Z").next();
+		if(scanner.hasNext())
+			content = scanner.useDelimiter("\\Z").next();
+		
 		log.debug("PARSED input:{},output:{}", qFile, content);
 		scanner.close();
 		return content;
