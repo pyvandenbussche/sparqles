@@ -31,63 +31,66 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', function(req, res){
-		var eps = JSON.parse(fs.readFileSync('./examples/index.json'));
+		/*var eps = JSON.parse(fs.readFileSync('./examples/index.json'));*/
 		mongoDBProvider.endpointsCount(function(error,nbEndpointsSearch){
 		//console.log(docs);
 			mongoDBProvider.getLastUpdate( function(error,lastUpdate){
 			//console.log(lastUpdate);
 				mongoDBProvider.getIndex( function(error,index){
 				//console.log(index);
-					var indexInterop = JSON.parse(JSON.stringify(index.interoperability.data), function(k, v) {
-						if (k === "data") 
-							this.values = v;
-						else
-							return v;
-					});
-					//PERFORMANCE
-					mongoDBProvider.getPerfView( function(error,docs){
-					//TODO precompute the data?
-						var thresholds=[];
-						var avgASKCold=0;
-						var avgASKWarm=0;
-						var avgJOINCold=0;
-						var avgJOINWarm=0;
-						var nbEndpointsTotal=0;
-						for (i in docs){
-							if(docs[i].threshold>0 && docs[i].threshold%100==0){
-								if(thresholds[docs[i].threshold])thresholds[docs[i].threshold]++;
-								else thresholds[docs[i].threshold]=1;
-							}
-							if(docs[i].askMeanCold+docs[i].joinMeanCold>0) nbEndpointsTotal++;
-							avgASKCold+=docs[i].askMeanCold;
-							avgASKWarm+=docs[i].askMeanWarm;
-							avgJOINCold+=docs[i].joinMeanCold;
-							avgJOINWarm+=docs[i].joinMeanWarm;
-						}
-						avgASKCold=avgASKCold/nbEndpointsTotal;
-						avgASKWarm=avgASKWarm/nbEndpointsTotal;
-						avgJOINCold=avgJOINCold/nbEndpointsTotal;
-						avgJOINWarm=avgJOINWarm/nbEndpointsTotal;
-						var mostCommonThreshold = [0,0];
-						for (i in thresholds){
-							if(thresholds[i]>mostCommonThreshold[1]){
-								mostCommonThreshold[0]=i;
-								mostCommonThreshold[1]=thresholds[i];
-							}
-						}
-						res.render('content/index.jade',{
-							configInstanceTitle: configApp.get('configInstanceTitle'),
-							eps: eps,
-							index:index,
-							indexInterop:indexInterop,
-							nbEndpointsSearch: nbEndpointsSearch,
-							lastUpdate: lastUpdate[0].lastUpdate,
-							perf: {"threshold":mostCommonThreshold[0],"data":[{"key": "Cold Tests","color": "#1f77b4","values": [{"label" : "Average ASK" ,"value" : avgASKCold },{"label" : "Average JOIN" ,"value" : avgJOINCold}]},{"key": "Warm Tests","color": "#2ca02c","values": [{"label" : "Average ASK" ,"value" : avgASKWarm} ,{"label" : "Average JOIN" ,"value" : avgJOINWarm}]}]},
-							configInterop: JSON.parse(fs.readFileSync('./texts/interoperability.json')),
-							configPerformance: JSON.parse(fs.readFileSync('./texts/performance.json')),
-							configDisco: JSON.parse(fs.readFileSync('./texts/discoverability.json'))
-							});
-					});
+          mongoDBProvider.getAMonths( function(error,amonths){
+            console.log(JSON.stringify(amonths));
+            var indexInterop = JSON.parse(JSON.stringify(index.interoperability.data), function(k, v) {
+              if (k === "data") 
+                this.values = v;
+              else
+                return v;
+            });
+            //PERFORMANCE
+            mongoDBProvider.getPerfView( function(error,docs){
+            //TODO precompute the data?
+              var thresholds=[];
+              var avgASKCold=0;
+              var avgASKWarm=0;
+              var avgJOINCold=0;
+              var avgJOINWarm=0;
+              var nbEndpointsTotal=0;
+              for (i in docs){
+                if(docs[i].threshold>0 && docs[i].threshold%100==0){
+                  if(thresholds[docs[i].threshold])thresholds[docs[i].threshold]++;
+                  else thresholds[docs[i].threshold]=1;
+                }
+                if(docs[i].askMeanCold+docs[i].joinMeanCold>0) nbEndpointsTotal++;
+                avgASKCold+=docs[i].askMeanCold;
+                avgASKWarm+=docs[i].askMeanWarm;
+                avgJOINCold+=docs[i].joinMeanCold;
+                avgJOINWarm+=docs[i].joinMeanWarm;
+              }
+              avgASKCold=avgASKCold/nbEndpointsTotal;
+              avgASKWarm=avgASKWarm/nbEndpointsTotal;
+              avgJOINCold=avgJOINCold/nbEndpointsTotal;
+              avgJOINWarm=avgJOINWarm/nbEndpointsTotal;
+              var mostCommonThreshold = [0,0];
+              for (i in thresholds){
+                if(thresholds[i]>mostCommonThreshold[1]){
+                  mostCommonThreshold[0]=i;
+                  mostCommonThreshold[1]=thresholds[i];
+                }
+              }
+              res.render('content/index.jade',{
+                configInstanceTitle: configApp.get('configInstanceTitle'),
+                amonths: amonths,
+                index:index,
+                indexInterop:indexInterop,
+                nbEndpointsSearch: nbEndpointsSearch,
+                lastUpdate: lastUpdate[0].lastUpdate,
+                perf: {"threshold":mostCommonThreshold[0],"data":[{"key": "Cold Tests","color": "#1f77b4","values": [{"label" : "Average ASK" ,"value" : avgASKCold },{"label" : "Average JOIN" ,"value" : avgJOINCold}]},{"key": "Warm Tests","color": "#2ca02c","values": [{"label" : "Average ASK" ,"value" : avgASKWarm} ,{"label" : "Average JOIN" ,"value" : avgJOINWarm}]}]},
+                configInterop: JSON.parse(fs.readFileSync('./texts/interoperability.json')),
+                configPerformance: JSON.parse(fs.readFileSync('./texts/performance.json')),
+                configDisco: JSON.parse(fs.readFileSync('./texts/discoverability.json'))
+                });
+            });
+          });
 				});
 			});
 		});
