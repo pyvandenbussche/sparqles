@@ -2,25 +2,22 @@ package sparqles.analytics;
 
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Calendar;
 
-import sparqles.paper.objects.AvailEp;
+import org.jongo.Jongo;
+import org.jongo.MongoCollection;
+
+import sparqles.core.SPARQLESProperties;
+import sparqles.paper.objects.AMonth;
 import sparqles.paper.objects.AvailEpFromList;
-import sparqles.paper.objects.AvailEvolMonthList;
-import sparqles.paper.objects.AvailJson;
+import sparqles.utils.MongoDBManager;
 
 import com.google.gson.Gson;
+import com.mongodb.MongoClient;
 
 public class AEvol  {
 	
@@ -38,24 +35,54 @@ public class AEvol  {
 			
 			//check if there is any stat to run or if it is up to date
 			//open connection to mongodb aEvol collection
+			Jongo jongo = new Jongo(new MongoClient(SPARQLESProperties.getDB_HOST()+":"+SPARQLESProperties.getDB_PORT()).getDB(SPARQLESProperties.getDB_NAME()));
+			MongoCollection amonthsColl = jongo.getCollection(MongoDBManager.COLL_AMONTHS);
 			
-			
-			
-			//read the list of endpoints
-			String json = readUrl("http://sparqles.ai.wu.ac.at/api/endpoint/list");
-			AvailEpFromList[] epArray = gson.fromJson(json, AvailEpFromList[].class);
-			List<String> epList = new ArrayList<>();
-			for (int i = 0; i < epArray.length; i++) {
-				epList.add(epArray[i].getUri());
-//				System.out.println(epArray[i].getUri());
+			//get last month
+			AMonth lastMonth = amonthsColl.findOne().orderBy("{date: -1}").as(AMonth.class);
+			//check that lastMonth is from a different month than the current one 
+			Calendar cal = Calendar.getInstance();
+		    cal.setTime(lastMonth.getDate());
+		    Calendar calNow = Calendar.getInstance();
+		    
+		    //in case there is at least a full new month to process
+			cal.add(Calendar.MONTH, 1);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			while(calNow.get(Calendar.MONTH)>cal.get(Calendar.MONTH)){
+				//get the end of the month
+				Calendar calEnd = (Calendar) cal.clone();
+				calEnd.add(Calendar.MONTH, 1);
+				System.out.println("Computing month aggregation from date ["+sdf.format(cal.getTime())+" to "+sdf.format(calEnd.getTime())+"[");
+				
+				//read the list of endpoints
+				String json = readUrl("http://sparqles.ai.wu.ac.at/api/endpoint/list");
+				AvailEpFromList[] epArray = gson.fromJson(json, AvailEpFromList[].class);
+				MongoCollection atasksColl = jongo.getCollection(MongoDBManager.COLL_AVAIL);
+//				System.out.println(atasksColl.count("{'endpointResult.start': {$gt : #}}", cal.getTimeInMillis()));
+				
+				AMonth newMonth = new AMonth();
+				newMonth.setDate(cal.getTime());
+				
+				//for each endpoint in the list (remove ghosts from the picture), get it's period availability and add this ton the result object
+				for (int i = 0; i < epArray.length; i++) {
+					
+					//get number of avail and unavail tests
+					long nbAvail = atasksColl.count("{'endpointResult.endpoint.uri': '"+epArray[i].getUri()+"', 'isAvailable':true, 'endpointResult.start': {$gte : "+cal.getTimeInMillis()+", $lt : "+calEnd.getTimeInMillis()+"}}}");
+					long nbUnavail = atasksColl.count("{'endpointResult.endpoint.uri': '"+epArray[i].getUri()+"', 'isAvailable':false, 'endpointResult.start': {$gte : "+cal.getTimeInMillis()+", $lt : "+calEnd.getTimeInMillis()+"}}}");
+//					System.out.println(nbAvail+"\t"+nbUnavail+"\t"+epArray[i].getUri());
+					newMonth.addEndpoint(nbAvail, nbUnavail);
+				}
+				
+				//add the new month to the collection
+				amonthsColl.insert(newMonth);
+				
+				//increment the month to process
+				cal.add(Calendar.MONTH, 1);
 			}
-			
-			
 			
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

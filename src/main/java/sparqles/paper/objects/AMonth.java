@@ -1,13 +1,6 @@
 package sparqles.paper.objects;
 
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-import java.util.Locale;
 
 public class AMonth {
 	private Date date=null;
@@ -16,9 +9,6 @@ public class AMonth {
 	private int seventyfiveNintyfive = 0;
 	private int nintyfiveNintynine = 0;
 	private int nintynineHundred = 0;
-	
-	private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
-	private static DecimalFormat df = new DecimalFormat("0.####",new DecimalFormatSymbols(Locale.US));
 	
 	
 	public Date getDate() {
@@ -58,5 +48,16 @@ public class AMonth {
 		this.nintynineHundred = nintynineHundred;
 	}
 	
-	
+	public void addEndpoint(long availTests, long unavailTests){
+		//prevent from division by 0
+		if(availTests+unavailTests == 0) zeroFive++;
+		else{
+			double perc = ((double)availTests/(availTests+unavailTests))*100;
+			if(perc<=5)zeroFive++;
+			else if(perc>5 && perc<=75)fiveSeventyfive++;
+			else if(perc>75 && perc<=95)seventyfiveNintyfive++;
+			else if(perc>95 && perc<=99)nintyfiveNintynine++;
+			else if(perc>99)nintynineHundred++;
+		}
+	}
 }
