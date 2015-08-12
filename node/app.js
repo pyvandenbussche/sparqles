@@ -39,7 +39,7 @@ app.get('/', function(req, res){
 				mongoDBProvider.getIndex( function(error,index){
 				//console.log(index);
           mongoDBProvider.getAMonths( function(error,amonths){
-            console.log(JSON.stringify(amonths));
+            //console.log(JSON.stringify(amonths));
             var indexInterop = JSON.parse(JSON.stringify(index.interoperability.data), function(k, v) {
               if (k === "data") 
                 this.values = v;
