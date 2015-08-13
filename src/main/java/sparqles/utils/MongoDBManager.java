@@ -62,21 +62,22 @@ public class MongoDBManager {
 	private final static String VIEW_KEY="endpoint.uri";
 	private final static String EP_KEY="uri";
 	
-	private final static String COLL_SCHED="schedule";
+	public final static String COLL_SCHED="schedule";
 
-	private final static String COLL_ROBOTS="robots";
-	private final static String COLL_AVAIL="atasks";
-	private final static String COLL_PERF="ptasks";
-	private final static String COLL_DISC="dtasks";
-	private final static String COLL_FEAT="ftasks";
-	private final static String COLL_ENDS="endpoints";
-	private final static String COLL_INDEX="index";
+	public final static String COLL_ROBOTS="robots";
+	public final static String COLL_AVAIL="atasks";
+	public final static String COLL_PERF="ptasks";
+	public final static String COLL_DISC="dtasks";
+	public final static String COLL_FEAT="ftasks";
+	public final static String COLL_ENDS="endpoints";
+	public final static String COLL_INDEX="index";
+	public final static String COLL_AMONTHS="amonths";
 
-	private final static String COLL_AVAIL_AGG="atasks_agg";
-	private final static String COLL_PERF_AGG="ptasks_agg";
-	private final static String COLL_DISC_AGG="dtasks_agg";
-	private final static String COLL_FEAT_AGG="ftasks_agg";
-	private final static String COLL_EP_VIEW="epview";
+	public final static String COLL_AVAIL_AGG="atasks_agg";
+	public final static String COLL_PERF_AGG="ptasks_agg";
+	public final static String COLL_DISC_AGG="dtasks_agg";
+	public final static String COLL_FEAT_AGG="ftasks_agg";
+	public final static String COLL_EP_VIEW="epview";
 
 	private static Map<Class, String[]> obj2col = new HashMap<Class, String[]>();
 	static {

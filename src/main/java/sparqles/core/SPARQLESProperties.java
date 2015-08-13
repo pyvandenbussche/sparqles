@@ -36,7 +36,7 @@ public class SPARQLESProperties {
 	private static String DB_HOST = "localhost";
 	private static int DB_PORT=27017;
 
-	private static String DB_NAME;
+	private static String DB_NAME="sparqles";
 	
 	public static String getDATA_DIR() {
 		return DATA_DIR;

@@ -86,6 +86,10 @@
 							<!-- <jvmSettings> <extraArguments> <extraArgument>-Dlog4j.configuration=../conf/log4j.properties</extraArgument> 
 								</extraArguments> </jvmSettings> -->
 						</program>
+            <program>
+							<mainClass>sparqles.analytics.AEvol</mainClass>
+              <name>aEvol</name>
+						</program>
 					</programs>
 				</configuration>
 				<!-- <executions>
@@ -161,6 +165,11 @@
 			<artifactId>mongo-java-driver</artifactId>
 			<version>2.11.3</version>
 		</dependency>
+		<dependency>
+	      <groupId>org.jongo</groupId>
+	      <artifactId>jongo</artifactId>
+	      <version>1.1</version>
+	    </dependency> 
     <dependency>
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
