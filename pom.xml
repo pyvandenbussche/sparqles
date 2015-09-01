@@ -56,7 +56,7 @@
 
 					<!-- Generate bin scripts for windows and unix pr default -->
 					<platforms>
-						<!-- <platform>windows</platform> -->
+						<platform>windows</platform>
 						<platform>unix</platform>
 					</platforms>
 
