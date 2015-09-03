@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletionService;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorCompletionService;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -51,13 +52,33 @@ public class OneTimeExecution<T extends SpecificRecordBase> {
 //			compService.submit(t);
 		}
 	    
-	    
+	    List<Future<T>> all = new ArrayList<Future<T>>();
 	    try {
-			List<Future<T>> all= executor.invokeAll(todo);
+			all= executor.invokeAll(todo);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	    int count=0, failed=0;
+	    for(Future<T> f : all){
+	        try {
+				T t = f.get();
+				if (f.isDone()) {
+					count++;
+		        	log.info("Task for {} completed", t);
+		            
+		        }
+		        else{
+		        	failed++;
+		        	log.info("Task for {} not completed", t);
+		            
+		        }
+			} catch (InterruptedException | ExecutionException e) {
+				e.printStackTrace();
+			}
+	    }
+	    
+	    
 	    
 //	    
 //	    Future<T> f= null;
@@ -72,7 +93,7 @@ public class OneTimeExecution<T extends SpecificRecordBase> {
 //		} catch (Exception e) {
 //			e.printStackTrace();
 //		}
-	    log.info("All tasks are done");
+	    log.info("All {} tasks are oprocessed with {} done and {} failed", (count+failed), count, failed);
 	    executor.shutdown();
 	}
 }

@@ -27,7 +27,6 @@ public class DAnalyser extends Analytics<DResult> {
 		super(db);
 	}
 
-
 	@Override
 	public boolean analyse(DResult pres) {
 		log.info("[Analytics] {}",pres);

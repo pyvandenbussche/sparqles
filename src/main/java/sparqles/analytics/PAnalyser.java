@@ -128,7 +128,7 @@ public class PAnalyser extends Analytics<PResult> {
 		}
 		if(views.size()==0){
 			view = new PerformanceView();
-						view.setEndpoint(ep);
+			view.setEndpoint(ep);
 			_db.insert(view);
 
 		}else{

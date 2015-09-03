@@ -45,6 +45,7 @@ public class ATask extends EndpointTask<AResult>{
 		long start = System.currentTimeMillis();
 		try {
 			QueryExecution qe = QueryManager.getExecution(epr.getEndpoint(), ASKQUERY);
+			qe.setTimeout(TaskRun.A_FIRST_RESULT_TIMEOUT, TaskRun.A_FIRST_RESULT_TIMEOUT);
 			boolean response = qe.execAsk();
 			if(response){
 				result.setResponseTime((System.currentTimeMillis()-start));
