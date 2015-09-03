@@ -41,7 +41,7 @@ public class ARGUMENTS {
 	public static final String [] PARAM_RUN = createParam("run","run");
 	public static final String [] PARAM_FLAG_INDEX = createParam("iv","indexview");
 	public static final String[] PARAM_FLAG_RECOMPUTELAST = createParam("rl","recomputeLast");
-	
+	public static final String[] PARAM_FLAG_STATS =  createParam("st","stats");;
 	
 	public static final Option OPTION_PROP_FILE = createOption("property file", 1, "SPARQLES (additional) property file", 
 			PARAM_PROP_FILE[SHORT_ARG], PARAM_PROP_FILE[LONG_ARG],true);
@@ -65,6 +65,10 @@ public class ARGUMENTS {
 	
 	public static final Option OPTION_UPDATE_EPS= createOption("flag",0,"update datahub list",
 			PARAM_FLAG_UPDATE_EPS[SHORT_ARG],PARAM_FLAG_UPDATE_EPS[LONG_ARG],false);
+	
+	
+	public static final Option OPTION_STATS = createOption("flag",0,"mongodb stats",
+			PARAM_FLAG_STATS[SHORT_ARG],PARAM_FLAG_STATS[LONG_ARG],false);
 	
 	
 
