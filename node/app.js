@@ -53,17 +53,40 @@ app.get('/', function(req, res){
                 var avgJOINCold = (docs[0].median_JOIN_cold / 1000) % 60;
                 var avgASKWarm = (docs[0].median_ASK_warm /1000) % 60;
                 var avgJOINWarm = (docs[0].median_JOIN_warm / 1000) % 60;
-                res.render('content/index.jade',{
-                  configInstanceTitle: configApp.get('configInstanceTitle'),
-                  amonths: amonths,
-                  index:index,
-                  indexInterop:indexInterop,
-                  nbEndpointsSearch: nbEndpointsSearch,
-                  lastUpdate: lastUpdate[0].lastUpdate,
-                  perf: {"threshold":10000 /*mostCommonThreshold[0]*/,"data":[{"key": "Cold Tests","color": "#1f77b4","values": [{"label" : "Median ASK" ,"value" : avgASKCold },{"label" : "Median JOIN" ,"value" : avgJOINCold}]},{"key": "Warm Tests","color": "#2ca02c","values": [{"label" : "Median ASK" ,"value" : avgASKWarm} ,{"label" : "Median JOIN" ,"value" : avgJOINWarm}]}]},
-                  configInterop: JSON.parse(fs.readFileSync('./texts/interoperability.json')),
-                  configPerformance: JSON.parse(fs.readFileSync('./texts/performance.json')),
-                  configDisco: JSON.parse(fs.readFileSync('./texts/discoverability.json'))
+
+                // get the discoverability stats
+                mongoDBProvider.getDiscoView( function(error,docs){
+                  //var lastUpdate=0;
+                  var nbEndpointsVoID=0;
+                  var nbEndpointsSD=0;
+                  var nbEndpointsServerName=0;
+                  var nbEndpointsTotal=0;
+                  var nbEndpointsNoDesc=0;
+                  for (i in docs){
+                    nbEndpointsTotal++;
+                    //if(docs[i].lastUpdate>lastUpdate) lastUpdate=docs[i].lastUpdate;
+                    if(docs[i].VoID==true)nbEndpointsVoID++;
+                    if(docs[i].SD==true)nbEndpointsSD++;
+                    if(docs[i].VoID!=true && docs[i].SD!=true)nbEndpointsNoDesc++;;
+                    if(docs[i].serverName.length>0&&docs[i].serverName!="missing") nbEndpointsServerName++;
+                  }
+                  res.render('content/index.jade',{
+                    configInstanceTitle: configApp.get('configInstanceTitle'),
+                    amonths: amonths,
+                    index:index,
+                    indexInterop:indexInterop,
+                    nbEndpointsSearch: nbEndpointsSearch,
+					nbEndpointsVoID: nbEndpointsVoID,
+					nbEndpointsSD: nbEndpointsSD,
+					nbEndpointsServerName: nbEndpointsServerName,
+					nbEndpointsTotal: nbEndpointsTotal,
+					nbEndpointsNoDesc: nbEndpointsNoDesc,
+                    lastUpdate: lastUpdate[0].lastUpdate,
+                    perf: {"threshold":10000 /*mostCommonThreshold[0]*/,"data":[{"key": "Cold Tests","color": "#1f77b4","values": [{"label" : "Median ASK" ,"value" : avgASKCold },{"label" : "Median JOIN" ,"value" : avgJOINCold}]},{"key": "Warm Tests","color": "#2ca02c","values": [{"label" : "Median ASK" ,"value" : avgASKWarm} ,{"label" : "Median JOIN" ,"value" : avgJOINWarm}]}]},
+                    configInterop: JSON.parse(fs.readFileSync('./texts/interoperability.json')),
+                    configPerformance: JSON.parse(fs.readFileSync('./texts/performance.json')),
+                    configDisco: JSON.parse(fs.readFileSync('./texts/discoverability.json'))
+                  });
                 });
               });
             });
@@ -308,8 +331,8 @@ app.get('/performance', function(req, res){
 
 app.get('/interoperability', function(req, res){
 		mongoDBProvider.endpointsCount(function(error,nbEndpointsSearch){
-			var nbSPARQL1Features=28;
-			var nbSPARQL11Features=20;
+			var nbSPARQL1Features=24;
+			var nbSPARQL11Features=18;
 			mongoDBProvider.getInteropView( function(error,docs){
 				var lastUpdate=0;
 				var nbCompliantSPARQL1Features=0;

@@ -44,15 +44,15 @@ block content
               a(title='', href='./discoverability')
                 h2 Discoverability
               div
-                b #{parseFloat((index.discoverability.VoIDDescription*100).toFixed(2))+ '%'} 
+                b #{parseFloat((nbEndpointsVoID/nbEndpointsTotal*100).toFixed(2))+ '%'} 
                 | of the endpoints provide a 
                 span(onmouseover='tooltip.show(\'#{configDisco["VoID Description"]}\')', onmouseout='tooltip.hide();') VoID description
               div
-                b #{parseFloat((index.discoverability.SDDescription*100).toFixed(2))+ '%'} 
+                b #{parseFloat((nbEndpointsSD/nbEndpointsTotal*100).toFixed(2))+ '%'} 
                 | of the endpoints provide a 
                 span(onmouseover='tooltip.show(\'#{configDisco["Service Description"]}\')', onmouseout='tooltip.hide();') SD description
               div
-                b #{parseFloat((index.discoverability.NoDescription*100).toFixed(2))+ '%'} 
+                b #{parseFloat((nbEndpointsNoDesc/nbEndpointsTotal*100).toFixed(2))+ '%'} 
                 | of the endpoints have 
                 b no 
                 | description

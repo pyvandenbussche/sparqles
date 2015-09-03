@@ -5,7 +5,7 @@
 	<artifactId>sparqles</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
-		<jdkLevel>1.7</jdkLevel>
+		<jdkLevel>1.8</jdkLevel>
 		<requiredMavenVersion>[2.1,)</requiredMavenVersion>
 		<main.basedir>${project.basedir}</main.basedir>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -22,7 +22,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
+				<version>3.1</version>
 				<configuration>
 					<source>${jdkLevel}</source>
 					<target>${jdkLevel}</target>
