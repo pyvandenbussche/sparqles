@@ -52,6 +52,7 @@ public class PTask extends EndpointTask<PResult>{
 				Run r = new Run(PRun.A_FIRST_RESULT_TIMEOUT, -1, 0L, 0L, 0L, (CharSequence)("Test Aborted due to "+consequExcept+" consecutive exceptions"), PRun.EXECUTION_TIMEOUT);
 				pres.setCold(r);
 				pres.setWarm(r);
+				
 				pres.setQuery(run.getQuery());
 			}else{
 				log.debug("executing {}:{}", this, sp.name());
