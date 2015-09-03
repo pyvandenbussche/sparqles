@@ -77,7 +77,7 @@ block content
           chart.yAxis.tickFormat(d3.format('.0f'));
           
           d3.select('#avail')
-            .datum(!{JSON.stringify(eps.availability)})
+            .datum(!{JSON.stringify(amonths)})
             .call(chart);
           
           nv.utils.windowResize(chart.update);

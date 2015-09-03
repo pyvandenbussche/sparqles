@@ -151,4 +151,42 @@ MongoDBProvider.prototype.getIndex = function(callback) {
     });
 };
 
+//Amonths
+MongoDBProvider.prototype.getAMonths = function(callback) {
+    this.getCollection('amonths',function(error, collection) {
+      if( error ) callback(error)
+      else {
+        collection.find({}).sort({"date":1}).toArray(function(error, months) {
+          if( error ) callback(error)
+          else{
+          
+            // transform the months view into d3js expected format
+            var valZeroFive=[];
+            var valfiveSeventyfive=[];
+            var valseventyfiveNintyfive=[];
+            var valnintyfiveNintynine=[];
+            var valnintynineHundred=[];
+            for(var i in months){
+              var d = Date.parse(months[i].date);
+              valZeroFive.push([d,months[i].zeroFive]);
+              valfiveSeventyfive.push([d,months[i].fiveSeventyfive]);
+              valseventyfiveNintyfive.push([d,months[i].seventyfiveNintyfive]);
+              valnintyfiveNintynine.push([d,months[i].nintyfiveNintynine]);
+              valnintynineHundred.push([d,months[i].nintynineHundred]);
+            }
+            var res = [
+              {"key":"0-5","index":1,"values":valZeroFive},
+              {"key":"5-75","index":2,"values":valfiveSeventyfive},
+              {"key":"75-95","index":3,"values":valseventyfiveNintyfive},
+              {"key":"95-99","index":4,"values":valnintyfiveNintynine},
+              {"key":"99-100","index":5,"values":valnintynineHundred}
+            ];
+            callback(null, res)
+          }
+        });
+      }
+    });
+};
+
+
 exports.MongoDBProvider = MongoDBProvider;

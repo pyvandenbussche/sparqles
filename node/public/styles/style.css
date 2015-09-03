@@ -116,6 +116,11 @@ textarea {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+table-layout: fixed;
+}
+table tr.odd:hover,
+table tr.even:hover {
+  background-color: white;
 }
 
 .tdcenter{
@@ -1409,4 +1414,14 @@ px      68    160    252    344    436    */
 	only screen and (min-device-pixel-ratio: 2) {
 	
 	
+}
+
+#maintenance {
+    position: absolute;
+    text-align: center;
+    color: red;
+    top: 10px;
+    width: 700px;
+    margin-left: -350px;
+    left: 50%;
 }
