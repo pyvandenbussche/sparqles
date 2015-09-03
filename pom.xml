@@ -12,7 +12,7 @@
 		<project.build.outputEncoding>UTF-8</project.build.outputEncoding>
 		<maven.compiler>2.0.2</maven.compiler>
 		<avro.version>1.7.5</avro.version>
-
+	    <maven.test.skip>true</maven.test.skip>
 	</properties>
 
 
@@ -22,7 +22,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
+				<version>3.3</version>
 				<configuration>
 					<source>${jdkLevel}</source>
 					<target>${jdkLevel}</target>
