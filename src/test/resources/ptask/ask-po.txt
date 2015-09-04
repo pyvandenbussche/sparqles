@@ -1,1 +1,0 @@
-ASK WHERE { ?s <http://nonsensical.com/8> <http://nonsensical.com/9> . }

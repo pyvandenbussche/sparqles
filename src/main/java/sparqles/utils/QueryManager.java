@@ -47,7 +47,24 @@ public class QueryManager {
 		
 		log.debug("PARSED input:{},output:{}", qFile, content);
 		scanner.close();
-		return content;
+		return substitute(content);
+	}
+	
+	private static String substitute(String query){
+		long time= System.currentTimeMillis();
+    	if (query.contains("%%uri1")){
+    		String url1 = "<http://nonsensical.com/1/"+time+">";
+    		query = query.replace("%%uri1", url1 );
+    	}
+    	if (query.contains("%%uri2")){
+    		String url2 = "<http://nonsensical.com/2/"+time+">";
+    		query = query.replace("%%uri2", url2 );
+    	}
+    	if (query.contains("%%uri3")){
+    		String url3 = "<http://nonsensical.com/3/"+time+">";
+    		query = query.replace("%%uri3", url3 );
+    	}
+		return query;
 	}
 
 	public static QueryExecution getExecution(Endpoint ep, String query) throws Exception {

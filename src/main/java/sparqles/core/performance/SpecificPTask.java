@@ -66,20 +66,7 @@ public enum  SpecificPTask {
     public PRun get(Endpoint ep){
     	String rquery = query;
     	
-    	long time= System.currentTimeMillis();
-    	if (rquery.contains("%%uri1")){
-    		String url1 = "<http://nonsensical.com/1/"+time+">";
-    		rquery = rquery.replace("%%uri1", url1 );
-    	}
-    	if (rquery.contains("%%uri2")){
-    		String url2 = "<http://nonsensical.com/2/"+time+">";
-    		rquery = rquery.replace("%%uri2", url2 );
-    	}
-    	if (rquery.contains("%%uri3")){
-    		String url3 = "<http://nonsensical.com/3/"+time+">";
-    		rquery = rquery.replace("%%uri3", url3 );
-    	}
-		
+    	System.out.println(rquery);
         return new PRun(ep, rquery);
     }
    
