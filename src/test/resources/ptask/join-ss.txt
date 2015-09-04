@@ -1,1 +1,0 @@
-SELECT DISTINCT ?s ?p2 WHERE { ?s ?p ?o . OPTIONAL { ?s ?p2 <http://nonsensical-join.com/13> .} } LIMIT 1000

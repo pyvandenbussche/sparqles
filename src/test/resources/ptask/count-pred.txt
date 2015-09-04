@@ -1,1 +1,0 @@
-SELECT (COUNT(?p) AS ?x) WHERE { ?s ?p ?o . }
