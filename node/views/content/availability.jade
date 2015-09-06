@@ -8,12 +8,12 @@ block content
             details
               summary Description:
               p
-                | To assess the reliability of SPARQL Endpoints, we test hourly (by default) the endpoints uptime. In order to accommodate patchy SPARQL compliance, we try two queries to test availability for each endpoint:
+                | To assess the reliability of SPARQL Endpoints, we test hourly (by default) each endpoint's uptime. In order to accommodate patchy SPARQL compliance, we try two queries to test availability for each endpoint:
               p
                 span.dimensionDescriptionCode ASK WHERE{ ?s ?p ?o . }
               p
                 span.dimensionDescriptionCode SELECT ?s WHERE{ ?s ?p ?o . } LIMIT 1
-              p If the ASK query fails (e.g., is not supported) we try the SELECT query.
+              p If the ASK query fails (e.g., is not supported) we try the SELECT query. We count the endpoint as available at a given point in time if it can return a valid SPARQL response to one of these queries. The hourly availability queries can then be aggregated into weekly/monthly/etc. availability by taking the ratio of successful responses to total queries issued in the given time period
       .line
       section#posts.default-area
         article.wrp(style='padding-bottom: 1em;')

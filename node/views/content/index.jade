@@ -22,13 +22,15 @@ block content
           article.wrpl(style='min-width: 400px;')
             .wrplInnerBox(style='height: 380px;')
               a(title='', href='./availability')
-                h2 Availability
+                h2 
+                  span(onmouseover='tooltip.show(\'#{configAvailability["availability"]}\')', onmouseout='tooltip.hide();') Availability
               svg#avail(style='height: 350px; padding-right:10px;')
           article.wrpl(style='min-width: 400px;')
             .wrplInnerBox(style='height: 380px;')
               - function numberWithCommas(x) {if (x) return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");}
               a(title='', href='./performance')
-                h2 Performance
+                h2 
+                  span(onmouseover='tooltip.show(\'#{configPerformance["performance"]}\')', onmouseout='tooltip.hide();') Performance
               span
                 b #{numberWithCommas(perf.threshold)} 
                 | is the most common 
@@ -37,12 +39,14 @@ block content
           article.wrpl(style='min-width: 400px;')
             .wrplInnerBox(style='height: 380px;')
               a(title='', href='./interoperability')
-                h2#log Interoperability
+                h2#log
+                  span(onmouseover='tooltip.show(\'#{configInterop["interoperability"]}\')', onmouseout='tooltip.hide();') Interoperability
               svg#interop
           article.wrpl(style='min-width: 400px;')
             .wrplInnerBox(style='height: 380px;')
               a(title='', href='./discoverability')
-                h2 Discoverability
+                h2 
+                  span(onmouseover='tooltip.show(\'#{configDisco["discoverability"]}\')', onmouseout='tooltip.hide();') Discoverability
               div
                 b #{parseFloat((nbEndpointsVoID/nbEndpointsTotal*100).toFixed(2))+ '%'} 
                 | of the endpoints provide a 

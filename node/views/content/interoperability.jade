@@ -7,8 +7,10 @@ block content
             time Last update: #{lastUpdate}
             details
               summary Description:
-              p
-                | The interoperability empirically analyses the SPARQL 1.0 and SPARQL 1.1 features supported by an endpoint.
+              p The interoperability empirically analyses the SPARQL 1.0 and SPARQL 1.1 features supported by an endpoint. The goal is to see if the endpoint accepts and returns a valid response for queries using a variety of different SPARQL 1.0 and SPARQL 1.1 features. The queries we use are inspired by the official W3C test-case suites. However, in the interest of not overwhelming endpoints with very expensive queries, we have modified the original queries to be more friendly to remote endpoints by inserting URIs that should not appear in the remote data; thus the queries should not generate large (intermediate) result sets.
+              p Since we do not have control over remote data, we cannot verify if a result is correct. We would expect that if an endpoint does not support a feature (e.g., it's using a SPARQL 1.0 version engine and thus does not support SPARQL 1.1 features), that it would throw a parse-exception or similar, which would not count as a valid response. Hence, here we verify that the endpoint can return a valid SPARQL response for a valid SPARQL (1.1) query, not necessarily a correct response.
+              p The specific queries that we run can be seen by clicking on a specific endpoint and hovering over the query shortcuts in the interoperability pane (where the exceptions encountered for that endpoint, if any, can also be found).
+              p Interoperability experiments are run on a monthly basis.
       .line
       section#posts.default-area
         article.wrp(style='padding-bottom: 1em;')
