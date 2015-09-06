@@ -1,4 +1,4 @@
-SELECT ?s ?str WHERE {
+SELECT * WHERE {
 	<http://nonsensical.com/1> <http://example.org/type> ?str
 	FILTER CONTAINS(?str, "a")
 } LIMIT 10

@@ -1,5 +1,5 @@
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-SELECT ?s WHERE {
+SELECT * WHERE {
     <http://nonsensical.com/1> <http://example.org/type> ?v .
     FILTER(datatype(xsd:string(?v)) = xsd:string) .
 } LIMIT 10

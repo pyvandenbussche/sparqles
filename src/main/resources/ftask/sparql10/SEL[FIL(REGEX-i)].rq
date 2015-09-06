@@ -1,4 +1,4 @@
-SELECT ?s ?val
+SELECT *
 WHERE {
 	<http://nonsensical.com/1> <http://example.org/type> ?val .
 	FILTER regex(?val, "thi", "i")

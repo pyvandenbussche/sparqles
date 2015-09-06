@@ -1,4 +1,4 @@
-SELECT  ?a ?c
+SELECT *
 WHERE
     { <http://nonsensical.com/1> <http://example.org/type> ?c . 
       OPTIONAL
