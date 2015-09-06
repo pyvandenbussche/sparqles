@@ -1,4 +1,4 @@
-SELECT ?o (MIN(?o) AS ?min)
+SELECT (MIN(?o) AS ?min)
 WHERE {
 	<http://nonsensical.com/1> <http://example.org/type>  ?o
 } 

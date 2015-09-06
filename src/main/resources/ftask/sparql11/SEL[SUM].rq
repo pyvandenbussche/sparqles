@@ -1,5 +1,5 @@
 PREFIX : <http://www.example.org/>
-SELECT ?o (SUM(?o) AS ?sum)
+SELECT (SUM(?o) AS ?sum)
 WHERE {
 	<http://nonsensical.com/1> <http://example.org/type>  ?o
 } 
