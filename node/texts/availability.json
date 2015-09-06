@@ -1,0 +1,5 @@
+{
+	"availability": "<p>To assess the reliability of SPARQL Endpoints, we test hourly (by default) each endpoint&apos;s uptime. In order to accommodate patchy SPARQL compliance, we try two queries to test availability for each endpoint: ASK WHERE{ ?s ?p ?o . } If the ASK query fails (e.g., is not supported) we try the SELECT query: SELECT ?s WHERE{ ?s ?p ?o . } LIMIT 1 We count the endpoint as available at a given point in time if it can return a valid SPARQL response to one of these queries.</p>"
+}
+
+

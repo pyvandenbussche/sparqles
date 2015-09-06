@@ -10,8 +10,12 @@ block content
             time Last update: #{lastUpdate}
             details
               summary Description:
-              p
-                | The performance of a SPARQL Endpoint is crucial for any application using this service. The performance first looks at the presence of an hypothetical result size threshold enforced by the endpoint. Then, it measures ask and join queries performance. Each query is runned twice to compare cold-cache (first run) and warm-cache (second run) timings.
+              p The performance of a SPARQL endpoint is crucial for any application using this service. SPARQLES thus performs some tests to estimate the performance of an endpoint relative to other endpoints. In particular, we run a variety of ASK, JOIN and LIMIT queries against endpoints. These queries are designed to estimate performance in a comparable way.
+              p ASK queries are single-triple pattern queries with a mix of constants in all positions. For example, the ASK_SP query is ASK { <x> <y> ?z } , where <x> and <y> are replaced with random URIs for each pair of COLD/WARM runs such that the URIs should not appear in the remote data. We run ASK_S, ASK_P, ASK_O, ASK_SP, ASK_PO, ASK_SO, ASK_SPO queries.
+              p JOIN queries invoke a fixed number of join lookups in the remote engine for three different positions. For example, a JOIN_SS query would be SELECT DISTINCT ?s ?p2 WHERE { ?s ?p ?o . OPTIONAL {?s ?p2 <x> .} } LIMIT 1000, where <x> is replaced with a random URI for each pair of COLD/WARM runs. Even though <x> does not exist in the remote data, the use of optional forces the engine to run the join, making the performance comparable across endpoints with different content (assuming 1000 results are returned).
+              p We also run LIMIT queries of the form SELECT * WHERE { ?s ?p ?o } LIMIT 100002 to test the throughput of raw results. Although for brevity we do not report the performance of such queries here, we do report the result-size thresholds detected using this query.
+              p The results presented here are the mean COLD/WARM performance for each group of queries (e.g., the mean of the seven ASK queries and the mean of three JOIN queries) for the last run of the performance experiments.
+              p Performance experiments are run on a weekly basis
       .line
       section#posts.default-area
         article.wrp(style='padding-bottom: 1em;')
@@ -21,7 +25,7 @@ block content
               b #{parseFloat((nbEndpointsWithThreshold/nbEndpointsTotal*100).toFixed(2))+ '%'} 
               | (#{nbEndpointsWithThreshold}/#{nbEndpointsTotal)) 
               | of the available endpoints are suspected to 
-              b enforce a result-size thresholds
+              b enforce a result-size threshold
 
             div
               b #{numberWithCommas(mostCommonThreshold)} 
@@ -36,11 +40,11 @@ block content
                   th.tablehead(width='10%') 
                     span(onmouseover='tooltip.show(\'#{configPerformance["Result-size thresholds"]}\')', onmouseout='tooltip.hide();') Result-size thresholds
                   th.tablehead(width='20%') 
-                    span(onmouseover='tooltip.show(\'#{configPerformance["ASK queries"]}\')', onmouseout='tooltip.hide();') ASK queries mean runtime 
-                    span(onmouseover='tooltip.show(\'#{configPerformance["Cold-Warm"]}\')', onmouseout='tooltip.hide();') (Cold-Warm)
+                    p(onmouseover='tooltip.show(\'#{configPerformance["ASK queries"]}\')', onmouseout='tooltip.hide();') ASK queries mean runtime 
+                    p(onmouseover='tooltip.show(\'#{configPerformance["Cold-Warm"]}\')', onmouseout='tooltip.hide();') (Cold-Warm)
                   th.tablehead(width='20%') 
-                    span(onmouseover='tooltip.show(\'#{configPerformance["JOIN queries"]}\')', onmouseout='tooltip.hide();') Join queries mean runtime 
-                    span(onmouseover='tooltip.show(\'#{configPerformance["Cold-Warm"]}\')', onmouseout='tooltip.hide();') (Cold-Warm)
+                    p(onmouseover='tooltip.show(\'#{configPerformance["JOIN queries"]}\')', onmouseout='tooltip.hide();') Join queries mean runtime 
+                    p(onmouseover='tooltip.show(\'#{configPerformance["Cold-Warm"]}\')', onmouseout='tooltip.hide();') (Cold-Warm)
               tbody
                 - each ep, i in ptasks_agg
                   tr(class=(i % 2 == 0) ? 'odd' : 'even')

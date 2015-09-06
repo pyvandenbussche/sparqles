@@ -46,6 +46,16 @@ app.get('/', function(req, res){
               else
                 return v;
             });
+			// rename availability colors range
+			for(var i = 0; i < amonths.length; i++) {
+				if(amonths[i]['key']=="0-5")amonths[i]['key']="[0-5[";
+				if(amonths[i]['key']=="5-75")amonths[i]['key']="[5-75[";
+				if(amonths[i]['key']=="75-95")amonths[i]['key']="[75-95[";
+				if(amonths[i]['key']=="95-99")amonths[i]['key']="[95-99[";
+				if(amonths[i]['key']=="99-100")amonths[i]['key']="[99-100]";
+			}
+			//amonths = JSON.parse(JSON.stringify(amonths).replace("\"0\-5\":", "\"[0-5[\":"));
+			
             //PERFORMANCE
             mongoDBProvider.getCollection('performance_widget', function(error, coll) {
               coll.find({}).sort({"date_calculated": -1}).limit(1).toArray(function(err, docs) {
@@ -63,7 +73,8 @@ app.get('/', function(req, res){
                   perf: {"threshold":10000 /*mostCommonThreshold[0]*/,"data":[{"key": "Cold Tests","color": "#1f77b4","values": [{"label" : "Median ASK" ,"value" : avgASKCold },{"label" : "Median JOIN" ,"value" : avgJOINCold}]},{"key": "Warm Tests","color": "#2ca02c","values": [{"label" : "Median ASK" ,"value" : avgASKWarm} ,{"label" : "Median JOIN" ,"value" : avgJOINWarm}]}]},
                   configInterop: JSON.parse(fs.readFileSync('./texts/interoperability.json')),
                   configPerformance: JSON.parse(fs.readFileSync('./texts/performance.json')),
-                  configDisco: JSON.parse(fs.readFileSync('./texts/discoverability.json'))
+                  configDisco: JSON.parse(fs.readFileSync('./texts/discoverability.json')),
+				  configAvailability: JSON.parse(fs.readFileSync('./texts/availability.json'))
                 });
               });
             });

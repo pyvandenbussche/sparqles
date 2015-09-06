@@ -1,4 +1,5 @@
 {
+	"performance":"<p>The performance of a SPARQL endpoint is crucial for any application using this service. SPARQLES thus performs some tests to estimate the performance of an endpoint relative to other endpoints. In particular, we run a variety of ASK, JOIN and LIMIT queries against endpoints. These queries are designed to estimate performance in a comparable way.</p><p>Refer to the Performance description for more information.</p>",
 	"Result-size thresholds": "<p><b>Maximum results returned by engine (<i>tested up to 100,002 results</i>)</b></p><p>SELECT * WHERE {</p><p>&nbsp;&nbsp;?s ?p ?o </p><p>}</p><p>LIMIT 100002</p>",
 	"ASK queries": "<p><b>Atomic ASK lookups with one triple pattern</b></p><ul><li><b>s:</b> constant subject</li><li><b>p:</b> constant predicate</li><li><b>o:</b> constant object</li><li><b>sp:</b> constant subject &amp; predicate</li><li><i>etc.</i></li></ul>",
 	"JOIN queries": "<p><b>Queries requiring a fixed number of 1,000 atomic joins</b></p><ul><li><b>ss:</b> subject&ndash;subject joins</li><li><b>so:</b> subject&ndash;object joins</li><li><b>oo:</b> object&ndash;object joins</li></ul>",
