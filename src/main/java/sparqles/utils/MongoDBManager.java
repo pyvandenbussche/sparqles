@@ -7,6 +7,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -62,21 +63,22 @@ public class MongoDBManager {
 	private final static String VIEW_KEY="endpoint.uri";
 	private final static String EP_KEY="uri";
 	
-	private final static String COLL_SCHED="schedule";
+	public final static String COLL_SCHED="schedule";
 
-	private final static String COLL_ROBOTS="robots";
-	private final static String COLL_AVAIL="atasks";
-	private final static String COLL_PERF="ptasks";
-	private final static String COLL_DISC="dtasks";
-	private final static String COLL_FEAT="ftasks";
-	private final static String COLL_ENDS="endpoints";
-	private final static String COLL_INDEX="index";
+	public final static String COLL_ROBOTS="robots";
+	public final static String COLL_AVAIL="atasks";
+	public final static String COLL_PERF="ptasks";
+	public final static String COLL_DISC="dtasks";
+	public final static String COLL_FEAT="ftasks";
+	public final static String COLL_ENDS="endpoints";
+	public final static String COLL_INDEX="index";
+	public final static String COLL_AMONTHS="amonths";
 
-	private final static String COLL_AVAIL_AGG="atasks_agg";
-	private final static String COLL_PERF_AGG="ptasks_agg";
-	private final static String COLL_DISC_AGG="dtasks_agg";
-	private final static String COLL_FEAT_AGG="ftasks_agg";
-	private final static String COLL_EP_VIEW="epview";
+	public final static String COLL_AVAIL_AGG="atasks_agg";
+	public final static String COLL_PERF_AGG="ptasks_agg";
+	public final static String COLL_DISC_AGG="dtasks_agg";
+	public final static String COLL_FEAT_AGG="ftasks_agg";
+	public final static String COLL_EP_VIEW="epview";
 
 	private static Map<Class, String[]> obj2col = new HashMap<Class, String[]>();
 	static {
@@ -253,6 +255,10 @@ public class MongoDBManager {
 	public <V extends SpecificRecordBase> List<V> get(Class<V> cls, Schema schema) {
 		return getResults(null, cls, schema);
 	}
+	
+	public <V extends SpecificRecordBase> Iterator<V> getIterator(Class<V> cls, Schema schema) {
+		return getResultsIterator(null, cls, schema);
+	}
 
 
 	public Endpoint getEndpoint(Endpoint ep) {
@@ -273,6 +279,28 @@ public class MongoDBManager {
 			log.warn("Collection for {} unknown", cls);
 		}
 		return new ArrayList<T>();
+	}
+	
+	public <T> Iterator<T> getResultsIterator(Endpoint ep, Class<T> cls, Schema schema) {
+		String[] v = obj2col.get(cls);
+		
+		if(v != null && v[0] != null&& v[1] != null)
+			return scanIterator(ep,v[0], cls,schema, v[1]);
+		else{
+			log.warn("Collection for {} unknown", cls);
+		}
+		return new Iterator<T>() {
+
+			public boolean hasNext() {return false;}
+
+			@Override
+			public T next() {return null;}
+
+			@Override
+			public void remove() {
+				;
+			}
+		};
 	}
 
 	public <T extends SpecificRecordBase> List<T> getResultsSince(Endpoint ep, Class<T> cls,
@@ -405,6 +433,60 @@ public class MongoDBManager {
 
 		return reslist;
 	}
+	
+	private <T> Iterator<T> scanIterator(final Endpoint ep,final String colName, final Class<T> cls, final Schema schema, final String key) {
+		ArrayList<T> reslist = new ArrayList<T>();	
+
+		
+		DBCollection c  = db.getCollection(colName);
+		final DBCursor curs;
+		try{
+			if(ep==null){
+				curs = c.find().batchSize(50).addOption(com.mongodb.Bytes.QUERYOPTION_NOTIMEOUT);
+			}else{
+				BasicDBObject q = new BasicDBObject();
+				q.append(key, ep.getUri().toString());
+				curs = c.find(q).batchSize(50).addOption(com.mongodb.Bytes.QUERYOPTION_NOTIMEOUT);
+			}
+			
+			return new Iterator<T>() {
+
+				@Override
+				public boolean hasNext() {
+					// TODO Auto-generated method stub
+					return curs.hasNext();
+				}
+
+				@Override
+				public T next() {
+					DBObject o = curs.next();
+					SpecificDatumReader r = new SpecificDatumReader<T>(cls);
+					JsonDecoder d;
+					try {
+						d = DecoderFactory.get().jsonDecoder(schema, o.toString());
+						T t =(T) r.read(null, d);
+						return t;
+					} catch (IOException e) {
+						log.error("SCAN Exception: {}:{}:{} {}", ep.getUri(),colName, cls, ExceptionHandler.logAndtoString(e,true));
+					}
+					return null;
+				}
+
+				@Override
+				public void remove() {
+					// TODO Auto-generated method stub
+					
+				}
+			};
+
+		}finally{
+			//if(curs!=null)
+			//	curs.close();
+		}
+
+		
+	}
+	
 
 	public boolean cleanup(Endpoint ep) {
 		//remove endpoint

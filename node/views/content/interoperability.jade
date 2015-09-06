@@ -89,10 +89,10 @@ block content
                       if ep.nbCompliantSPARQL1Features==nbSPARQL1Features
                         img(src='/images/green.png')
                       else
-                        if ep.nbCompliantSPARQL1Features>0 && (ep.nbCompliantSPARQL1Features/nbSPARQL1Features)<0.5
+                        if ep.nbCompliantSPARQL1Features>0 && (ep.nbCompliantSPARQL1Features/nbSPARQL1Features)>0.5
                           img(src='/images/orange.png')
                         else
-                          if ep.nbCompliantSPARQL1Features>0 && (ep.nbCompliantSPARQL1Features/nbSPARQL1Features)>=0.5
+                          if ep.nbCompliantSPARQL1Features>0 && (ep.nbCompliantSPARQL1Features/nbSPARQL1Features)<=0.5
                             img(src='/images/red.png')
                           else 
                             if ep.nbCompliantSPARQL11Features==0
@@ -104,10 +104,10 @@ block content
                       if ep.nbCompliantSPARQL11Features==nbSPARQL11Features
                         img(src='/images/green.png')
                       else
-                        if ep.nbCompliantSPARQL11Features>0 && (ep.nbCompliantSPARQL11Features/nbSPARQL11Features)<0.5
+                        if ep.nbCompliantSPARQL11Features>0 && (ep.nbCompliantSPARQL11Features/nbSPARQL11Features)>0.5
                           img(src='/images/orange.png')
                         else
-                          if ep.nbCompliantSPARQL11Features>0 && (ep.nbCompliantSPARQL11Features/nbSPARQL11Features)>=0.5
+                          if ep.nbCompliantSPARQL11Features>0 && (ep.nbCompliantSPARQL11Features/nbSPARQL11Features)<=0.5
                             img(src='/images/red.png')
                           else 
                             if ep.nbCompliantSPARQL1Features==0

@@ -2,6 +2,7 @@ package sparqles.utils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Scanner;
 
 import org.apache.jena.riot.web.HttpOp;
@@ -21,7 +22,8 @@ public class QueryManager {
 	
 	
 	public static String getQuery(String folder, String qFile) {
-		String content;
+		log.info("getQuery {}, {}", folder, qFile);
+		String content = null;
 		Scanner scanner=null;
 		if(folder.startsWith("file:")){
 			File fold = new File(folder.replace("file:", ""));
@@ -31,18 +33,38 @@ public class QueryManager {
 				e.printStackTrace();
 			}
 		}else{
-			scanner = new Scanner(QueryManager.class.getClassLoader().getSystemResourceAsStream(folder+qFile));
+			InputStream res = QueryManager.class.getClassLoader().getSystemResourceAsStream(folder+qFile);
+			if(res != null)
+				scanner = new Scanner(res);
 		}
 		if(scanner == null){
 			log.warn("FAILED Could not load query file {} from {}", qFile, folder);
 			return null;
 		}
 
-
-		content = scanner.useDelimiter("\\Z").next();
+		if(scanner.hasNext())
+			content = scanner.useDelimiter("\\Z").next();
+		
 		log.debug("PARSED input:{},output:{}", qFile, content);
 		scanner.close();
-		return content;
+		return substitute(content);
+	}
+	
+	private static String substitute(String query){
+		long time= System.currentTimeMillis();
+    	if (query.contains("%%uri1")){
+    		String url1 = "<http://nonsensical.com/1/"+time+">";
+    		query = query.replace("%%uri1", url1 );
+    	}
+    	if (query.contains("%%uri2")){
+    		String url2 = "<http://nonsensical.com/2/"+time+">";
+    		query = query.replace("%%uri2", url2 );
+    	}
+    	if (query.contains("%%uri3")){
+    		String url3 = "<http://nonsensical.com/3/"+time+">";
+    		query = query.replace("%%uri3", url3 );
+    	}
+		return query;
 	}
 
 	public static QueryExecution getExecution(Endpoint ep, String query) throws Exception {

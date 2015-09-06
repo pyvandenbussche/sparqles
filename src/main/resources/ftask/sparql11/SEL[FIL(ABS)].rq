@@ -1,5 +1,5 @@
 PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#> 
 SELECT * WHERE {
-	?s <http://example.org/type> xsd:integer
+	?num <http://example.org/type> xsd:integer
 	FILTER(ABS(?num) >= 2)
 } LIMIT 10

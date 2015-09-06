@@ -28,7 +28,6 @@ public class PTask extends EndpointTask<PResult>{
     public PTask(Endpoint ep, SpecificPTask ... tasks) {
 		super(ep);
 		_tasks = tasks;
-		
 		log.info("INIT {} with {} tasks and {} ms wait time", this, tasks.length, SPARQLESProperties.getPTASK_WAITTIME());
     }
 
@@ -52,6 +51,7 @@ public class PTask extends EndpointTask<PResult>{
 				Run r = new Run(PRun.A_FIRST_RESULT_TIMEOUT, -1, 0L, 0L, 0L, (CharSequence)("Test Aborted due to "+consequExcept+" consecutive exceptions"), PRun.EXECUTION_TIMEOUT);
 				pres.setCold(r);
 				pres.setWarm(r);
+				
 				pres.setQuery(run.getQuery());
 			}else{
 				log.debug("executing {}:{}", this, sp.name());

@@ -19,3 +19,5 @@ build/
 .project
 .settings/
 node/node_modules/
+repo/
+conf/

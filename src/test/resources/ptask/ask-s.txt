@@ -1,1 +1,0 @@
-ASK WHERE { <http://nonsensical.com/10> ?p ?o . }

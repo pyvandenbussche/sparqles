@@ -64,7 +64,10 @@ public enum  SpecificPTask {
     }
    
     public PRun get(Endpoint ep){
-        return new PRun(ep, query);
+    	String rquery = query;
+    	
+    	System.out.println(rquery);
+        return new PRun(ep, rquery);
     }
    
     public static List<PRun> allTasks(Endpoint ep){

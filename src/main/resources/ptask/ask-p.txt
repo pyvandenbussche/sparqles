@@ -1,1 +1,1 @@
-ASK WHERE { ?s <http://nonsensical.com/11> ?o . }
+ASK WHERE { ?s %%uri1 ?o . }

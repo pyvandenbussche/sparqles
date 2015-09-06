@@ -11,13 +11,13 @@ import org.slf4j.LoggerFactory;
 import sparqles.analytics.AnalyserInit;
 import sparqles.analytics.IndexViewAnalytics;
 import sparqles.analytics.RefreshDataHubTask;
+import sparqles.analytics.StatsAnalyser;
 import sparqles.core.CONSTANTS;
 import sparqles.avro.Endpoint;
 import sparqles.core.SPARQLESProperties;
 import sparqles.avro.availability.AResult;
 import sparqles.avro.discovery.DResult;
 import sparqles.avro.features.FResult;
-
 import sparqles.avro.performance.PResult;
 import sparqles.avro.schedule.Schedule;
 import sparqles.schedule.Scheduler;
@@ -48,6 +48,7 @@ public class SPARQLES extends CLIObject{
 		opts.addOption(ARGUMENTS.OPTION_INIT);
 		opts.addOption(ARGUMENTS.OPTION_UPDATE_EPS);
 		opts.addOption(ARGUMENTS.OPTION_START);
+		opts.addOption(ARGUMENTS.OPTION_STATS);
 		opts.addOption(ARGUMENTS.OPTION_RECOMPUTE);
 		opts.addOption(ARGUMENTS.OPTION_RECOMPUTELAST);
 		opts.addOption(ARGUMENTS.OPTION_RESCHEDULE);
@@ -94,6 +95,9 @@ public class SPARQLES extends CLIObject{
 		}
 		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_FLAG_INDEX)){
 			recomputeIndexView();
+		}
+		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_FLAG_STATS)){
+			computeStats();
 		}
 		
 		if( CLIObject.hasOption(cmd, ARGUMENTS.PARAM_RUN)){
@@ -143,7 +147,17 @@ public class SPARQLES extends CLIObject{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+	}
+	
+	private void computeStats(){
+		StatsAnalyser stats = new StatsAnalyser(); 
+		stats.setDBManager(dbm);
+		try {
+			stats.call();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void recomputeAnalytics(boolean onlyLast) {
