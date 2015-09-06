@@ -8,7 +8,7 @@ var express = require('express')
  
 var ConfigProvider = require('./configprovider').ConfigProvider;
 var MongoDBProvider = require('./mongodbprovider').MongoDBProvider;
-var mongoDBProvider = new MongoDBProvider('localhost', 27017);
+var mongoDBProvider = new MongoDBProvider('127.0.0.1', 27017);
 var configApp = new ConfigProvider('../config.json');
 
 var app = express();
