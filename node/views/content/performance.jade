@@ -15,7 +15,7 @@ block content
               p JOIN queries invoke a fixed number of join lookups in the remote engine for three different positions. For example, a JOIN_SS query would be SELECT DISTINCT ?s ?p2 WHERE { ?s ?p ?o . OPTIONAL {?s ?p2 <x> .} } LIMIT 1000, where <x> is replaced with a random URI for each pair of COLD/WARM runs. Even though <x> does not exist in the remote data, the use of optional forces the engine to run the join, making the performance comparable across endpoints with different content (assuming 1000 results are returned).
               p We also run LIMIT queries of the form SELECT * WHERE { ?s ?p ?o } LIMIT 100002 to test the throughput of raw results. Although for brevity we do not report the performance of such queries here, we do report the result-size thresholds detected using this query.
               p The results presented here are the mean COLD/WARM performance for each group of queries (e.g., the mean of the seven ASK queries and the mean of three JOIN queries) for the last run of the performance experiments.
-              p Performance experiments are run on a weekly basis
+              p Performance experiments are run on a daily basis.
       .line
       section#posts.default-area
         article.wrp(style='padding-bottom: 1em;')
