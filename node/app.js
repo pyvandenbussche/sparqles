@@ -216,7 +216,13 @@ app.get('/endpoint', function(req, res){
 							else
 								return v;
 						});
-						console.log(docs[0].availability);
+            for(var i in docs[0].availability.data.values){
+              if(docs[0].availability.data.values[i].x == 1421625600000){
+                delete docs[0].availability.data.values[i];
+                break;
+              }
+            }
+						console.log(JSON.stringify(docs[0].availability));
 						res.render('content/endpoint.jade',{
 							ep: ep,
 							nbEndpointsSearch:nbEndpointsSearch,
