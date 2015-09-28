@@ -218,7 +218,7 @@ app.get('/endpoint', function(req, res){
 						});
             for(var i in docs[0].availability.data.values){
               if(docs[0].availability.data.values[i].x == 1421625600000){
-                delete docs[0].availability.data.values[i];
+                docs[0].availability.data.values.splice(i,1);
                 break;
               }
             }
