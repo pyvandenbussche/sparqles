@@ -25,6 +25,9 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/dumps',express.static('/usr/local/sparqles/dumps'));
 
+// set default timezon in London
+process.env.TZ = 'Europe/London';
+
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
