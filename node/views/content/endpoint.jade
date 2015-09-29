@@ -151,7 +151,7 @@ block content
             .showControls(false)
             .showLegend(false)
             .yDomain([0,1]);
-          chart.xAxis.tickFormat(function(d) { return d3.time.format('%Y-%m-%d')(new Date(d)) });
+          chart.xAxis.tickFormat(function(d) { return d3.time.format('%Y-%m-%d')(new Date(d + ((new Date().getTimezoneOffset()+60) * 60000))) });
           chart.yAxis.tickFormat(d3.format('.2%'));
           d3.select('#chartAvail')
             .datum(!{'[{"key":"Availability","values":'+JSON.stringify(epAvail.data.values.sort(function(a,b){return parseFloat(a.x)-parseFloat(b.x)}))+'}]'})

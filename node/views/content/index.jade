@@ -77,7 +77,9 @@ block content
             .showControls(false);
             //.clipEdge(true);
           
-          chart.xAxis.tickFormat(function(d) { return d3.time.format('%Y-%m')(new Date(d)) });
+          //chart.xAxis.tickFormat(function(d) { return d3.time.format('%Y-%m')(new Date(d)) });
+          //make sure everyone has the same time displayed.
+          chart.xAxis.tickFormat(function(d) { return d3.time.format('%Y-%m')(new Date(d+ ((new Date().getTimezoneOffset()+60) * 60000))) });
           chart.yAxis.tickFormat(d3.format('.0f'));
           
           d3.select('#avail')
