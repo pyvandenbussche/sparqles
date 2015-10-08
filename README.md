@@ -47,6 +47,12 @@ You can then access your application at the following URL: [http://localhost:300
 
 ## Running the backend
 
+- Git clone the project.
+- Copy the cloned folder under Eclipse "workspace" and then run "create project" using that path (make sure the folder is in your workspace otherwise Eclipse complains)
+- Install Maven plugin for Eclipse to handle dependencies http://www.eclipse.org/m2e/index.html 
+- Once plugin installed, select Configure>Convert to Maven Project
+- That's it, you should be able to run from command line using these arguments: `SPARQLES -p src/main/resources/sparqles.properties -h`
+
 
 ## License
 SPARQLES code and dataset are licensed under a [Creative Commons Attribution 4.0 International License]( https://creativecommons.org/licenses/by/4.0/).
