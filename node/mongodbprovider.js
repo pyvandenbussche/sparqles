@@ -188,5 +188,54 @@ MongoDBProvider.prototype.getAMonths = function(callback) {
     });
 };
 
+MongoDBProvider.prototype.getLastTenPerformanceMedian = function(uri, callback) {
+    this.getCollection('ptasks',function(error, collection) {
+      if( error ) callback(error)
+      else {
+        collection.find({ "endpointResult.endpoint.uri": uri })
+          .sort({ "endpointResult.end" : -1})
+          .limit(10)
+          .toArray(function(error, results) {
+            if( error ) return callback(error);
+
+            var ret = {};
+            for(var i=0; i<results.length; i++) {
+              var obj = results[i];
+              for(var x in obj.results) {
+                if(!ret[x]) ret[x] = [];
+                ret[x].push(obj.results[x].cold.exectime);
+              }
+            }
+
+            // calculate median
+            for(var y in ret) {
+              ret[y] = median(ret[y]);
+            }
+
+            callback(ret);
+
+          })
+      }
+    });
+};
+
+function median(values) {
+  var arr = []
+  for(var i in values) {
+    if(values[i] == 0) continue;
+    arr.push(values[i])
+  }
+
+  values = arr;
+
+  values.sort( function(a,b) {return a - b;} );
+
+  var half = Math.floor(values.length/2);
+
+  if(values.length % 2)
+      return values[half];
+  else
+      return (values[half-1] + values[half]) / 2.0;
+}
 
 exports.MongoDBProvider = MongoDBProvider;
