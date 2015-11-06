@@ -202,17 +202,21 @@ MongoDBProvider.prototype.getLastTenPerformanceMedian = function(uri, callback) 
             for(var i=0; i<results.length; i++) {
               var obj = results[i];
               for(var x in obj.results) {
-                if(!ret[x]) ret[x] = [];
-                ret[x].push(obj.results[x].cold.exectime);
+                var coldKey = x + '_cold';
+                var warmKey = x + '_warm';
+                if(!ret[coldKey]) ret[coldKey] = [];
+                if(!ret[warmKey]) ret[warmKey] = [];
+                ret[warmKey].push(obj.results[x].warm.exectime);
+                ret[coldKey].push(obj.results[x].cold.exectime);
               }
             }
 
             // calculate median
             for(var y in ret) {
-              ret[y] = median(ret[y]);
+              ret[y] = median(ret[y]) / 1000; // 1000 is for millisceonds to seconds
             }
 
-            callback(ret);
+            callback(null, ret);
 
           })
       }

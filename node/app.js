@@ -210,34 +210,57 @@ app.get('/endpoint', function(req, res){
 				mongoDBProvider.getCollection('endpoints', function(error, collection) {
 					collection.find({ "uri": uri })
 					.toArray(function(err, results) {
-						var perfParsed = JSON.parse(JSON.stringify(docs[0].performance), function(k, v) {
-							if (k === "data")
-								this.values = v;
-							else
-								return v;
-						});
-            for(var i in docs[0].availability.data.values){
-              if(docs[0].availability.data.values[i].x == 1421625600000){
-                docs[0].availability.data.values.splice(i,1);
-                break;
+            // get last 10 performance median runs
+            mongoDBProvider.getLastTenPerformanceMedian(uri, function(error, lastTenObj) {
+              var perfParsed = JSON.parse(JSON.stringify(docs[0].performance), function(k, v) {
+                if (k === "data")
+                  this.values = v;
+                else
+                  return v;
+              });
+              // do ASK COLD
+              for(var y=0; y<perfParsed.ask[0].values.length; y++) {
+                var o = perfParsed.ask[0].values[y];
+                o.value = lastTenObj[ 'ASK' + o.label.toUpperCase() + '_cold' ];
               }
-            }
-						console.log(JSON.stringify(docs[0].availability));
-						res.render('content/endpoint.jade',{
-							ep: ep,
-							nbEndpointsSearch:nbEndpointsSearch,
-							lastUpdate: uri,
-							configInterop: JSON.parse(fs.readFileSync('./texts/interoperability.json')),
-							configPerf: JSON.parse(fs.readFileSync('./texts/performance.json')),
-							configDisco: JSON.parse(fs.readFileSync('./texts/discoverability.json')),
-							epUri: uri,
-							epDetails: /*docs[0].endpoint*/ results[0],
-							epPerf: perfParsed,
-							epAvail: docs[0].availability,
-							epInterop: docs[0].interoperability,
-							epDisco: docs[0].discoverability
-						});
+              // do ASK WARM
+              for(var y=0; y<perfParsed.ask[1].values.length; y++) {
+                var o = perfParsed.ask[1].values[y];
+                o.value = lastTenObj[ 'ASK' + o.label.toUpperCase() + '_warm' ];
+              }
+              // do JOIN COLD
+              for(var y=0; y<perfParsed.join[0].values.length; y++) {
+                var o = perfParsed.join[0].values[y];
+                o.value = lastTenObj[ 'JOIN' + o.label.toUpperCase() + '_cold' ];
+              }
+              // do JOIN WARM
+              for(var y=0; y<perfParsed.join[1].values.length; y++) {
+                var o = perfParsed.join[1].values[y];
+                o.value = lastTenObj[ 'JOIN' + o.label.toUpperCase() + '_warm' ];
+              }
+              for(var i in docs[0].availability.data.values){
+                if(docs[0].availability.data.values[i].x == 1421625600000){
+                  docs[0].availability.data.values.splice(i,1);
+                  break;
+                }
+              }
+              console.log(JSON.stringify(docs[0].availability));
+              res.render('content/endpoint.jade',{
+                ep: ep,
+                nbEndpointsSearch:nbEndpointsSearch,
+                lastUpdate: uri,
+                configInterop: JSON.parse(fs.readFileSync('./texts/interoperability.json')),
+                configPerf: JSON.parse(fs.readFileSync('./texts/performance.json')),
+                configDisco: JSON.parse(fs.readFileSync('./texts/discoverability.json')),
+                epUri: uri,
+                epDetails: /*docs[0].endpoint*/ results[0],
+                epPerf: perfParsed,
+                epAvail: docs[0].availability,
+                epInterop: docs[0].interoperability,
+                epDisco: docs[0].discoverability
+              });
 
+            });
 					})
 				})
 
