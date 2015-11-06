@@ -39,7 +39,7 @@ MongoClient.connect(url, function(err, db) {
 });
 
 function parseResults(db, results) {
-  var data = {};
+  var data = [];
   for(var endpoint in results) {
     var ASKwarm = [];
     var ASKcold = [];
@@ -74,16 +74,46 @@ function parseResults(db, results) {
     // insert median into view collection
     //var performance_widget = db.collection('performance_widget');
 
-    data[endpoint] = {
+    data.push({
+      endpoint: endpoint,
       median_ASK_warm: median(ASKwarm),
       median_ASK_cold: median(ASKcold),
       median_JOIN_warm: median(JOINwarm),
       median_JOIN_cold:  median(JOINcold),
       date_calculated: new Date()
-    };
+    });
   }
-  console.log(data);
-  db.close();
+
+  // update ptasks_agg with this median info
+  function updateEndpoint(idx) {
+    var obj = data[idx];
+    if(!obj) {
+      db.close();
+      return;
+    }
+    console.log('updating ptasks_agg '+ obj.endpoint)
+    db.collection('ptasks_agg')
+      .findAndModify(
+          { 'endpoint.uri': obj.endpoint },
+          [],
+          { $set: {
+                    "askMeanCold" : obj.median_ASK_cold / 1000,
+                    "askMeanWarm" : obj.median_ASK_warm/ 1000,
+                    "joinMeanCold" : obj.median_JOIN_cold/1000,
+                    "joinMeanWarm" : obj.median_JOIN_warm/1000
+                  }
+          },
+          {},
+          function(err, res) {
+            // next!
+            console.log(err, res)
+            updateEndpoint(idx + 1);
+          });
+  }
+
+  // start recursion
+  updateEndpoint(0);
+
 }
 
 function average(elmt) {
