@@ -180,7 +180,10 @@ public class DAnalyser extends Analytics<DResult> {
 
 	private DiscoverabilityView getView(Endpoint ep) {
 		DiscoverabilityView view =null;
-		List<DiscoverabilityView> views = _db.getResults(ep,DiscoverabilityView.class, DiscoverabilityView.SCHEMA$);
+		List<DiscoverabilityView> views = new ArrayList<DiscoverabilityView>();
+		if (_db  != null){
+			views = _db.getResults(ep,DiscoverabilityView.class, DiscoverabilityView.SCHEMA$);
+		}
 		if(views.size()!=1){
 			Log.warn("We have {} FeatureView, expected was 1",views.size());
 		}
@@ -191,7 +194,8 @@ public class DAnalyser extends Analytics<DResult> {
 			view.setVoID(false);
 			view.setServerName("missing");
 			view.setLastUpdate(-1L);
-			_db.insert(view);
+			if (_db  != null)
+				_db.insert(view);
 		}else{
 			view = views.get(0);
 		}

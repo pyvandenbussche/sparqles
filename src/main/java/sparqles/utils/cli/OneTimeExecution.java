@@ -37,7 +37,6 @@ public class OneTimeExecution<T extends SpecificRecordBase> {
 
 	public void run(String task) {
 		Collection<Endpoint> eps = dbm.get(Endpoint.class, Endpoint.SCHEMA$);
-		
 
 		ExecutorService executor = Executors.newFixedThreadPool(100);
 	    
