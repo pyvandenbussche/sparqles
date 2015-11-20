@@ -13,8 +13,6 @@ public class PRun extends TaskRun{
 	
 	private static final Logger log = LoggerFactory.getLogger(PRun.class);
 	
-
-	
 	
 	public PRun(Endpoint ep, String queryFile ) {
 		this(ep, queryFile, System.currentTimeMillis());

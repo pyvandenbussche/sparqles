@@ -115,11 +115,14 @@ public class DTask extends EndpointTask<DResult> {
 		Robots rob = fetchRobotsTXT();
 
 		//get list of existing robots.txt
-		List<Robots> r = _dbm.getResults(_ep, Robots.class, Robots.SCHEMA$);
-		if(r.size()==0){
+		List<Robots> r = new ArrayList<Robots>();
+		if(_dbm != null){
+			r = _dbm.getResults(_ep, Robots.class, Robots.SCHEMA$);
+		}
+		if(r.size()==0 && _dbm != null){
 			//first robots.txt test, insert into DB
 			_dbm.insert(rob);
-		}else{
+		}else if(_dbm != null) {
 			if(rob.getRespCode().toString().startsWith("5")){
 				//there was a server error, try to get the last stored robots.txt
 				if(r.size()==1){ rob = r.get(0);}
@@ -328,6 +331,7 @@ public class DTask extends EndpointTask<DResult> {
 			parseHeaders(info,  header);
 			if(status.startsWith("2")){
 				String content = EntityUtils.toString(resp.getEntity());	
+				content= content.replaceAll("\t",	" ");
 				info.setContent(content);
 				PipedRDFIterator<Triple> iter = new PipedRDFIterator<Triple>();
 				final PipedRDFStream<Triple> inputStream = new PipedTriplesStream(iter);
@@ -447,7 +451,7 @@ public class DTask extends EndpointTask<DResult> {
 		if(type.contains("application/rdf+xml")||type.contains("application/xml"))
 			return Lang.RDFXML;
 		if(type.contains("text/plain"))
-			return Lang.NTRIPLES;
+			return Lang.RDFXML;
 		if(type.contains("text/rdf+n3"))
 			return Lang.N3;
 

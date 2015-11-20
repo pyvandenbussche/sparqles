@@ -21,14 +21,15 @@ public class DiscoverabilityTEST {
 	@Before
 	public void setUp() throws Exception {
 		SPARQLESProperties.init(new File("src/test/resources/sparqles.properties"));
-		m = new MongoDBManager();
+//		m = new MongoDBManager();
+		 
 //		
 		
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		m.close();
+//		m.close();
 	}
 	
 	
@@ -46,7 +47,7 @@ public class DiscoverabilityTEST {
 		Task<DResult> t = TaskFactory.create(CONSTANTS.DTASK, ep, m, null);
 		DResult res = t.call();
 		System.out.println(res);
-		m.insert(res);
+//		m.insert(res);
 	}
 
 	@Test
