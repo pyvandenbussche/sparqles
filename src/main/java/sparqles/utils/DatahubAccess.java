@@ -12,10 +12,19 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.conn.scheme.Scheme;
+import org.apache.http.conn.scheme.SchemeRegistry;
+import org.apache.http.conn.ssl.SSLSocketFactory;
+import org.apache.http.conn.ssl.X509HostnameVerifier;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.conn.SingleClientConnManager;
 import org.apache.http.util.EntityUtils;
 import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonNode;
@@ -42,8 +51,24 @@ public class DatahubAccess {
 	public static Collection<Endpoint> checkEndpointList(){
 		Map<String, Endpoint> results = new HashMap<String, Endpoint>();
 		try {
-			HttpClient httpclient = new DefaultHttpClient();
-			HttpGet getRequest = new HttpGet("http://datahub.io/api/2/search/resource?format=api/sparql&all_fields=1&limit=1000");
+			// Do not do this in production!!!
+			HostnameVerifier hostnameVerifier = org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER;
+
+			DefaultHttpClient client = new DefaultHttpClient();
+
+			SchemeRegistry registry = new SchemeRegistry();
+			SSLSocketFactory socketFactory = SSLSocketFactory.getSocketFactory();
+			socketFactory.setHostnameVerifier((X509HostnameVerifier) hostnameVerifier);
+			registry.register(new Scheme("https", socketFactory, 443));
+			SingleClientConnManager mgr = new SingleClientConnManager(client.getParams(), registry);
+			DefaultHttpClient httpclient = new DefaultHttpClient(mgr, client.getParams());
+
+			// Set verifier     
+			HttpsURLConnection.setDefaultHostnameVerifier(hostnameVerifier);
+			String apiURL="https://datahub.io/api/2/search/resource?format=api/sparql&all_fields=1&limit=1000";
+			apiURL="https://datahub.io/api/3/action/resource_search?query=format:api/sparql";
+			HttpGet getRequest = new HttpGet(apiURL);
+			
 			getRequest.addHeader("User-Agent", CONSTANTS.USER_AGENT);
 			
 			
@@ -58,7 +83,8 @@ public class DatahubAccess {
 			ObjectMapper mapper = new ObjectMapper(factory);
 			JsonNode rootNode = mapper.readTree(respString);  
 
-			JsonNode res = rootNode.get("results");
+			JsonNode res = rootNode.get("result");
+			res = res.get("results");
 			log.info("We found {} datasets",res.size());
 			Iterator<JsonNode> iter = res.getElements();
 			int c=1;
@@ -117,8 +143,9 @@ public class DatahubAccess {
 		log.debug("[GET] dataset info for {} and {}", datasetId,ep);
 		HttpGet getRequest = null;
 		try {
-			getRequest = new HttpGet("http://datahub.io/api/2/rest/dataset/"+datasetId);
+			getRequest = new HttpGet("https://datahub.io/api/3/action/package_show?id="+datasetId);
 			getRequest.addHeader("User-Agent", CONSTANTS.USER_AGENT);
+			System.out.println(getRequest);
 			HttpResponse response = httpClient.execute(getRequest);
 			if (response.getStatusLine().getStatusCode() != 200) {
 				throw new RuntimeException("Failed : HTTP error code : "
@@ -129,11 +156,12 @@ public class DatahubAccess {
 			
 			JsonFactory factory = new JsonFactory();
 			ObjectMapper mapper = new ObjectMapper(factory);
-			JsonNode rootNode = mapper.readTree(respString); 
+			JsonNode rootNode = mapper.readTree(respString);
+			JsonNode res = rootNode.get("result");
 
 //			System.out.println(rootNode);
-			String ckan_url = rootNode.findPath("ckan_url").getTextValue();
-			List<JsonNode> titles  = rootNode.findValues("title");
+			String ckan_url = res.findPath("url").getTextValue();
+			List<JsonNode> titles  = res.findValues("title");
 			String title = null;
 			for(JsonNode s : titles){
 //				System.out.println(s);
