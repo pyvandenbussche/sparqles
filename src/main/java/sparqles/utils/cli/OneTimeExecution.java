@@ -39,7 +39,7 @@ public class OneTimeExecution<T extends SpecificRecordBase> {
 		Collection<Endpoint> eps = dbm.get(Endpoint.class, Endpoint.SCHEMA$);
 		
 
-		ExecutorService executor = Executors.newFixedThreadPool(100);
+		ExecutorService executor = Executors.newFixedThreadPool(50);
 	    
 	    List<Callable<T>> todo = new ArrayList<Callable<T>>(eps.size());
 
