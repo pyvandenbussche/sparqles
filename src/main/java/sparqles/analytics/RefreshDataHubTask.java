@@ -60,13 +60,30 @@ public class RefreshDataHubTask implements Task<Index>{
 		Collection<Endpoint> datahub = DatahubAccess.checkEndpointList();
 		
 		if(datahub.size() == 0) return null;
-		Collection<Endpoint>  db = _dbm.get(Endpoint.class, Endpoint.SCHEMA$);
 		
 		
+		//flush the endpoint collection		
+		_dbm.initEndpointCollection();
+		
+		int newEPs = 0, upEPs=0, remEPs=0;
+		for(Endpoint ep : datahub){
+			if(_dbm.insert(ep)){
+				newEPs++;
+			}
+		}
+
+		
+		/*
+		//Collection<Endpoint>  db = _dbm.get(Endpoint.class, Endpoint.SCHEMA$);
 		TreeSet<Endpoint> ckan = new TreeSet<Endpoint>(new EndpointComparator());
-		TreeSet<Endpoint> sparqles = new TreeSet<Endpoint>(new EndpointComparator());
 		ckan.addAll(datahub);
+		
+		
+		
+		
+		TreeSet<Endpoint> sparqles = new TreeSet<Endpoint>(new EndpointComparator());
 		sparqles.addAll(db);
+		
 		
 		int newEPs = 0, upEPs=0, remEPs=0;
 		for(Endpoint ep : ckan){
@@ -76,10 +93,10 @@ public class RefreshDataHubTask implements Task<Index>{
 				
 				if(_dbm.insert(ep)){
 					newEPs++;
-					Schedule sch = _s.defaultSchedule(ep);
-					_dbm.insert(sch);
+//					Schedule sch = _s.defaultSchedule(ep);
+//					_dbm.insert(sch);
 					
-					_s.initSchedule(sch);
+//					_s.initSchedule(sch);
 				}
 				
 				
@@ -104,7 +121,10 @@ public class RefreshDataHubTask implements Task<Index>{
 				
 			}
 		}
+		
 		log.info("executed updating ckan catalog, {} total, {} updates, {} new, {} removals",ckan.size(),upEPs, newEPs,remEPs);
+		*/
+		log.info("executed updating ckan catalog, {} new", newEPs);
 		return null;
 	}
 
