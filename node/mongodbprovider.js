@@ -223,6 +223,24 @@ MongoDBProvider.prototype.getLastTenPerformanceMedian = function(uri, callback) 
     });
 };
 
+MongoDBProvider.prototype.getLatestDisco = function(uri, callback) {
+    this.getCollection('dtasks',function(error, collection) {
+      if( error ) callback(error)
+      else {
+        collection.find({ "endpointResult.endpoint.uri": uri })
+          .sort({ "endpointResult.end" : -1})
+          .limit(1)
+          .toArray(function(error, result) {
+            if( error ) return callback(error);
+
+            callback(null, result);
+
+          })
+      }
+    });
+
+}
+
 function median(values) {
   var arr = []
   for(var i in values) {

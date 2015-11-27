@@ -244,20 +244,48 @@ app.get('/endpoint', function(req, res){
                   break;
                 }
               }
-              console.log(JSON.stringify(docs[0].availability));
-              res.render('content/endpoint.jade',{
-                ep: ep,
-                nbEndpointsSearch:nbEndpointsSearch,
-                lastUpdate: uri,
-                configInterop: JSON.parse(fs.readFileSync('./texts/interoperability.json')),
-                configPerf: JSON.parse(fs.readFileSync('./texts/performance.json')),
-                configDisco: JSON.parse(fs.readFileSync('./texts/discoverability.json')),
-                epUri: uri,
-                epDetails: /*docs[0].endpoint*/ results[0],
-                epPerf: perfParsed,
-                epAvail: docs[0].availability,
-                epInterop: docs[0].interoperability,
-                epDisco: docs[0].discoverability
+
+              mongoDBProvider.getLatestDisco(uri, function(error, latestDisco) {
+                var SDDescription = [{
+                  label: 'foo',
+                  value: true
+                }];
+                var SDDescription = [];
+                var descriptionFiles = latestDisco[0].descriptionFiles;
+                for(var i=0; i<descriptionFiles.length; i++) {
+                  var d = descriptionFiles[i];
+                  var name = d.Operation;
+                  if(name == 'EPURL') name = 'HTTP Get';
+                  if(name == 'wellknown') name = '/.well-known/void';
+                  var preds = false;
+                  // check if SPARQLDESCpreds object is empty or not
+                  if(Object.keys(d.SPARQLDESCpreds).length) {
+                    preds = true;
+                  }
+                  SDDescription.push({
+                    label: name,
+                    value: preds
+                  })
+                }
+
+
+                docs[0].discoverability.SDDescription = SDDescription;
+
+                res.render('content/endpoint.jade',{
+                  ep: ep,
+                  nbEndpointsSearch:nbEndpointsSearch,
+                  lastUpdate: uri,
+                  configInterop: JSON.parse(fs.readFileSync('./texts/interoperability.json')),
+                  configPerf: JSON.parse(fs.readFileSync('./texts/performance.json')),
+                  configDisco: JSON.parse(fs.readFileSync('./texts/discoverability.json')),
+                  epUri: uri,
+                  epDetails: /*docs[0].endpoint*/ results[0],
+                  epPerf: perfParsed,
+                  epAvail: docs[0].availability,
+                  epInterop: docs[0].interoperability,
+                  epDisco: docs[0].discoverability
+                });
+
               });
 
             });
