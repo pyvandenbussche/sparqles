@@ -38,7 +38,7 @@ block content
                 span(style='padding-left: 0.75em;') Description not available
         article.wrp
           .wrplInnerBox(style='height: 100%;')
-            table#table_current.psp-table(cellspacing='0', cellpadding='0', border='0', width='100%')
+            table#table_current.sortable.psp-table(cellspacing='0', cellpadding='0', border='0', width='100%')
               thead
                 tr
                   th.tablehead(scope='col', width='50%') SPARQL Endpoint
@@ -69,16 +69,18 @@ block content
                         td
                           a(href="/endpoint?uri=#{encodeURIComponent(ep.endpoint.uri)}") #{ep.endpoint.uri}
                     //-Display VoID Description
-                    td.tdcenter
-                      if ep.VoID
+                    if ep.VoID
+                      td.tdcenter(sorttable_customkey="1")
                         img(src='/images/green.png')
-                      else
+                    else
+                      td.tdcenter(sorttable_customkey="2")
                         img(src='/images/gray.png')
                     //-Display SD Description
-                    td.tdcenter
-                      if ep.SD
+                    if ep.SD
+                      td.tdcenter(sorttable_customkey="1")
                         img(src='/images/green.png')
-                      else
+                    else
+                      td.tdcenter(sorttable_customkey="2")
                         img(src='/images/gray.png')
                     //-Display VoID Description
                     td.tdcenter

@@ -39,10 +39,10 @@ block content
               b available
             br
             -//#{JSON.stringify(atasks_agg[0])}
-            table#table_current.psp-table(cellspacing='0', cellpadding='0', border='0', width='100%')
+            table#table_current.sortable.psp-table(cellspacing='0', cellpadding='0', border='0', width='100%')
               thead
                 tr
-                  th.tablehead(width='5%') 
+                  th..sorttable_nosort.tablehead(width='5%') 
                   th.tablehead(width='45%') SPARQL Endpoint
                   th.tablehead(width='25%') Uptime Last 24h
                   th.tablehead(width='25%') Uptime Last 7 days
