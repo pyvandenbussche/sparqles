@@ -33,6 +33,7 @@ For you to test the frontend, you can load the sample data provided in the **sam
 
     git clone https://github.com/pyvandenbussche/sparqles
     cd sampleData
+    unzip mongoDump.zip
     mongod &
     mongorestore -d sparqles dump/sparqles
     rm -rf dump/    
