@@ -1,6 +1,13 @@
-#################
-## Eclipse
-#################
+# Logs & other files
+/*.csv
+/logs/
+/sampleData/dump/
+
+# Node
+/node/npm-debug.log
+/node/node_modules/
+
+# Java
 build/
 /code
 /bin
@@ -18,6 +25,5 @@ build/
 .classpath
 .project
 .settings/
-node/node_modules/
 repo/
 conf/
