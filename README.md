@@ -19,7 +19,7 @@ SPARQL Endpoint Status project aims at monitoring SPARQL Endpoints based on 4 as
 
 ## Deploying the application
 
-### Prerequisite
+### Prerequisites
 In order to run both backend and frontend of SPARQLES application you need to install the following programs:
 - Java (tested with version 1.7)
 - MongoDB (tested with version 2.4.9)
@@ -29,17 +29,25 @@ In order to run both backend and frontend of SPARQLES application you need to in
 Get the code from GitHub: https://github.com/pyvandenbussche/sparqles
 
 ### Loading sample data
-For you to test the frontend, you can load the sample data provided in the **sampleData** folder. Use **mongorestore** command to load the unzipped data into a database named **sparqles**.
+For you to test the frontend, you can load the sample data provided in the **sampleData** folder. Use **mongorestore** command to load the unzipped data into a database named **sparqles**:
+
+    git clone https://github.com/pyvandenbussche/sparqles
+    cd sampleData
+    mongod &
+    mongorestore -d sparqles dump/sparqles
+    rm -rf dump/    
 
 ### Running the frontend
 Make sure the **sparqles** database is present in MongoDB and populated. You can now run the frontend by executing the following command:
+
 ```
 cd node
 npm install
-node ./app.js
+npm start
 ```
 
 You should see the following message:
+
 ```
 Express server listening on port 3001
 ```
