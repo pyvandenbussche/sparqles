@@ -60,12 +60,12 @@ app.get('/', function(req, res){
 			//amonths = JSON.parse(JSON.stringify(amonths).replace("\"0\-5\":", "\"[0-5[\":"));
 			
             //PERFORMANCE
-            mongoDBProvider.getCollection('performance_widget', function(error, coll) {
+            mongoDBProvider.getCollection('ptasks_agg', function(error, coll) {
               coll.find({}).sort({"date_calculated": -1}).limit(1).toArray(function(err, docs) {
-                var avgASKCold = (docs[0].median_ASK_cold / 1000) % 60;
-                var avgJOINCold = (docs[0].median_JOIN_cold / 1000) % 60;
-                var avgASKWarm = (docs[0].median_ASK_warm /1000) % 60;
-                var avgJOINWarm = (docs[0].median_JOIN_warm / 1000) % 60;
+                var avgASKCold = (docs[0].askMedianCold / 1000) % 60;
+                var avgJOINCold = (docs[0].joinMeanCold / 1000) % 60;
+                var avgASKWarm = (docs[0].askMedianWarm /1000) % 60;
+                var avgJOINWarm = (docs[0].joinMeanWarm / 1000) % 60;
 
                 // get the discoverability stats
                 mongoDBProvider.getDiscoView( function(error,docs){
