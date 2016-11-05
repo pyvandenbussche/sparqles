@@ -41,27 +41,32 @@ For you to test the frontend, you can load the sample data provided in the **sam
 ### Running the frontend
 Make sure the **sparqles** database is present in MongoDB and populated. You can now run the frontend by executing the following command:
 
-```
-cd node
-npm install
-npm start
-```
+    cd node
+    npm install
+    npm start
 
-You should see the following message:
 
-```
-Express server listening on port 3001
-```
-You can then access your application at the following URL: [http://localhost:3001/](http://localhost:3001/)
+You should see the following message: `Express server listening on port 3001`.
+You can now access your application at the following URL: [http://localhost:3001/](http://localhost:3001/)
 
 ## Running the backend
+
+### From the command-line
+
+Make sure the `mongod` is running. Then, under the project folder root, run the following:
+
+    mvn clean package appassembler:assemble
+    sh bin/sparqles -p src/main/resources/sparqles.properties -i
+
+The first command compiles the code, packages the jar, and generates wrapper scripts. The second command initialises the MongoDB database (as specified in `/src/main/resources/sparqles.properties`, by default `sparqles` on `localhost`) with the datasets from the [Datahub](https://datahub.io).
+
+### From Eclipse
 
 - Git clone the project.
 - Copy the cloned folder under Eclipse "workspace" and then run "create project" using that path (make sure the folder is in your workspace otherwise Eclipse complains)
 - Install Maven plugin for Eclipse to handle dependencies http://www.eclipse.org/m2e/index.html 
 - Once plugin installed, select Configure>Convert to Maven Project
 - That's it, you should be able to run from command line using these arguments: `SPARQLES -p src/main/resources/sparqles.properties -h`
-
 
 ## License
 SPARQLES code and dataset are licensed under a [Creative Commons Attribution 4.0 International License]( https://creativecommons.org/licenses/by/4.0/).
