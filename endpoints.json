@@ -444,4 +444,4 @@
 { "_id" : { "$oid" : "524a948c0cf2bb6b5d1eb12f" }, "uri" : "http://services.data.gov.uk/business/sparql", "datasets" : [ { "uri" : "http://thedatahub.org/dataset/business-data-gov-uk", "label" : "business.data.gov.uk" } ] }
 { "_id" : { "$oid" : "524a948c0cf2bb6b5d1eb130" }, "uri" : "http://govwild.org/sparql", "datasets" : [ { "uri" : "http://thedatahub.org/dataset/government-web-integration-for-linked-data", "label" : "GovWILD - Government Web Integration for Linked Data" } ] }
 { "_id" : { "$oid" : "524a948c0cf2bb6b5d1eb131" }, "uri" : "http://api.talis.com/stores/eurobarometer/services/sparql", "datasets" : [ { "uri" : "http://thedatahub.org/dataset/eurobarometer-standard", "label" : "Standard Eurobarometer" } ] }
-{ "_id" : { "$oid" : "524a948c0cf2bb6b5d1eb131" }, "uri" : "https://stad.gent/sparql", "datasets" : [ { "uri" : "https://stad.gent/data/datasets", "label" : "City of Ghent" } ] }
+{ "_id" : { "$oid" : "524a948c0cf2bb6b5d1eb132" }, "uri" : "https://stad.gent/sparql", "datasets" : [ { "uri" : "https://stad.gent/data/datasets", "label" : "City of Ghent" } ] }
